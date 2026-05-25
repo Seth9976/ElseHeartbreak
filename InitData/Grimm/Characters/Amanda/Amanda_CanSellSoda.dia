@@ -1,0 +1,46 @@
+
+LISTEN Sebastian_talk_Amanda
+FOCUS
+Amanda.StartTalking()
+
+Amanda "Nej tack, jag är inte sugen"
+Amanda.SetKnowledge("Soda")
+
+CHOICE {
+	"Va?":
+		Amanda "Du säljer något väl?"
+		CHOICE {
+			"Ehm... ja":
+				Amanda "Ja jag kände det på mig"
+				Amanda "Jag vill inte ha"
+				Amanda "Adjö"
+			"Nej":
+				Amanda "Ok, vad vill du då?"
+				[WADDYAWANT]
+				CHOICE {
+					"Jag tänkte bara säga hej":
+						Amanda "Hej hej"
+					"Jag kommer från Wellspring Soda":
+						Amanda "Jag vill INTE ha något sa jag ju precis!"
+						Amanda "Svårt att fatta?"
+						Amanda "Adjö"
+				}
+		}
+
+	"Hej!":
+		Amanda "Vad vill du?"
+		GOTO WADDYAWANT
+}
+
+
+Amanda.StopTalking()
+DEFOCUS
+
+[AGAIN]
+LISTEN Sebastian_talk_Amanda
+Amanda "Inte intresserad!"
+LISTEN Sebastian_talk_Amanda
+Amanda "Nej tack"
+LISTEN Sebastian_talk_Amanda
+Amanda "Hej, fortfarande inte intresserad"
+GOTO AGAIN

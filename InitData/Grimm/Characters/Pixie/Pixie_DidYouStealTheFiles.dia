@@ -1,0 +1,481 @@
+
+Pixie.SetTimetable(Pixie)
+
+WAIT IsWithinDistance(Pixie, Sebastian, 7) AND Sebastian.NotTalking()
+
+BROADCAST TalkedToPixieAboutHowFactoryMissionWent
+
+FOCUS
+Pixie.GetUpAndInteract(Sebastian)
+Pixie.SetTimetable(TalkToSebastian)
+Pixie "Sebastian!!!"
+Pixie.StartTalking()
+Pixie "Hur gick det?"
+
+CHOICE ETERNAL {
+	"Helt enligt planen, vill du ha filerna nu?":
+		Pixie "Ja, hemskt gärna"
+		GOTO PIXIE_RECEIVE_FILES
+
+	"Jodå...":
+		Pixie "Fick du tag på dem?!"
+		CHOICE {
+			"Jepp!":
+				GOTO GOOD
+			"Nej, tyvärr":
+				GOTO BAD
+		}
+
+	"Det gick bra!":
+		[GOOD]
+		Pixie "Fan vad bra!"
+		Pixie "Har du med dig några disketter?"
+		CHOICE {
+			"Ja, du kan få dem nu om du vill?":
+				Pixie "Javisst"
+				GOTO PIXIE_RECEIVE_FILES
+
+			"Nej... jag tappade bort dem":
+				Pixie "Du gjorde vadå sa du???!"
+				GOTO PIXIE_DISAPPOINTED
+		}
+
+	"Det gick helt åt skogen":
+		[BAD]
+		Pixie "Va?! Vad hände?"
+		CHOICE {
+			"Vet inte...":
+			"Jag vill inte prata om det":
+			"Jag hittade inte några disketter":
+		}
+		GOTO PIXIE_DISAPPOINTED
+
+	"[INVITE_ME_TO_PARTY]":
+		GOTO INVITE_ME_TO_PARTY
+}
+
+# ----------------------------------------------
+[PIXIE_RECEIVE_FILES]
+
+[TRY_GIVE_AGAIN]
+Sebastian.Interact(Pixie)
+Pixie.StartWaitForGift()
+LISTEN Sebastian_give_Pixie [GIVE_FLOPPYS] {
+	RemoveDanglingDialogueOptions("Pixie_DidYouStealTheFiles")
+	WAIT Pixie.HasAnyHandItem()
+	IF Pixie.HasHandItemOfType(Floppy) {
+		Sebastian.SetKnowledge("GaveFilesToPixie")
+		GOTO GOT_FILES
+	} 
+	ELIF Pixie.HasHandItemOfType(Memory) {
+		Sebastian.SetKnowledge("GaveFilesToPixie")
+		GOTO GOT_FILES
+	} 
+	ELSE {
+		Pixie "Den här kan väl inte ha några filer på sig?"
+		Pixie.Give()
+		WAIT Sebastian.HasAnyHandItem()
+		GOTO TRY_GIVE_AGAIN
+	}
+}
+
+
+LISTEN TIMER_TRIGGER [CANNOT_FIND_THEM] {
+	[ONE_SEC]
+	CHOICE ETERNAL {
+		"Hmm, verkar ha glömt att ta med filerna...":
+		"Jag hittar inte filerna":
+		"En sekund...":
+			WAIT 5
+			GOTO ONE_SEC
+	}
+	Pixie.StopWaitForGift()	
+	Pixie "Va?!"
+	Pixie.SetKnowledge(SebastianCanGiveFilesLater)
+	CHOICE {
+		"Jag ska försöka hitta dem...":
+			Pixie "Ja, gör det"
+			GOTO PIXIE_DISAPPOINTED
+
+		"Jag har tappat bort dem":
+			GOTO PIXIE_DISAPPOINTED
+	}
+}
+
+WAIT 10
+BROADCAST TIMER_TRIGGER
+LISTEN DONT_GO_PAST_HERE
+
+
+[GOT_FILES]
+CANCEL CANNOT_FIND_THEM
+CANCEL GIVE_FLOPPYS
+Pixie.StopWaitForGift()
+Pixie "Fantastiskt!"
+Pixie.PutAwayHandItem()
+WAIT Pixie.HasNoHandItem()
+
+CHOICE {
+	"Tack!":
+	"Jag har faktiskt några fler här...":
+		Sebastian.SetKnowledge("GaveFilesToPixie")
+		Pixie "Wow!"
+		Pixie "Du kanske kan lägga dem vid mitt skrivbord?"
+		Pixie "Jag har händerna fulla här"
+		CHOICE {
+			"OK då":
+			"Javisst!":
+		}
+		Pixie "Men grymt alltså"
+}
+
+Pixie "Hur gjorde du?"
+
+CHOICE {
+	"Lång historia...":
+		Pixie "Haha ok"
+
+	"Följde väl planen mer eller mindre":
+		Pixie "Ok verkligen? Vad bra!"
+}
+
+Pixie.StopTalking()
+GOTO PARTY_TONIGHT
+
+# ----------------------------------------------
+LISTEN DONT_GO_PAST_HERE
+[PIXIE_DISAPPOINTED]
+
+Pixie "Det var inte bra det här"
+Pixie "Du måste skärpa dig Sebastian, annars kommer Yulian bli arg"
+Pixie "Jag vet att det är svårt så här i början"
+CHOICE {
+	"Ja, jag gjorde mitt bästa!":
+		Pixie "Det är bra"
+	"Mm...":
+		Pixie "Inget att hänga läpp över, vi försöker igen snart"
+}
+
+
+
+
+[PARTY_TONIGHT]
+CANCEL GIVE_FLOPPYS
+
+IF IsOverHour(17) {
+	Pixie "Hörde du att Petra ska ha fest imorgon kväll förresten?"
+} ELSE {
+	Pixie "Hörde du att Petra ska ha fest ikväll förresten?"
+}
+
+CHOICE {
+	"Vem är Petra?":
+		Pixie "Min bästis!"
+		Pixie "Ni måste väl ha träffats?"
+		Pixie "Hon DJ:ar på Bar Yvonne"
+		CHOICE {
+			"Jaha, hon!":
+			"Nej det vet jag inte vem det är":
+				Pixie "OK"
+			"Mhm... jag förstår":
+		}
+		Pixie "Hon är awesome"
+		Pixie "Och hon ska ha fest ikväll i alla fall"
+	"Ja!":
+		Pixie "Ska du dit?"
+	"Nej...":
+		Pixie "Jo men så är det i alla fall"
+		Pixie "Blir nog jättetrevligt"
+	"Var det ikväll?":
+		Pixie "Ja"
+}
+Pixie "Ivan och jag ska gå såklart"
+Pixie "Och Felix verkade sugen också"
+Pixie "Börjar väl klockan åtta, typ"
+
+CHOICE {
+	"Härligt, jag kommer gärna":
+		Pixie "Gött!"
+
+	"Ok, jag kommer om jag har tid":
+		Pixie "Vad har du för hemliga saker du behöver göra då?"
+		CHOICE {
+			"Äh, ingenting direkt":
+				Pixie "Sääkert!"
+				Pixie "Är det en tjej..?"
+				CHOICE {
+					"Va, eh nej!":
+						Pixie "Mhm..?"
+					"Nej":
+						Pixie "Säkert..?"
+					"Kanske det...":
+						Pixie "Ooo!"
+						Pixie "Jag visste väl det!"
+				}
+				Pixie "Kan du inte ta med henne också"
+				CHOICE {
+					"Nej alltså, det är inte någon tjej":
+					"Jag har ingen tjej":
+					"Nej":
+				}
+				Pixie "Ok, ok, ok"
+				Pixie "Men kom ikväll om du har tid i alla fall"
+				Pixie "Skulle vara kul!"
+				CHOICE {
+					"Jepp":
+					"Mm, ska tänka på saken":
+				}
+
+			"Tänkte försöka sälja lite läsk":
+				Pixie "Men fy vad tråkigt"
+				Pixie "Du jobbar ju här nu dessutom!"
+				CHOICE {
+					"Jo, sant":
+					"Ja men Yulian sa att jag borde behålla det jobbet också":
+						Pixie "Mm... antar att han har rätt"
+						Pixie "Men du kan väl sälja läsk någon annan gång"
+						Pixie "Eller innan festen börjar?"
+						CHOICE {
+							"Mm":
+							"Jo...":
+						}
+						Pixie "Bra, gör så istället"
+				}
+		}
+}
+
+Sebastian "Var bor hon?"
+Pixie "Mitt emot skoaffären skulle man kunna säga"
+Pixie "Burrows 2 är adressen"
+Pixie "Andra våningen"
+CHOICE {
+	"Jaha, är det nära Plaza?":
+		Pixie "Nej, inte direkt"
+		Pixie "Om du går upp till skoaffären och sen rakt fram så hittar du det"
+
+	"OK, är det de husen som man ser när man går över bron från hotellet?":
+		Pixie "Ja precis!"
+}
+
+Pixie "Det är ett stort och rött hus"
+Pixie "Hon bor på övervåningen som sagt"
+
+CHOICE {
+	"Cool, vi ses sen då":
+	"Då förstår jag":
+		CHOICE {
+			"OK jag kanske kommer lite senare då, eventuellt":
+			"Vi ses!":
+		}
+	"Får se om jag hittar...":
+		Pixie "Hehe, ja"
+}
+
+[INVITE_ME_TO_PARTY]
+
+Pixie "Ha det"
+CHOICE {
+	"Du med!":
+	"Hej då!":
+	"Hej på ett tag":
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+IF Pixie.HasAnyHandItem() {
+	Pixie.PutAwayHandItem()
+}
+
+Pixie.SetTimetable("Pixie")
+Sebastian.SetKnowledge("PartyAtPetras")
+
+
+
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+IF Pixie.HasKnowledge(SebastianCanGiveFilesLater) {
+	Pixie "Har du filerna nu?"
+	CHOICE {
+		"Japp!":
+			Pixie "Fasen vad bra!"
+			Pixie "Du kanske kan lägga dem vid mitt skrivbord så kollar jag på dem sen"
+			CHOICE {
+				"Javisst":
+				"Är det OK om jag undersöker dem också?":
+					Pixie "Självklart"
+			}
+			Pixie.StopTalking()
+			DEFOCUS
+			LISTEN Sebastian_talk_Pixie
+			FOCUS
+			Pixie.StartTalking()
+		"Nej...":
+			Pixie "OK"
+	}
+}
+
+Pixie "Var det något särskilt?"
+
+[MORE]
+CHOICE ETERNAL {
+	"Tänkte bara kolla vad du gör":
+		IF Pixie.IsAtTask("Work") {
+			Pixie "Jag försöker komma på hur jag kan förbättra en komprimeringsalgoritm"
+			Pixie "Vad gör du?"
+			CHOICE {
+				"Funderar på att jobba lite":
+					Pixie "Ok"
+					Pixie "Med läsk eller programmering?"
+					CHOICE {
+						"Läsk":
+							Pixie "Ok, lycka till då"
+							CHOICE {
+								"Tack!":
+								"Suck... ja lycka är precis vad jag behöver":
+							}
+						"Programmering":
+							Pixie "Cool, säg till om det är något som strular"
+							CHOICE {
+								"Nej det är lugnt just nu":
+								"Ja, jag har ett problem faktiskt":
+									Pixie "Ok?"
+									GOTO PROGRAMMING_PROBLEM
+							}
+					}
+
+				"Har tråkigt mest":
+					Pixie "Har du kollat med Yulian, han verkade behöva hjälp med något?"
+					CHOICE {
+						"Ja, vi har redan snackat":
+						"Nej, bra idé":
+					}
+				"Ska sticka ut på stan tänkte jag, måste undersöka lite grejer":
+					Pixie "Ok, spännande"
+					Pixie "Hoppas att det går bra"
+			}
+		}
+		ELSE {
+			Pixie "Inte mycket, vad gör du?"
+		}
+
+	"Skulle du kunna hjälpa mig med ett problem jag har?":
+		Pixie "Ja, det kan jag absolut"
+		GOTO PROGRAMMING_PROBLEM
+
+	"Vill du ha några fler disketter?":
+		Pixie "Ja, om du lyckades hitta några fler?"
+		CHOICE {
+			"Jag tror det...":
+				Pixie "Ge mig!"
+				GOTO GIVE_ME
+			"Nej men jag tänkte leta runt i stan":
+				Pixie "OK, cool"
+		}
+
+	"Jag har några filer till dig, vill du ha dem nu?":
+		Pixie "Javisst, gärna!"
+		[GIVE_ME]
+		WAIT 1
+		INTERRUPT GiveEvenMoreFiles
+		FOCUS
+		WAIT 1
+		Pixie "Var det något mer?"
+		FOCUS
+		GOTO MORE 
+}
+
+[END_OF_CONVERSATION_1]
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+
+
+
+
+
+LISTEN DONT_GO_PAST_HERE
+[PROGRAMMING_PROBLEM]
+
+CHOICE {
+	"Jag fattar inte det här med loopar":
+		Pixie "Ok..?"
+		Pixie "Har du frågat Frank om det? Han älskar loopar"
+		CHOICE {
+			"Vem är Frank?":
+				IF Pixie.IsInSameRoom(Frank) {
+					Pixie "Han där borta"
+				} ELSE {
+					Pixie "Jag vet inte var han är nu"
+					Pixie "Men han brukar jobba med mig på The Lodge i alla fall"
+				}
+				Sebastian "Får fråga honom då..."
+				GOTO ASK_FRANK
+
+			"Ja, men han förklarar så krångligt":
+				Pixie "Mm, OK"
+				Pixie "Hmm..."
+				Pixie "En loop är liksom som en snurr"
+				Pixie "Det snurrar runt, runt"
+				Pixie "Man kan snurra länge eller kort"
+				CHOICE {
+					"OK":
+					"Ja, men det förstår jag":
+				}
+				Pixie "De flesta program har någon loop i sig"
+				Pixie "Operativsystemen har ofta en loop som tar emot kommandon från användaren"
+				Pixie "Så att programmet aldrig stänger av sig"
+				CHOICE {
+					"Ah, smart!":
+					"Skumt...":
+				}
+				Pixie "Kolla på någon arbetsdator så kommer du se det"
+
+			"Nej...":
+				[ASK_FRANK]
+				Pixie "Testa med det!"
+		}
+
+	"Vad ska man göra när saker börjar ryka?":
+		Pixie "Har du testat att återställa objektets kod?"
+		CHOICE {
+			"Ja":
+				Pixie "Det är ofta en bra utväg om man krånglat till det för mycket"
+				CHOICE {
+					"Att börja om?":
+						Pixie "Ja"
+						Pixie "Man har ju ofta lärt sig en del då"
+						Pixie "Så lösningen blir bättre än första gången"
+
+					"OK, ska testa med det...":
+				}
+
+			"Nej, hur gör man det?":
+				Pixie "Har du inte en knapp för det på din modifierare?"
+				CHOICE {
+					"Jo kanske, får kolla":
+					"Tror inte det...":
+						Pixie "Jo, det måste du ha!"
+						Pixie "Annars får du leta upp en fräschare device"
+						CHOICE {
+							"OK, OK":
+							"Jag ska kolla igen...":
+						}
+				}
+		}
+}
+
+Pixie "Nu ska jag nog jobba vidare"
+CHOICE {
+	"Ok, ses":
+		Pixie "Det gör vi Sebbe!"
+	"Fast vänta, det är en till sak som jag är osäker på":
+		GOTO PROGRAMMING_PROBLEM
+}
+
+GOTO END_OF_CONVERSATION_1

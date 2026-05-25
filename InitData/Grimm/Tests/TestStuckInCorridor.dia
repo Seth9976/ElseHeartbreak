@@ -1,0 +1,16 @@
+
+Pixie.SetTimetable("")
+Yulian.SetTimetable("")
+Felix.SetTimetable("")
+
+Sebastian.Pos(Lodge_FirstCorridor_Snusdosa_Snusdosa_1)
+
+Pixie.Pos(Lodge_FirstCorridor_Snusdosa_Snusdosa_1)
+Felix.Pos(Lodge_Entry_GuardChair)
+
+Felix.Walk(Lodge_FirstCorridor_Snusdosa_Snusdosa_1)
+WAIT 6
+Pixie.Walk(Lodge_Entry_GuardChair)
+
+
+# Pixie.Interact(Lodge_Room1_ComputerCashier)

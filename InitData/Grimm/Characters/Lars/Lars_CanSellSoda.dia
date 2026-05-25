@@ -1,0 +1,105 @@
+
+Lars.SetTimetable("LarsVisitCafe")
+
+LISTEN Sebastian_talk_Lars [TALK_BEFORE_CHATEAU] {
+    FOCUS
+    Lars.StartTalking()
+
+    IF Sebastian.HasKnowledge(Lars) {
+        Sebastian "Hej Lars!"
+        Lars "Goddagens"
+    } ELSE {
+        Sebastian "Hejsan!"
+        Lars "Goddagens, Lars var namnet"
+        Sebastian.SetKnowledge(Lars)
+        CHOICE {
+            "OK, jag heter Sebbe!":
+            "Hejsan, mitt namn är Sebastian":
+        }
+    }    
+
+    [QUESTIONS]
+    CHOICE {
+        "Vad händer här då?":
+            Lars "Jag bara njuter av det vackra vädret"
+            GOTO QUESTIONS
+
+        "Hej, vill du köpa en läsk av mig?":
+            Lars "Det vore fantastiskt unge man"
+            Lars "Men jag har inte en spänn!"
+            CHOICE {
+                "Nähä, OK... synd":
+                "Vill du ha en ändå?":
+                    Lars "Nej då, jag klarar mig"
+                    Lars "Men tack för erbjudandet!"
+            }
+    }
+
+    Lars.StopTalking()
+    DEFOCUS
+
+    [MORE_TALK]
+    LISTEN Sebastian_talk_Lars
+    FOCUS
+    Lars.StartTalking()
+    Lars "Vad är det Sebastian?"
+    CHOICE {
+        "Det går kasst att sälja":
+            Lars "Häng inte läpp för det!"
+            Lars "Livet har så mycket mer att erbjuda än arbete"
+            Lars "Titta på mig bara, jag rör inte ett finger"
+            CHOICE {
+                "Har du inget jobb?":
+                    Lars "Nej!"
+                "Men hur tjänar du pengar då?":
+                    Lars "Jag har inga pengar"
+                    Lars "Vem behöver sånt?"
+            }
+            CHOICE {
+                "Hmm...":
+                "Intressant...":
+            }
+
+        "Vet du var gruvorna ligger?":
+            Lars "Ja, det är nära där jag bor"
+            Lars "Bakom Polisstationen så finns det ett hål i staketet, gå igenom där"
+            CHOICE {
+                "OK, tack så mycket!":
+                "Jaha":
+            }
+
+        "Jag har tråkigt":
+            Lars "Har du varit i parken?"
+            Lars "Väldans fint nere vid vattnet där"
+            Lars "Och så har de en sköldpadda som jag verkligen gillar"
+            CHOICE {
+                "Wow!":
+                "Oj, det har jag helt missat":
+            }
+            Lars "Ja, det är väl värt ett besök"
+    }
+    Lars "Ha det!"
+    Lars.StopTalking()
+    DEFOCUS
+    GOTO MORE_TALK  
+}
+
+
+WAIT Sebastian.IsSleepingOnGround() AND Sebastian.IsInEitherRoom(Plaza, PlazaBackstreet, BurrowsNorth, Hospital_Exterior, PoliceOffice_Exterior, HarborEast, HarborSouth, HarborWest, HarborNorth, PoorDesolateBuilding1_Exterior, DorisGardens_East, DorisGardens_West, Ministry_Exterior) LISTEN Sebastian_fellAsleep
+CANCEL TALK_BEFORE_CHATEAU
+
+IF Sebastian.HasKnowledge(HasWokenUpAtLarsPlace) {
+    # nothing
+} ELSE {
+    INTERRUPT MovedToLars
+}
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Lars
+Lars "Hallå hallå!"
+
+LISTEN Sebastian_talk_Lars
+Lars "Tjenamors"
+
+GOTO AGAIN

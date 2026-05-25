@@ -1,0 +1,36 @@
+
+STOP DetectFoundDoctorsOffice
+
+# THIS IS REPLACED BY "QUEEN OF THE INTERNET" NOW
+
+
+LISTEN Sebastian_talk_Monad
+FOCUS
+Monad.StartTalking()
+
+IF Monad.HasKnowledge(SebastianBrokeIntoOffice) {
+    Monad "Ja Sebastian, vad är det nu?"    
+}
+ELSE {
+    Monad "Mhm?"
+}
+
+Monad.SetKnowledge(Sebastian)
+
+CHOICE {
+    "Ni har gjort något hemskt med Ivan!":
+
+    "Ni måste släppa Ivan":
+
+    "Vad är det ni håller på med egentligen?!":
+}
+
+Monad "Jag har inte tid med ditt gnällande"
+Monad "Vi skapar historia här"
+Monad "Vad din vän beträffar så vet du ingenting"
+Monad "Jag och Ivan har ett särskilt band"
+Monad "Nu..."
+Monad "Måste ni gå"
+
+Monad.StopTalking()
+DEFOCUS

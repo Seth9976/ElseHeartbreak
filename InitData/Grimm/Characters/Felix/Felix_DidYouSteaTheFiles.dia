@@ -1,0 +1,78 @@
+
+LISTEN Sebastian_talk_Felix [PRE_TALK] {
+    FOCUS
+    Felix.StartTalking()
+    Felix "Tja!"
+    Felix "Pixie sa att hon letade efter dig"
+    CHOICE {
+        "OK, var är hon?":
+            IF Pixie.IsInRoom(Lodge_Room1) {
+                Felix "Där inne"
+            } ELSE {
+                Felix "Ingen aning"
+            }
+        "Ah, tack!":
+    }
+    Felix.StopTalking()
+    DEFOCUS
+}
+
+
+WAIT Sebastian.HasKnowledge("PartyAtPetras")
+CANCEL PRE_TALK
+
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+
+CHOICE {
+    "Ursäkta Felix":
+    "Hejsan":
+}
+Felix "Yo, vad händer dude?"
+
+[MORE]
+CHOICE {
+    "Inte mycket":
+        Felix "Soft"
+        GOTO MORE
+
+    "Ska du till hon där Petra ikväll?":
+        Felix "Kanske"
+        Felix "Får se"
+
+    "Pixie är så konstig":
+        Felix "Haha, tycker du?"
+        Felix "Du vet tjejer... svåra att fatta"
+        CHOICE {
+            "Jag vet inte vad jag ska göra för att hon ska gilla mig mer":
+                Felix "Tjejer gillar killar som är softa"
+                Felix "Med humor"
+                Felix "Du måste försöka vara avslappnad helt enkelt, inga stiffa moves"
+                Felix "Fattar du?"
+                CHOICE {
+                    "Mm... typ":
+                    "Ja, OK":
+                }
+
+            "Jo, så är det väl":
+
+            "Är inte killar svåra att fatta också?":
+                Felix "Vettefan"
+                Felix "Jag antar det!"
+        }
+        GOTO MORE
+}
+
+CHOICE {
+    "Vi kanske ses där då":
+        Felix "OK, sweet"
+
+    "Jaha...":
+}
+
+Felix "Peace out dude"
+
+Felix.StopTalking()
+DEFOCUS

@@ -1,0 +1,35 @@
+
+WAIT Heart.HasErrors()
+
+Log("Heart is blown up")
+
+HeartIsBroken() # save to world settings
+
+BROADCAST SmallBoom
+BROADCAST HeartExplotionSound1 # <- oscar 1
+
+WAIT 6
+
+BROADCAST SmallBoom
+BROADCAST HeartExplotionSound1 # <- oscar 1
+
+WAIT 5
+
+BROADCAST SmallBoom
+BROADCAST HeartExplotionSound1
+
+WAIT 4
+
+BROADCAST SmallBoom
+BROADCAST HeartExplotionSound1
+
+WAIT 2
+
+BROADCAST TheHeartIsBroken
+BROADCAST HeartExplotionSound2 # <- oscar 2
+WAIT 2
+BROADCAST Boom
+WAIT 1
+BROADCAST SmallBoom
+
+

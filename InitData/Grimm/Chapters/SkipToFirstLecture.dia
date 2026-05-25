@@ -1,0 +1,30 @@
+SetLanguage("eng")
+
+SetHour(13)
+Sebastian.Pos(HanksApartment_SofaSeat_1)
+
+Story("FirstDay")
+WAIT 1
+Story("TryFindLodge")
+WAIT 1
+Story("FoundLodge")
+WAIT 1
+Story("AfterStalking")
+WAIT 1
+Story("AfterPyjamas")
+
+START GetHackdev
+START GetMap
+
+Sebastian.SetHandItem(RustyModder)
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+UnlockDoor(Lodge_Room1_DoorToRoom2)
+
+Pixie.Pos(Lodge_Room1_Point1)
+Felix.Pos(Lodge_Entry_FelixPoint)
+Hank.Pos(HanksApartment_Point)
+
+WAIT 2
+Story("FirstLecture")

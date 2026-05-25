@@ -1,0 +1,45 @@
+
+Pixie.SetTimetable(Pixie)
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Varför kom du inte?"
+CHOICE {
+	"Kom vart då?":
+	"Förlåt":
+	"Eh, va?":
+}
+
+Pixie "Det är inte roligt"
+Pixie "Ivan är död"
+
+CHOICE {
+	"Va?!":
+
+	"Oj vad tråkigt":
+		Pixie "VAD FAN Sebastian"
+
+	"Jag vet inte vad jag ska säga":
+}
+
+Pixie "Experimentet..."
+Pixie "De har DÖDAT honom!"
+Pixie "Varför kom du inte?!"
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+# later #
+
+
+[AGAIN]
+LISTEN Sebastian_talk_Pixie
+Pixie.StartTalking()
+Pixie "Jag måste få vara i fred nu"
+Pixie.StopTalking()
+GOTO AGAIN
+

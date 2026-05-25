@@ -1,0 +1,21 @@
+
+WAIT Sebastian.IsInRoom(LongsonApartment) {
+    Sebastian.SetKnowledge("GotIntoLongsonApt")
+    CityHallGuard.Pos(Cafe_Exterior)
+    CityHallGuard.SetTimetable(CityHallGuard_CoffeeBreak)
+    WAIT 200
+    CityHallGuard.SetTimetable(CityHallGuard)
+}
+
+LISTEN Sebastian_hack_LongsonOffice_Diskette_Diskette7_1 {
+    Sebastian.SetKnowledge(PlaystationReceipt)
+}
+
+LISTEN TalkingToPlayWife {
+	Story("FoundCyborg")
+}
+
+LISTEN GaveInfoAboutGeorgeToYulian
+Story("HookOnLongson")
+
+LISTEN DONT_STOP

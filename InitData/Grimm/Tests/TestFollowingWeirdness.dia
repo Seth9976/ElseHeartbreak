@@ -1,0 +1,9 @@
+
+#Sebastian.Pos(HarborEast_Point)
+Sebastian.Pos(PoliceOffice_Exterior_Trigger_2)
+Pixie.Pos(Sebastian)
+Pixie.SetTimetable(PixieFactoryMission)
+StartLogging(Pixie)
+
+Sebastian.SetRunning(true)
+Sebastian.Walk(Mines_Entry_Trigger_1)

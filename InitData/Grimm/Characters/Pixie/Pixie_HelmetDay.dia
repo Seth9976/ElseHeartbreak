@@ -1,0 +1,107 @@
+Pixie.SetTimetable("WorryInLobby")
+
+LISTEN Sebastian_talk_Pixie [PIXIE_IS_WORRIED]
+FOCUS
+Pixie.StartTalking()
+
+CHOICE {
+	"När ska de börja?":
+		Pixie "Ingen vet riktigt"
+	
+	"Hur mår du?":
+		Pixie "För jävligt"
+		Pixie ""
+
+	"[CHEAT]":
+		Pixie.Pos(Ministry_ExperimentHall_Trigger_1)
+		Petra.Pos(Ministry_ExperimentHall_Trigger_1)
+		Sebastian.Pos(Ministry_ExperimentHall_Trigger_1)
+		DEFOCUS
+		GOTO IN_EXPERIMENT_HALL
+}
+
+CHOICE {
+	"Är det ingen mer här?":
+		Pixie "Jo, Ivan är i experimenthallen"
+		Pixie "Jag vet inte om det kommer några fler"
+
+	"Var är Ivan?":
+		Pixie "Han är där uppe i experimenthallen"
+
+	"Kan jag göra något för dig?":
+		Pixie "Jag vet inte"
+		Pixie "Tror inte det"
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+WAIT 15
+
+Pixie "OK, ska vi gå då?"
+Pixie "Kommer ni eller?"
+
+Pixie.SetTimetable("")
+Petra.SetTimetable("")	
+
+Pixie.SetTimetable(Pixie_Ministry_Lobby_Point2)
+
+IF Sebastian.IsWithinDistance(Pixie, 20) {
+	FOCUS
+	CHOICE {
+		"Vänta!":
+		"Jag kommer":
+	}
+	DEFOCUS
+}
+
+Petra.SetTimetable(PetraTalkToPixie)
+
+WAIT Sebastian.IsWithinDistance(Pixie, 10) AND Petra.IsWithinDistance(Pixie, 10)
+
+Petra.CancelWalking()
+Petra.SetTimetable("")
+
+Ministry_Elevator1_Computer.SetResettableCode("MinistryElevator1_Pixie")
+Ministry_Elevator1_Computer.SetCodeAndRun("MinistryElevator1_Pixie")
+
+Pixie.SetTimetable(Pixie_Ministry_Elevator1_Point)
+
+WAIT Pixie.IsInRoom(Ministry_Elevator1) AND Sebastian.IsInRoom(Ministry_Elevator1)
+Log("Pixie and Sebbe are in the elevator")
+Pixie.SetTimetable("")
+
+Petra.SetTimetable(Petra_GetIntoElevator)
+Petra.Interact(Ministry_Lobby_MinistryElevatorDoor_1)
+
+FOCUS
+WAIT 3
+Pixie "Kom då Petra!"
+
+WAIT Petra.IsInRoom(Ministry_Elevator1)
+WAIT 2
+Pixie "Bra, alla inne?"
+Petra.Walk(Ministry_Elevator1_Point)
+Petra "Japp"
+Pixie "De sa att jag ska trycka på datorn här"
+Pixie "Hoppas det funkar"
+
+Ministry_Elevator1_Computer.SetResettableCode("MinistryElevator1_Pixie")
+Ministry_Elevator1_Computer.SetCodeAndRun("MinistryElevator1_Pixie")
+Pixie.SetTimetable(Interact_Ministry_Elevator1_Computer)
+
+WAIT 5
+Log("Time to get out")
+DEFOCUS
+[IN_EXPERIMENT_HALL]
+Petra.SetTimetable("Petra_SitDownExperimentHall")
+WAIT 3
+Pixie.SetTimetable("PixieInteractIvan")
+
+
+WAIT 5
+Petra.Walk(Ministry_ExperimentHall_Trigger_1)
+
+WAIT 3
+Pixie "Hmm"
+Pixie "Det måste väl vara här då..?"

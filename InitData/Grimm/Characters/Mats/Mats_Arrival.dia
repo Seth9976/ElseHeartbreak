@@ -1,0 +1,55 @@
+
+LISTEN Sebastian_talk_Mats
+FOCUS
+Mats.StartTalking()
+
+Mats "Ja?"
+
+CHOICE {
+    "God morgon":
+    "God middag":    
+    "God kväll":
+}
+
+Mats "Jag vet inte om den är så god"
+
+CHOICE {
+    "Nähä... varför inte?":
+        Mats "Öh..."
+        Mats "Vem är du?"
+        Mats "Det här samtalet gör mig väldigt obekväm"
+
+    "Oj då":
+
+    "Jo!":
+}
+
+Mats "Jag måste gå"
+
+Mats.StopTalking()
+DEFOCUS
+
+WAIT 20
+
+
+
+LISTEN Sebastian_talk_Mats
+FOCUS
+Mats.StartTalking()
+
+[MORE]
+CHOICE {
+    "Hej!":
+        Mats "Hej"
+        GOTO MORE
+    "På bättre humör nu?":
+        Mats "Nej"
+    "Du jobbar på fabriken eller?":
+        Mats "Jo precis"
+        GOTO MORE
+    "Du får ha det så bra!":
+        Mats "Tack"
+}
+
+Mats.StopTalking()
+DEFOCUS

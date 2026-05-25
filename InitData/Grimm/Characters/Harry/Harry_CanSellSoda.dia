@@ -1,0 +1,102 @@
+
+
+LISTEN Sebastian_talk_Harry
+FOCUS
+Harry.StartTalking()
+
+Harry "Tjenamors"
+
+CHOICE {
+    "Tja":
+    "Hejsan":
+    "God kväll":
+    "God dag":
+}
+
+Harry "Var det nåt?"
+
+[MORE]
+CHOICE {
+    "Jag fattar inte riktigt var jag är...":
+        [WHERE_AM_I]
+        Harry "Haha, ja det är många som går vilse här i hamnen"
+        Harry "Du kan alltid följa spåren tillbaka"
+        Harry "Eller ta en vagn, det är ju skönare för fötterna"
+        CHOICE {
+            "Tack då":
+                Harry "Ingen orsak"
+            "OK, hej då!":
+                Harry "Ha det"
+        }
+
+    "Vill du köpa en läsk?":
+        Harry "Njae..."
+        Harry "Inte direkt"
+        CHOICE {
+            "Jo, kom igen!":
+                Harry "Alltså..."
+                Harry "Nej men det är bra"
+            "OK":
+        }
+        GOTO MORE
+
+    "Vad heter den här stadsdelen?":
+        Harry "Det här är hamnen"
+        Harry "Södra delen då"
+        Harry "Det är här vi lassar och lossar containrarna"
+        CHOICE {
+            "Jaha?":
+            "OK":
+        }
+        Harry "Mycket export från Dorisburg nu"
+        Harry "Nya packlårar varje vecka"
+        CHOICE {
+            "Vad bra!":
+                Harry "Ja, någon blir väl rik på det i alla fall"
+            "OK, jag undrar mest var jag är..?":
+            GOTO WHERE_AM_I
+        }
+}
+
+Harry.StopTalking()
+DEFOCUS
+
+
+# later
+
+
+[LATERLATER]
+LISTEN Sebastian_talk_Harry
+Harry "Mhm?"
+
+FOCUS
+Harry.StartTalking()
+
+CHOICE {
+    "Vad var det för stadsdel det här nu igen?":
+        Harry "Södra hamnen"
+        Harry "Har du ingen karta?"
+        CHOICE {
+            "Nä... var finns det såna?":
+                Harry "Vet inte"
+                Harry "Turistbyrån?"
+
+            "Jo":
+                Harry "Så?"
+                CHOICE {
+                    "Jag ska kolla på den igen":
+                    "Jag är så dålig på att läsa den bara":
+                        Harry "Jo det är ju en konst"
+                }
+        }
+
+    "Ha en bra dag!":
+
+    "Du ska inte köpa en läsk?":
+        Harry "Nej tack, jag klarar mig bra med mitt kaffe"
+        Harry "Det är ju gratis dessutom"
+}
+
+Harry.StopTalking()
+DEFOCUS
+GOTO LATERLATER

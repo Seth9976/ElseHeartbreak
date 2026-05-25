@@ -1,0 +1,55 @@
+
+
+[AGAIN]
+
+WAIT Receptionist.IsInRoom(Ministry_Lobby) LISTEN Sebastian_talk_Receptionist
+
+FOCUS
+Receptionist.StartTalking()
+
+Receptionist "Vem söker ni?"
+CHOICE {
+    "Jag tror att en av era anställda blev skadad av en explosion nere på stan!":
+        Receptionist "Ja, vi är informerade om läget"
+        CHOICE {
+            "Vet ni vem det var som gjorde det?":
+                Receptionist "Vi kan inte lämna ut någon information i ärendet"
+            "Bra":
+            "Kommer han att klara sig?":
+                Receptionist "Det räknar jag med"
+        }
+
+    "Chefen!":
+        Receptionist "Vi har ett antal enhetschefer och avdelningschefer"
+        Receptionist "Var god precisera er förfrågan"
+        CHOICE {
+            "Äsch, strunt samma":
+            "Högsta chefen...":
+                Receptionist "Jag antar att ni menar Dr Monad?"
+                Receptionist "Hon tar inte emot gäster"
+        }
+
+    "Jag har en fråga angående ministeriet":
+        Receptionist "Jag får då hänvisa er till informationsavdelningen"
+        CHOICE {
+            "Jaha, var sitter den?":
+                Receptionist "Våning 2, kontor 1c"
+                CHOICE {
+                    "Jag vill dit!":
+                        Receptionist "De är på semester"
+                    "Jaha, kan jag åka dit med hissen?":
+                        Receptionist "Nej, de är på semester"
+                }
+            "OK, hej då":
+        }
+}
+
+Receptionist "Adjö"
+
+
+Receptionist.StopTalking()
+DEFOCUS
+
+
+GOTO AGAIN
+

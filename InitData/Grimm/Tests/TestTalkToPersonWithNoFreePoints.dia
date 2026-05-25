@@ -1,0 +1,10 @@
+
+Father.Pos(HomeApartment_Poor_ArmChair_Poor_Devotchka_SebbesSuite_ArmChair_1)
+Sebastian.Pos(HomeApartment_Point)
+
+[AGAIN]
+LISTEN Sebastian_talk_Father
+Father "Hej min son"
+LISTEN Sebastian_talk_Father
+Father "Jag sa ju hej"
+GOTO AGAIN

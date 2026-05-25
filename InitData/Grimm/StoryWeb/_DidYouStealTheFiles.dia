@@ -1,0 +1,13 @@
+
+BROADCAST DidYouStealTheFilesStarted
+
+Story("Razzia")
+
+LISTEN TalkedToPixieAboutHowFactoryMissionWent
+
+Story("Downtime")
+
+WAIT IsBeforeHour(17)
+WAIT IsHour(17)
+WAIT Sebastian.NotTalking()
+Story("CrazyParty")

@@ -1,0 +1,289 @@
+[FROM_THE_BEGINNING]
+
+LISTEN Sebastian_talk_Felix
+
+FOCUS
+Felix.StartTalking()
+
+Felix "Yo man"
+Sebastian "Tjena"
+
+[AGAIN]
+CHOICE {
+	"Jag har varit med om en helt sjuk grej!":
+		Felix "Aha, vadårå?"
+
+	"Du kan inte gissa vilken störd grej som hände mig i natt!":
+		Felix "Nej, vadå?"
+
+	"Läget?":
+		Felix "Det är bra, bara fint"
+		Felix "Har fått tag på ett nytt slags piller som är så jävla coolt"
+		CHOICE {
+			"Jaha, jag är inte sugen":
+			"OK, vad gör det?":
+				Felix "Man tappar typ minnet och tror att man är 10 år"
+				Felix "Fast det går över rätt snabbt"
+				CHOICE {
+					"Ok":
+					"Hehe, låter roligt. Får man testa?":
+						Felix "Jadå, ska se om jag har något"
+						Felix "Fan de är slut ju"
+						Felix "Kunde svära på att jag hade ett kvar"
+						Felix "Jag säger till om jag får in nya"
+						Felix "Annars då?"
+						GOTO AGAIN
+				}
+		}
+	"Har lite bråttom, vi ses senare":
+		Felix "Visst dude"
+		Felix.StopTalking()
+		DEFOCUS
+		GOTO FROM_THE_BEGINNING
+}
+
+CHOICE {
+	"Det var en snubbe på mitt hotellrum i natt":
+		Felix "Oj, Sebastian!"
+		Felix "Så du var med en kille för första gången?"
+		Felix "Fan va festligt!"
+		Felix "Jag visste inte att du var så experimentell"
+		Sebastian "Va?"
+		CHOICE {
+			"Eh, nä alltså det var inte en riktig person":
+			"Nä, det var inte så jag menade":
+		}
+		CHOICE {
+			"Han var nästan genomskinlig":
+			"Det var liksom som ett spöke":
+		}	
+		
+	"Det kom in någon slags varelse på mitt hotellrum i natt":
+}
+
+Sebastian "Han stod och kollade på mig när jag sov"
+Felix "Ok?!"
+CHOICE {
+	"Och han liknade Ivan":
+		Felix.SetKnowledge("IvanIsGhost")
+		Felix "Sa han något?"
+		CHOICE {
+			"Ja, men det var väldigt svårt att förstå":
+			"Mm":
+				Felix "Vadå?"
+		}
+	"Ja och så försökte jag prata med honom":
+		Felix "Vad sa han då?"
+}
+
+CHOICE {
+	"Han pratade om att han ville ha hjälp":
+		Felix "Hjälp med vad?"
+		CHOICE {
+			"Han letade efter någon":
+				Felix "Ok..?"
+			"Att prata med Pixie verkade det som":
+				GOTO TALKED_ABOUT_PIXIE
+		}
+	"Han ville träffa Pixie":
+		[TALKED_ABOUT_PIXIE]
+		Felix "Verkligen?!"
+		Felix.SetKnowledge("GhostTalkedAboutPixie")
+	"Han lät plågad":
+		Felix "Ok"
+}
+
+Felix "Mer?"
+
+CHOICE {
+	"Han verkade inte kunna höra vad jag sa":
+		Felix "Ok, intressant"
+
+	"Njae... inte direkt":
+		Felix "Ok"
+}
+
+CHOICE {
+	"Vad tror du att det kan betyda?":
+		Felix "Det vettefan"
+		Felix "Det låter helt vrickat!"
+
+	"Du verkar inte jätteförvånad?":
+		Felix "Alltså, man måste försöka ha ett öppet sinne dude"
+		Felix "Men det låter helt vrickat!"
+}
+
+CHOICE {
+	"Ja det var riktigt flummigt":
+	"Jag blev skraj, helt klart":
+}
+
+Felix "Mm... hmm"
+Felix "Alltså fan"
+
+CHOICE {
+	"Vadå?":
+	"Ditt ansiktsuttryck oroar mig...":
+}
+
+Sebastian.SetKnowledge("Albert")
+Felix "Det påminner på något jävla vis om det som hände Albert"
+
+CHOICE {
+	"Vem är Albert?":
+		Felix "Eh vad ska man säga"
+		Felix "Han jobbade med Pixie och Frank för några år sedan"
+		Felix "Riktigt trevlig kille"
+		Felix "Jäkligt skum... men på ett najs sätt"
+		CHOICE {
+			"Hehe, ok":
+			"Vad hände?":
+				Felix "Ja du..."
+		}
+		GOTO WHAT_HAPPENED
+
+	"Vad hände honom?":
+		Felix "Vi vet inte riktigt"
+		[WHAT_HAPPENED]
+		Felix "Han jobbade ofta över, satt vid datorn hela nätterna"
+		Felix "En dag började han snacka om att han träffat en tjej"
+		Felix "Och att de skulle flytta ihop..."
+		CHOICE {
+			"Vadå då?":
+			"Ok":
+		}
+		Felix "Alltså, grejen var ju bara att det kom fram att den här tjejen bara fanns på internet"
+		Felix "Hon var helt virtuell liksom"
+		Felix "Men enligt Albert så hälsade hon på honom på nätterna, utanför datorn"
+		Felix "Hur fan det nu kunde gå till, han förklarade inte detaljerna"
+}
+
+CHOICE {
+	"Fick ni träffa henne?":
+		Felix "Nej, jag tror ingen ens fick en skymt av henne"
+		Felix "Vi trodde ju inte direkt på vad han sa heller"
+		Felix "Skum kille och så..."
+	"Ok...":
+		Felix "Alltså vi trodde ju mest att han höll på att bli galen"
+}
+
+Felix "Sen en dag så var han bara borta i alla fall"
+Felix "Polisen letade efter honom både i hans lägenhet och lite överallt i stan"
+
+CHOICE {
+	"Hittade de något?":
+		Felix "Inte ett spår så vitt jag vet"
+	"Å fan":
+		Felix "Mm"
+	"Helt borta eller?":
+		Felix "Jepp, totally GONE"
+}
+
+IF Felix.IsInRoom(Lodge_Entry) {
+	Felix "Det var en jobbig tid här på The Lodge"
+} ELSE {
+	Felix "Det var en jobbig tid på The Lodge"
+}
+
+Felix "Frank var helt förstörd i flera månader"
+Felix "Yulian blev sur på honom för att han inte skrev någon kod"
+Felix "Heh"
+
+CHOICE {
+	"Hehe, jag kan tänka mig det":
+		Felix "Mm"
+
+	"Ja det låter onekligen lite likt min historia":
+		Felix "Visst gör det"
+
+	"Oj... vad tycker du att jag ska göra?":
+}
+
+Felix "Jag skulle nog ta det lite försiktigt framöver om jag var du"
+Felix "Kolla om någon annan vet mer om liknande incidenter"
+
+CHOICE {
+	"Tror du att jag är i fara?":
+		Felix "Nä alltså inte direkt"
+	"Ja ok":
+	"Mm... kanske vore smart":
+}
+
+IF Felix.HasKnowledge("GhostTalkedAboutPixie") {
+	Felix "Har du pratat med Pixie om det här?"
+	CHOICE {
+		"Ja":
+			Felix "Hur reagerade hon?"
+			CHOICE {
+				"Ehm vet inte":
+					Felix "Du får vara försiktig med vad du säger till henne"
+					GOTO YOU_KNOW_HOW_UPSET_SHE_CAN_BE
+				"Inte bra":
+					Felix "Nä? Tänkte väl det"
+				"Hon tog det helt OK":
+					Felix "Alright, bra"
+			}
+		"Nej":
+			Felix "Jag skulle inte säga något till henne om det"
+			[YOU_KNOW_HOW_UPSET_SHE_CAN_BE]
+			Felix "Du vet hur upprörd hon kan bli"
+			CHOICE {
+				"Ja men det gäller ju henne och Ivan!":
+					IF Felix.HasKnowledge("IvanIsGhost") {
+						Felix "Det vet vi inte"
+						Felix "Han kanske bara var lik honom"
+						CHOICE {
+							"Ja...":
+							"Mm, men han pratade ju om Pixie också":
+								Felix "Åfan"
+						}
+					} ELSE {
+						Felix "Vadå?"
+						CHOICE {
+							"Spöket liknade honom":
+							"Nä eller jag vet inte, men spöket pratade om Pixie":
+						}
+						Felix "Åfan"
+					}
+				"Mm, sant":
+			}
+	}
+}
+
+Felix "Men fan dude! Jag får kalla kårar av det här"
+Felix "Säg till om du vill ha något lugnande"
+
+CHOICE {
+	"Jag tror jag klarar mig":
+	"Nej det är bra tack":
+}
+
+Felix "OK"
+Felix "Aja, ta det försiktigt i alla fall"
+
+CHOICE {
+	"Det ska jag":
+	"Ja, du med":
+}
+
+Felix.StopTalking()
+DEFOCUS
+
+
+
+# later
+
+
+WAIT Felix.IsNotAtTask(Guard) LISTEN Sebastian_talk_Felix {
+	Felix "L8r dude"
+}
+
+
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "Sorry dude men jag tänkte softa med min tidning nu"
+Felix "Kan vi höras lite senare?"
+Felix.StopTalking()
+DEFOCUS
+

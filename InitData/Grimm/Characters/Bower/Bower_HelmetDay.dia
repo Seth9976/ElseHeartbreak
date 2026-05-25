@@ -1,0 +1,5 @@
+
+Bower.SetTimetable("")
+Bower.Pos("Ministry_ExperimentHall_Trigger_2")
+Bower.WakeUp()
+Bower.SetFieldToFloat("sleepiness", 0)

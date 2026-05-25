@@ -1,0 +1,137 @@
+
+WAIT George.IsNotAtTask("Gambling") LISTEN Sebastian_talk_George {
+    FOCUS
+    George.StartTalking()
+
+    George "Hej, har vi setts förut?"
+    George "Jag träffar så många personer varje dag, svårt att minnas alla"
+    CHOICE {
+        "Ja det förstår jag":
+        "Jo jag tror att vi har setts":
+            George "Ja, så bra"
+        "Nej, jag vet inte vem ni är?":
+            George "Va?!"
+            George "Jag är ju stans ledare"
+            George "'Kungen av Dorisburg' som jag lite skämtsamt brukar säga"
+    }
+    George "Glöm inte att rösta på mig i nästa val!"
+    CHOICE {
+        "Eh, OK!":
+        "Va? Nej jag bor inte här så jag får nog inte rösta...":
+            George "Nähä?"
+            George "Hmm, det kanske vi borde ordna"
+            George "Det är ju hemskt att inte alla som vill ska kunna rösta!"
+            George "I alla fall om de röstar på mig..."
+    }
+    George "Ha en bra dag"
+    CHOICE {
+        "Du med":
+        "Japp!":
+        "OK, hej då":
+    }
+
+    George.StopTalking()
+    DEFOCUS
+    WAIT George.IsNotAtTask("Gambling") LISTEN Sebastian_talk_George
+}
+
+
+
+George.SetTimetable("GeorgeGambling")
+
+WAIT George.IsAtTask("Gambling") LISTEN Sebastian_talk_George
+FOCUS
+George.StartTalking()
+
+George "Huh?"
+
+CHOICE {
+	"Ehm, förlåt det var inget":
+
+	"Hur går det?":
+		George "Det går åt skogen"
+}
+
+George "Vem är ni?"
+
+CHOICE {
+    "Sebastian":
+        George "Hej Sebastian"
+        George.SetKnowledge("Sebastian")
+
+    "Mattias":
+        George "Hej Mattias"
+        George.SetKnowledge("Mattias")
+
+    "Sebbe":
+        George "Hej Seb... be?"
+        CHOICE {
+            "Sebbe":
+            "Sebastian":
+        }
+        George "Jaha, ja ja"
+        George "Hej på dig"
+        George.SetKnowledge("Sebbe")
+}
+
+CHOICE {
+    "Och ni, vem är ni?":
+        George "Longson"
+        CHOICE {
+            "Angenämt":
+            "Trevligt att träffas":
+            "OK!":
+        }
+
+    "Vet du var toaletterna ligger?":
+        George "Jag tror inte att de har toaletter här"
+        CHOICE {
+            "Nähä...":
+            "Aj då!":
+        }
+}
+
+IF George.HasKnowledge(Sebbe) {
+    George "Så Seppe, gillar ni att spela?"
+} ELIF George.HasKnowledge(Sebastian) {
+    George "Så Sebastian, gillar ni att spela?"
+} ELSE {
+    George "Så Mattias, gillar ni att spela?"
+}
+
+CHOICE {
+    "Nej, inte direkt":
+    "Aldrig testat!":
+    "Jo... det gör jag väl":
+    "Jag älskar det!":
+        George "Ah, fantastiskt"
+}
+
+George "Det finns så många amatörer här inne"
+George "Folk som spelar bort alla sina pengar"
+George "Man måste veta ett och annat om man ska bli rik på spel!"
+
+CHOICE {
+    "Ja?":
+    "Exakt, så är det verkligen":
+        George "Vad härligt att ni håller med"
+}
+
+George "Sen måste man ju ha kapital att investera"
+George "Annars tjänar man bara småpotatis"
+
+CHOICE {
+    "Och det har du?":
+        George "Vad ser det ut som?"
+
+    "Jaha... OK":
+
+    "Givetvis":
+        George "Ja precis"
+}
+
+George "Men låt oss återgå till att tjäna lite kosing nu då!"
+George "God kväll"
+
+George.StopTalking()
+DEFOCUS

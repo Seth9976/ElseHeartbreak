@@ -1,0 +1,14 @@
+07:00 - 13:00 Hanging 			BeInRoom HarborEast
+13:00 - 15:00 Fika              Fika Cafe_Room1
+15:00 - 18:00 Hanging           BeInRoom HarborEast
+18:00 - 20:30 Smoking 			Smoke HarborEast_ParkBenchSeat1_1
+20:30 - 23:00 Hanging 			BeInRoom HarborEast
+23:00 - 07:00 Sleeping 			Sleep BobSchack_BedL_Left_1
+
+[Bob_ClubDotParty]
+10:00 - 16:00 Hanging 			BeInRoom HarborEast
+16:00 - 03:00 Party! 			Fika Mines_ClubDot
+03:00 - 10:00 Sleeping 			Sleep BobSchack_BedL_Left_1
+
+[Bob_JustFika]
+00:00 - 24:00 Fika              Fika Cafe_Room1

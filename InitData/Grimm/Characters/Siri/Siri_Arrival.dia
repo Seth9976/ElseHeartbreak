@@ -1,0 +1,63 @@
+WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri {
+	Siri "Oj ursäkta"
+	WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+	Siri "Jag orkar inte prata"
+}
+
+
+
+WAIT Siri.IsAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+FOCUS
+
+Sebastian "Hej"
+Siri.StartTalking()
+Siri "hej" # mindre typsnitt?
+
+CHOICE {
+	"Vem är du?":
+		Siri "va?"
+		Sebastian "Jag frågade bara vad du heter"
+		Siri "kan du vara snäll och lämna mig ifred"
+		CHOICE {
+			"OK, självklart":
+				STOP
+			"Men vad gör du här mitt i natten?":
+		}
+		
+	"Får man vara här inne?":
+		Siri "vet inte..."
+		CHOICE {
+			"Vad gör du här?":
+			"Det verkar inte så kul":
+		}
+	
+	"Sitter du här inne helt ensam?":
+		Siri "va?"
+
+#	"Gå härifrån! [TEST]":
+#		DEFOCUS
+#		Siri.SetTimetable("")
+#		Siri.Walk(WifeBedPosition)
+#		WAIT Siri.IsInRoom(Hotel_Room3)
+#		WAIT IsHour(02)
+#		Siri.SetTimetable("Siri")
+#		STOP
+}
+
+[DONT_WANNA_TALK]
+Siri "jag vet inte om jag orkar prata med någon just nu"
+
+# om man stannar kvar så blir hon sur och säger till en
+# lämnar man fortfarande inte henne i fred så går hon upp på sitt rum
+
+Siri.StopTalking()
+DEFOCUS
+
+WAIT 5
+
+WAIT IsWithinDistance(Sebastian, Siri, 5) AND Siri.IsIdle() {
+	Siri "Kan du vara snäll och gå?!"
+}
+
+WAIT Siri.IsAtTask(Sleeping)
+START Siri2

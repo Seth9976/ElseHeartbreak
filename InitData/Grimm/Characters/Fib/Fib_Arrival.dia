@@ -1,0 +1,178 @@
+
+WAIT Sebastian.IsWithinDistance(Fib, 50)
+Fib.SetHandItem(FibsHackdev)
+
+LISTEN Sebastian_talk_Fib
+INTERRUPT GetToKnowFib
+FOCUS
+
+Fib "Har du sett vad vackra körsbärsträden är nu förresten?"
+
+CHOICE {
+	"Ja, verkligen! Är det du som sköter dem också?":
+		Fib "Jajemänsan"
+
+	"Vadå, var..?":
+		Fib "De står lite varstans i staden"
+		Fib "Håll ögonen öppna!"
+		CHOICE {
+			"Aha ok":
+			"Ja det ska jag göra!":
+				Fib "Härligt att höra, jag älskar träd"
+		}
+
+	"Nej det har jag inte... men jag ska kolla in dem":
+		Fib "Ja gör det"
+}
+
+CHOICE {
+	"En helt annan sak... var ligger caféet här i stan?":
+		[CAFE]
+		Fib "Jo men det är rätt nära"
+		Fib "Bara att gå till Plaza här bredvid och sen svänga vänster"
+		CHOICE {
+			"Najs":
+			"Ok!":
+		}
+
+	"Jag har gått lite vilse tror jag":
+		Fib "Något särskilt du letar efter?"
+		CHOICE {
+			"Caféet":
+				GOTO CAFE
+
+			"Något bra ställe för att sälja läsk typ":
+				Fib "Hmm..."
+				Fib "Vid Plaza?"
+				CHOICE {
+					"Ja kanske":
+					"Nej där har jag redan testat massor":
+						Fib "Ok, då vet jag inte tyvärr"
+				}
+
+			"Jag vill mest träffa människor":
+				Fib "Jaha..."
+				Fib "Kasinot kanske? Fast det är inte så trevligt"
+				Fib "Bar Yvonne är ju rätt populärt annars"
+				CHOICE {
+					"Jag har varit där redan":
+						Fib "Ok, ja jag är inte ute och svirar så mycket"
+
+					"Mm, får testa det":
+						Fib "Gör så!"
+				}
+		}
+
+	"Ska sticka nu, ha det fint!":
+		GOTO BYE
+}
+
+CHOICE {
+	"Nu måste jag nog gå, har ett möte":
+		Fib "Ok, jaha"
+		GOTO BYE
+
+	"Det var trevligt att prata, ska röra på mig":
+		Fib "Ja detsamma"
+		GOTO BYE
+
+	"Vad gör man som trädgårdsmästare egentligen?":
+		Fib "Man sår frön..."
+		Fib "Och vattnar"
+		Fib "Och så måste man gå in och modifera frön och sånt ibland"
+		Fib "Om man vill ha spektakulära växter i alla fall"
+		Fib "Och det vill man ju"
+		CHOICE {
+			"Ja...?":
+			"Jo självklart":
+		}
+		Fib "Och så måste man ju rensa ogräs ibland"
+		CHOICE {
+			"Mm, det kan inte vara så roligt":
+				Fib "Det är ganska skönt, man har tid att fundera på livet och så"
+				CHOICE {
+					"Hmm...":
+					"Ok, intressant":
+				}
+				Fib "På tal om det, nu måste jag nog jobba vidare"
+				CHOICE {
+					"Jaha, ja då ska jag gå":
+					"Ok, hej då!":
+				}
+			"Hur kan man modifiera frön egentligen..?":
+				Fib.TakeOutItem(FibsHackdev)
+				Fib "Jo men med den här apparaten"
+				Fib "Det är lite klurigt, måste tänka efter noga vad man gör"
+				Fib "Men resultatet kan bli riktigt fint, jag kan visa dig några blommor jag skapat"
+				Fib "Fast får bli en annan gång, nu måste jag jobba vidare"
+				CHOICE {
+					"Ok, hej då!":
+					"Låter intressant... jag kommer tillbaka någon annan gång":
+				}
+		}
+}
+
+[BYE]
+Fib "Ha det så bra, vi kanske ses!"
+
+Fib.StopTalking()
+DEFOCUS
+
+
+
+# later #
+
+
+
+LISTEN Sebastian_talk_Fib
+
+FOCUS
+Fib.StartTalking()
+[MORE_SMALLTALK]
+
+Fib "Hej du!"
+
+CHOICE {
+	"Tjena":
+	"Hej!":
+	"God dag, god dag":
+}
+
+Fib "Vad var det du hette nu igen?"
+
+CHOICE {
+	"Sebastian":
+	"Sebastian sa jag ju!":
+	"Sebbe":
+}
+
+Fib "Ja just det, förlåt så hemskt mycket"
+Fib "Jag är så dålig på namn"
+
+CHOICE {
+	"Det är lugnt":
+	"Ja":
+	"Jo men det är jag också!":
+		Fib "OK, vilken tur"
+}
+
+Fib "Du borde komma och hälsa på mig i parken sen"
+Fib "Det är där jag oftast är och jobbar"
+CHOICE {
+	"Det ska jag göra!":
+	"OK, coolt":
+	"Kanske det":
+		Fib "Det vore jättetrevligt"
+}
+Fib "Du måste gå in i den andra delen, där har jag min redskapsbod"
+Fib "Det finns en liten stig bredvid scenen"
+CHOICE {
+	"Aha":
+	"Finns det en scen i parken?":
+		Fib "Jupp"
+	"OK":
+}
+Fib "Ses senare då"
+
+Fib.StopTalking()
+DEFOCUS

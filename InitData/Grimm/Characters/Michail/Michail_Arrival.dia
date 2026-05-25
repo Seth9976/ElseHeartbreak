@@ -1,0 +1,105 @@
+
+LISTEN Sebastian_talk_Michail
+FOCUS
+Michail.StartTalking()
+
+CHOICE {
+	"Är du kock eller?":
+		Michail "Ja, ja. Javisst"
+
+	"Hejsan":
+		Michail "God dag"
+
+	"Ursäkta, stör jag?":
+		Michail "Nej nej, inte alls"
+}
+
+CHOICE {
+	"Vad gör du?":
+		[WHAT_DO_YOU_DO]
+		Michail "Jag lagar maten här på hotellet"
+		Michail "Hoppas du gillar den!"
+		CHOICE {
+			"Jodå, den är ok":
+				Michail "Ah, det glädjer mig att höra"
+				GOTO BYE
+			"Har inte hunnit äta här än":
+				Michail "Å, men det måste ni pröva!"
+				Michail "Husets specialitet är löksoppa"
+			"Kaffet är bra":
+				Michail "Så ni har inte prövat vår löksoppa?"
+		}
+		CHOICE {
+			"Löksoppa?":
+				Michail "Ja!"
+				GOTO BEST
+			"Är det verkligen gott?":
+				[BEST]
+				Michail "Åh, det är det bästa som finns"
+				Michail "Lova mig att du provar den"
+			"Mhm..?":
+				Michail "Ni verkar skeptisk"
+		}
+
+	"Vad heter du?":
+		Michail "Michail!"
+		Sebastian.SetKnowledge(Michail)
+		CHOICE {
+			"Trevligt att träffas, Michail":
+				Michail "Det samma"
+			"Vad gör du då?":
+				GOTO WHAT_DO_YOU_DO
+		}
+}
+
+IF IsNight() {
+	Michail "God kväll"
+}
+ELSE {
+	Michail "God middag"
+}
+
+[BYE]
+
+Michail.StopTalking()
+DEFOCUS
+
+
+
+[MORE]
+LISTEN Sebastian_talk_Michail
+FOCUS
+Michail.StartTalking()
+IF IsNight() {
+	Michail "God kväll"
+}
+ELSE {
+	Michail "God middag"
+}
+
+CHOICE {
+	"Hejsan!":
+	"Läget?":
+		Michail "Alltid redo"
+	"Hur går det med jobbet?":
+		Michail "Bara fint, jag älskar det"
+}
+
+CHOICE {
+	"Jag kanske skulle kunna tänka mig en löksoppa nu":
+		Michail "Ah!"
+		Michail "Jag har slut på den just nu"
+		Michail "Men kom tillbaka lite senare så kanske jag hunnit laga en ny kastrull"
+	"Bor du också på hotellet?":
+		Michail "Hehe ja, faktiskt"
+		Michail "Fru Babcia har låtit mig låna en av sviterna"
+		Michail "Det är ingen som brukar hyra dem ändå"
+		Michail "Hon bor i den andra!"
+	"Hon är lite skum, hon i receptionen..?":
+		Michail "Å, inte prata illa om Fru Babcia"
+		Michail "Nej nej nej"
+		Michail "Hon är fantastisk"
+}
+Michail.StopTalking()
+DEFOCUS
+GOTO MORE

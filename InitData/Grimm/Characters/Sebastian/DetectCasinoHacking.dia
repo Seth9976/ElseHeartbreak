@@ -1,0 +1,5 @@
+[MOVE_OUT_AGAIN]    
+WAIT Sebastian.IsSleeping() AND Sebastian.IsInRoom(Casino_Floor1)
+WAIT 60
+Sebastian.Pos(BurrowsToCasinoPier_Trigger_1)
+GOTO MOVE_OUT_AGAIN

@@ -1,0 +1,33 @@
+
+	CHOICE {
+	"$2":
+		Hank "Ok, billigt!"
+		SebastianCreditCard.RunMakeTransactionFunctionOnCreditCard(2)
+
+	"$3":
+		Hank "Ok!"
+		SebastianCreditCard.RunMakeTransactionFunctionOnCreditCard(3)
+
+	"$4":
+		Hank "Ok"
+		SebastianCreditCard.RunMakeTransactionFunctionOnCreditCard(4)
+
+	"Du kan få en":
+		Hank "Schysst!"
+} 
+	Hank "Aha, synd..."
+	Hank "En annan gång då"
+	Hank "Kan jag få tillbaka mina pengar..?"
+
+	CHOICE {
+		"Naturligtvis...":
+			SebastianCreditCard.RunMakeTransactionFunctionOnCreditCard(-2)
+		"Eh jag vet inte hur man gör det...":
+			Hank "Ok?"
+			Hank "Jaja, det var ju inte så mycket pengar i alla fall"
+			CHOICE {
+				"Jag ska försoka fixa det!":
+					Hank "Ja det vore snällt"
+				"Nej precis":
+			}
+	}

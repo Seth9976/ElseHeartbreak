@@ -1,0 +1,10 @@
+
+[AGAIN]
+
+WAIT Sebastian.IsWithinDistance(BrokenFusebox, 3) LISTEN Sebastian_inspect_Fusebox
+
+WAIT 1
+#BrokenFusebox.Explode()
+#Sebastian.Sleep(1)
+
+GOTO AGAIN

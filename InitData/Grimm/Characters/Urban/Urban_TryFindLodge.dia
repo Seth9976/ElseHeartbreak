@@ -1,0 +1,106 @@
+Urban.SetTimetable(Urban)
+
+
+LISTEN Sebastian_talk_Urban
+FOCUS
+Urban.StartTalking()
+
+Urban "Hejshch....."
+Urban "Du är........."
+
+IF Urban.HasKnowledge(SebastianGaveBeer) {        
+    Urban "SCHNÄLL!"
+    Urban "Du bårde träffa en person"
+    Urban "Ochkså snäll!"
+    Urban "Känner du Elsa........?"
+    Urban "Hon bor"
+    Urban "Hon bor..."
+    Urban "Var bor hon..?"
+    CHOICE {
+        "Elsa?":
+        "Henne känner jag":
+        "Va?!":
+    }
+    Urban "Schmart är hon"
+    Urban "Jääävligt smart..."
+    Urban "Ja oj oj"
+    CHOICE {
+        "OK?":
+        "Jaha... och var bor hon då?":
+        "Mhm? Jag ska nog gå nu...":
+    }
+    Urban "Hon bor..."
+    Urban "I ett högt hus!"
+    Urban "Norra delen av stan"
+    Urban "Tror jag"
+    Urban "Konstigh del av stan, mycket skumt folk"
+    Urban "Mycket konstiga apparater..."
+    Urban "Ja fy i helvete"
+} ELSE {
+    [SLEEP]
+    Urban.Sleep(3)
+    Urban.StopTalking()
+    DEFOCUS
+    WAIT Urban.IsAwake()
+    LISTEN Sebastian_talk_Urban
+    Urban "Öhhh?!"
+    Urban "Va?!"
+    GOTO SLEEP
+}
+
+Urban.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Urban
+FOCUS
+Urban.StartTalking()
+
+Urban "Hej gamle polare"
+Urban "Du är en klippa i denna kalla, hårda värld"
+Urban "Har du öl?"
+
+CHOICE {
+    "Det kanske räcker nu?":
+    "Nej...":
+    "Ja, du kan få en":
+        [GIVE_ME]
+        Urban "Åååhååå"
+        Urban.StartWaitForGift()
+        [TRY_GIVE_AGAIN]
+        LISTEN Sebastian_give_Urban {
+            Log("Giving....")
+            RemoveDanglingDialogueOptions("Urban_Arrival")
+            WAIT Urban.HasAnyHandItem()
+            Log("Urban got something...")
+            IF Urban.HasHandItemOfDrinkType("beer") {
+                Urban "Tackar, tackar!"
+                Urban.SetKnowledge(SebastianGaveBeer)
+            } ELSE {
+                Urban "Det här är väl ingen öl?"
+                Urban.Give()
+                Urban "Fy fan, försöker du lura en gammal man så här?"
+                WAIT Sebastian.HasAnyHandItem()
+                GOTO TRY_GIVE_AGAIN
+            }   
+            Urban.StopWaitForGift()
+            GOTO DONE_GIVING
+        }
+        IF Sebastian.HasDrinkOfType("beer") {
+            LISTEN Forever
+        } ELSE {
+            Sebastian "Eh, jag måste nog gå och hämta burkarna"
+            Urban "Amääännnn..."
+            DEFOCUS
+            Urban.StopTalking()
+            LISTEN Sebastian_talk_Urban
+            Urban "Har du öl nu eller?"
+            Urban.StartTalking()
+            GOTO TRY_GIVE_AGAIN
+        }
+        [DONE_GIVING]
+}
+
+Urban.StopTalking()
+DEFOCUS

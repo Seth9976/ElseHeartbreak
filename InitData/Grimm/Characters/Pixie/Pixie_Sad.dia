@@ -1,0 +1,56 @@
+
+# när hon vet att Ivan ska utsättas för experimentet
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+Pixie "*snyft*"
+
+CHOICE {
+	"Vad är det som har hänt?":
+		Pixie "Fan fan fan"
+	
+	"Oj, gråter du?!":
+		Pixie "Vad ser det ut som"
+
+	"Hej, allt bra?":
+		Pixie "Nej! Det ser du väl din idiot"
+}
+
+CHOICE {
+	"Kan jag göra något?":
+		Pixie "Nä, det finns inget som någon kan göra"
+
+	"Vill du ha något att dricka?":
+		Pixie "Nä, det är bra"
+}
+
+CHOICE {
+	"Ska jag gå?":
+		Pixie "Nej, stanna gärna"
+
+	"Du måste berätta vad som har hänt!":
+}
+
+WAIT 2
+Pixie "Det är Ivan..."
+
+CHOICE {
+	"OK?":
+
+	"Den jäveln! Vad har han nu gjort???":
+		Pixie "Nej, nej. Inte så"
+
+	"Är han skadad?":
+		Pixie "Nej..."
+		Pixie "Inte än"
+}
+
+Pixie "Han ska vara med i något slags projekt på Ministeriet"
+Pixie "Det verkar skitfarligt"
+
+Pixie.StopTalking()
+DEFOCUS
+

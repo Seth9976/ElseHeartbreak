@@ -1,0 +1,144 @@
+
+Pixie.StopTalking()
+Pixie.SetTimetable(Pixie)
+
+LISTEN FelixFetchesPixie [FETCH] {
+	Pixie.SetFieldToFloat("sleepiness", 0)
+	Pixie.WakeUp()
+	Pixie.SetTimetable(TalkToSebastian)
+	Pixie.Pos(Lodge_Room1_Point1)
+	Pixie.StopTalking()
+}
+
+WAIT IsWithinDistance(Sebastian, Pixie, 5)
+CANCEL FETCH
+
+WAIT Sebastian.NotTalkingButIgnore(Pixie)
+FOCUS
+Pixie.StartTalking()
+
+Yulian.Pos(YulianApartment_Poor_Bed_Poor_Madrass_1) # move him out of the way
+Yulian.SetTimetable("")
+
+WAIT 2
+Pixie.Interact(Sebastian)
+Pixie "Sebastian!?!"
+WAIT 2
+Pixie "Vad fan gör DUU här?"
+Sebastian.SetKnowledge("PixieIsAHacker")
+
+IF Felix.IsWithinDistance(Pixie, 10) {
+
+} ELSE {
+	Felix.SetTimetable("Felix_FindPixie")
+	WAIT Felix.IsWithinDistance(Pixie, 7) {
+		Felix.CancelWalking()
+		Felix.SetTimetable("")
+	}
+}
+
+[FOLLOW]
+CHOICE {
+	"Ehh... jag följde efter dig hit":
+		Pixie "Men FÖR I HELVETTE!"
+		Pixie "Jävla stalker"
+		
+	"Jag var ute på en promenad och så hamnade jag bara här":
+		Pixie "Nähä, det tror jag inte på!"
+		Pixie "Du har fan följt efter mig hit"
+		Pixie "Jävla STALKER!"
+		
+	"Jag var så nyfiken på vad du jobbar med":
+		Pixie "Så du följde efter mig hit?!!"
+		CHOICE {
+			"Ja, typ":
+			"Du sa ju aldrig vad du jobbade med så jag undrade väldigt mycket...":
+		}
+		Pixie "Så då började du typ STALKA mig?!!"
+		
+	"Vet inte":
+		Pixie "VAFAAN?!"
+		GOTO FOLLOW
+
+	"[SKIP]":
+		GOTO SKIP
+}
+
+CHOICE {
+	"Förlåt":
+	"Jag är ledsen!":
+	"Mmm":
+	"Ja så vad ska jag säga...":
+}
+
+Pixie "Varför ska ni killar alltid vara så creepy?!"
+Pixie ""
+Pixie.GetAngryAtComputer()
+Pixie "Ahhhhhh!!!"
+# ilske-animation
+
+CHOICE {
+	"Jag ska nog gå nu":
+		Pixie "Ja!"
+		Pixie "Eller äh nej, vänta"
+		Pixie "Så jävla farligt är det inte"
+
+	"Eh, förlåt...":
+		Pixie "Mm... kanske"
+}
+
+Pixie "Bara du slutar vara creepy, lova?"
+CHOICE {
+	"Ja, absolut":
+	"Jag lovar":
+}
+
+Pixie "Felix, vad vet du om det här?"
+Sebastian.SetKnowledge(Felix)
+
+IF Felix.HasKnowledge("Sebastian") {
+	Felix "Han heter Sebastian, han verkar soft"
+} ELSE {
+	Felix "Chilla lite Pixie, jag har ingen aning vem den här snubben är"
+	Felix "Men han verkar soft"
+}
+
+Pixie "Ok, ok"
+Pixie "Men hur tusan kom du in hit Sebbe?!"
+
+CHOICE {
+	"Jag vet inte riktigt... det var lite klurigt":
+	"Äh, man har väl sina trix antar jag":
+	"Jag gick in bara":
+		Pixie "OK, jag måste ta ett snack med Nini uppe i skoaffären"
+		GOTO FRIENDS
+}
+
+Pixie "Hmm..."
+Pixie "OK, jag är lite imponerad faktiskt"
+Pixie "Även om jag fortfarande är arg för att du följde efter mig!"
+
+[FRIENDS]
+CHOICE {
+	"Men vi kan fortfarande vara vänner?":
+		Pixie "Ja såklart, dummer!"
+		Pixie "Jag måste bara lugna ner mig lite"
+		GOTO FRIENDS
+	
+	"Vad är det ni gör här nere?":
+		Pixie "Det kan jag inte berätta just nu"
+}
+
+[SKIP]
+Pixie "Men du Sebastian"
+Pixie "Du måste gå innan vår chef märker att du är här"
+
+DEFOCUS
+Pixie.StopTalking()
+Pixie.SetTimetable("Pixie")
+
+Pixie "Vi får ses ikväll eller någon annan dag typ"
+Yulian.Pos(PoorDesolateBuilding1_Exterior_FrontTrigger)
+Yulian.SetTimetable(Yulian)
+
+BROADCAST PixieAccuseYouOfStalking

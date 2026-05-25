@@ -1,0 +1,45 @@
+FOCUS
+
+Pixie "Mitt tips om du vill komma igång är att du pratar med min gamla programmeringslärare"
+
+[ASK_MORE]
+CHOICE {
+	"OK, vad heter han?":
+		Pixie "Gunnar"
+		Pixie "Han är lite vresig, men jävligt bra"
+		CHOICE {
+			"Det finns ingen som inte är vresig?":
+				Pixie "Nej, inte vad jag vet!"
+				Pixie "Men det finns många i staden som kan programmera"
+				Pixie "Så du kanske kan hitta någon annan"
+				GOTO ASK_MORE
+			"Var bor han då?":
+		}
+	
+	"Är det en bra lärare?":
+		Pixie "Jadå"
+		Pixie "Han kan vara lite hård men han är jättebra på att lära ut saker"
+		GOTO ASK_MORE
+
+	"OK, hur hittar jag honom?":
+}	
+
+Pixie "Han bor i ett litet hus nära hamnen"
+Pixie "Det är rosa med guldtak"
+Pixie "Om han inte har flyttat..."
+
+CHOICE {
+	"OK, det huset har jag nog sett":
+		Pixie "Va bra"
+	"Jaha, jag tror att jag har träffat honom förrut faktiskt":
+		Pixie "Oj då"
+		Pixie "Då vet du att han kan vara lite tvär?"
+		Sebastian "Mm"
+	"OK, det låter ju inte så svårt att hitta":
+		Pixie "Nej, det är lätt"
+}
+
+Sebastian.SetKnowledge("Gunnar")
+Sebastian.SetKnowledge("PixieToldMeAboutGunnar")
+
+DEFOCUS

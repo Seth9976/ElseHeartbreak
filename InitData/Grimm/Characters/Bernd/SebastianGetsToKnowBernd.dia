@@ -1,0 +1,44 @@
+FOCUS
+Bernd.StartTalking()
+
+Bernd "Hallo!"
+
+CHOICE {
+	"Hej!":
+	"Hallå!":
+}
+
+Bernd "Vem är du?"
+
+CHOICE {
+	"Jag heter Sebastian":
+		Bernd "Hej Sebastian!"
+
+	"Du kan kalla mig Sebbe":
+		Bernd "Hej Sebbe!"
+}
+
+Bernd.SetKnowledge("Sebastian")
+Bernd "Själv heter jag Bernd, trevligt att träffas"
+Sebastian.SetKnowledge(Bernd)
+
+IF Bernd.IsInRoom(Hotel_Diner) {
+	Bernd "Bor du här på hotellet?"
+}
+ELSE {
+	Bernd "Bor du på hotellet?"
+}
+
+CHOICE {
+	"Jepp":
+	"Jajamän":
+	"Ja":
+	"Mm, tyvärr":
+		Bernd "Tyvärr??!"
+		Bernd "Du gillar det inte?"
+		CHOICE {
+			"Äh, det är väl ok":
+			"Det är inte så mysigt som jag hade hoppats":
+				Bernd "Men de har bra frükost!"
+		}
+}

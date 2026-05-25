@@ -1,0 +1,80 @@
+
+LISTEN Sebastian_talk_Panda4
+FOCUS
+Panda4.StartTalking()
+
+Panda4 "Jag är så seeeg"
+Panda4 "Drack alldeles för mycket i går... bläää"
+CHOICE {
+    "Oj då":
+    "Ta ett glas vatten":
+        Panda4 "Tack för tipset, Einstein"
+}
+
+Panda4 "Mina rumskompisar gillar att supa varje dag"
+Panda4 "Blir helt knäckt av det"
+
+[AGAIN]
+CHOICE {
+    "Måste du dricka också då?":
+        Panda4 "Men vad ska jag göra då?"
+        Panda4 "Det är ju kul också"
+        Panda4 "Fast de vill ALLTID gå till Yvonne, det börjar bli lite tjatigt"
+        CHOICE {
+            "Yvonne?":
+                IF Panda4.IsInRoom(BarYvonne) {
+                    Panda4 "Ja, vi är där just nu"
+                    Panda4 "BAR Yvonne alltså"
+                    Panda4 "Hahahaha"
+                }
+                ELSE {
+                    Panda4 "Ja... Bar Yvonne alltså"
+                    Panda4 "Ligger vid Plaza"
+                }
+            "Var kan man gå annars då?":
+                Panda4 "Jag vet inte..."
+                Panda4 "Topfloor kanske?"
+                Panda4 "Fast det är mest gamla där"
+                Panda4 "Eller Casinot, om man kommer vill säga"
+                Panda4 "Men där är det i och för sig massa folk från ministeriet"
+                Panda4 "De är CREEPY!!!"
+        }
+        GOTO AGAIN
+
+    "Vilka bor du med?":
+        Panda4 "Några tjejer"
+        Panda4 "Vi har ett kollektiv"
+        Panda4 "Det ligger i ett torn bredvid sjukhuset"
+        CHOICE {
+            "Coolt":
+            "Jaha, jag förstår":
+            "OK":
+        }
+
+    "Ta det lugnt":
+}
+
+Panda4.StopTalking()
+DEFOCUS
+
+WAIT 10
+
+LISTEN Sebastian_talk_Panda4
+FOCUS
+Panda4.StartTalking()
+Panda4 "Jag känner mig helt hyper!"
+Panda4 "Helt sjukt!"
+Panda4 "Har du testat droger någon gång?"
+CHOICE {
+    "Ja...":
+    "Nej...":
+}
+Panda4 "Uuuuhhhh"
+Panda4 "Det känns så konstigt i kroppen"
+Panda4.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Panda4
+Panda4 "Wahoooo"
+Panda4 "Aj!"
+Panda4 "Uuuuhhhh"

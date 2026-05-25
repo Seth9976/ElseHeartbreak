@@ -1,0 +1,10 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("Ghosts")
+Story("AfterGhostVisit")
+
+SetHour(0)
+
+Sebastian.Pos(Ministry_CorridorLevel2a_Point)

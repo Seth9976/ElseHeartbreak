@@ -1,0 +1,58 @@
+FOCUS
+Monad.StartTalking()
+
+IF Monad.HasKnowledge("SebastianBrokeIn") {
+    Monad "Jag förväntade mig inte att se dig här igen"
+    Monad "Förbannade turister"
+}
+ELSE {
+    Monad "Jaha, det här var ju tråkigt"
+    Monad.SetKnowledge("SebastianBrokeIn")
+    Monad.SetKnowledge(Sebastian)
+
+    CHOICE {
+        "Hej, jag heter Sebastian":
+        "Ursäkta, vem är ni?":
+        "Va?!":
+    }
+
+    Monad "Jag vill inte skapa uppståndelse"
+    Monad "Men att besöka min lägenhet är inte något jag rekommenderar"
+    Monad "Ni är inte från stan, eller hur?"
+
+    CHOICE {
+        "Nej precis..?":
+        "Jo!":
+    }
+
+    Monad "Å, jag orkar inte med sånt här!"
+}
+
+Monad.StopTalking()
+
+Monad.TakeOutItem(LoneTaser)
+WAIT Monad.HasHandItemOfType(Taser)
+Monad.SetTimetable("MonadInteractSebastian")
+
+LISTEN START_THREAD [THREAD] {
+    WAIT 10
+    Sebastian.Sleep(8)
+    GOTO FIX
+}
+BROADCAST START_THREAD
+
+WAIT Monad.HasConversationTarget(Sebastian)
+Monad.InteractUsingHandItem(Sebastian)
+
+CANCEL THREAD
+WAIT Sebastian.IsSleeping()
+[FIX]
+DEFOCUS
+Monad.SetTimetable("")
+WAIT 60
+Sebastian.Pos(PoliceOfficeInterior_SofaSeat_2)
+
+Monad.PutAwayHandItem()
+Monad.SetTimetable("Monad")
+
+STOP

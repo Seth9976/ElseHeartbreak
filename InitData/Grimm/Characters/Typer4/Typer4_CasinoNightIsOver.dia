@@ -1,0 +1,87 @@
+WAIT Typer4.IsAtTask("LodgeBreak")
+
+LISTEN Sebastian_talk_Typer4
+Typer4.StartTalking()
+FOCUS
+
+Typer4 "God dag"
+
+CHOICE {
+    "Hej!":
+    "God dag":
+    "God morgon":
+}
+
+CHOICE {
+    "Vad gör ni här?":
+    "Söker ni någon?":
+    "Vad är ert ärende?":
+}
+
+Typer4 "Jag vill tala med er chef!"
+
+CHOICE {
+    "Han är inte inne":
+    "Hmm, jag ska se vad jag kan göra":
+        Typer4 "Det är mycket brådskande!"
+    "Eh...":
+}
+
+Typer4 "Ni ligger mycket illa till vill jag lova!"
+
+Typer4 "Jag köpte ett par skor här förra veckan"
+Typer4 "Uppe på skoaffären alltså"
+
+Typer4 "Och de har redan gått sönder"
+
+CHOICE {
+    "Eh... jaha! Oj då":
+    "Det var dåligt":
+    "Verkligen?!":
+    "Ööhh.......":
+}
+
+[AGAIN]
+CHOICE {
+    "Jag ska se vad jag kan göra":
+    "Vänta här en sekund så ska jag kolla med bossen":
+    "Det var inget annat ni ville..?":
+        Typer4 "Jag vill ha mina pengar tillbaka!"
+        GOTO AGAIN
+}
+
+DEFOCUS
+Typer4.StopTalking()
+
+
+Sebastian.SetKnowledge("Typer4Shoes")
+WAIT Sebastian.IsNotInRoom(Lodge_Entry)
+
+
+
+LISTEN Sebastian_talk_Typer4
+Typer4.StartTalking()
+FOCUS
+
+Typer4 "Nå, hur gick det?"
+Typer4 "Jag kräver att få byta de här"
+
+CHOICE {
+    "Tyvärr, vi tillåter inga byten":
+        Typer4 "Det var det grövsta!"
+        Typer4 "Jag ska anmäla er till polisen, det ska jag"
+    "Var god och gå upp till affären där uppe så kan expediten hjälpa dig där":
+        Typer4 "Men jag har redan pratat med henne!"
+        Typer4 "Hon var till ingen nytta alls"
+    "Skulle ni kunna komma tillbaka nästa vecka?":
+        Typer4 "Nästa vecka?!"
+        Typer4 "Vad har ni för service på det här stället"
+}
+
+DEFOCUS
+Typer4.StopTalking()
+
+Typer4 "Adjö!"
+Typer4.SetTimetable(Typer4)
+
+

@@ -1,0 +1,78 @@
+FOCUS
+
+Frank "Hur känns det med modifieraren då, har du koll på hur man använder den?"
+
+CHOICE {
+    "Alltså... typ":
+        Frank "Mm..?"
+    "Jodå, det känns bra!":
+        Frank "Gött"
+    "Haha jag vet inte, är inte supersäker än":
+        Frank "OK?"
+}
+
+Frank "Har du lärt dig loopar?"
+
+CHOICE {
+    "Ja, jo men det har jag":
+        Frank "Bra, de är användbara..."
+        [NEVER_FORGET]
+        Frank "Jag glömmer aldrig när jag och Albert knäckte låsen inne på stadshuset"
+        Frank "Haha, ja det var tider det"
+        Frank "Var ju bara grabb..."
+        CHOICE {
+            "Öh, OK..?":
+            "Cool!":
+            "Brute-vadå?":
+                Frank "Med hjälp av loopar kan man testa många kombinationer"
+                Frank "De har förbättrat säkerheten nu, får man hoppas"
+                Frank "Jag var ju nära att hamna i fängelse, hade väl tur som var så ung"
+        }
+
+    "Nej, vad är det?":
+        Frank "Å, det är något av det mest användbara man kan göra med kod"
+        Frank "Du kan räkna, både uppåt och nedåt"
+        Frank "Och så kan du titta igenom innehållet i listor"
+        Frank "Det är awesome"
+        CHOICE {
+            "OK? Men hur gör man allt det..?":
+            "Wow!":
+        }
+        Frank "Det magiska ordet är 'loop'"
+        Frank "Om man använder det ensamt så loopar man i oändlighet"
+        Frank "Eller ja... tills datorn stannar i alla fall"
+        CHOICE {
+            "Det låter inte jättepraktiskt":
+            "OK..?":
+        }
+        Frank "Det kommer till nytta oftare än man tror"
+        Frank "Sen kan man loop:a över saker, t.ex. en lista"
+        Frank "loop [1,2,3] till exempel"
+        Frank "Här, kolla på koden i det här objektet"
+        Frank.GetUpAndInteract(Sebastian)
+        WAIT Frank.IsIdle()
+        Frank.TakeOutItem(FranksLoopBox)
+        WAIT Frank.IsIdle()
+        Frank.Give()
+        WAIT Frank.HasNoHandItem()
+        
+        WAIT Sebastian.IsHacking()
+        WAIT Sebastian.IsIdle()
+
+        Frank "Ser du?"
+        Frank "Du kan behålla den, så har du lite exempel på vad man kan göra med loopar"
+
+        CHOICE {
+            "Tack!":
+            "Vad bra...":
+            "Men vad kan man göra rent praktiskt med loopar?":
+                Frank "Massor med saker!"
+                Frank "Söka efter data"
+                Frank "Lösa matematiska problem"
+                Frank "Alla möjliga saker där det finns osäkerhet eller man behöver leta bland flera olika svar"
+                GOTO NEVER_FORGET
+        }
+}
+
+Frank.SetKnowledge(HasTeachedLoops)
+DEFOCUS

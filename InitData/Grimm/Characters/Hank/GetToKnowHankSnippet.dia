@@ -1,0 +1,57 @@
+FOCUS
+
+Hank "Ja?"
+CHOICE {
+	"Tänkte bara säga hej":
+		[YOU_WORK_HERE_RIGHT]
+		Sebastian "Du jobbar på hotellet va?"
+		Hank "Jepp, hur visste du det?"
+		CHOICE {
+			"Kläderna":
+				Hank "Ah"	
+			"Jag såg dig tidigare när du jobbade":
+				Hank "Ok"
+			"En ren gissning":
+				Hank "Jaha"
+			"Jag vet inte... jag är bra på att gissa sånt där tror jag":
+				Hank "Ok"
+		}		
+	"Eh ursäkta, jag går bara runt och kollar läget":
+		Hank "Ok, går det bra då?"
+		CHOICE {
+			"Inte direkt":
+			"Jo, jag har sett mycket fina fåglar här nära hamnen":
+				Hank "Mm"
+			"Njae... kollar in folk och så":
+		}
+		GOTO YOU_WORK_HERE_RIGHT
+
+	"[HURRY]":
+		GOTO HURRY
+}
+
+WAIT 1
+Hank "Och själv då? Du är gäst på hotellet?"
+
+CHOICE {
+	"Ja, jag heter Sebastian":
+	"Ja precis. Jag heter Sebbe":
+}
+
+Hank.SetKnowledge("Sebastian")
+Hank "Sebastian... ok!"
+
+IF Hank.IsAtTask(Chilling) {
+	CHOICE {
+		"Du har det fint här!":
+			[HURRY]
+			Hank "Tack"
+		"Är det något kul på TV?":
+			Hank "Knappast"
+		"Vad kallas den här floden här?":
+			Hank "Dåren"
+			Sebastian "Jaha, intressant..."
+	}
+}
+
+DEFOCUS

@@ -1,0 +1,18 @@
+
+START SkipToAfterGhosts
+
+WAIT 1
+
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_1)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_2)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_3)
+
+SodaStorage_WellspringSoda_1.SetCode(LowerCorruption)
+SodaStorage_WellspringSoda_2.SetCode(LowerCorruption)
+SodaStorage_WellspringSoda_3.SetCode(LowerCorruption)
+
+# Heart.SetCode(TheHeart)
+
+Sebastian.Pos(Ivan)
+#Sebastian.Pos(Internet_Trigger_1)
+#Sebastian.Interact(Internet_Heart_Analyzer)

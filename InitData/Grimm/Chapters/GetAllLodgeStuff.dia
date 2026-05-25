@@ -1,0 +1,14 @@
+Story("FirstDay")
+Story("CanSellSoda")
+Story("FoundLodge")
+Story("AfterStalking")
+Story("YouAreMemberNow")
+
+START GetHackdev
+START GetKey
+START GetMap
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+UnlockDoor(Lodge_Room1_DoorToRoom2)

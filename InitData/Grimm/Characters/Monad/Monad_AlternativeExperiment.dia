@@ -1,0 +1,149 @@
+
+# Monad picks Sebastian as target for the experiment instead
+
+WAIT IsHour(7)
+
+Monad.SetTimetable(WaitForSebastianInLobby)
+
+WAIT Sebastian.IsWithinDistance(Monad, 10) AND Monad.IsInRoom(Ministry_Lobby)
+
+FOCUS
+Monad.SetTimetable(MonadInteractSebastian)
+
+WAIT 2
+Monad "Du!"
+Monad "Du är sen"
+Monad "Kom med mig"
+Monad.SetTimetable(Monad_GetIntoElevator)
+
+CHOICE {
+    "Jag tänkte på de här pengarna?":
+    "OK...":
+    "Oj, vänta!":
+    "Jag har ändrat mig":
+        Monad "Kommer inte på fråga, följ med nu"
+    "[IN_EXPERIMENT_HALL]":
+        DEFOCUS
+        Monad.Pos(Ministry_ExperimentHall_Trigger_1)
+        WAIT 1
+        Sebastian.Pos(Ministry_ExperimentHall_Trigger_1)
+        GOTO IN_EXPERIMENT_HALL
+    "[INTERNET]":
+        DEFOCUS
+        GOTO INTERNET
+}
+
+DEFOCUS
+
+WAIT 3
+Monad "Raska steg!"
+
+WAIT Monad.IsInRoom(Ministry_Elevator1) AND Sebastian.IsInRoom(Ministry_Elevator1)
+Log("Monad and Sebbe are in the elevator")
+
+Ministry_Elevator1_Computer.SetResettableCode("MinistryElevator1_Monad")
+Ministry_Elevator1_Computer.SetCodeAndRun("MinistryElevator1_Monad")
+
+WAIT 3
+Monad "OK, håll dig i skinnet nu"
+Monad.SetTimetable(Interact_Ministry_Elevator1_Computer)
+
+WAIT 5
+Log("Time to get out")
+Ministry_Elevator1_Computer.SetResettableCode("MinistryElevator1")
+Ministry_Elevator1_Computer.SetCodeAndRun("MinistryElevator1")
+
+WAIT 2
+Monad.SetTimetable(Monad_GuideToExperiment)
+Monad "Kom med nu"
+
+WAIT Monad.IsInRoom(Ministry_ExperimentHall)
+[IN_EXPERIMENT_HALL]
+Monad.SetTimetable("Monad_InExperimentHall")
+
+WAIT Monad.IsSitting() AND Sebastian.IsWithinDistance(Monad, 7)
+
+Monad "OK, vi kommer inte ha några åskådare idag"
+Monad "Förutom jag då"
+Monad "Experimentet är mycket enkelt"
+Monad "Sätt dig på stolen där framme nu"
+
+LISTEN Sebastian_talk_Monad [QUESTIONS] {
+    FOCUS
+    CHOICE {
+        "Är det farligt?":
+            Monad "Nej nej nej!"
+            Monad "Inte det minsta"
+
+        "Vilken stol?":
+            Monad "Den där framme, över bron"
+            CHOICE {
+                "OK":
+                "Jag vill inte":
+                    Monad "Du måste"
+            }
+
+        "Jag har ångrat mig":
+            Monad "Å, vilken barnrumpa du är"
+            Monad "Kom igen!"
+    }
+    DEFOCUS
+    LISTEN Sebastian_talk_Monad
+    Monad "Seså, sätt dig ner nu"
+    LISTEN Sebastian_talk_Monad
+    Monad "Nu!"
+}
+
+WAIT Sebastian.IsSitting() AND Sebastian.IsWithinDistance(Ministry_ExperimentHall_TheChair, 2)
+CANCEL QUESTIONS
+
+FOCUS
+
+Monad "Sitter du ner ordentligt?"
+CHOICE {
+    "Jodå...":
+    "Eh, vad händer?":
+    "Hjälp!":
+}
+
+Monad "Aktivera armen"
+
+BROADCAST FoldUpProbe
+
+WAIT 1
+SetCameraTarget("LookFromHere", "ToHere")
+
+WAIT 3
+BROADCAST SmallBoom
+
+CHOICE {
+    "Hmm...":
+    "Ehhhhh":
+    "WTF?!":
+}
+
+BROADCAST FoldOutFlower
+WAIT 2
+BROADCAST StartShootingWithProbe
+BROADCAST Boom
+WAIT 1
+
+WAIT 3
+BROADCAST Boom
+Sebastian.SetCorruption(20)
+Sebastian.GetTasedGently()
+
+BROADCAST Boom
+
+SetCameraTarget("", "")
+
+DEFOCUS
+
+[INTERNET]
+
+Sebastian.SetKnowledge(AlternativeExperiment)
+Sebastian.Pos(Internet_Trigger_4)
+
+Monad.SetTimetable(Monad)
+
+Story("DieOnInternet")

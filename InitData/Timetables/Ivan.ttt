@@ -1,0 +1,38 @@
+22:00 - 08:00 Zzz		Sleep		IvanApartment_Testing_Poor_Bed_Poor_Bed_6_1
+08:00 - 18:00 Fikaing 	Fika 		Cafe_Room1
+18:00 - 22:00 Work		BeInRoom	HarborSouth
+
+[Ivan_PyjamasParty]
+00:00 - 24:00 _ Interact FelixApartment_ArcadeMachine_ArcadeMachine_1
+
+[Ivan_HangAroundExposed]
+22:00 - 08:00 Zzz       Sleep       HarborWest_SleepPoint   
+08:00 - 11:00 _         BeInRoom    Cafe_Exterior
+11:00 - 13:00 _         BeInRoom    StationNorth
+13:00 - 16:00 _         BeInRoom    Plaza
+16:00 - 19:00 _         BeInRoom    StationNorth
+16:00 - 22:00 _         BeInRoom    Plaza
+
+[Ivan_Ghost]
+00:00 - 24:00 _ BeAtTing Ivan_Ghost_Point
+
+[Ivan_GetOutOfInternet]
+00:00 - 24:00 _ Interact Internet_Internet_ComputerTerminal_7
+
+[Ivan_CurseIsOver]
+00:00 - 24:00 _ Sit PixiesApartment_Chair_SimpleCarver_Chair_SimpleCarver_1
+
+[Ivan_Weirdo]
+00:00 - 24:00 _ BeInRoom PixiesApartment
+
+[Ivan_CrazyParty]
+00:00 - 24:00 _ Interact PetrasApartment_ArcadeMachine_ArcadeMachine2_1
+
+[Ivan_HelmetDay]
+00:00 - 24:00 _ Sit Ministry_ExperimentHall_TheChair
+
+[Ivan_BeAtHome]
+00:00 - 24:00   _ BeInRoom IvanApartment
+
+[IvanCakeParty]
+00:00 - 24:00   _ Sit Chair_SimpleCarver_Chair_SimpleCarver2 PixiesApartment_SofaSeat_1

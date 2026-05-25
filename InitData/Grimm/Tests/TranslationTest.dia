@@ -1,0 +1,16 @@
+[AGAIN]
+WAIT 1
+Sebastian "Hej"
+Sebastian "Vad heter du?"
+Sebastian "Jag heter Sebastian"
+Sebastian "Försök säg det här då"
+Sebastian "Tänkte väl det"
+FOCUS
+CHOICE {
+    "Jag kan säga det här":
+    "Eller så kan jag säga det här":
+    "Sluta!":
+        STOP
+}
+DEFOCUS
+GOTO AGAIN

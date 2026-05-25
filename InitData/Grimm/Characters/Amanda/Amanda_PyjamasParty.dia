@@ -1,0 +1,139 @@
+
+LISTEN Sebastian_talk_Amanda [BEFORE] {
+	FOCUS 
+	Amanda.StartTalking()
+
+	[MORE]
+	CHOICE {
+		"Vet du var Felix bor?":
+			Amanda "Felix?"
+			Amanda "Ja ja, vi är där jätteofta"
+			Amanda "Han är så himla gullig"
+			Amanda "Han bor ju jättenära, mellan caféet och parken"
+			Amanda "Man går in där bakom ett hörn"
+			Amanda "Du har väl sett hans uteplats?"
+			CHOICE {
+				"Jo kanske":
+				"Nä...":
+			}
+			Amanda "Fräckast i stan"
+			Amanda "Han är så cool, Felix"
+
+		"Läget?":
+			Amanda "Eh?"
+			Amanda "Bra..?"
+			GOTO MORE
+
+		"Hej då":
+	}
+
+	Amanda.StopTalking()
+	DEFOCUS
+}
+
+
+WAIT Amanda.IsInRoom(FelixApartment)
+CANCEL BEFORE
+
+
+LISTEN Sebastian_talk_Amanda [TALK_TO_AMANDA] {
+	FOCUS
+	Amanda.StartTalking()
+
+	CHOICE {
+		"Hejsan":
+			Amanda "Hej hej"
+		
+		"Tjenare":
+			Amanda "Hej hej"
+		
+		"Yo":
+			Amanda "Yo?"
+			Amanda "Seriöst..?!"
+	}
+			
+	Sebastian "Jo, ehm..."
+	Amanda "Du, har du någon öl?"
+	
+	CHOICE {
+		"Ja, massor":
+			Amanda "Kan man få en?"
+			CHOICE {
+				"Javisst":
+					Amanda "Schysst"
+
+					[TRY_GIVE_AGAIN]
+					Amanda.PutAwayHandItem()
+					WAIT Amanda.HasNoHandItem()
+					Sebastian.Interact(Amanda)
+					Amanda.StartWaitForGift()
+					LISTEN Sebastian_give_Amanda [GIVING] {
+						RemoveDanglingDialogueOptions("Amanda_PyjamasParty")
+						WAIT Amanda.HasAnyHandItem()
+						IF Amanda.HasHandItemOfDrinkType("beer") {
+							IF Amanda.DrinkInHandIsAlmostEmpty() {
+								Amanda "Vad i helvete, den här är ju tom!"
+								CHOICE {
+									"Eh...":
+									"Oj, sorry!":
+									"Öh, är den..?":
+								}
+								Amanda "Skitstövel"
+							}
+							ELSE {
+								Amanda "Tack"
+							}
+						} ELSE {
+							Amanda "Det här är väl ingen öl?"
+							Amanda.Give()
+							WAIT Amanda.IsIdle()
+							GOTO TRY_GIVE_AGAIN
+						}	
+						Amanda.StopWaitForGift()
+						GOTO DONE_GIVING_BEER
+					}
+
+					IF Sebastian.HasDrinkOfType("beer") {
+						LISTEN FOREVER
+					} ELSE {
+						[WAIT_HERE]
+						Sebastian "Vänta här så ska jag hämta"
+						Amanda "Ok..."
+						GOTO DONE_GIVING_BEER
+					}
+
+
+				"Nä, jag har inte så det räcker till dig":
+					Amanda "Men vafan"
+			}
+		
+		"Nej, tyvärr":
+			Amanda "OK, segt"
+	}
+
+	[DONE_GIVING_BEER]
+	Amanda.StopWaitForGift()
+	Amanda.StopTalking()
+	DEFOCUS
+	
+	LISTEN Sebastian_talk_Amanda 
+	FOCUS
+	CHOICE {
+		"Ursäkta...":
+		"Vill du ha mer öl?":
+	}
+	Amanda "Jag ska nog gå hem nu"
+	Amanda "Mår inte bra"
+	Sebastian "OK"
+	DEFOCUS
+	Amanda.SetTimetable(Amanda)
+	WAIT 3
+	IF Amanda.IsWithinDistance(Emma, 10) {
+		Amanda "Hej då Emma"
+		Emma "Hej då, vi ses!"
+	}
+}
+
+
+
+LISTEN EndOfFelixParty

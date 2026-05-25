@@ -1,0 +1,37 @@
+
+
+LISTEN Sebastian_talk_Yulian
+
+Sebastian.SetKnowledge("HasTalkedToYulian")
+
+
+FOCUS
+Yulian.StartTalking()
+Yulian "Ja?"
+[AGAIN]
+CHOICE {
+	"Det var inget":
+		Yulian "OK"
+
+	"Ursäkta, var ligger hotellet?":
+		Yulian "Det är bara att följa vattnet här så borde du se en skylt sen"
+		Yulian "Gå inte över bron bara, då kommer du till Burrows"
+
+	"Snygg jacka":
+		Yulian "Tack!"
+}
+Yulian.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Yulian
+FOCUS
+Yulian.StartTalking()
+Yulian "Du igen?"
+
+CHOICE ETERNAL {
+    "Ja...":
+    "Mm":
+}
+
+GOTO AGAIN

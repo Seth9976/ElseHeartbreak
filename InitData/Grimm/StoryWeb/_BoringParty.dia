@@ -1,0 +1,13 @@
+Sebastian.Pos(OutsidePetrasApartment_Point1)
+
+WAIT Sebastian.IsInRoom(PetrasApartment)
+
+Pixie.Pos(PetrasApartmentChair3)
+Pixie.Interact(PetrasApartmentChair3)
+Petra.Pos(PetrasApartmentChair2)
+Petra.Interact(PetrasApartmentChair2)
+
+Pixie ""
+FOCUS
+Pixie "Hej"
+

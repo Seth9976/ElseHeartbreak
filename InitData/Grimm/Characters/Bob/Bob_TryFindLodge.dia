@@ -1,0 +1,147 @@
+
+LISTEN Sebastian_talk_Bob
+
+FOCUS
+Bob.StartTalking()
+
+CHOICE {
+	"God dag":
+		Bob "Hejsan"
+	"Vilken fantastiskt fin dag vi har idag!":
+		Bob "Tycker du?"
+	"Hej":
+		Bob "Hej du"
+}
+
+IF Sebastian.HasKnowledge("HasSoldSodaToBob") {
+	Bob "Jag är inte sugen på läsk idag"
+	CHOICE {
+		"Ok":
+		"Inga problem":
+	}
+}
+ELIF Bob.HasKnowledge("SebastianAtClubDot") {
+	Bob "Du var på spelningen i Club Dot va?"
+	CHOICE {
+		"Ja, precis":
+		"Mm":
+	}
+	Bob "Vilken kväll, haha"
+	CHOICE {
+		"Ja...":
+		"Mm":
+	}
+} ELSE {
+	Bob "Har vi setts förut?"
+	CHOICE {
+		"Vet inte":
+		"Jag tror det!":
+	}
+}
+
+CHOICE {
+	"Du jag tänkte på en sak... min kompis letar efter en person":
+		Bob "Jaha, vem då?"
+		CHOICE {
+			"Pixie tror jag att hon heter":
+
+			"Minns inte riktigt...":
+				Bob "Ok, då blir det svårt"
+				CHOICE {
+					"Ja...":
+					"Mm":
+				}
+		}
+
+	"Förresten, känner du någon som heter Pixie?":
+
+	"Nej, jag ska väl ta och gå då":
+		GOTO BYE
+}
+Bob "Pixie?"
+
+IF Bob.HasKnowledge("SebastianAtClubDot") {
+	Bob "Ja hon var ju på festen i gruvan"	
+} ELSE {
+	Bob "Jo, henne springer man ju på titt som tätt"
+}
+
+Bob "Hurså?"
+
+[HOW_COME]
+CHOICE {
+	"Jag kan inte sluta tänka på henne":
+		Bob "Hehe, på så vis"
+		Bob "Och vad vill du göra nu?"
+		CHOICE {
+			"Jag måste hitta henne!":
+			"Vet inte...":
+				Bob "Nej ok"
+		}
+
+	"Äsch...":
+		Bob "Haha, du ser lite röd ut om kinderna"
+		GOTO HOW_COME
+
+	"Hon har råkat få med sig min plånbok tror jag...":
+		Bob "Plånbok?"
+		CHOICE {
+			"Ja, så jag tänkte om du visste var hon kan hålla hus":
+			"Sjukt irriterande":
+				Bob "Ja det förstår jag"
+		}
+}
+
+Bob "Hon jobbar väl på skoaffären, eller?"
+
+CHOICE {
+	"Gör hon?!":
+	"Jaha...":
+}
+
+Bob "Jag tror det i alla fall"
+
+CHOICE {
+	"Ok, tack för tipset!":
+		GOTO BYE
+	"Jag var där förut men då såg jag henne inte":
+		Bob "Nej, ok då vet jag inte"
+		Bob "Hon kanske har slutat då"
+		CHOICE {
+			"Ja... jag ska väl dra vidare, tack för hjälpen i alla fall":
+			"Skit också, vi hörs!":
+		}
+}
+
+[BYE]
+Bob "Ha det fint vännen"
+
+Bob.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Bob
+Bob.StartTalking()
+Bob "Tja drömmarn!"
+Bob.StopTalking()
+
+LISTEN Sebastian_talk_Bob
+Bob.StartTalking()
+Bob "Hur är läget egentligen?"
+FOCUS
+CHOICE {
+	"Funkar":
+		Bob "Gött"
+	"Jag vet inte...":
+		Bob "Ryck upp dig!"
+}
+DEFOCUS
+Bob.StopTalking()
+
+[AGAIN]
+LISTEN Sebastian_talk_Bob
+Bob.StartTalking()
+Bob "Hörru, nu får du låta mig vara lite i fred"
+Bob.StopTalking()
+GOTO AGAIN

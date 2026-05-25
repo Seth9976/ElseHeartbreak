@@ -1,0 +1,21 @@
+
+WAIT Sebastian.IsWithinDistance(ShoeStore_Point, 2) AND Nini.IsAtTing(ShoeStore_Point)
+Sebastian.CancelWalking()
+FOCUS
+Nini "Ey, här bakom får du inte gå!!!"
+CHOICE {
+	"OK, OK sorry!":
+	"Men vart leder dörren?":
+		Nini "Vilken dörr?"
+		Nini "Gå härifrån nu"
+	"Yikes, låt inte så arg":
+}
+Sebastian.Pos(ShoeStore_PushToThisPoint)
+DEFOCUS
+
+[PUSHED]
+WAIT Sebastian.IsWithinDistance(ShoeStore_Point, 2) AND Nini.IsAtTing(ShoeStore_Point)
+Sebastian.CancelWalking()
+Sebastian.Pos(ShoeStore_PushToThisPoint)
+Nini "Nej, sa jag ju!"
+GOTO PUSHED

@@ -1,0 +1,249 @@
+
+Hank.SetTimetable(Hank_AfterGhosts)
+
+
+LISTEN Sebastian_talk_Hank
+
+FOCUS
+Hank.StartTalking()
+
+Hank "Ja?"
+
+CHOICE {
+	"Du känner inte till några legender om hotell Devotchka?":
+		Hank "Legender?"
+		CHOICE {
+			"Ja, typ":
+				Hank "Vad skulle de handla om?"
+				Sebastian "Spöken!"
+			"Legender om spöken!":
+		}
+		[GHOSTS_REALLY]
+		Hank "Spöken?"
+		CHOICE {
+			"Ja, eller gastar eller vad du nu vill kalla dem":
+			"Det låter dumt men jag har sett konstiga saker på natten":
+		}
+		Hank "OK?"
+
+	"Du måste komma upp till mitt rum!":
+		Hank "OK...?!"
+		Sebastian "Jag har haft besök av spöken på mitt rum"
+		GOTO GHOSTS_REALLY
+
+	"[GO_TO_ROOM]":
+		GOTO GO_TO_ROOM
+
+	"[TELEPORT_TO_ROOM]":
+		Hank.StopTalking()
+		DEFOCUS
+		Sebastian.Pos(Hotel_Room1_Point)
+		Hank.Pos(Hotel_Room1_Point2)
+		GOTO TELEPORT_TO_ROOM
+}
+
+CHOICE {
+	"Tror du mig inte?!":
+		Hank "Jag vet inte vad jag ska tro... berätta mer"
+
+	"Ja?":
+		Hank "Det är svårt att förstå exakt vad du pratar om."
+		Hank "Berätta mer"
+}
+
+CHOICE {
+	"Äsch, skit samma. Det är ingen som kommer att tro mig ändå":
+		Hank "Äh, var inte så negativ"
+		Hank "Det låter bara väldigt underligt allt du säger"
+		Hank "Vad är det som har hänt egentligen?"
+		CHOICE {
+			"Det var någon på mitt rum i natt, du måste komma och titta":
+				Hank "Ok, ok vi går och kollar då"
+
+			"Jag har något jag måste visa":
+				Hank "Ok jag vet inte om jag har tid"
+				CHOICE {
+					"Du måste komma, det är uppe på mitt rum":
+					"Snälla, det går snabbt":
+						Hank "Ok, vad är det du vill visa?"
+						CHOICE {
+							"Det är uppe på mitt rum":
+							"Det var någon på mitt rum i natt":
+						}
+						Hank "Ok, jag vi går upp och kollar då"
+				}
+		}
+
+	"Det kanske är bäst att vi bara går upp till mitt rum så kan jag visa":
+		Hank "Ja, det låter som en idé"
+}
+
+[GO_TO_ROOM]
+Hank.StopTalking()
+DEFOCUS
+
+Hank.SetTimetable("Hank_GuideToSebastiansRoom")
+Hotel_Corridor_Door1.UnlockDoor()
+
+[TELEPORT_TO_ROOM]
+WAIT Hank.IsInRoom(Hotel_Room1) AND Sebastian.IsInRoom(Hotel_Room1)
+WAIT 3
+
+FOCUS
+Hank.StartTalking()
+Hank "Ok, så berätta nu vad som hände"
+
+CHOICE {
+	"Det var någon här i rummet...":
+	"Någonting väckte mig, jag har ingen aning vad klockan var":
+}
+
+CHOICE {
+	"Jag tror att det var en man":
+	"En person med ett konstigt sken runt sig":
+	"Det var svårt att se ansiktet":
+}
+
+CHOICE {
+	"Han satt i stolen där":
+	"Han stod typ där du står nu":
+}
+
+Hank "Ja?"
+
+CHOICE {
+	"Och så pratade han på ett konstigt sätt":
+		Hank "Hur då?"
+		Hank "Sa han något du kunde förstå?"
+
+	"Och han såg lite ut som Ivan":
+		Hank "Vem är det?"
+		CHOICE {
+			"En snubbe jag känner lite":
+			"Pixies pojkvän":
+			"En dryg person som bor här i stan":
+		}
+		Hank "Jaha, ok?"
+}
+
+CHOICE {
+	"Det verkade som att han försökte få mig att förstå något":
+		Hank "Men det gick inte att höra orden eller?"
+		CHOICE {
+			"Jodå, men de var bara helt ologiska":
+			"Jo typ... jag har glömt vad han sa dock":
+		}
+
+	"Jag fattade inte alls vad han snackade om tyvärr":
+}
+
+Hank "Ok"
+Hank "Det låter lite oroväckande allt det här"
+Hank "Jag ska kolla en grej..."
+
+Hank.TakeOutItem(HanksHackdev)
+WAIT Hank.HasHandItemOfType(Hackdev)
+Hank "Kan du akta lite på dig är du snäll"
+DEFOCUS
+WAIT 1
+
+Hank.StopTalking()
+WAIT 1
+Hank.SetTimetable(Hank_HackFuseBox)
+Hank.CancelWalking()
+Hank.Hack(Hotel_Room1_FuseBox)
+
+WAIT 10
+Hank "Har du grejat något med det här elskåpet här?"
+Hank.SetTimetable("")
+
+FOCUS
+
+CHOICE {
+	"Nää":
+	"Ehm... nej!":
+	"Kanske":
+	"Jag har nog anslutit min modifierare till den någon gång ja":
+	"Japp!":
+}
+
+Hank "Hmmm"
+WAIT 3
+Hank "Jag ska testa en grej här på det"
+#Hank.Hack("Hotel_Room1_FuseBox")
+WAIT 2
+
+Hotel_Room1_FuseBox.SetCode("HanksFuseboxHack")
+WAIT 3
+
+Hank "Ja du..."
+Hank "Jag låter skåpet vara trasigt tills vidare"
+Hank "Du bör hålla dig borta från det"
+Hank "Du får ursäkta röken och oljudet, hoppas du kan sova ändå"
+
+[MORE]
+CHOICE {
+	"Ja ok, det ska nog gå":
+		Hank "Mm"
+		GOTO MORE
+
+	"Men vad tycker du att jag ska göra?":
+		Hank "Det är väl inte så mycket att göra direkt"
+		Hank "Kanske finns någon du kan prata med som är bättre på spöken än jag"
+
+	"Men tänk om han dyker upp igen!":
+		Hank "Ja du får försöka vara mer uppmärksam då så du fattar vad han är ute efter"
+		Hank "Lyssna på vad han har att säga"
+}
+
+CHOICE {
+	"Japp":
+	"Så du tror i alla fall på mig?":
+		Hank "Alltså, spöken är inte så konstiga grejer som folk ofta får för sig"
+		Hank "Du har ju sett någonting... exakt vad det är kan vara svårt att säga"
+}
+
+Hank "Vi kan snacka mer om det här sen, jag måste jobba nu"
+Hank.PutAwayHandItem()
+
+CHOICE {
+	"Ok, tack för hjälpen!":
+	"Mm...":
+}
+
+Hank.StopTalking()
+DEFOCUS
+
+Hank.SetTimetable("Hank")
+
+
+
+WAIT 10
+
+
+
+LISTEN Sebastian_talk_Hank
+FOCUS
+Hank.StartTalking()
+
+Hank "Något nytt om det där spöket?"
+CHOICE {
+	"Jag jobbar på det":
+		Hank "Mm?"
+	"Nej inte direkt":
+		Hank "Ok, ok"
+		GOTO AFTER
+	"Ja... kanske":
+		Hank "Mm?"
+}
+
+CHOICE {
+	"Eller alltså, jag vet inte direkt":
+	"Jag återkommer":
+}
+Hank "Ok"
+
+[AFTER]
+Hank "Ses"
+Hank.StopTalking()
+DEFOCUS

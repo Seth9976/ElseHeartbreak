@@ -1,0 +1,7 @@
+
+WAIT 4
+#MineCart.Pos(Testing_Trigger_1)
+#MineCart.DetachFromNavNode()
+#MineWagon_Door.Pos(Testing_Trigger_1)
+
+MineCartComputer.RunMasterProgram()

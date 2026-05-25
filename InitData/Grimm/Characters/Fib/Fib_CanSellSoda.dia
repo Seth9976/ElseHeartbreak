@@ -1,0 +1,61 @@
+
+Fib.SetHandItem(FibsHackdev)
+
+LISTEN Sebastian_talk_Fib
+
+FOCUS
+Fib.StartTalking()
+
+IF Fib.HasKnowledge("Sebastian") {
+	GOTO MORE_TALK	
+} ELSE {
+	INTERRUPT GetToKnowFib
+	FOCUS
+	DEFOCUS
+	Fib.StopTalking()
+}
+
+# pause #
+WAIT 10
+
+LISTEN Sebastian_talk_Fib
+
+FOCUS
+Fib.StartTalking()
+[MORE_TALK]
+
+[SODA]
+CHOICE {
+	"Sugen på att köpa en läsk?":
+
+	"Hej jag säljer sån här Wellspring soda, vill du ha?":
+
+	"Hur går det med blommorna?":
+		Fib "Det går rätt bra"
+		Fib "Vi har haft tur med vädret nu på senaste, både regn och sol"
+		CHOICE {
+			"Härligt att höra":
+			"Ok, vad bra":
+		}
+		GOTO SODA
+}
+
+Fib "Nej jag dricker bara vatten"
+Fib "Känns så onaturligt med läsk"
+Fib "Och så är det dåligt för tänderna har jag hört"
+
+CHOICE {
+	"Ok, ok":
+	"Säkert..?":
+		Fib "Ja, jag är säker"
+}
+
+CHOICE {
+	"Vi ses":
+	"Hej då då!":
+}	
+
+Fib "Ha det bra!"
+
+Fib.StopTalking()
+DEFOCUS

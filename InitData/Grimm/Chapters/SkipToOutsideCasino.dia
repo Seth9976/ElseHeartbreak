@@ -1,0 +1,13 @@
+
+Story("FirstDay")
+Story("CanSellSoda")
+Story("AfterStalking")
+Story("FactoryMission")
+Story("GamblingTonight")
+
+SetHour(18)
+
+Pixie.Pos(Casino_Exterior_PointOnGround)
+
+#Sebastian.Pos(Casino_Floor1_CagePoint)
+Sebastian.Pos(Pixie)

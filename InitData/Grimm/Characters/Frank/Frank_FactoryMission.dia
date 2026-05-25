@@ -1,0 +1,32 @@
+LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+
+Frank "Allt klart inför uppdraget?"
+
+CHOICE {
+	"Jodå, allt är klart":
+		Frank "Super!"
+
+	"Jag är lite nervös":
+		Frank "Det är bara naturligt"
+}
+
+IF Frank.HasKnowledge(HasTeachedLoops) {
+    Frank "Hoppas du får chans att skriva en loop där inne på fabriken"
+    CHOICE {
+        "Heh, ja!":
+        "Mm...":
+        "Tror du att jag måste göra det?":
+            Frank "Man vet aldrig"
+    }
+} ELSE {
+    INTERRUPT TeachLoops
+}
+
+Frank.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Frank
+Frank "Lycka till nu då!"

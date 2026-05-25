@@ -1,0 +1,7 @@
+
+[AGAIN]
+Hospital_Exterior_TurnTableMixer_TurnTableMixer_1.StartMusic()
+WAIT IsHour(05)
+Hospital_Exterior_TurnTableMixer_TurnTableMixer_1.StopMusic()
+WAIT IsHour(18)
+GOTO AGAIN

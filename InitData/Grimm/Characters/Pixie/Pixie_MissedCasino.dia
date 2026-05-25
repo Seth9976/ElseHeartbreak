@@ -1,0 +1,53 @@
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+Pixie "Hallå där"
+
+CHOICE {
+	"Tja, var det kul på kasinot?":
+		Pixie "Kul vet jag inte om det är rätt ord"
+		Pixie "Men vi gjorde några intressanta observationer"
+
+	"Allt väl?":
+		Pixie "Ja då, själv?"
+		CHOICE {
+			"Det är bra":
+			"Jag är riktigt sliten":
+		}
+}
+
+Pixie "Vad gjorde du medan vi var på uppdraget?"
+
+CHOICE {
+	"Äsch, jag vet inte...":
+		Pixie "Haha, vad är det för äventyr du är ute på om kvällarna, Sebbe?"
+		CHOICE {
+			"Jag berättar någon annan gång":
+			"Det är inte så intressant":
+		}
+		Pixie "Ok, ok"
+
+	"Det är hemligt":
+		Pixie "Haha ok"
+		Pixie "Skit samma då!"
+
+	"Jag behövde jobba lite mer med försäljningen, ligger efter":
+		Pixie "Å, du borde bara skita i den där grejen nu när du är med oss"
+		CHOICE {
+			"Ja, kanske... fast Ivan sa ju":
+				Pixie "Bara gör det"
+				Pixie "Du blir ju sönderstressad om du ska hålla på med allting samtidigt"
+			"Mm, ska fundera på saken":
+				Pixie "Gör så"
+			"Men jag har ju lovat dem att jag ska jobba":
+				Pixie "Äsch, vad ska de säga"
+				Pixie "Bara gör det!"
+		}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+BROADCAST HasTalkedToPixie

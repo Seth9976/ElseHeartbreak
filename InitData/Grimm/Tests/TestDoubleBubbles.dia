@@ -1,0 +1,12 @@
+
+LISTEN Bam {
+	Sebastian "hej1"
+}
+
+LISTEN Bam {
+	Sebastian "hej2"
+}
+
+WAIT 3
+
+BROADCAST Bam

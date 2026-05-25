@@ -1,0 +1,35 @@
+
+Bower.SetTimetable("BowerGambling")
+
+
+WAIT Bower.IsAtTask(Gambling) LISTEN Sebastian_talk_Bower
+
+FOCUS
+Bower.StartTalking()
+
+CHOICE {
+    "Hej, det är ju du!":
+        Bower "Hm?"
+        Bower "Mm"
+        Bower "Hrm"
+        CHOICE {
+            "Vad gör du här?":
+                Bower "Spelar, vad trodde du?"
+            "Har du kul?":
+                Bower "Jodå, jag hade det rätt trevligt här"
+            "Trevligt ställe!":
+                Bower "Ja, här har de gjort ett bra jobb"
+        }
+
+    "Tjena":
+        Bower "God kväll"
+    "God kväll":
+        Bower "Hej du"
+}
+
+Bower.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Bower
+Bower "Nej, inte nu"
+

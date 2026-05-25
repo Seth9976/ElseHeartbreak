@@ -1,0 +1,49 @@
+
+LISTEN Sebastian_talk_Panda5
+FOCUS
+Panda5.StartTalking()
+
+Panda5 "Tja grabben"
+Panda5 "Varför har du mössa på dig???"
+CHOICE {
+    "Det är min favoritmössa":
+    "Strunta i det du":
+        Panda5 "Åhå, attityd?"
+}
+CHOICE {
+    "Hej då":
+    "Vem är du?":
+        Panda5 "Jag heter Felicia"
+        Panda5 "Vad heter du???"
+        CHOICE {
+            "Sebbe":
+            "Sebastian":
+        }
+        Panda5 "Var det du som skulle med på efterfest..?"
+        CHOICE {
+            "Njae...":
+            "Ja precis!":
+                Panda5 "OK"
+                Panda5 "Ses sen då"
+                CHOICE {
+                    "Var var festen?":
+                        Panda5 "Hemma i vårt torn"
+                        Panda5 "Bredvid sjukhuset"
+                        Panda5 "Så jävla stökigt är det"
+                        Panda5 "Men ingen orkar städa"
+                    "Toppen!":
+                }
+        }
+}
+
+Panda5.StopTalking()
+DEFOCUS
+
+
+
+
+LISTEN Sebastian_talk_Panda5
+Panda5 "Ja!"
+Panda5 "Ja!!!"
+Panda5 "Eller?"
+Panda5 "Jo!"

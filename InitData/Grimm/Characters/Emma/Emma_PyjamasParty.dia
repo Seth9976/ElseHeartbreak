@@ -1,0 +1,110 @@
+
+
+LISTEN Sebastian_talk_Emma [NO_TIME] {
+	Emma "Ursäkta, orkar inte snacka med någon nu"
+}
+
+
+WAIT Emma.IsInRoom(FelixApartment)
+CANCEL NO_TIME
+
+LISTEN Sebastian_talk_Emma {
+	FOCUS
+	Emma "Va?"
+	Sebastian "Ehm..."
+	
+	CHOICE {
+		"Vad heter du?":
+			Emma "Emma"
+			Sebastian.SetKnowledge(Emma)
+			CHOICE {
+				"Fint namn!":
+					Emma "Eh, jag hatar det"
+					Emma "Mina föräldrar har typ asdålig smak"
+					Sebastian "Synd..."
+					Emma "Whatever"
+					
+				"OK, jag heter Sebastian":
+					Emma "OK"
+			}
+			
+		"Han spelar bra musik":
+			Emma "Tycker du?"
+			CHOICE {
+				"Alltså, den är väl inte jättebra egentligen":
+					Emma "Deras första skiva var mycket bättre än det här"
+					CHOICE {
+						"Ja, exakt!":
+						"Mm...":
+					}
+				
+				"Ja jag älskar den":
+					Emma "Jag har hört bättre"
+			}
+			
+		"Så hur känner du Felix?":
+			Emma "Jag vet inte"
+			Emma "Han är en sån man lätt träffar på"
+			CHOICE {
+				"Jaha":				
+				"OK, jag känner honom genom Pixie":
+					Emma "OK"
+					IF Pixie.IsNotInRoom(FelixApartment) {
+						CHOICE {
+							"Känner du Pixie?":
+								Emma "Du menar Filippa? Ja jag vet vem hon är"
+								CHOICE {
+									"Filippa? Heter hon inte Pixie?!":
+										Emma "Asså jag vet inte"
+										Emma "Vem bryr sig?"
+									"Jag pratar om Pixie, inte någon Filippa!":
+										Emma "Whatever"
+								}
+													
+							"Mm, så är det...":
+								Emma "Ja, whatever"
+						}	
+					}					
+			}	
+	}
+	
+	Emma ""
+	Emma "Du, jag måste gå och röka nu"
+
+	CHOICE {
+		"OK":
+		"Får man haka på?":
+			Emma "Alltså, helst inte"
+			Emma "Jag gillar inte att bli störd när jag röker"
+	}	
+	
+	Sebastian.SetKnowledge("EmmaIsABitch")
+	DEFOCUS
+	
+	Emma.SetTimetable("Emma_SmokeOutside")
+	
+	LISTEN Sebastian_sit_FelixApartment_SofaSeat_5 {
+		FOCUS
+		CANCEL TALK_TO_AMANDA # now this can't happen!
+		Amanda "Tar du Emmas plats?"
+		Sebastian.SetKnowledge(Emma)
+		CHOICE {
+			"Oj, förlåt":
+				Amanda "*suck*"
+			"Men hon skulle ju ut och röka":
+				Amanda "Men hon kommer väl tillbaka snart, tror du inte det?"
+				Sebastian "Jo..."
+		}
+		DEFOCUS
+	}
+	
+	LISTEN Sebastian_talk_Emma {
+		FOCUS
+		Emma "Eh, kan du lämna mig i fred eller?"
+		DEFOCUS
+	}
+}
+
+LISTEN EndOfFelixParty
+
+Emma.SetTimetable("Emma")

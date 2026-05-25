@@ -1,0 +1,159 @@
+
+Monad.Pos(Internet_Trigger_4)
+Miman.Pos(Internet_Trigger_4b)
+
+Monad.SetTimetable(MonadSurfingInternet)
+
+WAIT Sebastian.IsWithinDistance(Monad, 10)
+
+FOCUS
+Monad.SetTimetable(MonadInteractSebastian)
+
+IF Monad.HasKnowledge(Sebastian) {
+    Monad "Vad gör DU här?!"
+}
+ELSE {
+    Monad "Känner jag dig?"
+    CHOICE {
+        "Jag vet inte..?":
+        "Kanske":
+        "Nej, det tror jag inte":
+        "[CHEAT]":
+            GOTO BYE
+    }
+    Monad "Vad heter du?"
+    CHOICE {
+        "Jag vet inte om jag vill säga det":
+        "Sebastian":
+        "Sebbe":
+        "Jag vet inte...":
+    }
+    Monad "Var kom du ifrån?"
+    Monad "Säg det!"
+    Monad "Säg det nu!!"
+    CHOICE {
+        "Eh...":
+        "Jag måste gå":
+        "Jag vet inte?":
+    }
+
+    Monad "Du måste tagit dig hit på något sätt"
+    Monad "Hur kom du hit?!!"
+}
+
+WAIT 2    
+Monad "ÅÅÅHHH!!!!"
+Monad.GetAngryAtComputer()
+WAIT 1
+Monad "Förbannade ungjävlar"
+Monad "Jag har god lust att bara döda dig"
+
+CHOICE {
+    "Snälla, gör inte det...":
+        Monad "Ge mig en god anledning att låta bli"
+        CHOICE {
+            "Jag har inte gjort något!":
+            "Ni har redan dödat Ivan!":
+                Monad "Äsch, struntprat"
+                GOTO WHINING
+            "Ni har gjort något hemskt med Ivan!":
+                Monad "Äsch"
+                GOTO WHINING
+        }
+    "Varför det?":
+        GOTO WHINING
+    "Ni har gjort något hemskt med Ivan!":
+        [WHINING]
+        Monad "Jag har inte tid med ditt gnällande"
+        Monad "Vi skapar historia här"
+        Monad "Vad din vän beträffar så vet du ingenting"
+        Monad "Jag och Ivan har ett särskilt band"
+        WAIT 1
+        Monad "Nu..."
+}
+
+WAIT 1
+
+Monad "Måste ni lämna stan"
+Monad "Träffar jag på er på internet igen så kommer jag att förgöra er"
+
+CHOICE {
+    "Jag förstår":
+    "Va?!":
+    "Ni kan inte göra så här!!!":
+}
+
+Monad "Å, håll käften"
+Sebastian.SetCorruption(200)
+Sebastian.Sleep(3)
+WAIT 30
+Sebastian.Pos(HarborEast_Point)
+
+
+Monad.SetTimetable(MonadSurfingInternet)
+DEFOCUS
+
+
+
+LISTEN Sebastian_open_HarborEast_DoorToFerry [LEAVING_TO_EARLY] {
+    Story("GotOntoBoat")
+    WAIT 2
+    Sebastian.CancelWalking()
+}
+
+
+
+WAIT Sebastian.IsWithinDistance(Monad, 10)
+CANCEL LEAVING_TO_EARLY
+
+FOCUS
+Monad "Så du kom tillbaka"
+WAIT 1
+Monad "Dumdristigt"
+WAIT 2
+Monad "Nu ska du dö!"
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(50)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(100)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(200)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(0)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(50)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(100)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(200)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(300)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(50)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(100)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(200)
+WAIT 0.2
+Sebastian.GetTasedGently()
+Sebastian.SetCorruption(300)
+
+Monad.TakeOutItem(LoneTaser)
+WAIT Monad.HasHandItemWithName(LoneTaser)
+Monad.InteractUsingHandItem(Sebastian)
+WAIT 3
+DEFOCUS
+WAIT 1
+
+Beat()
+BROADCAST InternetEndingSequence

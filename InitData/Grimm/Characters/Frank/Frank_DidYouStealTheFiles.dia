@@ -1,0 +1,75 @@
+
+LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+
+IF IsDay() {
+    Frank "God morgon"
+} ELSE {
+    Frank "God kväll"    
+}
+
+IF Frank.HasKnowledge(Sebastian) {
+    # do nothing
+}
+ELSE {
+    Frank "Frank var namnet"
+    Frank "Pixie sa att du börjat här"
+    CHOICE {
+        "Ja, precis!":
+        "Mhm! Jag heter Sebastian":
+            Frank "Trevligt, trevligt"
+    }   
+}
+
+IF Frank.HasKnowledge(HasTeachedLoops) {
+    Frank "Hur går det med looparna?"
+    CHOICE {
+        "Det går väl bra":
+        "Jättebra!":
+        "Jag har inte riktigt fattat dem än...":
+            Frank "OK, var inte orolig"
+            Frank "Ibland måste man tänka på svåra koncept länge"
+            Frank "Innan de sätter sig i skallen!"
+            CHOICE {
+                "Ja, OK":
+                "Mm?":
+            }
+    }
+} ELSE {
+    INTERRUPT TeachLoops
+}
+
+FOCUS
+Frank "Förresten, jag tänkte på en sak..."
+Frank "Du bor på hotellet eller?"
+CHOICE {
+    "Ja, hur visste du det?":
+        Frank "Äh, Pixie sa det"
+    "Precis":
+        Frank "OK, hur gillar du det?"
+        CHOICE {
+            "Det är väl OK":
+            "Det är mysigt":
+        }
+    "Mm, fast det var länge sen jag var där nu":
+        Frank "Jaha, varför det?"
+        CHOICE {
+            "Varit så mycket nu":
+            "Jag gillar inte att sova där":
+        }
+        Frank "OK, OK"
+}
+
+Frank "Hmm..."
+Frank "Nej nu får vi nog ta och jobba lite va?"
+Frank "Men vi ses, Sebastian!"
+
+CHOICE {
+    "Ja, ha det fint Frank":
+    "Hej då!":
+}
+
+Frank.StopTalking()
+DEFOCUS

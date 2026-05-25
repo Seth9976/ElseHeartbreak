@@ -1,0 +1,19 @@
+
+
+#Sebastian.Pos(GermanGuyBreakfastPosition)
+#Siri.Pos(WifeBedPosition)
+#Siri.SetTimetable(Siri)
+#START Siri1
+
+
+
+
+SetClockSpeed(700)
+
+Sebastian.Pos(FelixApartment_Point2)
+
+Felix.Pos(FelixApartment_Point1)
+Felix.SetTimetable(Test)
+
+START FelixTest1
+START FelixTest2

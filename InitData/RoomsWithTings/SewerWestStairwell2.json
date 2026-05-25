@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":268,"values":["\"Room\"","\"SewerWestStairwell2\"","[]","false","{\"x\":0,\"y\":0}","\"0000000000000000001000000000000000011111000000000000000111110000000000000001111100000000000000011111001000000000000010001111111111111110100011111111111111101000111111111111111110001111111111111110000000000111110000000000\"","{\"x\":20,\"y\":11}","{\"x\":-10,\"y\":-3}"]}

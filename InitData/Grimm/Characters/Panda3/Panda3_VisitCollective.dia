@@ -1,0 +1,99 @@
+
+Panda3.SetTimetable("")
+
+IF Panda3.IsNotInRoom(PandaApartment) {
+    STOP
+}
+
+IF Sebastian.IsNotInRoom(PandaApartment) {
+    STOP
+}
+
+WAIT Sebastian.IsWithinDistance(Panda3, 10)
+
+FOCUS
+Panda3.Interact(Sebastian)
+
+WAIT 3
+Panda3 "Hej!"
+Panda3 "Det är du från Bar Yvonne va?"
+
+[YOU_FROM_BAR]
+CHOICE {
+    "Eh, va?":
+        Panda3 "Vi har setts på Bar Yvonne väl?"
+        GOTO YOU_FROM_BAR
+
+    "Ja, exakt!":
+        Panda3 "Kul att du kom förbi!"
+
+    "Njae...":
+        Panda3 "OK, måste tänka på någon annan då"
+}
+
+CHOICE {
+    "Vad fint ni har det här!":
+        Panda3 "Tack!"
+        Panda3 "Ja, vi har försökt göra det så mysigt vi kan"
+        CHOICE {
+            "Ja, det är supermysigt!":
+            "Wow":
+            "OK":
+        }
+
+    "Bor ni många här eller?":
+        Panda3 "Ja, tre stycken"
+        Panda3 "Blir billigare så... och roligare!"
+        Panda3 "Fast vi sover mest här, alla är ute på kvällarna"
+        CHOICE {
+            "Ah...":
+            "OK, på bar Yvonne?":
+                Panda3 "Ja, bland annat"
+                Panda3 "Eller var som helst där det är fest!"
+        }
+}
+
+Sebastian "Är det OK om jag kollar runt lite?"
+Panda3 "Javisst, inga problem"
+Panda3 "Säg till om det är något"
+
+DEFOCUS
+
+
+
+# later
+
+
+
+LISTEN Sebastian_talk_Panda3
+FOCUS
+Panda3.StartTalking()
+
+Panda3 "Vill du ha en shot?"
+[WANT_A_SHOT]
+CHOICE {
+    "Va..?! Vad är det?":
+        Panda3 "Sprit"
+        GOTO WANT_A_SHOT
+
+    "Ja tack!":
+        Panda3 "En sekund..."
+        Panda3.CreateDrinkInHand("Margherita_Margherita")
+        WAIT Panda3.IsIdle()
+        Panda3.Interact(Sebastian)
+        WAIT Panda3.HasConversationTarget(Sebastian)
+        Panda3.Give()
+        WAIT Panda3.HasNoHandItem()
+        Panda3 "Hoppas du gillar den!"
+        CHOICE {
+            "Tack!":
+            "Ja det gör jag säkert":
+            "Får se...":
+        }
+
+    "Nej det är bra":
+        Panda3 "OK, OK"
+}
+
+Panda3.StopTalking()
+DEFOCUS

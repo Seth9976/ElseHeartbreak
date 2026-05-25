@@ -1,0 +1,131 @@
+
+WAIT Police.IsInRoom(PoliceOfficeInterior) LISTEN Sebastian_talk_Police
+FOCUS
+Police.StartTalking()
+
+Sebastian.SetKnowledge("MetPolice")
+Police "Jahapp?"
+
+[ASK_MORE]
+CHOICE {
+    "Vad händer här?":
+        Police "Jobb..."
+        Police "Fruktansvärt mycket"
+        CHOICE {
+            "Usch då":
+                GOTO ASK_MORE
+            "Synd för dig!":
+                Police "Hrm, jo precis"
+                GOTO ASK_MORE
+            "OK":
+        }
+
+    "Vem är du?":
+        Police "Jag?"
+        Police "Jag är poliskonstapeln här i stan"
+        Police "Håller ordning och så"
+
+    "Jag heter Sebastian":
+        Police "Sebastian... jaha ja"
+        Police.SetKnowledge("Sebastian")
+
+    "Sebbe var namnet":
+        Police "Jaså jaså"
+        Police.SetKnowledge("Sebbe")
+}
+
+Police "Gällde det något särskilt?"
+
+[MORE_QUESTIONS]
+CHOICE {
+    "Nej, jag ska gå nu":
+        Police "Ciao"
+
+    "Har ni mycket brottslingar här inne?":
+        Police "Nej, inte en enda faktiskt"
+        CHOICE {
+            "Konstigt":
+                Police "Vi har rätt bra pli på folk här"
+            "Skönt!":
+                Police "Ja, visst är det?!"
+        }
+        Police "Var det något annat?"
+        Police "Jag är rätt så rejält upptagen"
+
+    "Är du den enda polisen här?":
+        Police "I Dorisburg?"
+        Police "Ja just det, jo precis..."
+        CHOICE {
+            "OK":
+            "Ensamt?":
+                Police "Det går an"
+            "Coolt!":
+                Police "Är det?"
+        }
+        Police "Jag måste jobba nu, var det något viktigt eller?"
+}
+
+Police.StopTalking()
+DEFOCUS
+
+
+# later
+
+
+WAIT Police.IsInRoom(PoliceOfficeInterior) LISTEN Sebastian_talk_Police
+FOCUS
+Police.StartTalking()
+
+Police "Nej men nu"
+WAIT 2
+Police "Vad var det om?"
+
+CHOICE {
+    "Vet inte":
+        Police "AAAH, jag hatar att bli störd när jag arbetar!"
+        Police "Adjö"
+
+    "Jag har sett något misstänkt":
+        Police "Mhm?"
+        CHOICE {
+            "Skoja bara...":
+                Police "Inte OK"
+
+            "Det var någon i hamnen!":
+                Police "Jaha?"
+                Police "Jag ska kolla på det sen"
+
+            "Det är något med de här svarta byggnaderna i stan, de som blinkar och låter":
+                Police "Mm..?"
+                Police "Jag bry dig inte om dem"
+                CHOICE {
+                    "Men vad är de?":
+                    "OK":
+                }
+        }
+        Police "Adjö då"
+
+    "Jag letar efter en person":
+        Police "Mhm..?"
+        Police "Är det någon som är försvunnen?"
+        CHOICE {
+            "Njae, inte direkt":
+            "Nej alltså jag letar efter en som kan hjälpa mig":
+            "Hmm...":
+        }
+        Police "Jag kan bara hjälpa dig om du letar efter en försvunnen person"
+        Police "Vilket du inte verkar göra..."
+        Police "...så adjö!"
+}
+
+CHOICE {
+    "Hej då!":
+    "Ha det gött":
+    "OK... hej då då":
+}
+
+Police.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Police
+Police "Har inte tid"

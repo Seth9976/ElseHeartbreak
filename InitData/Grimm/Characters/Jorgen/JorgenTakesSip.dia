@@ -1,0 +1,8 @@
+WAIT Sebastian.IsWithinDistance(Jorgen, 10) {
+	[DRINK_MORE]
+	WAIT 4
+	Jorgen.UseHandItem()
+	WAIT 10
+	WAIT Sebastian.IsWithinDistance(Jorgen, 10)
+	GOTO DRINK_MORE
+}

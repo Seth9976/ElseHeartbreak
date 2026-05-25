@@ -1,0 +1,61 @@
+
+[AGAIN]
+
+WAIT George.IsNotInRoom(LongsonApartment) LISTEN Sebastian_talk_George
+
+FOCUS
+George.StartTalking()
+George "Huh?"
+
+CHOICE {
+	"Ehm, förlåt det var inget":
+
+	"Är det du som är George?":
+		George "Ja så är det"
+		Sebastian.SetKnowledge(George)
+		George "Dorisburgs starke man, även kallad"
+		George "Ledaren för flocken, så att säga. Höhö."
+		CHOICE {
+			"Det är du som är borgmästare alltså?":
+				George "I egen hög person"
+
+			"Jaha, wow!":
+				George "Jag skulle skrivit en autograf till dig"
+				George "Om jag bara haft en penna"
+				George "Men du kan komma förbi mitt kontor så kan min sekreterare ge dig en poster"
+				CHOICE {
+					"Å, ja gärna":
+					"På dig?":
+						George "På mitt vackra anlete, javisst!"
+				}
+		}
+		IF George.HasKnowledge(Mattias) {
+			GOTO MET_BEFORE
+		}
+		IF George.HasKnowledge(Sebastian) {
+			[MET_BEFORE]
+			George "Har vi träffats förut?"
+			CHOICE {
+				"Japp":
+				"Jo jag tror det":
+				"Kanske?":
+			}
+		} ELSE {
+			George "Vem är du förresten?"
+			CHOICE {
+				"Ehm, jag heter Sebastian":
+				"Jag kallas för Sebbe!":
+				"Öh... Örjan":
+			}	
+		}
+		George "Trevligt, trevligt"
+
+	"Oops, jag trodde du var en annan person":
+		George "Jaha ja"
+}
+
+George.StopTalking()
+DEFOCUS
+
+
+GOTO AGAIN

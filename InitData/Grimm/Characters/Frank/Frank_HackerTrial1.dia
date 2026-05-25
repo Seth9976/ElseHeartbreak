@@ -1,0 +1,152 @@
+
+WAIT Frank.NotTalkingButIgnore(Sebastian) LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+Frank "Wow wow wow... vänta ett tag jag är mitt uppe i en grej här!"
+
+CHOICE {
+	"Ok, sorry jag ville bara presentera mig":
+	"Förlåt jag ska inte störa...":
+	"Vad grejar du med?":
+}
+
+Frank "Hmmmm"
+WAIT 3
+Frank "Oj förlåt, sa du någonting?"
+
+Frank.SetKnowledge(Sebastian)
+
+CHOICE {
+	"Äh":
+		Frank.StopTalking()
+		DEFOCUS
+		STOP
+	"Jag tänkte bara presentera mig":
+		Frank "Aha! Vem är du då?"
+		CHOICE {
+			"Jo jag heter Sebastian":
+				Frank "Angenämnt. Själv är jag Frank."
+			"Sebastian. Vad heter du?":
+				Frank "Jag är Frank. Angenämnt!"
+				Sebastian.SetKnowledge(Frank)
+		}
+}
+
+IF Frank.HasKnowledge(SebastianSnoopingFranksRoom) {
+	Frank "Vänta, det är ju du som var inne och snokade på mitt rum förut"
+}
+
+Frank "Så vad är ditt ärende här hos oss?"
+
+CHOICE {
+	"Eh, jag känner Pixie":
+		Frank "Aha! Programmerar du?"
+		CHOICE {
+			"Njae... jag är läskförsäljare":
+				GOTO TRY_SELL_SODA
+			"Nej men jag tänker kanske försöka lära mig":
+				GOTO WANNABE_HACKER
+		}
+	"Jag tänkte försöka bli med i er organisation":
+		GOTO WANNABE_HACKER
+	"Jag säljer läsk":
+		GOTO TRY_SELL_SODA
+}
+
+[TRY_SELL_SODA]
+Frank "Jaså..?"
+CHOICE {
+	"Du kanske vill köpa en burk eller två?":
+		Frank "Nej tack"
+	"Jepp, Wellspring":
+}
+Frank "Du borde akta dig för det där giftet"
+CHOICE {
+	"Gift?":
+	"Vadå, är de onyttiga?":
+	"Wellspring är inte gift, de är en fantastisk produkt!":
+}
+Frank "Heh, jag antar att du inte kollat deras källkod..."
+GOTO MORE_TALK
+
+
+
+[WANNABE_HACKER]
+Frank "Sweet"
+Frank "Jag kan lära dig några trick sen när du kan grunderna"
+CHOICE {
+	"Ja! Vadå för trick?":
+		[TRICKS]
+		Frank "Jag är specialist på att knäcka krypteringar och säkerhetsspärrar"
+		Frank "Ministeriet bygger in mycket artificiella begränsningar i sin utrustning"
+		Frank "För att inte göra den för mäktig"
+		CHOICE {
+			"Ok?":
+			"Jaha, jag förstår":
+		}
+		Frank "Och jag bygger om deras grejer så att de får lite mer kräm... hehe"
+		CHOICE {
+			"Får man göra så?":
+				Frank "Det beror väl på vem du frågar"
+				Frank "Kunskap bör vara fri"
+				Frank "Varför ska bara slipsarna på ministeriet få ha allt det roliga?!"
+			"Haha, coolt":
+				Frank "Ja, det är rätt intressant"
+		}
+
+	"Gärna":
+		Frank "Det finns mycket roligt som man kan göra"
+		GOTO TRICKS
+
+	"Ok, ja jag måste nog öva mig lite mer bara":
+		Frank "Klokt"
+}
+
+[MORE_TALK]
+
+CHOICE {
+	"Har du några tips på hur jag ska klara mitt prov här?":
+		Frank "Njaee..."
+		Frank "Det där är nog bäst om du frågar Pixie om"
+		Frank "Men försök att inte krångla till det för mycket"
+		Frank "Och undersök namnen på saker här inne, så mycket kan jag säga"
+		CHOICE {
+			"OK, tack!":
+			"Hmm...":
+		}
+
+	"Hur länge har du jobbat här?":
+		Frank "Oj, det är några år nu"
+		Frank "Jag och Yulian är gamla vänner, jag var med och startade allting här"
+		Frank "Det var andra tider då..."
+		Frank "Ja oj..."
+		WAIT 2
+
+	"OK, jag ska försöka klara min uppgift nu då":
+		Frank "Lycka till!"
+		GOTO ENDINGENDING
+}
+
+Frank "Men du, jag måste fortsätta jobba här nu"
+Frank "Vi får snacka mer någon annan gång"
+CHOICE {
+	"OK, lycka till":
+		Frank "Tack"
+	"Javisst. Hej då!":
+		Frank "Ciao"
+}
+
+[ENDINGENDING]
+
+Frank.StopTalking()
+DEFOCUS
+
+
+# later
+
+
+[BUSY]
+LISTEN Sebastian_talk_Frank
+Frank "Vänta..."
+GOTO BUSY

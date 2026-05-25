@@ -1,0 +1,4 @@
+[AGAIN]
+Sebastian.Walk(BurrowsNorth_OutsideMinistryPoint)
+WAIT 0.1
+GOTO AGAIN

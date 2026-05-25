@@ -1,0 +1,41 @@
+
+08:00 - 12:00 Breakfast 	BeInRoom MonadsApartment
+12:00 - 17:00 OfficeHours	BeInRoom Ministry_MonadsOffice
+17:00 - 21:00 Dinner        BeInRoom MonadsApartment
+21:00 - 02:00 Party			BeInRoom Hospital_Exterior
+02:00 - 08:00 Rest			Sleep 	 MonadsApartment_BedL_Right_1
+
+[MonadGambling]
+10:00 - 18:00 OfficeHours 	BeInRoom 	MonadsApartment #Ministry_MonadsOffice
+18:00 - 20:00 Gambling		Fika 		Casino_Floor2
+20:00 - 22:00 Gambling		Fika        Casino_Floor2          # TODO:     Interact 	Casino_Exterior_CasinoChair_CasinoChair_3
+22:00 - 02:00 Gambling		Fika 		Casino_Floor2
+02:00 - 04:00 Gambling		BeInRoom 	Casino_Floor1
+04:00 - 10:00 Zzz			Sleep 	 	MonadsApartment_BedL_Right_1
+
+[MonadSurfingInternet]
+00:00 - 24:00 _             BeInRoom    Internet
+
+[MonadInteractSebastian]
+00:00 - 24:00 _             Interact Sebastian
+
+[SmokeCigInBurrows]
+00:00 - 24:00 _             Smoke    MonadSmokePos
+
+[Monad_SitInOfficeChair]
+00:00 - 24:00 _             Sit      Ministry_MonadsOffice_MonadChair
+
+[WaitForSebastianInLobby]
+00:00 - 24:00 _             BeInRoom Ministry_Lobby
+
+[Monad_GetIntoElevator]
+00:00 - 24:00 _ BeAtTing Ministry_Elevator1_Point
+
+[Monad_InExperimentHall]
+00:00 - 24:00   _ Sit Ministry_ExperimentHall_SofaSeat_5 Ministry_ExperimentHall_SofaSeat_2 Ministry_ExperimentHall_SofaSeat_6
+
+[Monad_GuideToExperiment]
+00:00 - 24:00   ShowTheWay          GuideTo Ministry_ExperimentHall_SofaSeat_5 Sebastian
+
+[Monad_SleepAtHome]
+00:00 - 24:00 Rest          Sleep    MonadsApartment_BedL_Right_1

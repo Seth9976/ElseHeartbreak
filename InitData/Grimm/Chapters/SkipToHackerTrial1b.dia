@@ -1,0 +1,12 @@
+SetClock(01, 13, 00, 0)
+
+Sebastian.Pos(Lodge_Room1_Point2)
+Felix.Pos(Lodge_Entry_FelixPoint)
+Pixie.Pos(Lodge_Room1_Point1)
+
+WAIT 3
+Story(HackerTrial1)
+STOP Yulian_HackerTrial1
+Yulian.SetTimetable(Yulian)
+
+START GetHackdev

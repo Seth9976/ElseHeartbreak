@@ -1,0 +1,24 @@
+
+Typer1.SetTimetable("")
+Typer1.CancelWalking()
+Typer1.DropHandItem()
+
+WAIT 3
+Typer1Modifier.Pos(Ministry_Offices3_Trigger_1) # leave it at the office TODO: better place
+Typer1.SetTimetable(Typer1_Gambling)
+
+
+WAIT Typer1.IsAtTask(Gambling) LISTEN Sebastian_talk_Typer1
+FOCUS
+
+Typer1 "Ursäkta, jag har inte tid att prata"
+Typer1 "Måste spela"
+Typer1 "Har redan vunnit minst 20000 ikväll"
+CHOICE {
+    "Oj!":
+    "Wow":
+    "Nähä?":
+        Typer1 "Jo"
+}
+
+DEFOCUS

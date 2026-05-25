@@ -1,0 +1,6 @@
+
+Sebastian.Pos(ShoeStore_Point)
+Nini.Pos(ShoeStore_PushToThisPoint)
+WAIT 5
+Nini.SetTimetable("")
+SetHour(12)

@@ -1,0 +1,111 @@
+
+Pixie.SetTimetable(Pixie_AfterExperiment)
+Pixie.StopTalking()
+Pixie.SetFieldToFloat("sleepiness", 0)
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+CHOICE {
+	"Vad ska du göra ikväll?":
+		Pixie "Vettefan... har du några planer?"
+		CHOICE {
+			"Njae, inte direkt":
+				GOTO LEAVING_THE_SUBJECT
+
+			"Nä. Men jag är lite orolig, det hände en konstig grej på mitt hotellrum nyligen.":
+				Pixie "Vadå?"
+				Sebastian "Jag är väldigt osugen på att sova där i natt igen"
+				Pixie "Vad är det som har hänt?"
+		}
+	
+	"Jag hade en så konstig dröm i natt":
+		#Pixie.PlayAnimation("Yawn")
+		Pixie "Jag hatar fan när folk berättar om sina drömmar"
+		CHOICE {
+			"OK, jag kan strunta i att berätta då":
+				Pixie "Nämen kom igen, nu är jag ju nästan nyfiken"
+				Pixie "Var det något speciellt med drömmen eller?"
+				
+			"Jag tror att du vill höra om den här":
+				Sebastian "Den kändes väldigt verklig"
+		}
+	
+	"Jag såg något jävligt skumt i natt förresten":
+		Pixie "OK?"
+	
+	"Ivan var i mitt rum i natt":
+		GOTO GETTING_ANGRY
+}
+
+CHOICE {
+	"Det var riktigt konstigt faktiskt, jag hoppas att du inte blir sur om jag säger det":
+		Pixie "Men kom igen, säg det bara!"
+		Pixie "Jag blir inte arg"
+		CHOICE {
+			"Din pojkvän besökte mig i natt":
+			"Ivan lever":
+		}
+	
+	"Jag såg Ivan":
+		Pixie "Vad fan säger du?!"
+}
+
+[GETTING_ANGRY]
+
+#Pixie.Mood("Angry")
+Pixie "Är du dum i huvudet eller?"
+Pixie "Sånt där skojar du fan inte om"
+CHOICE {
+	"Men jag skojar inte":
+		
+	"Förlåt, jag borde inte ha sagt det":
+		GOTO LEAVING_THE_SUBJECT
+		
+	"Jag är ledsen ...men han var där":
+		
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+#Pixie.PlayAnimation("HitHandOnTable")
+Pixie "SLUTA FÖR I HELVETE!"
+Pixie.SetTimetable("")
+#Pixie.Walk(Lodge_FirstCorridor_Point)
+Pixie.Walk(Lodge_Room1_Point2)
+
+#WAIT IsHour(23) {
+	#Pixie.SetKnowledge("SebastianDidntTryToComfortMe")
+	#STOP
+#}
+
+#WAIT Sebastian.IsCloseTo(Pixie)
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+CHOICE {
+	"Det var inte meningen att göra dig upprörd":
+	"Hur är det?":
+}
+Pixie ""
+Pixie "Gå"
+CHOICE {
+	"OK":
+	"Nej, jag vill inte":
+		Pixie "GÅ!"
+}
+DEFOCUS
+STOP
+
+
+
+# This happens if you avoid the subject early on:
+[LEAVING_THE_SUBJECT]
+
+
+
+Pixie.StopTalking()
+DEFOCUS

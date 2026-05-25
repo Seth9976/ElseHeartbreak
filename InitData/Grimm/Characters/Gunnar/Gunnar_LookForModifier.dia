@@ -1,0 +1,436 @@
+
+Gunnar.Pos(Hut_DesignedChair_TheLodge_ComputerTerminal_DesignedChair2_1)
+Gunnar.SetTimetable("Gunnar_SellModifierMode")
+
+
+LISTEN Sebastian_talk_Gunnar
+FOCUS
+Gunnar.StartTalking()
+
+Gunnar "Vem där? Jag ska inte ha något sa jag ju!"
+
+CHOICE {
+	"Jag är inte här i rollen som försäljare":
+	"Förlåt att jag tränger mig på":
+	"Lugn, jag har ett viktigt ärende":
+	"[CHEAT]":
+		GOTO CHEAT
+	"[ILL_TAKE_IT]":
+		GOTO ILL_TAKE_IT
+}
+
+Gunnar "Vem är ni?"
+
+CHOICE {
+	"Jag heter Sebastian":
+	"Jag kallas för Sebbe":
+	"Mitt namn är Sebastian":
+}
+Gunnar.SetKnowledge("Sebastian")
+
+Gunnar "Jaså, och..?"
+
+IF Gunnar.HasKnowledge("SebastianGaveSoda") {
+	CHOICE {
+		"Ni kanske känner igen mig, jag sålde en burk läsk till er tidigare i veckan":
+			Gunnar "Ja, hrm... det kan hända"
+
+		"Du kommer inte ihåg att vi har träffats?":
+			Gunnar "Jo, kanske det"
+	}
+}
+
+CHOICE {
+	"Jag är egentligen läskförsäljare":
+		Gunnar "Jag ska inte ha något sa jag ju"
+		CHOICE {
+			"Säker?":
+				Gunnar "Helt säker"
+
+			"Ja men jag har ett annat ärende!":
+		}
+
+	"Det är du som är Gunnar väl?":
+		Gunnar "Mm..."
+
+	"Jag söker Gunnar":
+		Gunnar "Ja det är jag"
+}
+
+Sebastian.SetKnowledge(Gunnar)
+
+[HOW_COME]
+CHOICE {
+	"Jag försöker få tag på en sån här 'modifierare'":
+
+	"En vän gav mig din adress":
+		CHOICE {
+			"Han sa att du visste mycket om ministeriet":
+				Gunnar "Ja... hurså?"
+				GOTO HOW_COME
+
+			"Han sa att du kanske sålde modifierare":
+				Gunnar "Mhm"
+				Gunnar "Så det sa han"
+				CHOICE {
+					"Ja...":
+					"Jag skulle vilja köpa en gärna":
+				}
+		}
+
+	"Jag håller på att utbilda mig till programmerare, typ":
+		Gunnar "Jaha, och vad ska det vara bra för?"
+		CHOICE {
+			"Men jag trodde du var programmerare också?":
+				Gunnar "Jag uppskattar inte ordets konnotationer"
+				[NOT_PROGRAMMING_THAT_IS_IMPORTANT]
+				Gunnar "Det är inte programmeringen som är det viktiga"
+				Gunnar "Det är vad man kan göra med den, hur man påverkar människor"
+				Gunnar "Och världen"
+				CHOICE {
+					"Men måste man inte kunna programmera då?":
+						Gunnar "Jo"
+					"Jaha...":
+				}
+
+			"Ehm, vet inte riktigt faktiskt":
+				Gunnar "Nej..."
+				Gunnar "Det är inte många som vet"
+				Gunnar "De flesta programmerare gör större skada än nytta skulle jag tro"
+				CHOICE {
+					"Verkligen?":
+						Gunnar "Ja"
+					"Det kan jag inte tro!":
+						Gunnar "Du får välja själv vad du vill tro"
+				}
+				GOTO NOT_PROGRAMMING_THAT_IS_IMPORTANT
+		}
+		Gunnar "Så varför har du kommit till mig?"
+		CHOICE {
+			"Jag letar efter en modifierare":
+				
+			"Jag fick tips om att du kunde hjälpa mig att komma igång med programmeringen":
+				Gunnar "Mhm?"
+				Sebastian "Du råkar inte sälja sådana här modifierare eller vad de nu kallas?"
+		}
+}
+
+[LOOKING_FOR_MODIFIER]
+WAIT 3
+CHOICE {
+	"...helst inte för dyr då":
+		Gunnar "Mm"
+
+	"...om du har sådana?":
+		Gunnar "Mm"
+		Gunnar "Jo det har jag"
+
+	"...annars kan jag gå om det är en opassande tid just nu?":
+		WAIT 2
+		Gunnar "Nej det går allt bra"
+}
+
+Gunnar "Vem är det som ska lära dig att använda den?"
+
+[WHO_WILL_TEACH]
+CHOICE {
+	"Eh jag vet inte":
+		Gunnar "Inte?"
+		GOTO WHO_WILL_TEACH
+	"Pixie, hoppas jag":
+		Gunnar "Jaha..."
+		Gunnar "Det vet jag inte vem det är"
+		CHOICE {
+			"OK":
+			"Det är en tjej jag känner":
+				Gunnar "Mm, givetvis"
+			"Hon är världens ballaste":
+				Gunnar "Ja ja, det tror jag säkert"
+		}
+	"Hank på hotellet kanske":
+		Gunnar "Ok... ja just det"
+	"Jag tänkte lära mig själv":
+		Gunnar "Verkligen?"
+		Gunnar "Bra... mycket bra"
+		Gunnar "Den enda som kan lära dig något är du själv, ingen annan"
+		CHOICE {
+			"Ja det var lite så jag kände också":
+			"Mm..?":
+		}
+}
+
+Gunnar "Men till saken"
+Gunnar "Jag har en modder inne, vad säger du om $100?"
+
+CHOICE {
+	"'Modder'?":
+		Gunnar "Modifierare"
+
+	"Är det en modifierare alltså?":
+		Gunnar "Ja"
+
+	"$100 för en modifierare..?":
+		Gunnar "Ja"
+}
+
+[ILL_TAKE_IT]
+Gunnar "Den är ju bara nivå 0 givetvis, högre nivåer får du ordna med själv"
+
+[TIME_TO_BUY]
+CHOICE {
+	"Jag tar den!":
+		[LETS_BUY_IT]
+		Gunnar.ClearHandItem()
+		Gunnar "Ok, kan jag få låna ditt kort?"
+		[GIVE_CREDIT_CARD_AGAIN]
+		Gunnar.StartWaitForGift()
+		LISTEN Sebastian_give_Gunnar
+		WAIT Gunnar.HasAnyHandItem()
+		Gunnar.StopWaitForGift()
+
+		IF Gunnar.HasHandItemOfType(CreditCard) {
+			Gunnar "Tack"
+		} ELSE {
+			Gunnar "Det här är inte ett kreditkort"
+			Gunnar.Give()
+			WAIT Sebastian.HasAnyHandItem()
+			CHOICE {
+				"Jag får komma tillbaka senare":
+					GOTO ILL_BE_BACK
+				"Oj, ursäkta":
+					GOTO GIVE_CREDIT_CARD_AGAIN
+			}
+		}
+
+		WAIT Gunnar.IsIdle()
+		Gunnar.CharacterTakesMoneyFromCreditCard(-100)
+		Gunnar.StopWaitForGift()
+		WAIT 2
+
+		IF Sebastian.CharacterHasLessMoneyThan(50) {
+			Gunnar "Oj då, det blev inte mycket kvar på det kortet"
+			CHOICE {
+				"Oops":
+				"Det får lösa sig":
+				"Skit också...":
+			}
+		}
+		ELSE {
+			Gunnar "Sådärja, det var ju inga problem!"
+			WAIT 1
+		}
+		
+		Gunnar.Give()
+		WAIT Sebastian.HasHandItemOfType("CreditCard")
+		[CHEAT]
+		Gunnar "Och här är modifieraren..."
+		Gunnar.TakeOutItem("RustyModder")
+		WAIT Gunnar.IsIdle()
+		Gunnar.Give()
+		Gunnar "Varsågod"
+		CHOICE {
+			"Tack!!!":
+			"Coooolt":
+			"Oj, den är tung!":
+		}
+		Gunnar "Var försiktig med den där nu"
+		Gunnar "Det är inte en leksak"
+		CHOICE {
+			"Nej nej":
+			"Jag förstår!":
+				Gunnar "Bra"
+			"Ok, mamma":
+				Gunnar "Jag menar allvar"
+		}
+		Gunnar "Och om någon frågar var du fått tag på den så hittade du den i en container"
+		CHOICE {
+			"Ok..?":
+			"Japp":
+		}
+		Gunnar "Den har allt det vanliga..."
+		Gunnar "Knappar för kompilering, återställning av koden, och så vidare"
+		Gunnar "Hjälpfunktionerna sitter på den undre skärmen naturligtvis"
+		CHOICE {
+			"Aha, praktiskt":
+				Gunnar "Ja"
+			"OK":
+		}
+		Gunnar "Det var nog allt"
+
+	"Jag har inte så mycket pengar tror jag":
+		Gunnar "OK?"
+		Gunnar "Du har inte någon beviljad kredit på ditt kort?"
+		CHOICE {
+			"Vad är det?":
+				Gunnar "Att du kan låna pengar av din bank"
+				Gunnar "Om det inte finns tillräckligt med pengar på ditt konto"
+				Sebastian "Jaha"
+
+			"Kanske...":
+		}
+		Gunnar "Ska vi testa?"
+		CHOICE {
+			"Ehm, låt mig tänka på saken":
+				Sebastian "Jag återkommer"
+				GOTO ILL_BE_BACK
+
+			"Ja, kör på":
+				GOTO LETS_BUY_IT
+		}
+	
+	"Känns lite dyrt...":
+		Gunnar "OK?"
+		Gunnar "Du kanske ska tänka på saken då?"
+		CHOICE {
+			"Nä men alltså, jag köper den!":
+				GOTO LETS_BUY_IT
+
+			"Ja, jag återkommer":
+				[ILL_BE_BACK]
+				Gunnar "OK"
+				Gunnar.StopTalking()
+				DEFOCUS
+				LISTEN Sebastian_talk_Gunnar
+				FOCUS
+				Gunnar.StartTalking()
+				Gunnar "Bestämt dig än?"
+				CHOICE ETERNAL {
+					"Vad skulle du ha för den nu igen?":
+						Gunnar "$100"
+						CHOICE ETERNAL {
+							"Jo men jag tar den!":
+								GOTO LETS_BUY_IT
+							"Hmm, vet inte alltså...":
+								GOTO ILL_BE_BACK
+						}
+					"Nä...":
+						GOTO ILL_BE_BACK
+					"Jag köper den!":
+						GOTO LETS_BUY_IT
+				}
+		}
+
+	"Kan man få se den först?":
+		Gunnar "Mm, det går bra"
+		Gunnar.TakeOutItem("RustyModder")
+		Gunnar "Den är i fint skick den här"
+		Gunnar "Rätt snygg finish om jag får säga det själv"
+		Gunnar "Men sånt kan man ju fixa med själv också"
+		Gunnar "Inte för att det spelar någon roll"
+		Gunnar "Den moddar ju saker oavsett om den har repor i lacken eller inte"
+		CHOICE {
+			"Ja men den se fin ut, jag tar den":
+				GOTO LETS_BUY_IT
+			"Jag måste nog tänka lite på saken":
+				GOTO ILL_BE_BACK
+		}
+}
+
+Gunnar "Adjö då"
+CHOICE {
+	"Hej då":
+	"Adjö":
+	"God kväll":
+	"God middag":
+	"Tja då, ha det gött!":
+}
+
+Gunnar "Och se till att du inte blir tagen av polisen nu"
+
+Gunnar.StopTalking()
+DEFOCUS
+
+
+
+
+WAIT Sebastian.IsInRoom(Hut) AND Gunnar.IsAwake() AND Gunnar.IsInRoom(Hut) AND Sebastian.IsHacking() {
+	[ANGRY]
+	WAIT 3
+	Sebastian.StopAction()
+	Gunnar.SetTimetable("")
+	Gunnar "Vad gör du?!"
+	FOCUS
+	Gunnar "Ligist!"
+	Gunnar "Ta ner den där med en gång!"
+	Gunnar.Interact(Sebastian)
+	CHOICE {
+		"Jag ville bara testa":
+			Gunnar "Inte här inne!"
+			Gunnar "Ge dig iväg"
+
+		"Ehh...":
+			Gunnar "Adjö"
+
+		"Får jag inte använda den här inne eller?":
+			Gunnar "Självklart inte!"
+			Gunnar "Dårskap är vad det är"
+			Gunnar "Stick härifrån nu!"
+
+		"Fölåt":
+			Gunnar "Gå ut nu, jag har fått nog av dig här inne"
+	}
+	Gunnar.SetTimetable(Gunnar_SellModifierMode)
+	DEFOCUS
+	WAIT 5
+	WAIT Sebastian.IsInRoom(Hut) AND Gunnar.IsAwake() AND Gunnar.IsInRoom(Hut) AND Sebastian.IsHacking()
+	GOTO ANGRY
+}
+
+
+
+
+[AGAIN]
+LISTEN Sebastian_talk_Gunnar
+FOCUS
+Gunnar.StartTalking()
+
+Gunnar "Mhm?"
+[ASK]
+CHOICE ETERNAL {
+	"Varför kan jag inte ändra dörrar med modifieraren?":
+		Gunnar "Den där som jag sålde är säkerhetsklass 1"
+		Gunnar "Att sälja en mer upplåst model är en allt för stor risk för mig"
+		Gunnar "Du får prata med någon annan om du vill fixa till den"
+		CHOICE {
+			"OK, vem då?":
+				Gunnar "Inte vet jag"
+			"Jaha... ja det ska jag göra":
+			"Jag förstår":
+		}
+		GOTO ASK
+
+	"Får jag modifiera saker här inne?":
+		Gunnar "Nej nej, för tusan"
+		Gunnar "Tänk inte tanken!"
+
+	"Jag kan inte koppla in mig i alla saker med modifieraren...":
+		Gunnar "Nej, vem har sagt att du skulle kunna det?"
+		Gunnar "Det beror helt och hållet på vad du har för mjukvara"
+		Gunnar "Och många saker har man inte kommit på hur de kan modifieras heller"
+		CHOICE {
+			"Men jag vill kunna använda den på allting!":
+				Gunnar "Suck, jag har inte tid med gnäll"
+				Gunnar "Du får gå och prata med någon som kan förklara det där för dig"
+				Gunnar "Adjö"
+			"Jaha, jag förstår":
+				GOTO ASK
+		}
+
+	"Är det inte tillåtet att använda modifierare?":
+		Gunnar "Man måste ha tillstånd"
+		Gunnar "Jag skulle passa mig för att visa upp den allt för mycket ute på stan"
+		Gunnar "Kan hända att du får problem med polisen"
+		Gunnar "Eller ministeriets byråkrater"
+		CHOICE {
+			"OK, tack för informationen":
+			"Jaha, jobbigt!":
+		}
+
+	"Nej, nu ska jag lämna dig ifred":
+		Gunnar "Tack"
+}
+
+Gunnar.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

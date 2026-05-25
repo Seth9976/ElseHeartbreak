@@ -1,0 +1,86 @@
+
+LISTEN Sebastian_talk_Bob [BEFORE_TALK] {
+	Bob "Ikväll blir det fest!"
+}
+
+
+
+Bob.SetTimetable(Bob_ClubDotParty)
+#Bob.Pos(Mines_ClubDot_PixiePoint)
+
+WAIT Bob.IsInRoom(Mines_ClubDot)
+CANCEL BEFORE_TALK
+Bob.CreateBeerInHand()
+
+WAIT Sebastian.IsInRoom(Mines_ClubDot) LISTEN Sebastian_talk_Bob
+
+FOCUS
+Bob.StartTalking()
+Bob "Tjenare!"
+CHOICE {
+	"Hej!":
+	"God kväll":
+}
+
+Bob.SetKnowledge("SebastianAtClubDot")
+
+IF Frank.IsWithinDistance(Mines_ClubDot_TurnTableMixer_TurnTableMixer_1, 4){
+ 	GOTO HELLUVA_GOOD_SHOW
+}
+
+Bob "Fan vad jag är taggad inför spelningen ikväll!"
+
+CHOICE {
+	"Ja, det ska verkligen bli kul!":
+		Bob "Fan va gött!"
+
+	"Ja! Jag älskar deras musik":
+		Bob "Ja!"
+		Bob "Eller vad sa du?"
+		Bob "Han är ju bara en"
+		Sebastian "Jaha... vem är det som spelar egentligen?"
+		GOTO NOT_KNOW
+
+	"Vem är det som ska spela?":
+		[NOT_KNOW]
+		Bob "Vet du inte det???"
+		Bob "Det är ju Frank!"
+		Bob "Han är bäst"
+}
+
+Bob "Vill du ha en öl förresten?"
+
+CHOICE {
+	"Ja ok":
+		Bob.StopAction()
+		WAIT 0.1
+		IF Bob.HasHandItemOfType(Drink) {
+			# do nothing
+		} ELSE {
+			Bob.CreateBeerInHand()
+		}
+		Bob.Give()
+		WAIT Sebastian.HasHandItemOfType(Drink)
+		CHOICE {
+			"Tack!":
+			"Schysst":
+		}
+		Bob "Inga problem"
+	"Nej det är bra":
+		Bob "OK, OK"
+}
+
+Bob.StopTalking()
+DEFOCUS
+
+WAIT Frank.IsWithinDistance(Mines_ClubDot_TurnTableMixer_TurnTableMixer_1, 4) LISTEN Sebastian_talk_Bob
+
+[HELLUVA_GOOD_SHOW]
+
+Bob "Fan va bra han e!"
+Bob "Vilken dj..."
+Bob "Oj oj oj"
+
+Bob.StopTalking()
+DEFOCUS
+

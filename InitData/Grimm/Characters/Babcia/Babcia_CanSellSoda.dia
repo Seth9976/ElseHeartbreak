@@ -1,0 +1,242 @@
+Babcia.SetTimetable(Babcia)
+
+WAIT Sebastian.IsWithinDistance(Babcia, 10)
+
+IF Hotel_Jukebox.BoolIsTrue("isPlaying") {
+	WAIT 4
+	Babcia "Å, jag tror jag blir galen på den här musiken"
+	Babcia "Hank?! Kan du inte byta"
+	IF Hank.IsInRoom(Hotel_Lobby) {
+		Hank "Det är mycket nu, jag tar det sen"		
+	}
+}
+
+[BEGINNING]
+LISTEN Sebastian_talk_Babcia
+FOCUS
+Babcia "Några problem?"
+Babcia.StartTalking()
+[ANYTHING_ELSE]
+CHOICE {
+	"Nej jag undrar bara om DU är intresserad av att köpa en burk svalkande läsk?":
+		Babcia "Läsk? Är det någon slags sockerdricka?"
+		CHOICE {
+			"Ja det kan man väl kalla det...":
+
+			"Nej det är fantastisk naturlig dryck":
+				Sebastian "Den kommer att få dina smaklökar att skina av lycka"
+		}
+		Babcia "Du är inte jätteövertygande som försäljare min vän"
+		CHOICE {
+			"Ok, synd":
+			"Jag vet inte vad jag gör för fel...":
+		}
+
+	"Jag letar efter något sätt att läsa en diskett":
+		Babcia "Jaså?"
+		Sebastian "Har ni en dator som kan göra det?"
+        INTERRUPT AskAboutFloppyReader
+        FOCUS
+        Babcia "Något mer?"
+        GOTO ANYTHING_ELSE
+
+	"Det är gigantiska spindlar på mitt rum":
+		Babcia "OK?"
+		CHOICE {
+			"Ska det vara det?":
+				Babcia "Nej... men de trivs"
+
+			"Du kan inte ta bort dem?":
+				Babcia "Tro mig, jag har försökt"
+		}
+		Sebastian "Ok..."
+		DEFOCUS
+		Babcia.StopTalking()
+		GOTO BEGINNING
+
+	"Jag kommer inte in på mitt rum igen":
+		Babcia "Va?!"
+		Babcia "Är det här någon slags fars?"
+		Babcia "Jag ska skicka någon som fixar det"
+		Babcia "Men sen får du ta det försiktigt med den där dörren"
+		Babcia "LOVA?!"
+		Babcia "Jag sätter upp det på hotellräkningen såklart"
+		CHOICE {
+			"Ok, ok":
+			"Förlåt":
+		}
+		Babcia "Adjö"
+		LISTEN THREAD_1 {
+			WAIT 60
+			SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+			Hotel_Corridor_Door1.UnlockDoor()
+		}
+		BROADCAST THREAD_1
+}
+
+Babcia.StopTalking()
+DEFOCUS
+
+
+
+# later #
+
+
+
+[BOTHER]
+DEFOCUS
+LISTEN Sebastian_talk_Babcia
+
+Babcia "Vad nu då?"
+
+FOCUS
+Babcia.StartTalking()
+
+CHOICE {
+	"Det står några blomkrukor uppe i mitt rum har jag sett...":
+		Babcia "Jaha?"
+		CHOICE {
+			"De ska inte ha blommor i sig eller?":
+				Babcia "Nej, vi fick lov att sluta bevattna dem"
+				Babcia "Det blev för dyrt"
+			"Mm, tänkte bara påpeka det":
+				Babcia "Ja ja"
+		}
+		GOTO BOTHER
+
+	"Hej du vill inte köpa en läsk nu eller?":
+		Babcia "Nej"
+		CHOICE {
+			"Grrrrhh, hur ska jag lyckas med det här jobbet..?":
+				Babcia "Livet är hårt"
+			"Skit också":
+			"Ok, tänkte bara kolla!":
+		}
+		GOTO BOTHER
+
+	"Jag kommer inte in på mitt rum...":
+		Babcia "Min herre"
+		Babcia "Det här är inte acceptabelt beteende"
+		Babcia "Adjö"
+
+	"Jo det var det här med att läsa en diskett":
+		IF Babcia.HasKnowledge(AskedAboutFloppyReader) {
+			Babcia "Nej, sa jag ju!"
+			Babcia "Vi har ingen som du kan låna"
+			Babcia "Sluta fråga nu"
+		}
+		ELSE {
+			Babcia "Ja?"
+			Sebastian "Har du någon diskettläsare?"
+        	INTERRUPT AskAboutFloppyReader
+        	WAIT 2
+        	FOCUS
+		}
+		Sebastian "Hmm..."
+		GOTO BOTHER
+
+	"Det går inte bra för mig att sälja läsk":
+		Babcia "Och?"
+		CHOICE {
+			"Nä jag är bara lite deppig på grund av det":
+				Babcia "Gå och ta ett glas på rummet"
+				Babcia "Det är alltid den bästa medicinen mot dåligt humör"
+				CHOICE {
+					"Du vet inte vad jag skulle kunna göra för att kunna sälja bättre?":
+						Babcia "Sånt där måste man ha i blodet tror jag"
+						GOTO TIP
+					"Ok, testar med det då":
+				}
+
+			"Du har inga tips, du jobbar ju lite i samma branch typ?":
+				Babcia "Jag äger ju ett hotell"
+				CHOICE {
+					"Ja... ok det kanske inte är samma sak":
+						Babcia "Nej"
+					"Ja men du måste ju sälja rum och så liksom":
+						Babcia "Jag förstår inte likheten"
+				}
+				[TIP]
+				Babcia "Men mitt bästa tips till dig är att du skaffar dig lite mer stil och klass"
+				Babcia "Kanske nya skor"
+				[ADVICE]
+				CHOICE {
+					"Ok?":
+						Babcia "Ja, det är mitt råd till dig unge man"
+						GOTO ADVICE
+					"Ja det kanske vore något, ska gå till skoaffären och kolla":
+						Babcia "Ja gör så"
+					"Mm... ok. Finns det någon skoaffär här i stan eller?":
+						Babcia "Ja, det ligger en här i närheten"
+						Babcia "I Burrows, över bron här utanför"
+				}
+				Sebastian "Ok"
+				CHOICE {
+					"Tack för tipset":
+					"Hej då då!":
+				}
+				GOTO BOTHER
+		}
+}
+
+Babcia.StopTalking()
+DEFOCUS
+
+
+
+
+[BOTHER_BABCIA_AGAIN]
+LISTEN Sebastian_talk_Babcia
+FOCUS
+Babcia.StartTalking()
+
+[ONE_THING]
+Babcia "Mm?"
+CHOICE {
+	"Jag måste verkligen komma på hur jag ska sälja mer läsk":
+		Babcia "Varför tror du att det är mitt bekymmer?!"
+		Babcia "Jag blir så trött!"
+		Babcia "Gå till hamnen... de svettas väl de som jobbar där?"
+		Babcia "Eller baren i centrum, där är det väl fullt av törstiga människor??!"
+		CHOICE {
+			"Förlåt...":
+			"Mm, jag vet inte vad jag ska ta mig till bara":
+				Babcia "Skärpning!"
+		}
+		Babcia "Ta dig i kragen, unge man"
+		Babcia "Var glad att du har ett jobb"
+		Babcia.StopTalking()
+		DEFOCUS
+		GOTO BOTHER_BABCIA_AGAIN
+
+	"Hur mås det?":
+		Babcia "Va?"
+		Babcia "Det mås alldeles utmärkt här, herrn"
+		Babcia "Var det något viktigt eller ville du bara störa en hårt arbetande kvinna?"
+		CHOICE {
+			"Förlåt, det var inte meningen att vara till besvär":
+			"Jo jag tänkte på en sak faktiskt":
+				GOTO ONE_THING
+		}
+
+	"Vad har ni för relation, du och Hank egentligen?":
+		Babcia "För bövelen!"
+		Babcia "Sköt du ditt så sköter jag mitt"
+		Babcia.StopTalking()
+		DEFOCUS
+		GOTO BOTHER_BABCIA_AGAIN
+}
+
+Babcia.StopTalking()
+DEFOCUS
+
+# later
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+Babcia.StartTalking()
+Babcia "Jag har inte tid med dig just nu"
+Babcia "Kom tillbaka senare"
+Babcia.StopTalking()
+DEFOCUS
+

@@ -1,0 +1,15 @@
+
+Monad.Pos(Ministry_Lobby_Point1)
+Monad.SetTimetable(Monad)
+
+WAIT Monad.IsAtTask(Party) LISTEN Sebastian_talk_Monad {
+    Monad "Grabben, jag försöker njuta av musiken"
+    WAIT Monad.IsAtTask(Party) LISTEN Sebastian_talk_Monad
+    Monad "Nej sa jag ju"
+}
+
+WAIT Sebastian.IsInRoom(MonadsApartment) AND Monad.IsInRoom(MonadsApartment) AND Monad.IsAwake() AND Sebastian.IsAwake() {
+    START Monad_BreakIntoMonads
+}
+
+LISTEN DONT_STOP

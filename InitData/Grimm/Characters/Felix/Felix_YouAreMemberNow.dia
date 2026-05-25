@@ -1,0 +1,32 @@
+
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+
+Felix "Hur gick det med testet?"
+
+CHOICE {
+	"Det gick helt ok...":
+		Felix "Kom du in?"
+		CHOICE {
+			"Jepp":
+			"Jo":
+		}
+		GOTO CONGRATS
+	"Det gick bra!":
+		[CONGRATS]
+		Felix "Grattis!"
+		Felix "Så du är en i gänget nu?"
+}
+
+CHOICE {
+	"Ja, det verkar så!":
+	"Mm precis":
+}
+
+Felix "Fan va coolt"
+Felix "Jag önskar att jag kunde programmera också"
+Felix "Men jag orkar inte lära mig, haha"
+
+Felix.StopTalking()
+DEFOCUS

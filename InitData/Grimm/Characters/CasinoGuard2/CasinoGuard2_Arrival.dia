@@ -1,0 +1,55 @@
+
+WAIT Sebastian.IsWithinDistance(CasinoGuard2, 10) AND CasinoGuard2.IsAtTask(Security)
+
+WAIT 3
+
+FOCUS
+CasinoGuard2.StartTalking()
+CasinoGuard2 "Stopp där"
+CasinoGuard2 "Bär ni på några illegala föremål?"
+
+CHOICE {
+	"Va..?":
+		CasinoGuard2 "Enligt våra regler är det förbjudet att föra in ett antal föremål på kasinot"
+		GOTO ILLEGAL
+
+	"Eh, nej det tror jag inte":
+		[STEP_THROUGH]
+		CasinoGuard2 "Då kan ni stiga genom säkerhetsbarriären"
+		CasinoGuard2 "Ha en trevlig kväll"
+
+	"Vilka föremål är illegala?":
+		[ILLEGAL]
+		CasinoGuard2 "Först och främst vapen, modifierare och droger"
+		CHOICE {
+			"Hmm, nej något sånt har jag definitivt inte med mig!":
+				GOTO STEP_THROUGH
+			"Ok jag tror inte att jag bär på något sånt":
+				GOTO STEP_THROUGH
+			"Kanske bäst att jag går då":
+			"Modifierare?":
+				CasinoGuard2 "Ja, exakt"
+				CasinoGuard2 "Det är väl ganska självklart, stora risker för fusk"
+				CHOICE {
+					"Ok... nej men någon sådan har jag inte":
+						GOTO STEP_THROUGH
+					"Kanske bäst att jag går...":
+				}
+		}
+		CasinoGuard2 "Ok, god kväll"
+}
+
+CasinoGuard2.StopTalking()
+DEFOCUS
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+
+LISTEN Sebastian_talk_Yulian
+
+Sebastian.SetKnowledge("HasTalkedToYulian")
+
+FOCUS
+Yulian.StartTalking()
+Yulian "Ja?"
+Sebastian "Ursäkta mig"
+
+CHOICE {
+	"Det var inget":
+		Yulian "OK"
+
+	"Ursäkta, var ligger caféet?":
+		Yulian "Ehm... ja du"
+		IF Yulian.IsInRoom(HarborEast) {
+			Yulian "Testa att fråga på turistbyrån där borta i hörnet"
+			CHOICE {
+				"OK, bra idé!":
+					Yulian "Inga problem"
+				"Ja... de borde ju veta":
+					Sebastian "Jag testar med det"
+					Yulian "Lycka till"
+				"Jag har redan frågat dem":
+					Yulian "Ja då vet jag inte tyvärr"
+					Yulian "Du får fråga runt helt enkelt"
+			}
+		} ELSE {
+			Yulian "De kanske vet på turistbyrån"
+			CHOICE {
+				"Var ligger den?":
+					Yulian "I hamnen där färjan lägger till"
+					CHOICE  {
+						"OK, tack så hemskt mycket!":
+							Yulian "Inga problem"
+						"Jag försöker med det då...":
+							Yulian "Lycka till"
+					}
+				"OK, tack!":
+			}
+		}
+
+	"Vet du något trevligt ställe att besöka här i stan?":
+		Yulian "Det är dåligt med sånt"
+		Yulian "De har börjat infiltrera de flesta platser"
+		Yulian "Jag skulle hitta en väl avskärmad källare om jag var du"
+		CHOICE {
+			"Vad snackar du om?":
+			"Vilka dom?":
+			"Ska jag gå och besöka en källare?":
+		}
+		Yulian "Scshhh... vi kan inte snacka om sånt ute på en allmän plats så här"
+		Yulian "Jag måste gå"
+		Yulian "Var uppmärksam!"
+		Yulian.StopTalking()
+		Yulian.SetTimetable("")
+		Yulian.Walk(YulianApartment_Point)
+		WAIT Yulian.IsIdle()
+		Yulian.SetTimetable("Yulian")
+}
+
+Yulian.StopTalking()
+DEFOCUS
+
+
+# later #
+
+
+[NO_TIME]
+LISTEN Sebastian_talk_Yulian
+Yulian.StartTalking()
+Yulian "Ursäkta, har inte tid just nu"
+Yulian.StopTalking()
+GOTO NO_TIME

@@ -1,0 +1,35 @@
+
+Pixie.SetTimetable("PixieGoHome")
+
+WAIT Pixie.IsInRoom(PixiesApartment) {
+	WAIT IsHour(03)
+	Pixie.SetTimetable("Pixie")
+	STOP
+}
+
+WAIT Pixie.IsWithinDistance(Sebastian, 20)
+Pixie.SetTimetable("")
+Pixie "Sebastian!"
+Pixie.GetUpAndInteract(Sebastian)
+WAIT Pixie.IsWithinDistance(Sebastian, 5)
+Pixie.CancelWalking()
+Pixie "Jag går hem nu, ha det så bra!"
+Pixie.SetTimetable("PixieGoHome")
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+Pixie "Ja?"
+CHOICE {
+	"God natt!":
+		Pixie "God natt Sebbe"
+
+	"Ska du inte stanna mer?":
+		Pixie "Nej, det är bra nu, måste upp tidigt imorgon"
+		Pixie "Men ha det så roligt"
+}
+Pixie "Vi ses snart"
+Pixie.StopTalking()
+DEFOCUS
+
+LISTEN DONT_STOP

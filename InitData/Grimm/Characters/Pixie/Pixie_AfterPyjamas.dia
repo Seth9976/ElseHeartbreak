@@ -1,0 +1,202 @@
+
+WAIT IsDay()
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+IF Pixie.IsAtTask(Clubbing) {
+	Pixie "Hej Sebbe!"
+	Pixie "Vill du dansa?!"
+	CHOICE {
+		"Eh... nä jag kan inte så bra":
+			Pixie "Jo, kom igen!"
+		"Ok!":
+	}
+}
+ELIF Pixie.IsInEitherRoom(Lodge_FirstCorridor, Lodge_Entry) {
+	Pixie "Hallå där"
+	Pixie "Är du här nere och stryker runt igen?"
+	CHOICE {
+		"Ja, men det är inte som det ser ut":
+		"Jag var och pratade med Felix":
+		"Mm":
+	}
+	GOTO AGAIN
+}
+ELSE {
+	Pixie "Hej Sebbe!"
+}
+
+Pixie "Hur går det med jobbet?"
+
+CHOICE {
+	"Går väl ok":
+		Pixie "Gött"
+
+	"Det går skit":
+		Pixie "Aha, segt"
+}
+
+
+[AGAIN]
+CHOICE {
+	"Förlåt för det som hände innan":
+		Pixie "Alltså det är lugnt Sebbe"
+		Pixie "Du måste bara softa lite"
+		CHOICE {
+			"Ja ok":
+			"Jag vet inte vad som flög i mig":
+				Pixie "Vi gör alla misstag ibland"
+				Pixie "Du har en expert på sånt här mitt framför näsan"
+				CHOICE {
+					"Heh":
+					"Vadå?":
+						Pixie "Jag menar bara att jag också gjort dumma grejer ibland"
+				}
+			"Det var ett stort missförstånd alltihop":
+				GOTO MISUNDERSTANDING
+			"Jag försökte inte vara creepy, jag lovar!":
+				[MISUNDERSTANDING]
+				Pixie "Ok, ok"
+				Pixie "Om du säger det så tror jag på dig"
+				Pixie "Jag gillar dig vet du!"
+		}
+		CHOICE {
+			"Nä nu måste jag försöka sälja lite mer läsk eller nåt, vi hörs sen!":
+				Pixie "OK, ha det bra Sebbe!"
+			"Du jag tänkte på en sak med det här stället där du jobbar...":
+				Pixie "Ja ok..?"
+				CHOICE {
+					"Tror du att jag skulle kunna få vara med där också?":
+						GOTO HMM_YOU
+					"Ni är väldigt hemlighetsfulla":
+						GOTO SECRETIVE
+				}
+		}
+
+	"Vet du vilken veckodag det är?":
+		Pixie "Ehmm... nej jag håller inte ordning på sånt"
+		Pixie "Lördag?"
+		Sebastian "OK, ja det kan nog stämma"
+		Sebastian "Men du Pixie..."
+		Pixie "Ja?"
+		GOTO AGAIN
+
+	"Tror du att jag också skulle kunna jobba med dig där i källaren?":
+		[HMM_YOU]
+		Pixie "Du?"
+		Pixie "Jag tänkte mig inte dig som en person som är intresserad av sånt"
+		Pixie "Vet du ens vad vi håller på med där?"
+
+		CHOICE {
+			"Det är något med datorer va?":
+				Pixie "Haha, jo typ"
+
+			"Inte direkt, alla är ju så himla hemlighetsfulla":
+				[SECRETIVE]
+				Pixie "Ja, men det finns en anledning till det också"
+				Pixie "Du får inte hålla på och prata med andra människor om de saker du har sett Sebastian"
+				Pixie "Lova!"
+				CHOICE {
+					"Ja, självklart":
+					"Mm ska försöka":
+						Pixie "Du måste, annars kan vi inte vara vänner"
+				}
+				CHOICE {
+					"Men det skulle inte gå att få hjälpa till lite där eller?":
+					"Men ok, jag ska inte rota mer i det där. Ursäkta att jag tog upp det":
+						Pixie "Nej nej, det är intressanta saker att diskutera"
+						Pixie "Vi måste bara vara försiktiga med vilka vi pratar med"
+						CHOICE {
+							"Jaha":
+							"Jo det förstår jag":
+						}
+						Pixie "Alla där i källaren riskerar mycket bara genom att vistas där"
+						Pixie "Men de drivs av att vilja förbättra världen"
+						Pixie "Och en fascination för tekniken såklart"
+				}
+		}
+		Pixie "Kan du något om sådana grejer? Programmering och så vidare"
+		CHOICE {
+			"Njae, inte direkt":
+				Pixie "Ok"
+			"Jag har gått en datakurs en gång":
+				Pixie "Ok, det vet jag inte hur långt du kommer på"
+			"Ja, jag är lite av en expert skulle jag nog vilja säga":
+				Pixie "Verkligen?!"
+		}
+		Pixie "Om du är seriös på riktigt med det där..."
+		Pixie "Så får du komma till The Lodge och be att få göra intagningsprovet"
+		[DO_THE_TEST]
+		Pixie.SetKnowledge(SebastianWantsToBeHacker)
+		CHOICE {
+			"The Lodge?":
+				Pixie "Ja, där vi sitter"
+				CHOICE {
+					"Ok":
+					"Konstigt namn":
+						Pixie "Du kan vara konstig"
+					"Någon som tittat för mycket på Twin Peaks?":
+						Pixie "Vad är det för något?"
+						Sebastian "Äsch, strunt samma"
+						Sebastian "Ni kanske inte har samma tv-kanaler här"
+				}
+				GOTO DO_THE_TEST
+			"Är det ett svårt prov?":
+				Pixie "Beror på hur bra man är"
+
+			"Jag hatar prov":
+				Pixie "Haha, jag med!"
+				Pixie "Men det är så Yulian har bestämt i alla fall"
+		}
+		Pixie "Men nu kan vi inte snacka mer om de här grejerna så här öppet"
+		CHOICE {
+			"Nej, ok. Ska försöka sälja lite läsk nu tror jag":
+				Pixie "Låter bra, vi ses"
+			"Jaha nej det är klart. Ska gå och fixa en grej ändå":
+				Pixie "OK, ses senare"
+		}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+
+# later #
+
+
+[MORE]
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Sebastian "Pixie!"
+
+CHOICE {
+	"Snygg klänning det där förresten":
+		Pixie "Å, tack Sebastian!"
+
+	"Känner du Hank på hotellet?":
+		Pixie "Vaktisen?"
+		Pixie "Haha, jag var dökär i honom när jag var liten"
+		Pixie "Han bodde i lägenheten mitt emot"
+		Pixie "Men det var länge sedan jag såg honom nu"
+		Pixie "Verkar han må bra?"
+		CHOICE {
+			"Jodå, det tror jag":
+				Pixie "Härligt att höra!"
+			"Han verkar lite stressad":
+				Pixie "Vem är inte det? Haha"
+		}
+
+	"Ska gå och försöka sälja lite mer läsk nu":
+		Pixie "Ja, gör så"
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+GOTO MORE

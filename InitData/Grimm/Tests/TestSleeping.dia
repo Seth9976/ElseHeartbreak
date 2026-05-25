@@ -1,0 +1,7 @@
+
+Sebastian.Pos(MysticalCube2)
+
+Bob.StartLogging()
+Bob.SetTimetable("SleepTest2")
+Bob.Pos(Testing_Trigger_2)
+Bob.SetFieldToFloat("sleepiness", 200)

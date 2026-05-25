@@ -1,0 +1,12 @@
+
+HarborNorth_DoorToRadioStation.UnlockDoor()
+
+LISTEN FindTheRedBag {
+    Story("TheRedBag")
+}
+
+WAIT IsHour(16) {
+    Story(ClubDotGig1)
+}
+
+LISTEN Forever

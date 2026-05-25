@@ -1,0 +1,11 @@
+01:30 - 07:00 _ Sleep PoliceOffice_Exterior_Poor_Bed_Poor_Madrass_1
+07:00 - 12:00 _ Sit PoliceOffice_Exterior_SofaSeat_5
+12:00 - 15:00 _ BeInRoom Hospital_Exterior
+15:00 - 01:30 _ Sit PoliceOffice_Exterior_SofaSeat_5
+
+[LarsVisitCafe]
+07:00 - 12:00 _ BeInRoom Cafe_Exterior
+12:00 - 14:00 _ Sit Cafe_Exterior_SofaSeat_2
+14:00 - 21:00 _ BeInRoom Cafe_Exterior
+21:00 - 00:00 _ BeInRoom Cafe_Room1
+00:00 - 07:00 _ Sleep PoliceOffice_Exterior_Poor_Bed_Poor_Madrass_1

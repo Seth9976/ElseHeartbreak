@@ -1,0 +1,6 @@
+
+Log("Sebastian has reached the internet!")
+
+RunMasterProgramOnAllComputersInRoom(Internet)
+
+START DetectHeartExplosion

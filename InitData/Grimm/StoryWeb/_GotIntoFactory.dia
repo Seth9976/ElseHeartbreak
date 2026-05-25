@@ -1,0 +1,7 @@
+
+STOP Pixie_FactoryMission
+Pixie.SetTimetable(Pixie)
+
+WAIT 5
+Driver.SetTimetable("")
+Driver.Pos(HomeApartment_Point)

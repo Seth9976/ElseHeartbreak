@@ -1,0 +1,94 @@
+
+FOCUS
+Petra.StartTalking()
+
+CHOICE {
+	"Hej Petra!":
+	"Tjena, dig känner jag igen":
+}
+
+Petra "Tja Sebastian"
+Petra "Hur är läget?"
+CHOICE {
+	"Det är bra":
+		Petra "Härligt"
+		CHOICE {
+			"Hur är det med dig?":
+				Petra "Jag är lite seg..."
+			"Jag är bara så trött på mitt jobb":
+				Sebastian "Det är sjukt tråkigt"
+				Petra "Ja, jag förstår"
+		}
+	"Jo det är ok":
+		Petra "Samma här"
+	"Jag är jäkligt stressad faktiskt":
+		Petra "Å nej, varför det?"
+		CHOICE {
+			"Det är det här med försäljningen":
+				Petra "Går det inte bra?"
+				CHOICE {
+					"Nej det går åt skogen":
+						Sebastian "Jag är nog inte så bra på mitt jobb"
+					"Jo det går OK men det är så tråkigt bara":
+				}
+				Petra "Mm, jag känner igen känslan"
+
+			"Mycket att stå i bara...":
+				Petra "Ja, det är det jobbiga med att bli vuxen"
+				Petra "När man var barn så hade man så sjukt mycket tid"
+				Petra "Nu är det bara massa måsten hela tiden"
+				CHOICE {
+					"Tycker du?":
+						Petra "Ja, så är det"
+					"Ja, exakt... usch":
+				}
+		}
+}
+Petra "Men du! Vi ska ha fest ikväll"
+Petra "Du borde verkligen komma"
+CHOICE {
+	"Låter kul!":
+		Petra "Ja, det kommer att bli gryyymt"
+	"Jag vet inte om jag orkar... måste sälja massa mer burkar":
+		Petra "Äsch, strunt i det nu."
+		Petra "Du kan ta det imorgon, det här kommer att bli en riktigt bra kväll tror jag"
+		CHOICE {
+			"Hmm... ok då":
+				Petra "Perfekt!"
+			"Njae men ärligt alltså, jag ligger efter jättemycket":
+				Petra "Men kom igen..!"
+				Petra "Du kan ju inte jobba hela dagarna, det är ju fan olagligt"
+				Sebastian "Mm ok då..."
+				Petra "Yay!"
+		}
+}
+Petra "OK, så vi ska vara hemma hos mig"
+Petra "...du vet var jag bor väl?"	
+CHOICE {
+	"Nej":
+	"Njae..":
+	"Jo, tror det":
+}
+Petra "OK, så jag bor i The Burrows, mitt i stan."
+CHOICE {
+	"OK":
+	"Hmm det vet jag inte om jag vet var det är":
+}
+Petra "Det är nära skoaffären om du vet var den ligger?"
+CHOICE {
+	"Ja!":
+	"Hmm, kanske...":
+		Petra "OK, du får fråga någon i värsta fall"
+}
+Petra "Sedan är det bara att ringa på vid hus nr 2"
+CHOICE {
+	"OK, hus nr 2":
+	"Japp, ska försöka":
+	"OK låter inte så svårt":
+}
+Petra "OK, fett! Då ses vi sen då!"
+Sebastian "Ja!"
+START YouShouldTryToo
+
+Petra.StopTalking()
+DEFOCUS

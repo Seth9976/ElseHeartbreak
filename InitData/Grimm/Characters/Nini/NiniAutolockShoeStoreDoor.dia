@@ -1,0 +1,24 @@
+
+[AGAIN]
+
+WAIT IsHour(06)
+Log("Unlocking shoestore extra early (at 6)")
+UnlockDoor(Door_Burrows_ToTheLodge)
+
+WAIT IsHour(07)
+Log("Unlocking shoestore (at 7)")
+UnlockDoor(Door_Burrows_ToTheLodge)
+
+WAIT IsHour(08)
+Log("Unlocking shoestore one more time (at 8)")
+UnlockDoor(Door_Burrows_ToTheLodge)
+
+WAIT IsHour(09)
+Log("Unlocking shoestore one more more time (at 9)")
+UnlockDoor(Door_Burrows_ToTheLodge)
+
+WAIT IsHour(22)
+Log("Locking shoestore")
+LockDoor(Door_Burrows_ToTheLodge)
+
+GOTO AGAIN

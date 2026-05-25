@@ -1,0 +1,15 @@
+Sebastian.PutIntoInventory(SebastianCreditCard)
+Sebastian.StartWaitForGift()
+RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 565)
+
+#Sebastian.SetNeverGetsTired(true) # <- Cheaty
+
+START SebastianInspectsFuseboxes
+START SebastianTurnsOffSink
+START SebastianInspectsFountains
+START SebastianInspectsTrashCans
+START BrokenFusebox
+START SebastianFindsPandaCollective
+START SometimesPeopleDrinkSoda
+START DetectCrimes
+START DetectCasinoHacking

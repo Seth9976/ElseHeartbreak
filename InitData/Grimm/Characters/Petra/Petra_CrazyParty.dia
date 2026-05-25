@@ -1,0 +1,93 @@
+
+LISTEN Sebastian_talk_Petra [PRE_TALK_IN_ROOM] {
+    FOCUS
+    Petra.StartTalking()
+    Petra "Hej Sebastian!"
+    Petra "Kul att du hittade hit"
+    Petra "Pixie kommer vid sju-åtta tror jag"
+    CHOICE {
+        "OK, cool":
+        "Aha...":
+        "Jag kollar in din lägenhet så länge då!":
+            Petra "Javisst, känn dig som hemma"
+    }
+    Petra.StopTalking()
+    DEFOCUS
+    LISTEN Sebastian_talk_Petra
+    Petra "Ta en öl om du vill"
+}
+
+LISTEN RealPartyHasStarted {
+    # när Pixie kommer till festen och säger hej till en
+    CANCEL PRE_TALK_IN_ROOM
+}
+
+
+LISTEN RoamingPartyStarted
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+
+CHOICE {
+    "Fin lägenhet du har!":
+        Petra "Tack Sebastian!"
+        Petra "Jag gillar den verkligen"
+        Petra "Fick den för ett jättebra pris"
+        Petra "Trots läget, det är ju väldigt centralt"
+        CHOICE {
+            "Jaha, vad bra!":
+            "OK":
+        }
+        Petra "Tydligen inte så många som vill bo här"
+        Petra "Vet inte varför... jag trivs jättebra"
+        CHOICE {
+            "Härligt":
+            "Ja, det verkar ju toppen":
+            "Skumt..?":
+                Petra "Det var en granne som pratade om spöken"
+                Petra "Men sånt tror inte jag på!"
+                CHOICE {
+                    "Läskigt!":
+                    "Nä, haha":
+                }
+        }
+
+    "Usch... jag är sömnig":
+        Petra "Ta en kaffe kanske?"
+        Petra "Jag vet inte om jag har någon, du får kolla i köket"
+        CHOICE {
+            "Äsch, jag ska nog gå hem":
+                Petra "OK, trist!"
+                Petra "Men ja, de flesta jobbar väl imorgon..."
+                Petra "Så vi håller nog inte på så länge till här"
+            "OK, tack!":
+        }
+
+    "Hur blir man DJ egentligen?":
+        Petra "Jag köpte några skivspelare och började träna hemma på egen hand"
+        Petra "Man måste framförallt ha bra musiksmak så klart"
+        Petra "Och kunna känna av dansgolvet"
+        CHOICE {
+            "Hur gör man det?":
+                Petra "Jag vet inte, det är väl en träningssak"
+                Petra "Och så märker man ju vilka låtar som går hem"
+                Petra "Ibland önskar jag att gästerna på Yvonne var lite mer varierade i sin smak... hehe"
+                CHOICE {
+                    "OK":
+                    "Jaha, heh":
+                    "Mm":
+                }
+
+            "Ja, du verkar bra på det!":
+                Petra "Tack!"
+                Petra "Man försöker ju göra sitt bästa"
+        }
+}
+
+Petra.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

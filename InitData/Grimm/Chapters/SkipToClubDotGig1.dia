@@ -1,0 +1,37 @@
+
+# När man har blivit bjuden på DJ-spelning i Club Dot av Pixie sin andra kväll i Dorisburg
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+Story("FirstDay")
+Story("CanSellSoda")
+Story("ClubDotMorning")
+Story("ClubDotGig1")
+
+
+SetHour(19)
+
+Sebastian.Pos(Mines_ClubDot_Point)
+#Sebastian.Pos(Mines_Entry_Trigger_1)
+
+Pixie.Pos(Mines_ClubDot_PixiePoint)
+Frank.Pos(Mines_ClubDot_PixiePoint)
+Bob.Pos(Mines_ClubDot_Point)
+Urban.Pos(Mines_ClubDot_Point)
+Jorgen.Pos(Mines_Entry_Trigger_1)
+
+Panda3.Pos(Mines_Entry_Trigger_1)
+WAIT 2
+Panda4.Pos(Mines_Entry_Trigger_1)
+WAIT 2
+Panda5.Pos(Mines_Entry_Trigger_1)
+
+
+# Three different things can happen:
+
+# 1. Sebastian gets drunk and dozes off
+# 2. He leaves the party
+# 3. He never shows up
+
+

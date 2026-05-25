@@ -1,0 +1,14 @@
+
+Amanda.SetTimetable(AmandaTopfloor)
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Amanda
+
+Amanda "Du jag är riktigt stressad just nu, har inte riktigt lust att prata"
+
+LISTEN Sebastian_talk_Amanda
+
+Amanda "Sorry, jag orkar inte prata mer"
+
+GOTO AGAIN

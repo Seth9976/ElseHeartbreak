@@ -1,0 +1,28 @@
+
+IF Sebastian.IsSleepingOnGround() {
+    # lars will take care of it?
+    Log("SLEEPING ON GROUND, WILL NOT DREAM ABOUT PIXIE")
+    Story("TryFindLodge")
+}
+ELSE {
+    IF Sebastian.IsInRoom(PoliceOffice_Exterior) {
+        Log("IN POLICE OFFICE EXT, WILL NOT DREAM ABOUT PIXIE")
+        Story("TryFindLodge")
+    }
+    ELSE {
+        Story("VisionaryDream")
+    }
+
+#    ELIF Sebastian.IsInRoom(HarborNorth) {
+#        Log("IN HARBOR NORTH, WILL NOT DREAM ABOUT PIXIE")
+#        Story("TryFindLodge")
+#    } 
+#    ELIF Sebastian.IsInEitherRoom(RadioStation, RadioStationToilet, RadioStationElevator) {
+#        Log("IN RADIO STATION ROOM, WILL NOT DREAM ABOUT PIXIE")
+#        Story("TryFindLodge")
+#    } 
+    
+}
+
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+Hotel_Corridor_Door1.UnlockDoor()

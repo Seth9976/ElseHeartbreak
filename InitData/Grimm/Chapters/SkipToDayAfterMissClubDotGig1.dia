@@ -1,0 +1,15 @@
+
+Story("FirstDay")
+Story("CanSellSoda")
+Story("ClubDotGig1")
+Story("EndOfDotGig1")
+
+Sebastian.Pos(Plaza_Point)
+
+SetHour(18)
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+WAIT 5
+Pixie.Pos(Plaza_Point)

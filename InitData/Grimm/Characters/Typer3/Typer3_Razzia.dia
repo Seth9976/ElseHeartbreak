@@ -1,0 +1,17 @@
+
+Typer3.SetTimetable(Typer3_Razzia)
+
+LISTEN Sebastian_talk_Typer3
+FOCUS
+Typer3.StartTalking()
+
+CHOICE {
+    "Hejsan, vad gör alla ni här?":
+        Typer3 "Rutinkontroll"
+
+    "Är det något problem?":
+        Typer3 "Nej, rutinkontroll"
+}
+
+Typer3.StopTalking()
+DEFOCUS

@@ -1,0 +1,91 @@
+
+LISTEN Sebastian_talk_WellspringRepresentant
+FOCUS
+WellspringRepresentant.StartTalking()
+
+IF WellspringRepresentant.HasKnowledge(WillShowStorageLater) {
+    WellspringRepresentant "Hej, du igen?"
+    [MORE]
+    CHOICE {
+        "Kan jag få börja jobba hos er nu?":
+            WellspringRepresentant "Ah just det..."
+            WellspringRepresentant "Ett litet problem där"
+            WellspringRepresentant "Det verkar som att du fått sparken"
+            CHOICE {
+                "Va?!":
+                "Å nej...":
+            }
+            WellspringRepresentant "Ja, lite jobbigt"
+            WellspringRepresentant "Du visade inte tillräckligt engagemang tyckte chefen"
+            WellspringRepresentant "Så de har tillsatt en annan"
+            CHOICE {
+                "Fan":
+                "Jaha... vad ska jag göra nu då?!":
+                    WellspringRepresentant "Jag vet inte riktigt..."
+            }
+            WellspringRepresentant "Ta hand om dig"
+
+        "Läget?":
+            WellspringRepresentant "Det är bra, säljer mycket nu"
+            GOTO MORE
+    }
+}
+ELSE {
+    [MORE]
+    CHOICE {
+        "Vad gör du?": 
+            WellspringRepresentant "Säljer läsk, jag är Wellsprings bäste försäljare här i staden"
+            Sebastian "Jag ska också jobba som försäljare!"
+            WellspringRepresentant "Ska du?"
+            WellspringRepresentant "Jag visade just en ny kille vårat lager"
+            CHOICE {
+                "OK?":
+                "Va?! Men jag skulle ju få jobbet":
+            }
+            WellspringRepresentant "Ta det lugnt"
+            WellspringRepresentant "Det där vet jag inget om"
+            WellspringRepresentant "Måste jobba vidare nu, ha det"
+
+        "Känner du någon som heter Pixie?":
+            WellspringRepresentant "Nej, tyvärr"
+            WellspringRepresentant "Jag jobbar mest så jag har inte tid att träffa folk"
+            GOTO MORE
+    }
+}
+
+[END]
+WellspringRepresentant.StopTalking()
+DEFOCUS
+
+[SMALLTALK]
+LISTEN Sebastian_talk_WellspringRepresentant
+FOCUS
+WellspringRepresentant.StartTalking()
+
+CHOICE {
+    "Hur går det med läskförsäljningen?":
+        WellspringRepresentant "Jodå, det går riktigt bra"
+
+    "Alltså snälla... kan jag inte få börja jobba hos er?":
+        WellspringRepresentant "Det där får du ta med chefen"
+        CHOICE {
+            "Var kan jag få tag på honom?":
+                WellspringRepresentant "Öh... vet inte"
+                WellspringRepresentant "Han ringer väl ibland"
+            "OK...":
+        }
+
+    "Vad ska jag ta mig till nu, jag har ju inga pengar!":
+        WellspringRepresentant "Jag vet inte, det där är inte mitt problem"
+        CHOICE {
+            "Jag kanske bara borde åka hem igen...":
+                WellspringRepresentant "Ja, kanske"
+
+            "Vet du om det finns några fler jobb här i stan?":
+                WellspringRepresentant "Nej, det har jag inte hört något om"
+        }
+}
+
+WellspringRepresentant.StopTalking()
+DEFOCUS
+GOTO SMALLTALK

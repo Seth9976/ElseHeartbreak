@@ -1,0 +1,10 @@
+
+LISTEN LetsDoTheHeist {
+	Story("GamblingTonight")
+}
+
+LISTEN LetsNotDoTheHeist {
+	Story("MissedCasino")
+}
+
+LISTEN DontStop

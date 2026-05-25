@@ -1,0 +1,293 @@
+WAIT 7
+Sebastian.Pos(HarborEast_Point)
+WAIT 7
+Sebastian.Pos(TouristOffice_GuestPoint)
+WAIT 7
+Sebastian.Pos(HarborNorth_Point)
+WAIT 7
+Sebastian.Pos(HarborWest_Point)
+WAIT 7
+Sebastian.Pos(SodaStorage_Point)
+WAIT 7
+Sebastian.Pos(Gunnar_Point)
+WAIT 7
+Sebastian.Pos(Hut_Point1)
+WAIT 7
+Sebastian.Pos(HarborWest_Trigger_2)
+WAIT 7
+Sebastian.Pos(HarborSouth_Trigger_1)
+WAIT 7
+Sebastian.Pos(HarbSouthSewer2_Trigger_1)
+WAIT 7
+Sebastian.Pos(HarbSouthTower_Trigger_1)
+WAIT 7
+Sebastian.Pos(FancyHouse1_Point)
+WAIT 7
+Sebastian.CarefulPos(FerryCabinBed)
+WAIT 7
+Sebastian.Pos(FerryCabin_Trigger_1)
+WAIT 7
+Sebastian.Pos(RadioStation_Point)
+WAIT 7
+Sebastian.Pos(RadioStationEntry_Trigger_1)
+WAIT 7
+Sebastian.Pos(RadioStationElevator_Trigger_1)
+WAIT 7
+Sebastian.Pos(Hotel_Exterior_Point)
+WAIT 7
+Sebastian.Pos(Hotel_Lobby_Point)
+WAIT 7
+Sebastian.Pos(Hotel_Diner_Point)
+WAIT 7
+Sebastian.Pos(Hotel_Room1_Point)
+WAIT 7
+Sebastian.Pos(Hotel_Room4_Point)
+WAIT 7
+Sebastian.Pos(GermanGuyBreakfastPosition)
+WAIT 7
+Sebastian.Pos(Hotel_Corridor_Point)
+WAIT 7
+Sebastian.Pos(Hotel_Exterior_RoofPoint)
+WAIT 7
+Sebastian.Pos(HankSpawnPoint)
+WAIT 7
+Sebastian.Pos(HanksApartment_Point)
+WAIT 7
+Sebastian.Pos(Hotel_Basement_StartPosition)
+WAIT 7
+Sebastian.Pos(Hotel_Office_Point1)
+WAIT 7
+Sebastian.Pos(Hotel_LeftSuite_Point1)
+WAIT 7
+Sebastian.Pos(Hotel_RightSuite_Point1)
+WAIT 7
+Sebastian.Pos(Hotel_Bathroom_Point1)
+WAIT 7
+Sebastian.Pos(StationNorth_Point)
+WAIT 7
+Sebastian.Pos(StationNorth_DangerPoint)
+WAIT 7
+Sebastian.Pos(RentingApartmentsLobby_Trigger_1)
+WAIT 7
+Sebastian.Pos(Plaza_Point)
+WAIT 7
+Sebastian.Pos(Plaza_SeasidePoint)
+WAIT 7
+Sebastian.Pos(PlazaBacktreet_Point1)
+WAIT 7
+Sebastian.Pos(BarYvonne_Point3)
+WAIT 7
+Sebastian.Pos(BarYvonne_PixiePoint)
+WAIT 7
+Sebastian.Pos(BarYvonne_DancePoint4)
+WAIT 7
+Sebastian.Pos(PixiesApartment_Point)
+WAIT 7
+Sebastian.Pos(Cafe_Exterior_Point)
+WAIT 7
+Sebastian.Pos(Cafe_Room1_Point)
+WAIT 7
+Sebastian.Pos(TouristGirlApartment_Trigger_1)
+WAIT 7
+Sebastian.Pos(FelixApartment_Point1)
+WAIT 7
+Sebastian.Pos(OutsideFelixApartment_Point1)
+WAIT 7
+Sebastian.Pos(Burrows_North_Point)
+WAIT 7
+Sebastian.Pos(MonadsApartment_Point1)
+WAIT 7
+Sebastian.Pos(PetrasApartmentPoint1)
+WAIT 7
+Sebastian.Pos(DorisGardens_East_Trigger_1)
+WAIT 7
+Sebastian.Pos(DorisGardens_West_Trigger_1)
+WAIT 7
+Sebastian.Pos(DorisGardens_West_GardenBoxComputer1_1)
+WAIT 7
+Sebastian.Pos(BlaKnutenRoom1_Trigger_1)
+WAIT 7
+Sebastian.Pos(LongsonApartment_Trigger_1)
+WAIT 7
+Sebastian.Pos(LongsonApartment_Trigger_2)
+WAIT 7
+Sebastian.Pos(TownHall_Trigger_1)
+WAIT 7
+Sebastian.Pos(ShoeStore_Point)
+WAIT 7
+Sebastian.Pos(TinyBarn_Point)
+WAIT 7
+Sebastian.Pos(DorianApartment_Trigger_1)
+WAIT 7
+Sebastian.Pos(Tram_Interior_Point)
+WAIT 7
+Sebastian.Pos(Tram_Interior2_Trigger_1)
+WAIT 7
+Sebastian.Pos(Tram_Interior3_Trigger_1)
+WAIT 7
+Sebastian.Pos(Tram_Interior4_Trigger_1)
+WAIT 7
+Sebastian.Pos(TramTesting_Trigger_1)
+WAIT 7
+Sebastian.Pos(PoliceOffice_Exterior_Trigger_2)
+WAIT 7
+Sebastian.Pos(PoliceOfficeInterior_Trigger_1)
+WAIT 7
+Sebastian.Pos(Mines_ClubDot_Point)
+WAIT 7
+Sebastian.Pos(Mines_ClubDot_ArcadePoint)
+WAIT 7
+Sebastian.Pos(Mines_Entry_DriverPoint)
+WAIT 7
+Sebastian.Pos(Mines_Entry_Trigger_1)
+WAIT 7
+Sebastian.Pos(Lodge_FirstCorridor_Point)
+WAIT 7
+Sebastian.Pos(Lodge_Entry_Point1)
+WAIT 7
+Sebastian.Pos(Lodge_Room1_Point1)
+WAIT 7
+Sebastian.Pos(Lodge_Room1_Point2)
+WAIT 7
+Sebastian.Pos(Lodge_Room2_Point)
+WAIT 7
+Sebastian.Pos(Lodge_Underwater_Point2)
+WAIT 7
+Sebastian.Pos(Lodge_Room1_FrankPoint)
+WAIT 7
+Sebastian.Pos(Frank_Room_Trigger_1)
+WAIT 7
+Sebastian.Pos(BurrowsNorth_OutsideMinistryPoint)
+WAIT 7
+Sebastian.Pos(Ministry_Exterior_Trigger_1)
+WAIT 7
+Sebastian.Pos(Ministry_Lobby_Point1)
+WAIT 7
+Sebastian.Pos(Ministry_Lobby_Point2)
+WAIT 7
+Sebastian.Pos(Ministry_Elevator1_Point)
+WAIT 7
+Sebastian.Pos(Ministry_Elevator4_Point1)
+WAIT 7
+Sebastian.Pos(Ministry_CorridorLevel1_Point)
+WAIT 7
+Sebastian.Pos(Ministry_CorridorLevel2a_Point)
+WAIT 7
+Sebastian.Pos(Ministry_ExperimentHall_Trigger_1)
+WAIT 7
+Sebastian.Pos(Ministry_MonadsOffice_Point1)
+WAIT 7
+Sebastian.Pos(Ministry_ChamberOfNumbers_Point)
+WAIT 7
+Sebastian.Pos(Ministry_CorridorLevel1_Point2)
+WAIT 7
+Sebastian.Pos(Ministry_ChamberOfNumbers_TramComputerPoint)
+WAIT 7
+Sebastian.Pos(Ministry_ChamberOfNumbers_Point1)
+WAIT 7
+Sebastian.Pos(Ministry_MeetingRoom_Point)
+WAIT 7
+Sebastian.Pos(Ministry_Offices1_Trigger_1)
+WAIT 7
+Sebastian.Pos(Ministry_Offices2_Trigger_1)
+WAIT 7
+Sebastian.Pos(Ministry_Offices3_Trigger_1)
+WAIT 7
+Sebastian.Pos(Ministry_Offices4_Trigger_1)
+WAIT 7
+Sebastian.Pos(FinanceCentre_ComputerRoom_Point)
+WAIT 7
+Sebastian.Pos(Casino_Exterior_PointOnGround)
+WAIT 7
+Sebastian.Pos(Casino_Floor1_CagePoint)
+WAIT 7
+Sebastian.Pos(Casino_Floor1_Point)
+WAIT 7
+Sebastian.Pos(Casino_Exterior_TopRoofPoint)
+WAIT 7
+Sebastian.Pos(Casino_Exterior_TopRoofPoint2)
+WAIT 7
+Sebastian.Pos(Casino_Floor2_Point)
+WAIT 7
+Sebastian.Pos(PoorDesolateBuilding1_Exterior_FrontTrigger)
+WAIT 7
+Sebastian.Pos(PoorDesolateBuilding1_Corridor_Point)
+WAIT 7
+Sebastian.Pos(PoorDesolateBuilding1_HackerRoom_Point)
+WAIT 7
+Sebastian.Pos(BobSchack_Trigger_1)
+WAIT 7
+Sebastian.Pos(ArcadeHall_Trigger_1)
+WAIT 7
+Sebastian.Pos(Factory_Exterior_Point1)
+WAIT 7
+Sebastian.Pos(Factory_Exterior_TrashPilePoint)
+WAIT 7
+Sebastian.Pos(Factory_Floor1_Point1)
+WAIT 7
+Sebastian.Pos(Factory_Floor2_Point)
+WAIT 7
+Sebastian.Pos(Factory_Lobby_Point1)
+WAIT 7
+Sebastian.Pos(Factory_Lobby_Point2)
+WAIT 7
+Sebastian.Pos(Factory_Lobby_Point3)
+WAIT 7
+Sebastian.Pos(Factory_Office_Point1)
+WAIT 7
+Sebastian.Pos(Factory_ServerRoom_Trigger_1)
+WAIT 7
+Sebastian.Pos(Hospital_Exterior_Point)
+WAIT 7
+Sebastian.Pos(PandaApartment_Trigger_1)
+WAIT 7
+Sebastian.Pos(TowerApartmentsLobby_Trigger_1)
+WAIT 7
+Sebastian.Pos(DreamForest_Point1)
+WAIT 7
+Sebastian.Pos(SebastiansApartment_Point)
+WAIT 7
+Sebastian.Pos(HomeApartment_Point)
+WAIT 7
+Sebastian.Pos(MineCart_Interior_Trigger_1)
+WAIT 7
+Sebastian.Pos(NickeRoom_Trigger_1)
+WAIT 7
+Sebastian.Pos(Internet_Point)
+WAIT 7
+Sebastian.Pos(Internet_Trigger_2)
+WAIT 7
+Sebastian.Pos(Internet_FuseBox_1)
+WAIT 7
+Sebastian.Pos(Internet_Trigger_1)
+WAIT 7
+Sebastian.Interact(Internet_Heart_Analyzer)
+WAIT 7
+Sebastian.Pos(Testing_Trigger_1)
+WAIT 7
+Sebastian.Pos(Testing_Trigger_2)
+WAIT 7
+Sebastian.Pos(Testing_Trigger_3)
+WAIT 7
+Sebastian.Pos(MysticalCube2)
+WAIT 7
+Sebastian.Pos(Testing_Chair2_1)
+WAIT 7
+Sebastian.Pos(Beer_Testroom_2)
+WAIT 7
+Sebastian.Pos(Testing_Beer_1)
+WAIT 7
+Sebastian.Pos(Foley_Point2)
+WAIT 7
+Sebastian.Pos(NickeRoom_Trigger_1)
+WAIT 7
+Sebastian.Pos(Testing3_Trigger_1)
+WAIT 7
+Sebastian.Pos(Testing4_Trigger_1)
+WAIT 7
+Sebastian.Pos(CharacterRoom_Point)
+WAIT 7
+Sebastian.Pos(Testing_Poor_Bed_Poor_Bed_5)
+WAIT 7
+Sebastian.Pos(SecretArcade_Poor_Toilet_Poor_Toilet_1)
+WAIT 7

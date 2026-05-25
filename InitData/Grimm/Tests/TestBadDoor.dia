@@ -1,0 +1,3 @@
+Sebastian.Pos(Hotel_Room1_Point)
+Hotel_Room1_Door1.SetCode(BadDoorCode)
+Frank.Pos(Sebastian)

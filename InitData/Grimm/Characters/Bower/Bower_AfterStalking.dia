@@ -1,0 +1,39 @@
+
+LISTEN Sebastian_talk_Bower
+
+FOCUS
+Bower.StartTalking()
+Bower "Jag har lite bråttom, var det något viktigt?"
+
+CHOICE {
+	"Ehm... nej ursäkta att jag störde":
+
+	"Jobbar du på Ministeriet?":
+		Bower "Nej"
+		CHOICE {
+			"OK":
+			"Jag tycker att jag sett dig där":
+				Bower "Jaha?"
+				Bower "Sluta snoka runt grabben"
+		}
+
+	"Snygg kostym":
+		Bower "Ja"
+		CHOICE {
+			"Var den dyr?":
+				Bower "Ja"
+			"Man brukar säga tack":
+				Bower "Tack"
+		}
+}
+
+Bower "Adjö"
+Bower.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Bower
+Bower "Hmph"
+LISTEN Sebastian_talk_Bower
+Bower "Jag har inte tid"
+LISTEN Sebastian_talk_Bower
+Bower "Sluta stör mig"

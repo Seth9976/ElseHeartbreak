@@ -1,0 +1,361 @@
+
+Pixie.SetTimetable("")
+
+WAIT Pixie.IsInRoom(Lodge_Underwater) AND Sebastian.IsInRoom(Lodge_Underwater)
+
+WAIT 2
+
+Pixie.StartTalking()
+#Pixie.CancelWalking()
+
+Sebastian "Det är väldigt fuktigt här"
+Pixie "Mm, vi är under floden nu"
+
+FOCUS
+[AGAIN]
+CHOICE {
+	"Vem är hon där borta?":
+		Pixie "Araki"
+		Sebastian.SetKnowledge(Araki)
+		Pixie "Stör henne inte i onödan"
+		Pixie "Kolla in den här grejen här borta istället"
+
+	"Jaha, vad konstigt":
+		Pixie "Tycker du du?"
+		Pixie "Du har väl sett att det går en kanal bredvid skoaffären?"
+		CHOICE {
+			"Ja just det":
+			"Nej det har jag inte tänkt på":
+				Pixie "Ok"
+		}
+		GOTO AGAIN
+
+	"Ok men men vad är provet nu då?":
+		Pixie "Kom med här ska du få se"
+
+	"[LET_ME_DO_TRIAL]":
+		DEFOCUS
+		GOTO LET_ME_DO_TRIAL
+
+	"[BRAVO]":
+		DEFOCUS
+		GOTO BRAVO
+}
+DEFOCUS
+
+Pixie.Walk(Lodge_Underwater_FishgamePoint)
+
+WAIT 1
+WAIT Pixie.IsIdle()
+
+Pixie "Det här är vårt spel - Neptune"
+
+FOCUS
+[AGAIN2]
+CHOICE {
+	"Är det du som har hittat på det?":
+		Pixie "Nej, det är mest Araki som grejat med det"
+		Pixie "Hon gör olika experiment med artificiell intelligens"
+		CHOICE {
+			"Jag förstår...":
+			"Vad är det?":
+				Pixie "Hur man får datorer att bete sig som om de kunde tänka"
+		}
+		Pixie "Araki pratar jämt om hur hon 'skapar liv'"
+		CHOICE {
+			"Liv?":
+				Pixie "Ja, precis. Men du får snacka med henne någon annan gång"
+				Pixie "Nu ska vi spela det här"
+				GOTO THERE_IS_A_BUTTON
+
+			"Hur funkar spelet då?":
+				GOTO HOW_DOES_THE_GAME_WORK
+		}		
+	"OK, hur funkar det?":
+		[HOW_DOES_THE_GAME_WORK]
+		Pixie "Det är ganska simpelt"
+		[THERE_IS_A_BUTTON]
+		Pixie "Det finns en knapp här..."
+}
+Pixie.Interact(FishGameStartButton)
+Pixie "Om du trycker på den så startar spelet"
+Pixie "Din uppgift är att styra den gröna fisken"
+Pixie "Och samtidigt inte bli tagen av de röda"
+Pixie "Du behöver bara slå ut de tre rörliga fiskarna"
+Pixie "Grejerna i hörnen är bara prydnader"
+
+CHOICE {
+	"Hur många fiskar ska jag slå ut?":
+		Pixie "Eh, tre stycken är det va?"
+		Pixie "Ja – tre stycken"
+		Pixie "Och så hackar du fisken för att kontrollera hur den rör sig"
+		GOTO NO_RIGHTO
+
+	"Hur styr jag fisken?":
+		Pixie "Nu ska vi se hur det var..."
+		Pixie "Hmm, man ska väl hacka fisken"
+		[NO_RIGHTO]
+		WAIT 1
+		Pixie "Eller vänta!"
+		Pixie "Nej just det, du ska ju hacka startknappen här"
+		Pixie "Det är lite förvirrande, men så funkar det i alla fall"
+		[RULES]
+		CHOICE {
+			"Varför kan jag inte hacka fisken direkt?":
+				Pixie "Det är emot reglerna"
+				Pixie "Och då hade du kunnat hacka fienderna också"
+				Pixie "Så vi har satt ett staket runt!"
+				Pixie "Försök inte ta dig förbi staketet är du snäll"
+				GOTO RULES
+
+			"Vad kan jag göra med koden i knappen?":
+				Pixie "Å, det var så länge sen jag testade det här spelet..."
+				Pixie "Jag tror att du kan gå framåt eller svänga"
+				Pixie "Om du går på rutan där det står en pjäs så slår du ut den"
+				Pixie "Om fienderna lyckas gå på rutan där du står så blir du tagen"
+				Pixie "Du får kolla på koden och se om du förstår"
+				CHOICE {
+					"Ja, ok":
+					"Mm, vi får se":
+				}
+				GOTO LETS_DO_IT
+		}
+
+	"Så jag ska hacka fisken eller?":
+		Pixie "Ja precis"
+		Pixie "Fast vänta, hur var det nu"
+		Pixie "Hmm..."
+		GOTO NO_RIGHTO
+}
+[LETS_DO_IT]
+
+Pixie "Tror du att du kan klara det?"
+
+CHOICE {
+	"Eh, jag vet faktiskt inte...":
+	"Kanske!":
+	"Jo men det tror jag":
+}
+
+Pixie "Klart du gör!"
+Pixie "Säg till mig när du vill visa upp det du gjort"
+DEFOCUS
+
+Pixie.StopTalking()
+#Pixie.Walk(Lodge_Underwater_Point1)
+
+
+[LET_ME_DO_TRIAL]
+Pixie.SetTimetable(Pixie_Trial3)
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.SetTimetable("")
+Pixie "Färdig?"
+
+CHOICE ETERNAL {
+	"Ja":
+		DEFOCUS
+		GOTO CHECK_SOLUTION
+
+	"Nej":
+		DEFOCUS
+		GOTO LET_ME_DO_TRIAL
+
+	"Njae, jag undrar en grej om spelet":
+		Pixie "Ja?"
+		CHOICE ETERNAL {
+			"Vilka regler följer fiskarna?":
+				Pixie "Hmm..."
+				Pixie "De tar ett steg framåt varje tur, efter att din fisk flyttat"
+				Pixie "Om de slår i kanten så vänder de håll"
+
+			"Vad har jag för funktioner tillgängliga?":
+				Pixie "Jag tror att det är Right() och Left()"
+				Pixie "Och Forward()"
+				Pixie "Ja, och så Wait() om du bara vill stå still"
+				Pixie "Du kan ju alltid Reset:a koden om du känner att du trasslat till det..."
+				CHOICE ETERNAL {
+					"Ja, kanske måste göra det!":
+					"Nej usch vad jobbigt":
+					"Heh ja... tack för hjälpen i alla fall":
+				}
+
+			"Hur vinner man spelet nu igen?":
+				Pixie "Du slår ut de tre röda fiskarna"
+				Pixie "Genom att gå på deras rutor där de står"
+				Pixie "Om de går på din ruta är det kört!"
+				CHOICE {
+					"OK":
+					"Aha":
+				}
+		}
+		DEFOCUS
+		GOTO LET_ME_DO_TRIAL
+
+	"Jag är supertrött...":
+		Pixie "Ta en kaffe, det brukar hjälpa"
+		DEFOCUS
+		GOTO LET_ME_DO_TRIAL
+}
+
+Pixie.Walk(Lodge_Underwater_FishgamePoint)
+
+IF Pixie.HasKnowledge("TriesFishGame") {
+	Pixie "Ok, jag testar då!"
+} ELSE {
+	Pixie "Testar igen då..."
+}
+
+[CHECK_SOLUTION]
+Pixie.GetUpAndInteract(FishGameStartButton)
+
+IF Pixie.HasKnowledge("TriesFishGame") {
+	Pixie "Hoppas det går bättre nu!"
+} ELSE {
+	Pixie "Spännande det här..."
+}
+
+WAIT Pixie.IsIdle()
+WAIT 2
+
+
+
+[NO]
+LISTEN Sebastian_talk_Pixie [HELP_PIXIE] {
+	FOCUS
+	Pixie "Ja?"
+	CHOICE ETERNAL {
+		"Den funkar nog inte... får jag göra om lite?":
+			Pixie "Javisst"
+			[REDO]
+			DEFOCUS
+			Pixie.Walk(Lodge_Underwater_Point1)
+			WAIT Pixie.IsIdle()
+			GOTO LET_ME_DO_TRIAL
+
+		"Vad tror du?":
+			Pixie "Jag vet inte, vill du ändra på programmet?"
+			CHOICE ETERNAL {
+				"Ja tack":
+					Pixie "OK, inga problem"
+					GOTO REDO
+				"Nej... vi kan se om det går":
+					DEFOCUS
+					GOTO NO
+			}
+
+		"Det var inget":
+			DEFOCUS
+			GOTO NO
+	}
+	DEFOCUS
+}
+
+
+
+[OBSERVE]
+
+Pixie.SetKnowledge("TriesFishGame")
+
+#Log("Pixie observing fish game...")
+
+IF PlayerFish.IsPawnDead() {
+	#Log("PLAYER FISH DEAD")
+	CANCEL HELP_PIXIE
+	Pixie "Oj, din fisk dog visst..."
+	Pixie.Walk(Lodge_Underwater_Point1)
+	Pixie "Du får försöka igen"
+	GOTO LET_ME_DO_TRIAL
+} 
+ELIF PlayerFish.HasMadeMoreMovesThan(30) { # TODO! detect that the fish program has ended
+	#Log("PLAYER FISH 30 MOVES")
+	CANCEL HELP_PIXIE
+	Pixie "Hmm, den verkar ha stannat?"
+	Pixie.Walk(Lodge_Underwater_Point1)
+	Pixie "Testa igen!"
+	GOTO LET_ME_DO_TRIAL
+}
+ELIF PlayerFish.HasMadeMoreMovesThan(30) {
+	CANCEL HELP_PIXIE
+	Pixie "Det gick lite segt det här"
+	Pixie.Walk(Lodge_Underwater_Point1)
+	Pixie "Jag orkar inte kolla längre, skriv ett snabbare program"
+	GOTO LET_ME_DO_TRIAL
+} 
+ELSE {
+	#Log("Checking for win")
+	IF Lodge_Underwater_FishGameEvilFish_1.IsPawnDead() {
+		#Log("Evil fish 1 is dead!")
+		IF Lodge_Underwater_FishGameEvilFish_2.IsPawnDead() {
+			#Log("Evil fish 2 is dead!")
+			IF Lodge_Underwater_FishGameEvilFish_3.IsPawnDead() {
+				#Log("All fish are dead!")
+				GOTO BRAVO
+			}
+		}
+	}
+}
+
+#Log("Will wait...")
+WAIT 2
+#Log("GOTO OBSERVE")
+GOTO OBSERVE
+
+[BRAVO]
+CANCEL HELP_PIXIE
+WAIT Sebastian.IsWithinDistance(Pixie, 10)
+
+FOCUS
+Pixie.StartTalking()
+Pixie "Bravo!"
+Pixie "Du har klarat det sista testet!"
+Pixie.SetNeverGetsTired(false)
+Frank.SetNeverGetsTired(false)
+Yulian.SetNeverGetsTired(false)
+
+Sebastian.SetKnowledge("LodgeMember")
+
+CHOICE {
+	"Verkligen?":
+		Pixie "Japp"
+
+	"Oj det var ju inte så svårt":
+		Pixie "Nej... men du har ju i och för sig inte varit ute på något riktigt uppdrag"
+		Pixie "Då kan det bli betydligt svårare, lita på mig"
+}
+
+Pixie "Jag måste gå och ta en kaffe, du kan väl göra dig hemmastadd här nere så länge"
+Pixie "Och så kan du hämta ut din nyckel hos Yulian"
+
+CHOICE {
+	"Får jag en egen nyckel?!":
+		Pixie "Javisst"
+		Pixie "Eller jag tror det i alla fall..."
+	"Coolt, vi ses":
+}
+
+Pixie "Säg till mig när du känner dig redo att börja jobba på riktigt!"
+Pixie "L8rs"
+
+Yulian.StartTalking()
+Yulian.Pos(Lodge_Room2_OfficeChair_OfficeChair_1)
+Yulian.SetTimetable(Yulian_WorkOvertime)
+Yulian.SetFieldToFloat("sleepiness", 0)
+
+Pixie.StopTalking()
+Pixie.SetTimetable(PixieInteractYulian)
+
+WAIT 2
+DEFOCUS
+
+BROADCAST CompletedHackerTrial3
+
+WAIT Pixie.HasConversationTarget(Yulian)
+Pixie "Han klarade det"
+Yulian "Utmärkt, utmärkt"
+Yulian.StopTalking()
+BROADCAST PixieToldYulianAboutTrial
+
+Pixie.SetTimetable(Pixie_WorkLate)

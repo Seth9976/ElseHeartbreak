@@ -1,0 +1,24 @@
+
+Story("FirstDay")
+Story("CanSellSoda")
+Story("FoundLodge")
+Story("AfterStalking")
+Story("YouAreMemberNow")
+
+START GetHackdev
+
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+UnlockDoor(Lodge_Room1_DoorToRoom2)
+
+Story("FactoryMission")
+SetClock(01, 17, 00, 00)
+
+Pixie.Pos(Lodge_Room1_Point1)
+Sebastian.Pos(Lodge_Room1_Point2)
+#Sebastian.Pos(Factory_Floor1_Point1)
+#Sebastian.Pos(Factory_Lobby_Point2)
+
+LISTEN FOLLOW_ME
+Sebastian.Pos(Mines_Entry_Trigger_1)
+WAIT 5
+Pixie.Pos(Mines_Entry_Trigger_1)

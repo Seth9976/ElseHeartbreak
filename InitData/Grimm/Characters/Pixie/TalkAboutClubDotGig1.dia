@@ -1,0 +1,48 @@
+
+Log("<3")
+
+
+IF Pixie.HasKnowledge("TalkedAboutClubDotGig1") {
+	STOP
+}
+
+
+Log("<3 <3")
+
+FOCUS
+
+IF Pixie.HasKnowledge("SebastianVisitedClubDotGig1") {
+	Pixie "Vad tyckte du om festen på Club Dot då?"
+	CHOICE {
+		"Jo men det var kul...":
+			[GO_AGAIN_SOME_TIME]
+			Pixie "Ja? Vi får gå snart igen!"
+
+		"Lite för instensivt för min smak kanske":
+			Pixie "Haha, då har du inte sett någonting"
+			Pixie "Men det var en bra fest, verkligen"
+
+		"Det var jättetrevligt!":
+			GOTO GO_AGAIN_SOME_TIME
+	}
+}
+ELSE {
+	Pixie "Jag såg dig inte på Club Dot förresten, du kom inte eller?"
+	CHOICE {
+		"Jo, jag var där!":
+			Pixie "Verkligen?"
+
+		"Nej jag missade det":
+			Pixie "Tråkigt, det var ett riktigt bra party faktiskt"
+			CHOICE {
+				"Nästa gång kanske...":
+				"Hmm ok, ja vad synd då!":
+				"Jag fick förhinder":
+					Pixie "Mm? Ok"
+			}
+	}
+}
+
+Pixie.SetKnowledge("TalkedAboutClubDotGig1")
+
+#DEFOCUS

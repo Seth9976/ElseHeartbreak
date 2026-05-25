@@ -1,0 +1,464 @@
+
+Hank.SetTimetable("Hank_GuideToSecondLecture")
+
+WAIT Hank.IsInRoom(HanksApartment)
+Hank.SetTimetable("")
+Hank.GetUpAndInteract("HanksApartment_Point")
+
+FunnyButton.SetCodeAndRun("FunnyButton_ShowIf")
+
+WAIT Sebastian.IsInRoom(HanksApartment)
+
+Log("Time for lecture 2")
+WAIT Hank.IsIdle()
+Hank.Dir(RIGHT)
+
+IF Sebastian.IsWithinDistance(Hank, 5) {
+
+}
+ELSE {
+	Hank "Kommer du?"
+	WAIT Sebastian.IsWithinDistance(Hank, 5)
+}
+
+FOCUS
+Hank "Vad ska vi greja med idag tycker du?"
+
+CHOICE {
+	"Det vet väl inte jag":
+		Hank "Ok..."
+		Hank "Inte jag heller"
+
+	"Du får bestämma":
+
+
+	"Jag vill göra något som riktiga hackers gör":
+		Hank "Ok..?"
+		Hank "Jag vet inte riktigt vad du menar med hackers"
+
+	"[IF]":
+		GOTO SHOW_BUTTON
+
+	"[EXPLAIN_LOOPS]":
+		GOTO EXPLAIN_LOOPS
+}
+
+Hank "Hmm"
+Hank "Men vi kanske borde gå in på hur man använder 'if' ?"
+
+CHOICE {
+	"'if' ?":
+		Hank "Ja, det är extremt användbart i nästan alla program"
+		CHOICE {
+			"Ok?":
+
+			"Hur då?":
+
+			"Mer användbart än variabler?":
+				Hank "Jag tror det"
+		}
+
+	"Ja, vad är det?":
+
+	"Nej det kan jag redan, lär mig något svårt!":
+		Hank "Ok, ehm jag vet inte"
+		Hank "Kan du använda loopar?"
+		CHOICE {
+			"Ja":
+				Hank "Då tror jag inte att jag har så mycket att lära dig tyvärr"
+				CHOICE {
+					"Inte? Synd":
+					
+					"Jaha":
+
+				}
+				Hank "Du får gärna hänga här inne om du vill träna dig mer"
+				Hank "Jag ska försöka fixa en lampa som har krånglat"
+				GOTO ENDING
+
+			"Nej, inte ett dugg":
+				Hank "Bra"
+				GOTO EXPLAIN_LOOPS
+		}
+}
+
+Hank "Med hjälp av 'if' kan man kontrollera om någonting är sant eller falskt"
+Hank "Och sedan kan man göra olika saker beroende på svaret"
+
+CHOICE {
+	"Hmm":
+		Hank "Det är inte så konstigt som det låter"
+
+	"Oj, kan man kontrollera vad som helst?":
+		Hank "Njae, hur menar du?"
+		Hank "Det beror på vilket objekt du modifierar"
+}
+
+[SHOW_BUTTON]
+DEFOCUS
+Hank "Här, jag ska visa"
+Hank.GetUpAndInteract(FunnyButton)
+
+LISTEN Hank_pressed_FunnyButton
+WAIT 1
+WAIT Sebastian.IsWithinDistance(Hank, 5)
+Hank "Hörde du?"
+
+FOCUS
+CHOICE {
+	"Ja":
+	"Nej, kan du visa en gång till?":
+		Hank "Javisst"
+		Hank.GetUpAndInteract(FunnyButton)
+		WAIT 3
+}
+
+Hank.Walk(HanksApartment_PointUpperLevel)
+Hank "Testa nu när du trycker på knappen!"
+DEFOCUS
+
+LISTEN Sebastian_pressed_FunnyButton
+
+WAIT 1.5
+Hank "Hörde du skillnaden?"
+
+FOCUS
+CHOICE {
+	"Ja, konstigt!":
+
+	"Nej":
+		Hank "Mitt ljud lät ju som en fågel"
+		Hank "Testa att trycka igen"
+		DEFOCUS
+		LISTEN Sebastian_pressed_FunnyButton
+		FOCUS
+		Hank "Hör du?! Ditt ljud låter helt annorlunda"
+}
+
+
+Sebastian "Hur kan det bli så?"
+Hank "Det beror på 'if'"
+Hank "Med hjälp av det kan man styra vad som händer"
+Hank "Kolla på koden så blir det nog tydligare"
+
+DEFOCUS
+
+LISTEN Sebastian_hack_FunnyButton
+WAIT Sebastian.IsIdle()
+
+Hank "Förstår du?"
+FOCUS
+CHOICE {
+	"Njae, inte direkt...":
+		Hank "Ok"
+
+	"Javisst!":
+		Hank "Härligt"
+
+	"Ja, lite. Typ.":
+		Hank "Bra"
+}
+Hank "En viktig detalj är funktionen GetUser()"
+Hank "Den ger tillbaka namnet på personen som använder knappen"
+Hank "Och sen kollar koden om namnet är lika med mitt namn, det vill säga 'Hank'"
+
+CHOICE {
+	"OK, hmm. Kan jag testa att ändra på den?":
+		Hank "Ja för tusan, gör det"
+		Hank "Om du vill byta ut ljudet kan du testa det..."
+		Hank "Jag gillar det som heter 'Win'"
+
+	"Jaha!":
+}
+
+DEFOCUS
+
+LISTEN Sebastian_talk_Hank
+FOCUS
+
+Hank "Känner du dig klar med 'if' nu?"
+
+CHOICE {
+	"Ja, för stunden i alla fall":
+		Hank "Toppen"
+
+	"Nej, det funkar inte...":
+		Hank "Inte?"
+		Hank "Ska jag testa?"
+		DEFOCUS
+		Hank.SetTimetable(InteractFunnyButton)
+		Hank.GetUpAndInteract(FunnyButton)
+		LISTEN Hank_pressed_FunnyButton
+		Hank.SetTimetable("")
+		WAIT 1
+		IF FunnyButton.HasErrors() {
+			Hank "Oj då..."
+		}
+		ELSE {
+			Hank "Hmm..."
+			Hank "Jag vet inte riktigt om jag förstår vad du gjort här"
+			Hank "Det borde väl typ funka?"
+			Hank "Ja ja"
+		}
+}
+
+Hank "Försök att memorera hur man skriver 'if'"
+Hank "Det är något som alla programmerare måste kunna som ett rinnande vatten"
+Hank "Nåväl..."
+
+Hank "Jag har en sak kvar som jag vill visa dig"
+Hank "Någonting som kallas för 'loop'"
+
+[EXPLAIN_LOOPS]
+
+FOCUS
+
+CHOICE {
+	"Vad ska man med 'loop' till?":
+		Hank "Eh... man kan liksom göra saker om och om igen"
+		Hank "Och så kan man räkna med dem"
+		CHOICE {
+			"Ok?":
+			"Jaha":
+		}
+
+	"Nej, det låter alldeles för svårt!":
+		Hank "Verkligen?"
+		Hank "Det är lite klurigt antar jag..."
+		Hank "Men inte värre än det vi redan gått igenom"
+		CHOICE {
+			"Mm, ok?":
+			"Om du säger det så":
+		}
+}
+
+Hank.GetUpAndInteract(HanksSteeringComputer)
+Hank "Jag ska visa ett exempel så kanske det är lättare att förstå"
+
+DEFOCUS
+Hank "Vi kan testa på den här datorn här"
+Hank.TakeOutItem(HanksHackdev)
+WAIT Hank.HasHandItemOfType(Hackdev)
+
+WAIT 2
+Hank.Hack(HanksSteeringComputer)
+
+FOCUS
+
+WAIT 3
+HanksSteeringComputer.SetCode(HanksSteeringComputer_ShowLoop_WithBug)
+Hank "Oj, oj vänta" 
+Hank "Jag måste ha gjort något fel"
+Hank "Skit, jag glömde 'end' på slutet"
+Hank "En sekund så ska jag rätta till det..."
+Hank "Hemskt klantigt det här!"
+WAIT 2
+HanksSteeringComputer.SetCodeAndRun(HanksSteeringComputer_ShowLoop)
+HanksSteeringComputer.SetResettableCode(HanksSteeringComputer_ShowLoop) # se till att Reset återställer till den här koden
+
+Hank "Så där, nu borde det funka ordentligt"
+Hank "Testa att köra programmet du!"
+Hank.GetUpAndInteract(HanksApartment_Chair2_1)
+
+DEFOCUS
+[LOOK_FOR_YOURSELF]
+
+LISTEN Sebastian_use_HanksSteeringComputer
+WAIT Sebastian.IsIdle()
+
+FOCUS
+WAIT 1
+Hank "Ser du hur den skriver ut nummer?"
+
+CHOICE {
+	"Va? Eh nej":
+		Hank "Kolla igen"
+		DEFOCUS
+		
+		LISTEN Sebastian_use_HanksSteeringComputer
+		WAIT Sebastian.IsIdle()
+		FOCUS
+	"Ja":
+
+	"Ja..? Inte superimponerande":
+		Hank "Hehe, nä"
+}
+
+Hank "Du kan ändra vilka nummer den loopar över om du vill..."
+
+CHOICE {
+	"Ja, låt mig testa":
+		DEFOCUS
+		LISTEN Sebastian_use_HanksSteeringComputer
+		WAIT Sebastian.IsIdle()
+		FOCUS
+
+	"Äsch, strunt samma":
+		Hank "OK?"
+		Hank "Så länge du fattar grejen"
+}
+
+WAIT 1
+Hank "Nästa steg blir att du ska skriva din egen loop"
+CHOICE {
+	"Jaha, vad ska loopen göra då?":
+
+	"Ok...":
+
+	"Coolt!":
+}
+
+Hank "Du kanske kan testa att rita massa linjer på skärmen?"
+
+[AGAIN]
+CHOICE {
+	"Hur gör man det?":
+		Hank "Du anropar funktionen RandomLine(x) som jag la till där"
+		Hank "Byt ut SlowPrint(x) mot RandomLine(x) och se vad som händer"
+
+	"Inne i loopen då eller?":
+		Hank "Ja precis"
+		GOTO AGAIN
+
+	"Jag testar!":
+		Hank "Gött"
+}
+
+Hank "Säg till mig när du känner dig nöjd"
+
+DEFOCUS
+
+
+# try on your own
+
+[LOOP_SELF]
+
+LISTEN Sebastian_talk_Hank
+FOCUS
+
+Hank "Mhm?"
+
+CHOICE {
+	"Nu har jag testat":
+		Hank "Var det tufft?"
+		CHOICE {
+			"Så där":
+				GOTO SUGGESTION
+			"Njae...":
+				[SUGGESTION]
+				Hank "Testade du att rita massor av linjer?"
+				CHOICE {
+					"Ja...":
+					"Nej, hur gör man det?":
+						Hank "Du måste loopa till ett högre nummer än 10"
+						CHOICE {
+							"Jaha, jag förstår":
+							"OK, OK":
+							"Mmm... givetvis":
+						}
+						DEFOCUS
+						GOTO LOOP_SELF
+				}
+			"Ja!":
+				Hank "Om du vill testa något riktigt crazy kan du lägga in din loop i en annan loop"
+					CHOICE {
+						"Vaaa?!":
+							Hank "Det är ballt"
+							Hank "Du måste anropa DisplayGraphics() efter varje loop bara"
+							Hank "Den säger till linjerna att rita ut sig"
+							CHOICE {
+								"OK":
+								"Aha":
+							}
+							Hank "Sen kanske vi ska sluta för idag"
+						"Nej nu får det räcka":
+							Hank "Haha, ja det har du nog rätt i"
+					}
+		}
+		GOTO END_FOR_TODAY
+
+	"Så där":
+		GOTO SUGGESTION
+
+	"Det strular bara":
+		Hank "Jobbigt"
+		[END_FOR_TODAY]
+		Hank "Ska vi sluta för idag?"
+		CHOICE {
+			"Ja...":
+			"OK då":
+			"Nej!":
+				Hank "Ja men testa lite mer då"
+				DEFOCUS
+				GOTO LOOP_SELF
+		}
+		Hank "Hoppas det går lättare imorgon när du sovit på saken"
+
+	"Vad betyder 'void'?":
+		Hank "Ah, du såg den raden där ja"
+		Hank "'void' betyder INGENTING"
+		Hank "Man använder det för att skapa funktioner som inte ger tillbaka ett svar"
+		Hank "Som RandomLine() till exempel, den gör något istället"
+		CHOICE {
+			"Så det är skillnad på att göra saker och att svara?":
+				Hank "Precis"
+				[HOW_TO_RETURN]
+				Hank "Om du vill att en funktion ska ge tillbaka ett nummer skriver du 'number' där istället"
+			"Flummigt":
+				Hank "Jo, lite kanske"
+				GOTO HOW_TO_RETURN
+			"Så den använder 'void'?":
+				Hank "Jepp"
+		}
+		DEFOCUS
+		GOTO LOOP_SELF
+}
+
+FOCUS
+
+Hank "Jag ska gå och fixa en lampa som krånglar nu"
+
+[ENDING]
+Hank "Du får säga till om det är något som kommer upp"
+
+CHOICE {
+	"Ja, tack så mycket för hjälpen":
+	"Jajemän – vi ses!":
+}
+
+Hank.StopTalking()
+DEFOCUS
+
+
+Hank.TakeOutItem(HanksHackdev)
+WAIT Hank.HasHandItemOfType(Hackdev)
+
+Hotel_Exterior_StreetLight4.SetCodeAndRun("FaultyLamp")
+Hank.SetTimetable(Hank_FixLamp)
+WAIT Hank.IsHacking()
+WAIT 20
+Hotel_Exterior_StreetLight4.SetCodeAndRun("StreetLight")
+WAIT 5
+Hank.SetTimetable(Hank)
+
+
+[MORE]
+LISTEN Sebastian_talk_Hank
+FOCUS
+Hank.StartTalking()
+
+Hank "Tjena, jag såg dig inte!"
+
+CHOICE {
+	"Hur går det?":
+		Hank "Bara fint"
+	"Tack för att du lärt mig så mycket":
+		Hank "Äsch, det var bara kul"
+	"Mycket att göra?":
+		Hank "Jo tack"
+		Hank "Haha!"
+}
+
+Hank.StopTalking()
+DEFOCUS
+GOTO MORE

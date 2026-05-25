@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A2B911C3-4CE0-439E-BA1A-EFA9D2AF8AEF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Boo.Lang</RootNamespace>
+    <AssemblyName>Boo.Lang</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractGenerator.cs" />
+    <Compile Include="AbstractGeneratorEnumerator.cs" />
+    <Compile Include="BooComparer.cs" />
+    <Compile Include="BooHashCodeProvider.cs" />
+    <Compile Include="Builtins.cs" />
+    <Compile Include="DuckTypedAttribute.cs" />
+    <Compile Include="DynamicVariable.cs" />
+    <Compile Include="EnumeratorItemTypeAttribute.cs" />
+    <Compile Include="Environments\ActiveEnvironment.cs" />
+    <Compile Include="Environments\CachingEnvironment.cs" />
+    <Compile Include="Environments\ClosedEnvironment.cs" />
+    <Compile Include="Environments\DeferredEnvironment.cs" />
+    <Compile Include="Environments\EnvironmentBoundValue.2.cs" />
+    <Compile Include="Environments\EnvironmentBoundValue.cs" />
+    <Compile Include="Environments\EnvironmentChain.cs" />
+    <Compile Include="Environments\EnvironmentProvision.cs" />
+    <Compile Include="Environments\IEnvironment.cs" />
+    <Compile Include="Environments\InstantiatingEnvironment.cs" />
+    <Compile Include="Environments\My.cs" />
+    <Compile Include="Environments\ObjectFactory.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="GenericGenerator.cs" />
+    <Compile Include="GenericGeneratorEnumerator.cs" />
+    <Compile Include="Hash.cs" />
+    <Compile Include="ICallable.cs" />
+    <Compile Include="IQuackFu.cs" />
+    <Compile Include="IQuackFuMember.cs" />
+    <Compile Include="IReflectiveQuackFu.cs" />
+    <Compile Include="List.2.cs" />
+    <Compile Include="List.cs" />
+    <Compile Include="MetaAttribute.cs" />
+    <Compile Include="ModuleAttribute.cs" />
+    <Compile Include="Procedure.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuackFuMember.cs" />
+    <Compile Include="QuackFuMemberKind.cs" />
+    <Compile Include="ResourceManager.cs" />
+    <Compile Include="Resources\StringResources.cs" />
+    <Compile Include="Runtime\AssertionFailedException.cs" />
+    <Compile Include="Runtime\CandidateMethod.cs" />
+    <Compile Include="Runtime\DynamicDispatching\AbstractDispatcherFactory.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Dispatcher.cs" />
+    <Compile Include="Runtime\DynamicDispatching\DispatcherCache.cs" />
+    <Compile Include="Runtime\DynamicDispatching\DispatcherKey.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Emitters\DispatcherEmitter.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Emitters\ExtensionMethodDispatcherEmitter.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Emitters\GetFieldEmitter.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Emitters\ImplicitConversionEmitter.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Emitters\MethodDispatcherEmitter.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Emitters\SetFieldEmitter.cs" />
+    <Compile Include="Runtime\DynamicDispatching\Emitters\SetPropertyEmitter.cs" />
+    <Compile Include="Runtime\DynamicDispatching\MethodDispatcherFactory.cs" />
+    <Compile Include="Runtime\DynamicDispatching\NumericPromotions.cs" />
+    <Compile Include="Runtime\DynamicDispatching\PropertyDispatcherFactory.cs" />
+    <Compile Include="Runtime\DynamicDispatching\SetOrGet.cs" />
+    <Compile Include="Runtime\DynamicDispatching\SliceDispatcherFactory.cs" />
+    <Compile Include="Runtime\ExtensionRegistry.cs" />
+    <Compile Include="Runtime\ICoercible.cs" />
+    <Compile Include="Runtime\MethodResolver.cs" />
+    <Compile Include="Runtime\NumericTypes.cs" />
+    <Compile Include="Runtime\RuntimeException.cs" />
+    <Compile Include="Runtime\RuntimeServices.cs" />
+    <Compile Include="Runtime\TextReaderEnumerator.cs" />
+    <Compile Include="TypeInferenceRuleAttribute.cs" />
+    <Compile Include="TypeInferenceRules.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

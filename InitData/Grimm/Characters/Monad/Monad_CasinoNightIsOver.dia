@@ -1,0 +1,6 @@
+
+Monad.SetTimetable("Monad")
+Monad.SetRunning(false)
+
+WAIT Sebastian.IsInRoom(MonadsApartment) AND Monad.IsInRoom(MonadsApartment) AND Monad.IsAwake() AND Sebastian.IsAwake()
+START Monad_BreakIntoMonads

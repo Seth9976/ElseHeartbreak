@@ -1,0 +1,30 @@
+
+Sebastian.Pos(Beer_Testroom_2)
+
+WAIT 3
+
+#Bob.SetTimetable("")
+#Bob.Pos(Testing_chair1)
+
+#Will.Pos(Testing_chair2)
+Will.Pos(Beer_Testroom_2)
+Will.Interact(StrangeDoor3)
+
+#Will.PutIntoInventory(KeyRoom1)
+#LockDoor(StrangeDoor3)
+
+[again]
+
+#Tester.Interact(Sebastian)
+#LISTEN Tester_talk_Sebastian
+#WAIT 5
+
+#Tester.Walk(Beer_Testroom_2)
+#WAIT Tester.IsInRoom(Testing2)
+#WAIT 5
+
+Will.Interact(StrangeDoor3)
+WAIT Will.IsIdle()
+WAIT 4
+
+GOTO again

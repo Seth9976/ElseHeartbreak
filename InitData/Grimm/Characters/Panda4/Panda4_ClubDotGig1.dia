@@ -1,0 +1,7 @@
+Panda4.SetTimetable(Panda4_ClubDotGig)
+
+LISTEN Sebastian_talk_Panda4
+Panda4 "Kom och var med och dansa!"
+
+LISTEN Sebastian_talk_Panda4
+Panda4 "Vilken kväll"

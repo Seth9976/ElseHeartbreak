@@ -1,0 +1,15 @@
+
+StartLogging(Amanda)
+StartLogging(Emma)
+
+#Sebastian.Pos(FelixApartment_SofaSeat_5)
+#Sebastian.Pos(FelixApartment_SofaSeat_4)
+Sebastian.Pos(FelixApartment_SofaSeat_1)
+#Sebastian.Pos(FelixApartment_SofaSeat_2)
+
+Amanda.Pos(OutsideFelixApartment_Point1)
+Emma.Pos(OutsideFelixApartment_Point1)
+
+Amanda.SetTimetable(Amanda_PartyAtFelixApartment)
+Emma.SetTimetable(Emma_PartyAtFelixApartment)
+

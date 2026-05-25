@@ -1,0 +1,151 @@
+
+LISTEN Sebastian_talk_Wallenstam {
+    [MORE_CRAZY_TALK]
+    Wallenstam "AHH!"
+    LISTEN Sebastian_talk_Wallenstam
+    Wallenstam "Herregud!"
+    LISTEN Sebastian_talk_Wallenstam
+    Wallenstam "Nej, nej!!!"
+    LISTEN Sebastian_talk_Wallenstam
+    GOTO MORE_CRAZY_TALK
+}
+
+
+WAIT Sebastian.IsInEitherRoom(Tram_Interior, Tram_Interior2, Tram_Interior3, Tram_Interior4)
+
+IF Sebastian.IsInRoom(Tram_Interior) {
+    Wallenstam.Pos(Tram_Interior_HarborSouth_SofaSeat_1_4)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior2) {
+    Wallenstam.Pos(Tram_Interior2_SofaSeat_5)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior3) {
+    Wallenstam.Pos(Tram_Interior3_SofaSeat_8)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior4) {
+    Wallenstam.Pos(Tram_Interior4_SofaSeat_10)
+}
+
+WAIT 4
+WAIT Sebastian.IsWithinDistance(Wallenstam, 8)
+Sebastian.CancelWalking()
+FOCUS
+Wallenstam.StartTalking()
+
+Wallenstam "Du..."
+Wallenstam "Är du trött?"
+
+CHOICE {
+    "Ja lite":
+    "Nej det är OK":
+}
+
+Wallenstam "Du har kämpat länge nu"
+Wallenstam "Jag undrar om du kommer finna det du söker..."
+
+CHOICE {
+    "Jag hoppas det":
+        Wallenstam "Ja"
+    "Mm...":
+    "Jo men det måste jag!":
+        Wallenstam "Ja?"
+}
+
+Wallenstam "Vad är du beredd att ge"
+
+CHOICE {
+    "Ge?":
+    "Vad menar du?":
+    "Öh...":
+}
+
+Wallenstam "För ett tips alltså"
+Wallenstam "Jag är trött på att hjälpa folk utan att få något tillbaka"
+
+CHOICE {
+    "Du kan få 100 spänn":
+        Wallenstam "Pengar har jag så det räcker"
+    "Jag behöver inga tips!":
+        Wallenstam "Inte?"
+        Wallenstam "Nej nej..."
+        GOTO ENDING
+    "Vill du ha en snus?":
+        Wallenstam "Inte direkt"
+    "Jaha":
+}
+
+Wallenstam "Jag vill ha något viktigt"
+Wallenstam "Något som du bryr dig om"
+Wallenstam "Som ett offer..."
+Wallenstam "Eller vänta"
+Wallenstam "Jag vill ha dig!"
+
+CHOICE {
+    "Ewww":
+    "Va, vad menar du?!":
+    "Öhh, OK...":
+}
+
+Wallenstam "Ta av dig kläderna!"
+
+CHOICE {
+    "Här?!":
+    "Du är ju inte riktigt klok":
+    "VA...?!":
+    "OK...":
+}
+
+CHOICE {
+    "Jag tyckte du sa att jag skulle få ett tips?":
+        Wallenstam "Jaaa... ja ja"
+    "Jag vet inte om jag vill det här...":
+        Wallenstam "Jag berättar vad du vill!"
+        Wallenstam "Du har kämpat så hårt"
+        Wallenstam "Jag hjälper dig!"
+}
+
+Wallenstam "Du måste ta dig in i Monads lägenhet!"
+Wallenstam "Hon bor på Plaza"
+Wallenstam "Använd papperskorgarna"
+CHOICE {
+    "Papperskorgarna?":
+    "Va?!":
+}
+
+Wallenstam "Ta av dig kläderna nu, jag vill ha dig!"
+CHOICE {
+    "Nej!":
+    "Jag känner mig inte så redo":
+    "Hmm":
+}
+
+Wallenstam "Du..."
+Wallenstam "Vad är det som händer?!"
+
+[ENDING]
+Wallenstam.StopTalking()
+DEFOCUS
+WAIT 2
+#Wallenstam.Sleep(24)
+#WAIT Sebastian.IsSleeping()
+Wallenstam.SetTimetable(Wallenstam)
+Wallenstam.Pos(StationNorth_Point)
+
+
+[AGAIN]
+WAIT 60
+IF Sebastian.IsWithinDistance(Wallenstam, 10) {
+    Wallenstam "Papperskorgarna..."
+}
+WAIT 80
+IF Sebastian.IsWithinDistance(Wallenstam, 10) { 
+    Wallenstam "Corruption..."
+}
+WAIT 70
+IF Sebastian.IsWithinDistance(Wallenstam, 10) {
+    Wallenstam "Slurp..."
+}
+GOTO AGAIN

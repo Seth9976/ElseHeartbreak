@@ -1,0 +1,26 @@
+LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+
+Frank "Du jobbar med oss nu?"
+Frank.SetKnowledge(Sebastian)
+
+CHOICE {
+	"Jepp!":
+	"Mm, tror det..?":
+}
+
+Frank "Cool"
+
+CHOICE {
+    "Ja, det känns riktigt konstigt faktiskt":
+        Frank "Du kommer känna dig hemma på nolltid"
+    "Verkligen!":
+}
+
+INTERRUPT TeachLoops
+
+Frank.StopTalking()
+DEFOCUS
+

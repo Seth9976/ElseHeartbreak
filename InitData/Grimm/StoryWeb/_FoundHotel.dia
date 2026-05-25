@@ -1,0 +1,4 @@
+
+WAIT Sebastian.IsInEitherRoom(Hotel_Room1, Hotel_Room2, Hotel_Room3, Hotel_Room4, Hotel_Room5)
+
+Story("GotIntoRoom")

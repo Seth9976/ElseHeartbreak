@@ -1,0 +1,12 @@
+﻿using System;
+
+namespace System.Data.OleDb
+{
+	/// <summary>Represents the method that will handle the <see cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" /> event of an <see cref="T:System.Data.OleDb.OleDbConnection" />.</summary>
+	/// <param name="sender">The source of the event. </param>
+	/// <param name="e">An <see cref="T:System.Data.OleDb.OleDbInfoMessageEventArgs" /> object that contains the event data. </param>
+	/// <filterpriority>2</filterpriority>
+	// Token: 0x020001B4 RID: 436
+	// (Invoke) Token: 0x060015B5 RID: 5557
+	public delegate void OleDbInfoMessageEventHandler(object sender, OleDbInfoMessageEventArgs e);
+}

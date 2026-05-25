@@ -1,0 +1,15 @@
+
+START BustedAtLongsons
+START PlayStationTalkDirty
+
+LISTEN Sebastian_talk_George
+FOCUS
+George.StartTalking()
+
+George "Hej du"
+George "Kom ihåg att rösta på mig!"
+George "Tack då"
+
+George.StopTalking()
+DEFOCUS
+

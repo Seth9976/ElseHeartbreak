@@ -1,0 +1,31 @@
+
+Yulian.Pos(Lodge_Underwater_Point1)
+
+LISTEN Sebastian_talk_Yulian
+
+FOCUS
+Yulian "Mm?"
+[AGAIN]
+Yulian.StartTalking()
+CHOICE {
+    "Det var inget":
+        Yulian "OK"
+
+    "Ursäkta, kan du hjälpa mig lite med provet?":
+        Yulian "Va?! Givetvis inte"
+        Yulian "Du måste ha bättre inställning än så om du ska jobba här"
+
+    "Det är verkligen snygg jacka du har":
+        Yulian "Tack!"
+
+    "Mysig kontor du har":
+        Yulian "Ja det är lite litet men vad ska man göra?"
+}
+Yulian.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Yulian
+FOCUS
+Yulian "Ja?"
+GOTO AGAIN

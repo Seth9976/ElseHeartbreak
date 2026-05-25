@@ -1,0 +1,66 @@
+
+Araki.SetTimetable(Araki_Gambling)
+
+
+WAIT Araki.IsNotInRoom(Casino_Floor1) AND Araki.IsNotInRoom(Casino_Floor2) LISTEN Sebastian_talk_Araki {
+    FOCUS
+    Araki.StartTalking()
+    Araki "Mmm..?"
+    CHOICE {
+        "Pixie sa att du skulle med till Casinot?":
+            Araki "Ja precis"
+
+        "Har du några tips inför kvällens uppdrag?":
+            Araki "Hmm"
+            Araki "Vi får inte låtsas om att vi känner varandra"
+            Araki "Och ta inte med din modifierare, såklart"
+            CHOICE {
+                "Nej, det ska jag inte":
+                "Just det":
+            }
+            Araki "Ååå, jag önskar att jag kunde komma in där med en modifierare, hade varit så sweet"
+            CHOICE {
+                "Ja...":
+                "Haha, OK":
+            }
+
+        "Äsch, jag kommer inte på något smart att säga till dig!":
+            Araki "Heh"
+    }
+
+    Araki.StopTalking()
+    DEFOCUS
+
+    WAIT Araki.IsNotInRoom(Casino_Floor1) AND Araki.IsNotInRoom(Casino_Floor2) LISTEN Sebastian_talk_Araki 
+    Araki "Lycka till där inne då"
+}
+
+
+
+WAIT Araki.IsInEitherRoom(Casino_Floor1, Casino_Floor2) LISTEN Sebastian_talk_Araki
+FOCUS
+Araki.StartTalking()
+
+Araki "Schh..."
+CHOICE {
+    "VA..?!":
+        [JEEZ]
+        Araki "Jeez!"
+        Araki "Vi kan inte prata med varandra"
+    "Oj förlåt":
+    "Hej Araki!":
+        GOTO JEEZ
+}
+
+Araki "Vi ses imorgon på lodgen, OK?"
+Araki "Låtsas inte om att du känner mig nu"
+CHOICE {
+    "OK":
+    "Jepp":
+    "Jaha... ska försöka":
+        Araki "Bra"
+}
+
+Araki.StopTalking()
+DEFOCUS
+

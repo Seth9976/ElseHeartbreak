@@ -1,0 +1,163 @@
+
+Typer5.SetTimetable(Typer_InvestigateRadiostation)
+Typer5.Pos(RadioStation_Point)
+
+WAIT Sebastian.IsInRoom(RadioStation)
+Typer5.SetTimetable("")
+Typer5.Interact(Sebastian)
+
+WAIT Sebastian.IsWithinDistance(Typer5, 15)
+FOCUS
+
+Typer5 "Stopp!"
+Typer5.Interact(Sebastian)
+
+Typer5 "Är ni Roby?"
+
+CHOICE {
+    "Va, eh nej!":
+        Typer5 "Var är han?"
+        [WHERES_ROBY]
+        CHOICE {
+            "Vet inte":
+            "Jag känner honom inte":
+            "Kanske ute och handlar?":
+        }
+        Typer5 "Driv inte med mig"
+        CHOICE {
+            "Jag vet verkligen inte var han är":
+            "Han skulle göra något ärende tror jag":
+        }
+        Typer5 "Och vem är ni?"
+        CHOICE {
+            "Sebastian":
+            "Sebbe":
+            "Det är väl inte din sak att veta":
+                Typer5 "Där har vi skilda åsikter"
+                Typer5.TakeOutItem(Typer5_Extractor)
+                WAIT Typer5.HasHandItemWithName(Typer5_Extractor)
+                Typer5 "En sekund..."
+                Typer5.InteractUsingHandItem(Sebastian)
+                WAIT 4
+                Typer5 "Så ni är Sebastian"
+        }
+
+    "Öhh... ja?":
+        [PAPERS_PLEASE]
+        Typer5 "Jag vill se era sändningsintyg"
+        Typer5 "Samt datorinnehavsblankett 3, 14 och 15"
+        CHOICE {
+            "Skoja bara, Roby är någon annanstans":
+                Typer5 "Jaså? Var då?!"
+                GOTO WHERES_ROBY
+            "Jag vet inte var jag lagt dem":
+                Typer5 "Leta upp dem"
+            "Ok, jag ska ta fram dem":
+                Typer5 "Bra"
+        }
+        DEFOCUS
+        LISTEN Sebastian_talk_Typer5
+        FOCUS
+        Typer5 "Nå, har ni några papper?"
+        CHOICE {
+            "Jag hittar ingenting...":
+            "Nej tyvärr":
+        }
+
+    "Vem då?":
+        Typer5 "Är ni ägaren av radiostationen?"
+        CHOICE {
+            "Japp!":
+                GOTO PAPERS_PLEASE
+            "Nej, haha verkligen inte":
+                Typer5 "Så var är han då?"
+                GOTO WHERES_ROBY
+        }
+
+    "[CHEAT]":
+}
+
+Typer5 "Jag måste be er att lämna lokalen omedelbart"
+Typer5 "Ni har inte rätt att befinna er här"
+CHOICE {
+    "Jag ska bara hämta en grej först":
+        Typer5 "Vad för grej?"
+        CHOICE {
+            "En väska":
+                Typer5 "Jaså?"
+            "Eh ingenting, strunt samma":
+                Typer5 "Jo, vadå?"
+                CHOICE {
+                    "En väska":
+                    "Skit i det du":
+                }
+        }
+        Typer5 "Ni måste lämna omedelbart"
+
+    "OK, jag ska gå":
+}
+
+Typer5.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Typer5 [GO_AWAY] {
+    Typer5 "Gå"
+}
+
+WAIT 10
+CANCEL GO_AWAY
+
+[GUARD_MORE]
+WAIT Sebastian.IsInRoom(RadioStation)
+Typer5.SetTimetable("")
+Typer5.Interact(Sebastian)
+WAIT Typer5.IsWithinDistance(Sebastian, 10) AND Sebastian.IsAwake()
+FOCUS
+Typer5.StartTalking()
+Typer5 "Ni skulle ju gå!"
+Typer5 "Jag är rädd att jag måste neutralisera er"
+Typer5.TakeOutItem(Typer5_Taser)
+CHOICE ETERNAL {
+    "Vänta! Va?":
+    "Nej, snälla!":
+    "Neutralisera..?":
+}
+Typer5.StopTalking()
+WAIT 0.5
+
+Typer5.InteractUsingHandItem(Sebastian)
+
+LISTEN THREAD_1 {
+    WAIT 6
+    IF Sebastian.IsNotInRoom(RadioStation) {
+        Typer5.SetTimetable(Typer_InvestigateRadiostation)
+        Typer5 "Hmph"
+        Log("Typer5 thinks Sebastian got away")
+        GOTO GUARD_MORE
+    }
+}
+BROADCAST THREAD_1
+
+LISTEN Typer5_tase_Sebastian
+DEFOCUS
+
+WAIT Sebastian.IsSleeping()
+Typer5.SetTimetable(Typer_InvestigateRadiostation)
+WAIT 30
+
+IF Sebastian.HasHandItemWithName(RedCase) {
+    Sebastian.ClearHandItem()
+}
+RedCase.Pos(Ministry_Offices2_Trigger_1)
+
+IF Sebastian.IsInRoom(DreamForest) {
+    Log("In Dream Forest, will NOT get teleported to park bench!")
+}
+ELSE {
+    Sebastian.Pos(HarborNorth_Testing2_ParkBenchSeat1_1_1)
+}
+
+WAIT 1
+
+GOTO GUARD_MORE
+

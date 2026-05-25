@@ -1,0 +1,152 @@
+
+[TALK_TO_FRANK]
+
+LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+
+[AGAIN]
+CHOICE {
+    "Du sa något om att du kan ta bort spärrar och sånt förut...":
+        Frank "Jo just det, det har man väl pysslat en del med"
+        Sebastian "Min modifierare har en sån"
+        Sebastian "Jag kan inte modifiera dörrar till exempel"
+        GOTO HELP_WITH_HACKDEV
+
+    "Pixie sa att du kunde hjälpa mig med en grej":
+        Frank "OK, vadå?"
+
+    "Allt lugnt idag?":
+        Frank "Mycket att göra... väldigt mycket!"
+        CHOICE {
+            "OK, ska inte störa då":
+            "Som alltid?":
+                Frank "Som alltid, precis!"
+                GOTO AGAIN
+        }
+}
+
+CHOICE {
+    "Min modifierare kan inte ansluta till dörrar och så":
+        GOTO HELP_WITH_HACKDEV
+
+    "Jag fattar inte det här med datorer... hur kan de fungera egentligen?":
+        Frank "Bra fråga"
+        Frank "Jag tror att jag har någon bra bok du skulle kunna få läsa om det"
+        Frank "Jag tar med den imorgon, jag tror att den står hemma någonstans"
+
+    "Äh, det var inget viktigt":
+        Frank "OK, säg till om du ändrar dig"
+}
+Frank.StopTalking()
+DEFOCUS
+GOTO TALK_TO_FRANK
+
+[HELP_WITH_HACKDEV]
+Frank "Aha, jag förstår!"
+Frank "Man kan i och för sig göra mer än du tror med en sån där apparat"
+Frank "Även level 0 alltså"
+Frank "Ja herregud..."
+WAIT 1
+Frank "Men ja! De artificiella begränsningarna som Ministeriet lagt in..."
+Frank "De kan vara irriterande"
+
+CHOICE {
+    "Ja precis":
+    "Mm, jag vill kunna ansluta mig till allting!":
+}
+
+Frank "Alltså, principen för att ta bort spärrarna är mycket enkel"
+Frank "Det enda du behöver är en extra device"
+
+Frank "Sen lägger du ner din egen modifierare på marken"
+Frank "Och kopplar in dig i den"
+
+CHOICE {
+    "Aha...":
+        Frank "Japp, så enkelt är det"
+
+    "OK?!":
+        Frank "En modifierare kan inte modifiera sig själv"
+        Frank "Men den kan modifiera andra!"
+}
+
+CHOICE {
+    "Tackar! Ses om ett tag då":
+        Frank "Så ska det låta!"
+
+    "OK, men hur gör jag sen då?":
+        Frank "Bästa sättet för att lära sig är att misslyckas"
+        Frank "Det är bara att ansluta en modifierare till din och börja kolla runt i källkoden"
+        Frank "Alla modeller är lite olika så du kanske måste experimentera för att få det att funka"
+}
+
+#Frank "Och paja inte min apparat heller är du snäll"
+
+Frank "Lycka till"
+
+Frank.StopTalking()
+DEFOCUS
+
+
+[BOTHER]
+
+LISTEN Sebastian_talk_Frank
+CHOICE ETERNAL {
+    "Jag fattar inte exakt hur jag ska göra":
+        Frank "Har du kollat på koden i din modifierare?"
+        CHOICE ETERNAL {
+            "Ja":
+            "Nej":
+                Frank "OK, gör det först"
+                Frank "Du kanske får lägga ner den framför dig så du inte tappar den"
+                CHOICE ETERNAL {
+                    "OK":
+                    "Mhm, smart":
+                }
+                Frank.StopTalking()
+                DEFOCUS
+                GOTO BOTHER
+        }
+
+    "Vill du ha tillbaka din modifierare?":
+        Frank "Javisst, om du är klar?"
+        CHOICE ETERNAL {
+            "Jupp":
+            "Nej":
+        }
+        [GIVE_AGAIN]
+        Frank.StartWaitForGift()
+        LISTEN Sebastian_give_Frank
+        WAIT Frank.HasAnyHandItem()
+        IF Frank.HasHandItemWithName(FranksModifier) {
+            Frank "Tackar, tackar!"
+            Frank.StopWaitForGift()
+        } ELSE {
+            Frank "Det här är inte min modifierare hörru!"
+            Frank.Give()
+            WAIT Frank.HasNoHandItem()
+            CHOICE {
+                "Oj förlåt... en sekund":
+                    GOTO GIVE_AGAIN
+                "Nej vänta jag ska hämta den":
+                    Frank.StopTalking()
+                    Frank.StopWaitForGift()
+                    DEFOCUS
+                    GOTO BOTHER
+            }
+        }
+
+    "Allt väl?":
+        Frank "Jaaråå"
+}
+
+Frank.StopWaitForGift()
+Frank.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Frank
+Frank "Vilken dag, så mycket att göra!"

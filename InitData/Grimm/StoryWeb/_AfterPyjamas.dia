@@ -1,0 +1,18 @@
+
+Felix.SetTimetable(Felix)
+Pixie.SetTimetable(Pixie)
+Ivan.SetTimetable(Ivan)
+
+WAIT Pixie.NotTalking()
+
+IF Pixie.IsInRoom(FelixApartment) {
+    Pixie "Oj, börjar bli sent nu"    
+}
+
+IF Ivan.IsInRoom(FelixApartment) {
+    Ivan "Ska vi dra, pixie?"
+}
+
+IF Felix.IsInRoom(FelixApartment) {
+    Felix "Ha det bra vänner, vi ses!"
+}

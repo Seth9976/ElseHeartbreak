@@ -1,0 +1,8 @@
+
+[AGAIN]
+WAIT IsProgramStopped(TramComputer1)
+
+Log("Ministry_Elevator1_Computer's master program is stopped!")
+WAIT 1
+
+GOTO AGAIN

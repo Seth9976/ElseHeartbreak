@@ -1,0 +1,36 @@
+
+LISTEN Sebastian_talk_Jorgen
+FOCUS
+Jorgen.StartTalking()
+
+Jorgen "Ja, hejsan?"
+
+CHOICE {
+    "Jag säljer läsk, vill du ha?":
+        [NO]
+        Jorgen "Nej tack, jag går på LCHF"
+        CHOICE {
+            "Jaha...":
+                GOTO GOOD
+            "Vad är det?":
+                Jorgen "Low carbon, high fat"
+                Jorgen "Diet"
+                [GOOD]
+                Jorgen "Det är jättebra, man blir smal och lycklig"
+        }
+        Jorgen.Sleep(1)
+
+    "Var ligger Plaza?":
+        IF Jorgen.IsInRoom(Plaza) {
+            Jorgen "Du står på den!"
+        } ELSE {
+            Jorgen "Jo men det är mitt i stan"
+        }
+
+    "Hej! Är du intresserad av att köpa fantastiskt god läsk av mig?!":
+        GOTO NO
+}
+
+Jorgen.StopTalking()
+DEFOCUS
+

@@ -1,0 +1,12 @@
+
+Lodge_Room1_DoorToRoom2.UnlockDoor()
+
+SetClock(01, 13, 00, 0)
+
+Felix.Pos(Lodge_Entry_FelixPoint)
+Pixie.Pos(Lodge_Room2_Point)
+Sebastian.Pos(Lodge_Room2_Point)
+
+Story("HackerTrial2")
+
+START GetHackdev

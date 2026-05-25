@@ -1,0 +1,23 @@
+
+
+Sebastian.SetFieldToFloat("sleepiness", 50) # was 80 before...
+
+
+WAIT Sebastian.IsInEitherRoom(Hotel_Lobby, Hotel_Diner, Hotel_Corridor, Hotel_Bathroom, Hotel_Toilet) LISTEN Sebastian_fellAsleep
+
+WAIT 10
+
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+Hotel_Lobby_DoorToHotelExterior.SetDoorTarget(Hotel_Exterior_DoorToHotel)
+
+UnlockDoor(Hotel_Corridor_Door1)
+Sebastian.CarefulLayInBed("Hotel_Room1_Bed") # this will trigger the IsInRoom event that might stop this dia..?
+
+Sebastian.PutIntoInventory(KeyRoom1)
+
+WAIT Sebastian.IsStanding()
+
+Sebastian "Uh... vad hände?"
+Sebastian.SetKnowledge(WasMovedToHotelBed)
+
+Babcia.SetKnowledge(Sebastian)

@@ -1,0 +1,94 @@
+RunMakeTransactionFunctionOnCreditCard("BobCreditCard", 2)
+
+LISTEN Sebastian_talk_Bob
+
+FOCUS
+Bob.StartTalking()
+
+CHOICE {
+	"Hej, jag kommer från Wellspring Inc.":
+		Sebastian "Jag undrar om du är intresserad av att köpa en burk läsk av mig"
+		CHOICE {
+			"Den är jättegod":
+			"Den är ganska god":
+			"Den är god":
+		}		
+
+	"Yo, hur är läget?":
+		Bob "Känner jag dig?"
+		CHOICE {
+			"Nej, men du önskar nog att du gjorde":
+				Sebastian "Jag har nämligen världens erbjudande för dig"
+				Sebastian "Jag säljer en läsk till ett mycket bra pris"
+			"Snackade inte vi tidigare?":
+				Bob "Jo... kanske?"
+				Bob "Vad gör du?"
+				CHOICE {
+					"Jag säljer läsk!":
+					"Jag driver mest runt, försöker att sälja de här dumma läskburkarna":
+					"Inget särskilt":
+						Bob "OK, ta det lugnt"
+						GOTO TAKE_IT_EASY
+				}
+		}
+
+	"[CHEAT]":
+		GOTO CHEAT
+}
+
+Bob "Läsk? Jag gillar läsk."
+Bob "Vilken sort är det?"
+CHOICE {
+	"Wellspring Soda":
+	"Den kallas Wellspring":
+}
+Bob "Wellspring? Ok den känner jag inte till."
+
+[CHEAT]
+INTERRUPT SellSodaToBob
+
+[TAKE_IT_EASY]
+Bob.StopTalking()
+
+# later #
+
+
+
+LISTEN Sebastian_talk_Bob
+FOCUS
+Bob.StartTalking()
+
+IF Sebastian.HasKnowledge("HasSoldSodaToBob") {
+	CHOICE {
+		"Sugen på mer läsk?":
+			Bob "Nej det är bra tack"
+
+		"Var den god?":
+			Bob "Eh, jag har inte smakat än"
+	}
+}
+ELSE {
+	Sebastian "Vill du köpa en läsk nu?"
+	Bob "Kan jag väl"
+	INTERRUPT SellSodaToBob
+	FOCUS
+}
+
+Bob.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Bob
+FOCUS
+Bob.StartTalking()
+Bob "God läsk det här"
+CHOICE {
+	"Härligt att höra":
+	"Fantastiskt":
+	"Jag vet!":
+	"Oj det var ovanligt att höra":
+		Sebastian "Men vad bra att du tycker det!"
+}
+Bob.StopTalking()
+DEFOCUS

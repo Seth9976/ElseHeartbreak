@@ -1,0 +1,41 @@
+Ministry_Elevator1_Door1.SetFieldToStringArray("elevatorAlternatives", 
+	"Ministry_Lobby_MinistryElevatorDoor_1", 
+	"Ministry_CorridorLevel1_MinistryElevatorDoor_1",
+	"Ministry_CorridorLevel2a_MinistryElevatorDoor_1")
+
+Ministry_Elevator2_Door1.SetFieldToStringArray("elevatorAlternatives", 
+	"Ministry_Lobby_MinistryElevatorDoor_2", 
+	"Ministry_CorridorLevel1_MinistryElevatorDoor_2",
+	"Ministry_CorridorLevel2b_MinistryElevatorDoor_2",
+	"Ministry_CorridorLevel3_MinistryElevatorDoor_2")
+
+Ministry_Elevator3_Door1.SetFieldToStringArray("elevatorAlternatives", 
+	"Ministry_Lobby_MinistryElevatorDoor_3", 
+	"Ministry_CorridorLevel1_MinistryElevatorDoor_3",
+	"Ministry_CorridorLevel2b_MinistryElevatorDoor_3",
+	"Ministry_CorridorLevel3_MinistryElevatorDoor_2")
+
+Ministry_Elevator4_Door1.SetFieldToStringArray("elevatorAlternatives", 
+	"Ministry_Lobby_MinistryElevatorDoor_4", 
+	"Ministry_CorridorLevel1_MinistryElevatorDoor_4",
+	"Ministry_CorridorLevel2a_MinistryElevatorDoor_4")
+
+
+
+PoorDesolateBuilding1_Elevator_Door.SetFieldToStringArray("elevatorAlternatives",
+	"PoorDesolateBuilding1_Corridor_ElevatorDoor",
+	"PoorDesolateBuilding1_Lobby2_ElevatorDoor",
+	"PoorDesolateBuilding1_Lobby3_ElevatorDoor",
+	"PoorDesolateBuilding1_Lobby4_ElevatorDoor")
+
+
+RadioStationElevator_Door.SetFieldToStringArray("elevatorAlternatives",
+	"RadioStationEntry_DoorToElevator",
+	"RadioStation_ElevatorDoor")
+
+
+PandaElevator_Door.SetFieldToStringArray("elevatorAlternatives",
+	"TowerApartmentsLobby_ElevatorToPandaApartment",
+	"PandaApartment_ElevatorDoors2_1")
+
+RebuildRoomNetwork() # NEEDED? Should happen automatically at some points anyway (when changing Door targets specifically)

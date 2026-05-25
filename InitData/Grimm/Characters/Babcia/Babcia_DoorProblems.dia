@@ -1,0 +1,93 @@
+
+LISTEN Sebastian_talk_Babcia
+
+FOCUS
+
+CHOICE {
+	"Ursäkta mig, jag har en fråga...":
+		Babcia "Mhm?"
+		CHOICE {
+			"Jag kommer inte in på mitt rum":
+				Babcia "Suck..."
+				Sebastian "Va?"
+			"Var det rum 1 jag hade?":
+				Babcia "Ja, precis"
+				Sebastian "OK... i så fall måste jag nog klaga lite"
+				GOTO COMPLAIN
+		}
+
+	"Jag vet inte vad som hände mig alldeles nyss, jag är chockad!!!":
+		Babcia "Vad nu då?"
+		Sebastian "När jag skulle gå in på mitt rum så hamnade jag i badrummet!!!"
+		Sebastian "Jag måste ha blivit galen, vad ska jag ta mig till?!"
+		Babcia "Lugna ner dig"
+		Babcia "Det händer ibland, vi har lite problem med det tekniska här i huset just nu"
+	
+#	"Det verkar som att det är något konstigt med dörren till mitt rum...":
+#		Babcia "Vad nu då?"
+#		Sebastian "Jag fattar inte riktigt men jag kommer in på badrummet på nån vänster"
+#		Babcia "Jaha... ja det är sånt som händer ibland tyvärr"
+
+	"Ursäkta att jag stör men mitt rum ser ut typ som ett badrum":
+		[COMPLAIN]
+		Babcia "Hmm?"
+		CHOICE {
+			"Alltså, det verkar inte finnas någon säng på mitt rum":
+			"Det står ett badkar där inne och det är inte så mysigt direkt...":
+		}
+		Babcia "OK, det har nog blivit något fel på din dörr"
+		Babcia "Det händer då och då här i huset, vi har lite problem med det tekniska"
+}
+
+Sebastian "Men..."
+Babcia "Jag ska ringa så att någon fixar det."
+
+CHOICE {
+	"Eh ok, tack så hemskt mycket!":
+		Babcia "En sekund"
+	"Jag blev väldigt orolig...":
+		Babcia "Ta något stärkande i minibaren sen bara"
+	"Usch, jag känner mig alldeles snurrig":
+		Babcia "Svaga nerver?"
+		Babcia "Du ser lite klen ut"
+	"Vad bra, jag blev väldigt förvånad":
+		
+}
+
+DEFOCUS
+
+WAIT 1
+Babcia.TakeOutItem(BabciasPhone)
+Babcia "Du kan vänta här nere så länge om du vill"
+WAIT Babcia.HasHandItemWithName(BabciasPhone)
+Babcia.UseHandItem()
+WAIT 3
+Babcia "Ja hej, hej gullet"
+Babcia "Det har blivit fel på en dörr här"
+WAIT 1
+Babcia "Mm"
+WAIT 1
+Babcia "Mhm, jag vet!"
+Babcia "Ja"
+Babcia.PutAwayHandItem()
+
+Story("FixTheDoor")
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+CHOICE ETERNAL {
+	"Har någon fixat dörren än?":
+		Babcia "Lugna ner dig, min herre!"
+		Babcia "Du kan väl gå och se om Hank är klar?"
+		CHOICE {
+			"Förlåt...":
+			"Ja det ska jag göra":
+			"OK":
+		}
+	"Det var inget":
+}
+DEFOCUS
+
+GOTO AGAIN

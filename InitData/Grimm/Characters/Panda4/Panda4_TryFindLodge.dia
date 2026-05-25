@@ -1,0 +1,4 @@
+Panda4.SetTimetable(Panda4)
+
+LISTEN Sebastian_talk_Panda4
+Panda4 "Tjena, tjena"

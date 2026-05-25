@@ -1,0 +1,11 @@
+08:00 - 10:30 Breakfast 	Fika Hotel_Diner
+10:30 - 21:00 Meetings		BeAtTing Ministry_MeetingRoom_Point
+21:00 - 08:00 Sleep			Sleep 	 Hotel_Room5_Bed
+
+[BowerGambling]
+17:00 - 00:00 Gambling		BeInRoom 	Casino_Floor2
+00:00 - 03:00 Gambling		BeInRoom 	Casino_Floor1
+03:00 - 17:00 Sleeping		Sleep 		Hotel_Room5_Point
+
+[Bower_TalkToSebastian]
+00:00 - 24:00   _ Interact Sebastian

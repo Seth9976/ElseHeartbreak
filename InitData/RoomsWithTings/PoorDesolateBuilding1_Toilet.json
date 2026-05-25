@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":144,"values":["\"Room\"","\"PoorDesolateBuilding1_Toilet\"","[]","false","{\"x\":27995,\"y\":0}","\"001110011110001111101110011110000110000110000100\"","{\"x\":6,\"y\":8}","{\"x\":1,\"y\":2}"]}

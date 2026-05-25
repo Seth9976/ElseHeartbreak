@@ -1,0 +1,23 @@
+
+SetHour(20)
+
+WAIT 2
+
+George.SetTimetable("GeorgeGambling")
+#George.Pos(Casino_Exterior_PointOnGround)
+
+George.Pos(Burrows_North_Point)
+#George.Pos(Casino_Exterior_PointOnGround)
+#George.Walk(Casino_Floor2_Point)
+
+#George.Walk(Casino_Floor1_Point)
+
+# TilePath(Casino_Floor1_CagePoint, Casino_Floor1_Point)
+# TilePath(Casino_Floor1_Point, Casino_Floor1_CagePoint)
+
+# Path(Burrows_North_Point, Casino_Floor2_Point)
+
+#Sebastian.Pos(Casino_Floor2_Point)
+#Sebastian.Pos(Burrows_North_Point)
+#Sebastian.Walk(Casino_Floor2_Point)
+Sebastian.Pos(Casino_Floor1_Point)

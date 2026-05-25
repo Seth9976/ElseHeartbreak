@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":212,"values":["\"Room\"","\"Minimal\"","[]","true","{\"x\":0,\"y\":0}","\"100000000000101\"","{\"x\":5,\"y\":3}","{\"x\":-2,\"y\":-2}"]}

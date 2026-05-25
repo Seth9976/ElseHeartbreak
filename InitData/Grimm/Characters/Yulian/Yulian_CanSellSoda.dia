@@ -1,0 +1,98 @@
+
+#WAIT Yulian.IsAtTask(Relaxing) 
+LISTEN Sebastian_talk_Yulian
+
+Sebastian.SetKnowledge("HasTalkedToYulian")
+
+Yulian.StartTalking()
+Yulian "Ja?"
+FOCUS
+CHOICE {
+	"God dag min herre, är DU intresserad av att testa Wellspring Soda?":
+		GOTO DISS_SODA
+
+	"Vackert väder ikväll":
+		Yulian "Ja visst är det"
+		CHOICE {
+			"Skulle sitta fint med något att dricka, eller hur?":
+				Yulian ""
+				CHOICE {
+					"Du kanske vill köpa en burk med läskande Wellspring Soda?":
+						GOTO DISS_SODA
+					"Vill du hänga med till någon bar och ta en öl?":
+						Yulian "Nej det är bra grabben, jag ska snart gå hem"
+						Sebastian "Och du vill inte köpa en läsk?"
+				}
+			"Du vill inte köpa en läsk av mig?":
+
+			"Perfekt dag för att bara sitta å slappa i solen":
+				Yulian "Ja, om man inte har viktigare saker för sig så"
+				GOTO DONT_SELL_SODA
+		}
+}
+
+[DISS_SODA]
+
+Yulian "Jag dricker bara vatten"
+Yulian "Och jag skulle verkligen råda dig att följa mitt exempel"
+
+CHOICE {
+	"OK..?":
+		Yulian "Lita på mig"
+
+	"Nej, de är jättegoda!":
+		Yulian "Det tvivlar jag inte på"
+
+	"Visst. Ha en bra dag!":
+		Yulian "Du med"
+}
+
+
+Yulian.SetKnowledge("SebastianIsSalesman")
+
+[DONT_SELL_SODA]
+
+Yulian.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Yulian [LEAVE_ME_ALONE] {
+	Yulian "Hörru, lämna mig i fred nu är du snäll"
+}
+
+WAIT IsHour(0)
+CANCEL LEAVE_ME_ALONE
+
+
+WAIT Sebastian.IsAtTask(Relaxing) LISTEN Sebastian_talk_Yulian
+
+Yulian.StartTalking()
+Yulian "Du igen?"
+
+FOCUS
+
+CHOICE {
+	"Du råkar inte vara sugen på Wellspring Soda?":
+		Yulian "Nej, inte idag heller"
+
+	"Ja vi sågs tidigare ja":
+}
+
+Yulian "Vad vill du egentligen?"
+
+CHOICE {
+	"Eh jag vet inte... jag måste sälja massa sådan här burkar...":
+		Yulian "Vad händer annars?"
+		CHOICE {
+			"Jag antar att jag får sparken":
+			"Jag måste åka hem och bo med min mamma och pappa igen":
+		}
+	"Ingenting... ursäkta jag ska gå istället":
+}
+
+Yulian.StopTalking()
+
+DEFOCUS
+
+
+
+

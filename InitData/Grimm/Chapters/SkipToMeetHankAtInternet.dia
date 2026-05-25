@@ -1,0 +1,9 @@
+
+START SkipToAfterGhosts
+
+WAIT 1
+Sebastian.Pos(Ivan)
+
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_1)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_2)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_3)

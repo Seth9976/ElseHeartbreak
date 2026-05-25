@@ -1,0 +1,12 @@
+
+Story("FirstDay")
+Story("TryFindLodge")
+Story("AfterPyjamas")
+Story("AlternativeExperiment")
+
+SetClock(01, 07, 00, 0)
+
+#Sebastian.Pos(Ministry_Exterior_Trigger_1)
+Sebastian.Pos(Ministry_Lobby_Point1)
+
+START GetHackdev

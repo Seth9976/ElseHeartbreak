@@ -1,0 +1,54 @@
+FOCUS
+
+[TRY_GIVE_AGAIN]
+Pixie.StartWaitForGift()
+LISTEN Sebastian_give_Pixie {
+    RemoveDanglingDialogueOptions("Pixie_DidYouStealTheFiles")
+    WAIT Pixie.HasAnyHandItem()
+    IF Pixie.HasHandItemOfType(Floppy) {
+        Sebastian.SetKnowledge("GaveFilesToPixie")
+        GOTO GOT_FILES
+    } 
+    ELIF Pixie.HasHandItemOfType(Memory) {
+        Sebastian.SetKnowledge("GaveFilesToPixie")
+        GOTO GOT_FILES
+    } 
+    ELSE {
+        Pixie "Den här kan väl inte ha några filer på sig?"
+        Pixie.Give()
+        WAIT Pixie.HasNoHandItem()
+        GOTO TRY_GIVE_AGAIN
+    }
+}
+
+
+LISTEN TIMER_TRIGGER [CANNOT_FIND_THEM] {
+    CHOICE {
+        "Äsch, nu hittar jag dem inte bara för det...":
+        "Öhhh... jag vet inte var de tog vägen!":
+    }
+    Pixie.StopWaitForGift() 
+    Pixie "Huh?"
+    Pixie.SetKnowledge(SebastianCanGiveFilesLater)
+    Pixie "Du kan ge mig dem senare då"
+    STOP  
+}
+
+WAIT 9
+BROADCAST TIMER_TRIGGER
+LISTEN DONT_GO_PAST_HERE
+
+
+[GOT_FILES]
+CANCEL CANNOT_FIND_THEM
+Pixie.StopWaitForGift()
+Pixie "Riktigt bra!"
+Pixie.PutAwayHandItem()
+WAIT Pixie.HasNoHandItem()
+
+DEFOCUS
+
+STOP # THERE'S SOMETHING IN THIS DIALOGUE THAT DOESN'T GET STOPPED BY THE DIA ENDING SO WE NEED AN EXPLICIT STOP HERE TO MAKE IT FINISH AND ENABLE THE INTERRUPT TO RETURN
+
+
+

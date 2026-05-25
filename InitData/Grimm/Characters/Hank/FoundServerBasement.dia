@@ -1,0 +1,96 @@
+
+WAIT Hank.IsInRoom(Hotel_ServerBasement) AND Hank.IsWithinDistance(Sebastian, 7)
+
+
+FOCUS
+Hank.StartTalking()
+
+Hank "Vänta nu, vad gör DU här?"
+
+CHOICE {
+    "Jag lyckades ta mig in!":
+        Hank "Eh, ja?"
+        [QUESTIONS]
+        CHOICE {
+            "Vad är det här för plats här nere??!":
+                [GUESTS_NOT_ALLOWED]
+                Hank "Jag sköter hotellet härifrån"
+                Hank "Gäster får egentligen inte vara här nere"
+                CHOICE {
+                    "Nähä, OK förlåt":
+                        CHOICE {
+                            "Hej då då!":
+                            "Jag går upp till Lobbyn då":
+                            "Inte ens om jag ber snällt?":
+                                GOTO COOL
+                        }
+                        Hank "OK, ses"
+                        GOTO BYE
+
+                    "Snälla, kan jag inte få vara här?!":
+                        GOTO COOL
+                }
+
+            "Det är väl lugnt?":
+                [COOL]
+                Hank "Alltså..."
+                Hank "Jo jo, OK"
+                Hank "Pilla inte på inställningarna bara"
+                Hank "Babcia blir så sur"
+                Sebastian.SetKnowledge(Babcia)
+                CHOICE {
+                    "Nej, OK":
+                    "Heh... OK":                    
+                }
+        }
+
+    "Vad gör du här?":
+        Hank "Jag jobbar här ju"
+        CHOICE {
+            "Aha...":
+            "Ja ja just det":
+            "Mm?":
+        }
+        GOTO GUESTS_NOT_ALLOWED
+
+    "Hej Hank!":
+        Hank "Öh?"
+        Hank "Vad gör du här, sa jag..?"
+        GOTO QUESTIONS
+}
+
+[MORE]
+CHOICE {
+    "Är du här nere ofta?":
+        Hank "Ja, varje dag"
+        Hank "Måste se över att allting är i sin ordning"
+        GOTO MORE
+
+    "Är det OK om jag använder den stora datorn där? Den med ratten":
+        Hank "Nä, helst inte"
+        CHOICE {
+            "OK":
+            "Synd":
+        }
+        GOTO MORE
+
+    "Jag kanske ska kolla lite på TV då":
+        Hank "Ja, det är alltid trevligt"
+        Hank "Fast min TV hemma är bättre, du får gärna komma förbi där om du vill"
+        CHOICE {
+            "Snällt!":
+            "OK, schysst":
+            "Jaha":
+        }
+
+    "Men jag ska nog gå upp till lobbyn nu":
+        Hank "OK, OK"
+        Hank "Vi ses"
+}
+
+[BYE]
+Hank.StopTalking()
+DEFOCUS
+
+
+

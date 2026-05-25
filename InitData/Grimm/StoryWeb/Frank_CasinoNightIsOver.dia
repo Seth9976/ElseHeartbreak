@@ -1,0 +1,9 @@
+
+LISTEN Sebastian_talk_Frank [BEFORE_BRIEFING] {
+    Frank "1 sekund"
+}
+
+LISTEN HasTalkedToPixie
+CANCEL BEFORE_BRIEFING
+
+

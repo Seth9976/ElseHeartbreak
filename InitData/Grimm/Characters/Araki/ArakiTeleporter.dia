@@ -1,0 +1,9 @@
+
+[AGAIN]
+
+LISTEN Araki_open_Lodge_Entry_DoorToRoom1
+Lodge_Room1_DoorToRoom2.UnlockDoor()
+LISTEN Araki_open_Lodge_Room1_DoorToRoom2
+Lodge_Room1_DoorToRoom2.LockDoor()
+
+GOTO AGAIN

@@ -1,0 +1,93 @@
+Sebastian.SleepUntil(10)
+
+WAIT IsHour(9)
+Sebastian.ClearHandItem()
+Sebastian.Pos("Poor_Bed_Poor_Bed")
+Sebastian.WakeUp()
+#Sebastian.SetFieldToFloat("sleepiness", 80)
+
+
+WAIT Sebastian.IsWithinDistance(Pixie, 5) AND Pixie.NotTalking()
+
+FOCUS
+Pixie.Interact(Sebastian)
+
+Pixie "Oj hej Sebastian, är du vaken?!"
+Pixie.StartTalking()
+
+Sebastian.Interact(Pixie)
+
+CHOICE {
+	"...":
+	"ööööööööh":
+	"huh???":
+	"Aj mitt huvud!":
+}
+
+Pixie "Hahaha du ser förfärlig ut"
+Sebastian "Öh?"
+Pixie "Blev några öl för mycket i går va?"
+
+[BLERGH]
+
+CHOICE {
+	"Urgh...":
+		GOTO BLERGH
+	"...":
+		GOTO BLERGH
+	"Ööööööh... var är jag?":
+		Pixie "I min lägenhet, haha"
+		Pixie "Ivan lyckades bära upp dig hit i går efter att du däckat"
+}
+
+CHOICE {
+	"Åfan":
+	"Jaha...":
+	"Oj då":
+}
+
+Pixie "Men du, jag måste verkligen dra till jobbet nu"
+Pixie "Du kan ligga kvar här och dra dig om du vill"
+Pixie "Det finns lite fil i kylen, det är bara att ta"
+
+CHOICE {
+	"OK, tack så mycket":
+		Pixie "Vi hörs sen då, hej då!"
+		
+	"Nä men jag mår bra nu! Jag kanske kan följa med dig till ditt jobb?":
+		Pixie "Haha nä du måste vila, det ser jag på dig"
+		CHOICE {
+			"Nä men snääälla":
+				Pixie "Nej säger jag! Hej då"
+			"OK":
+				Pixie "Hörs sen, hej då!"
+		}
+}
+
+IF Ivan.HasKnowledge(Sebastian) {
+	Pixie "Eller vänta, förresten"
+	Pixie "Ivan sa att han kände igen dig!"
+	Pixie "Ni hade setts på stan typ?"
+	CHOICE {
+		"Eh... ok?":
+			Pixie "Lite roligt bara"
+		"Jaha vad konstigt":
+			Pixie "Mmm?"
+		"Nej det var nog inte jag":
+			Pixie "Nä, ok"
+	}
+	Pixie "Ja ja, ha det fint nu"
+	Pixie "Och kom ihåg att dricka vatten!"
+}
+
+Pixie.StopTalking()
+Pixie.SetTimetable(Pixie)
+
+DEFOCUS
+
+
+
+
+BROADCAST ShouldTryFindLodge
+
+

@@ -1,0 +1,90 @@
+
+LISTEN Sebastian_talk_Jorgen
+FOCUS
+Jorgen.StartTalking()
+
+Jorgen "Ja, hej?"
+
+CHOICE {
+    "God morgon":
+        Jorgen "God morgon, du"
+    "God middag":    
+        Jorgen "God middag, du"
+    "God kväll":    
+        Jorgen "God kväll, du"
+}
+
+CHOICE {
+    "Ha det fint!":
+        Jorgen "Du med"
+
+    "Hej då!":
+        Jorgen "Hej, hej"
+}
+
+Jorgen.StopTalking()
+DEFOCUS
+
+
+WAIT 20
+
+
+LISTEN Sebastian_talk_Jorgen
+FOCUS
+Jorgen.StartTalking()
+
+[MORE]
+CHOICE {
+    "Var det du som var lite nere förut?":
+        Jorgen "Va?!"
+        Jorgen "Nej..."
+        Jorgen "Jag är ganska OK"
+        Jorgen "Du kanske tänker på Mats, han är deppig som fan"
+        Jorgen "Han trivs inte på jobbet"
+        CHOICE {
+            "Jaha, tråkigt...":
+                Jorgen "Ja verkligen"
+                Jorgen "Han är lite av en filosof"
+
+            "OK, jag förstår":
+        }
+        [HOW_DO_YOU_DO]
+        Jorgen "Hur går det för dig då?"
+        CHOICE {
+            "Går väl bra...":
+                Jorgen "Härligt att höra"
+            "Letar efter mitt hotell":
+                Jorgen "Jaså, ja ja"
+                GOTO GOOD_LUCK
+            "Letar efter en person...":
+                Jorgen "Mhm?"
+                [GOOD_LUCK]
+                Jorgen "Men lycka till då"
+        }
+
+    "Vackert väder":
+        Jorgen "Jepp"
+        GOTO MORE
+
+    "Har du cigg?":
+        Jorgen "Ja"
+        Jorgen "Men bara en... och jag måste ha den själv"
+        CHOICE {
+            "OK, OK":
+            "Jaha...":
+        }
+        Jorgen "Men om kolla ute i hamnen, det bor en snubbe där som säljer sjukt billigt"
+        Jorgen "Det är väl inte helt lagligt men vafan"
+
+        CHOICE {
+            "Tack för tipset!":
+                Jorgen "Ingen fara"
+
+            "Sånt där håller jag inte på med":
+                Jorgen "Nä, nä"
+                Jorgen "Inte jag heller"
+        }
+}
+
+Jorgen.StopTalking()
+DEFOCUS

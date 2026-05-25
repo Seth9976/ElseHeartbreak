@@ -1,0 +1,26 @@
+
+WAIT Sebastian.IsDrunk(300)
+FOCUS
+	
+WAIT 3
+Sebastian "Fan va full jag känner mig"
+
+WAIT 3
+Sebastian "Urk..."
+#FOCUS
+CHOICE {
+	"Ursäkta, var finns toaletten?":
+	"Pixie?!":
+	"Usch jag mår inte bra":
+}
+#DEFOCUS
+
+WAIT 3
+Sebastian "Woeööwhhh"
+
+WAIT 5
+
+Sebastian.SetKnowledge(GotDrunkAtClubDot)
+
+DEFOCUS
+BROADCAST SebastianDrunkAtClubDot

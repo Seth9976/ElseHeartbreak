@@ -1,0 +1,218 @@
+# Felix sitter i soffan och skakar lite pga droger, pratar inte
+# Pixie och Petra sitter i soffan med varsin öl, de väntar på Ivan
+
+#GOTO SKIP
+
+WAIT Sebastian.IsInRoom(PetrasApartment)
+
+IF Pixie.IsInRoom(PetrasApartment) {
+	# just go on
+} ELSE {
+	WAIT Pixie.IsInRoom(PetrasApartment)
+	Sebastian.SetKnowledge(WaitingForPixieAtPetras)
+}
+
+WAIT Sebastian.IsWithinDistance(Pixie, 8)
+Pixie "Tja Sebbe!"
+BROADCAST RealPartyHasStarted
+FOCUS
+
+CHOICE {
+	"Hej!":
+		Sebastian "Hur är läget?"
+		
+	"Yo motherfuckers":
+		#Pixie.LookAt(Sebastian)
+		Pixie "Vafan säger du?!"
+		CHOICE {
+			"Eh, får man inte säga så eller?":
+				Pixie "Hahaha"
+				Pixie "Det låter inte jättecoolt"
+				Sebastian "OK strunt samma, hur är läget?"
+			"Äsch, slappna av! Hur är läget?":
+		}
+		
+	"Här var det livat!":
+		Sebastian "Allt väl?"
+
+	"[CHEAT]":
+		GOTO CHEAT
+}
+DEFOCUS
+
+Petra "Jo det är bra"
+Pixie "Jadå"
+
+IF Sebastian.IsStanding() {
+	Pixie "Sätt dig ner förresten"
+	WAIT 2
+	#LISTEN Sebastian_sit_PetrasApartmentChair3
+	WAIT Sebastian.IsSitting()
+	FOCUS
+}
+
+IF Sebastian.HasKnowledge(WaitingForPixieAtPetras) {
+	Petra "Ey, jag tänkte på en sak"
+	Petra "Hur gammal tror ni Felix är?"
+	Pixie "Haha"
+} ELSE {
+	Petra "Vi diskuterar just hur gammal Felix är"	
+}
+
+Pixie "Han kan ju inte vara yngre än 19"
+Petra "Eller..?!"
+Pixie "Hahaha, nä... jag vet inte!"
+
+FOCUS
+
+CHOICE {
+	"Kan ni inte bara fråga honom?":
+		Pixie "Heh, han är lite borta"
+		Pixie "Felix, hur gammal är du?!"
+		Pixie ""
+		Felix "O____O"
+		Pixie ""
+		Pixie "Ja du ser ju"
+		
+	"Vad är det han gör?":
+		Pixie "Han har fått tag på några jävla piller"
+}
+
+CHOICE {
+	"Oj då":
+	"Usch det verkar lite farligt":
+	"Heh ok...":
+}
+
+WAIT 3
+
+Pixie "Ååååå, kan inte Ivan komma snart med resten av ölen, jag har nästan slut redan"
+
+CHOICE {
+	"Jaha, kommer Ivan?":
+		Pixie "Jepp, han skulle bara svänga förbi affären och köpa med sig lite bärs först"
+		CHOICE {
+			"OK, ...kul!":
+			"Jaha":
+		}
+		
+	"Du kan få en av mina öl":
+		Pixie "Å, tack Sebbe! Du är så jävla snäll"
+		Pixie "Vi borde hitta en tjej till honom, inte sant Petra?!"
+		Petra "Ja verkligen"
+		Petra "Vad gillar du för slags tjejer Sebastian?"
+		Sebastian "Ehhhh..."
+}
+
+#Felix.PlayAnimation("Stretch")
+Felix "SEBASTIAN!"
+Sebastian "Va?"
+Felix "Jag såg inte att du var här!!!"
+Felix "Jag har köpt världens ballaste grej!"
+Felix "Vill du prova?"
+
+CHOICE {
+	"Vad är det för något?":
+		Felix "Det här är fina grejer!"
+		Sebastian "OK?"
+		Felix "Det kallas Citnap"
+		
+	"Nej...":
+		Felix "Vet du vad det är ens?"
+		CHOICE {
+			"Knark?":
+			"Njae...":
+		}
+		Felix "Det här är Citnap, jag fick det av en kompis!"
+		Felix "Du kan få en om du vill"
+		Sebastian "Hmm"
+		
+	"Aldrig i livet!":
+		Felix "Vadå, det är inte farligt"
+		Sebastian "Jag knarkar inte"
+		Felix "Men Sebastian..."
+}
+
+[SKIP]
+
+Felix "Det är helt ofarligt"
+Felix "Du kommer inte känna mycket alls"
+Felix "Förutom att det är AWESOME då!"
+
+CHOICE {
+	"Jag vet inte... kan man inte bli knäpp av det?":	
+		Felix "Kom igeeeen"
+	"Ja OK då":
+		Felix "Grymt!"
+	"Jag har redan testat":
+		Felix "Verkligen??!"
+		Felix "Ja men då vet du ju hur grymt det känns!"
+}
+[CHEAT]
+DEFOCUS
+
+BROADCAST RoamingPartyStarted
+SetCameraAutoRotateSpeed(0)
+
+Felix.SetTimetable("")
+Felix.Walk(PetrasApartmentPoint1)
+
+WAIT Felix.IsIdle() {
+	Felix.Dir(Down)
+	Felix "Kom här Sebastian"
+	Felix "Jag ska ge dig lite"
+}
+
+Ivan.StopTalking()
+Ivan.SetFieldToFloat("sleepiness", 0)
+Ivan.Pos(OutsidePetrasApartment_Point1)
+Ivan.Interact(OutsidePetrasApartment_Door1)
+Ivan.SetTimetable(Ivan_CrazyParty)
+
+WAIT Ivan.IsWithinDistance(Pixie, 15) {
+	WAIT 3
+	Ivan "Hallå allihop"
+	Pixie "Tjena snygging!"
+	Ivan "Jag hittade ingen öl"
+	Ivan "Eller den var jävligt dyr"
+	Ivan "Så jag köpte ingen"
+	Pixie "Men vad i...!!!"
+	Petra "Lugn Pixie, vi har ju kvar"
+	WAIT 2
+	Petra "Jag tror jag ska DJ:a lite"
+	Petra.SetTimetable("PetraDjAtHome")
+}
+
+
+LISTEN PartyIsOver
+
+WAIT Sebastian.NotTalking()
+
+IF Sebastian.IsSleeping() {
+	# don't wake him up
+}
+ELSE {
+	Sebastian.CancelWalking()
+}
+
+Pixie.StartTalking()
+Felix.StartTalking()
+Petra.StartTalking()
+
+Pixie "Nej, nu måste jag gå hem och sova!"
+Ivan "Ja, kom älskling så går vi"
+Pixie.SetTimetable(Pixie)
+Pixie.StopTalking()
+
+Petra "OK, ha det bra vänner!"
+Petra "Jag ska väl också gå och slagga lite"
+
+Felix "Är det OK om jag stannar kvar ett tag Petra?"
+Petra "Asså fan Felix, kan du inte gå hem och knarka?!"
+Petra "Jag måste också sova"
+
+Felix "Ja ja, OK"
+Felix "Tja då allihop!"
+
+Felix.StopTalking()
+Petra.StopTalking()

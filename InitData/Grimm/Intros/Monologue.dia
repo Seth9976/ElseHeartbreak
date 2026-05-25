@@ -1,0 +1,27 @@
+
+Sebastian.Pos(SebastiansApartment_Point)
+
+WAIT 3
+
+FOCUS
+WAIT 3
+Sebastian "Hej"
+WAIT 1
+Sebastian "Jag heter Sebastian"
+Sebastian "Jag har just fått ett jobb som försäljare i Dorisburg"
+Sebastian "Det är mitt första jobb någonsin så jag är rätt nervös"
+WAIT 1
+Sebastian "Men det ska nog gå bra"
+WAIT 1
+Sebastian "Ska bo på något hotell där"
+Sebastian "Devotchka sa de att det hette..."
+Sebastian "Konstigt namn"
+WAIT 1
+Sebastian "Jag åker dit med båt imorgon"
+Sebastian "Dorisburg ligger långt borta verkar det som"
+WAIT
+WAIT 3
+DEFOCUS
+Sebastian.Pos(HarborEast_Point)
+
+Story("Arrival")

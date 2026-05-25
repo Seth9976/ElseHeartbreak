@@ -1,0 +1,72 @@
+
+Jorgen.SetTimetable("JorgenClubDot")
+
+WAIT Jorgen.IsInRoom(Mines_ClubDot)
+WAIT 5
+Jorgen.SetHandItem(JorgensGrog)
+
+WAIT IsHour(5) {
+	Jorgen.SetTimetable("Jorgen")
+	Jorgen.PutAwayHandItem()
+	STOP
+}
+
+START JorgenTakesSip
+
+LISTEN Sebastian_talk_Jorgen
+FOCUS
+Jorgen.StartTalking()
+Jorgen.Interact(Sebastian)
+Jorgen "Hej du"
+[MORE_QUESTIONS]
+CHOICE {
+	"Vad dricker du?":
+		Jorgen "Grogg"
+		Jorgen "Vill du testa?"
+		[GROGG]
+		STOP JorgenTakesSip
+		CHOICE {
+			"Ehmm... njae":
+				Jorgen "Jo men kom igen, du är väl ingen mes?"
+			"Ja, gärna!":
+			"Ok, visst":
+		}
+		WAIT Jorgen.HasHandItemOfType(Drink)
+		WAIT Jorgen.IsIdle()
+		Jorgen.Give()
+		WAIT Sebastian.HasHandItemWithName(JorgensGrog)
+		JorgensGrog.SetCode(JorgensGrogStrong)
+		CHOICE {
+			"Oj, den luktar... starkt":
+				Jorgen "Jo"
+			"Tack! Verkar god":
+				Jorgen "Jodå"
+			"Hmm, vågar jag verkligen dricka den här?":
+				Jorgen "Klart du gör"
+		}
+
+	"Vad har du för fräck hjälm på dig?":
+		Jorgen "Jobbar på fabriken"
+		CHOICE {
+			"Aha":
+			"Fabriken?":
+				Jorgen "Jepp"
+		}
+		GOTO MORE_QUESTIONS
+
+	"Trevligt att träffas, vi ses":
+		Jorgen "Du ska inte ha en grogg då?"
+		GOTO GROGG
+}
+Jorgen.StopTalking()
+DEFOCUS
+
+[AGAIN]
+LISTEN Sebastian_talk_Jorgen
+FOCUS
+Jorgen.StartTalking()
+Jorgen.Interact(Sebastian)
+Jorgen "Visst var den god?"
+Jorgen.StopTalking()
+DEFOCUS
+GOTO AGAIN

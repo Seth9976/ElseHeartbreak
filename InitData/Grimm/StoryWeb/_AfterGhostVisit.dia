@@ -1,0 +1,10 @@
+
+WAIT Sebastian.IsWithinDistance("Internet_HideoutPoint", 20) {
+	Story("FoundNetHideout")
+}
+
+LISTEN IvanIsFree {
+	Story("CurseIsOver")
+}
+
+LISTEN DontStop

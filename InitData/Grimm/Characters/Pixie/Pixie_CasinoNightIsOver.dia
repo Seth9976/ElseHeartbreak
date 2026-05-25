@@ -1,0 +1,404 @@
+
+Pixie.SetTimetable(PixieGoHome)
+
+WAIT Pixie.HasKnowledge(SebastianCameToCasino) AND Pixie.IsWithinDistance(Sebastian, 20) AND Sebastian.NotTalking() [AFTERTALK] {
+	Log("Pixie catches you on the way home from casino!")
+	Pixie.SetTimetable("TalkToSebastian")
+	WAIT Pixie.IsWithinDistance(Sebastian, 5)
+	FOCUS
+	Pixie.StartTalking()
+	Pixie "Jag går hem nu"
+	CHOICE {
+		"Förlåt, vad sa du?":
+			Pixie "Jag går hem nu"
+			Sebastian "Ok"
+		"Ok":
+	}
+	CHOICE {
+		"Sov så gott!":
+			Pixie "Du med!"
+			Pixie "Kom förbi kontoret imorgon förresten"
+			Pixie "Så får vi gå igenom lite vad som hände idag"
+			CHOICE {
+				"Ok":
+				"Jepp!":
+			}
+		"Ska jag följa med dig en bit på vägen?":
+			Pixie "Ja, det får du gärna"
+			START WalkHerHomeFromCasino
+	}
+	Pixie.StopTalking()
+	DEFOCUS
+	Pixie.SetTimetable("Pixie")
+}
+
+# next day #
+
+WAIT IsDay()
+CANCEL AFTERTALK
+
+UnlockDoor(Lodge_Room1_DoorToRoom2)
+Frank.SetTimetable("FrankLongFika")
+Pixie.SetFieldToFloat("sleepiness", 0)
+Pixie.SetTimetable("Pixie")
+Pixie.PutIntoInventory(PixiesModifier)
+
+Yulian.SetTimetable(Yulian_WorkOvertime) # should stay in his seat
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Så, vad tyckte du om vårt besök på Casinot?"
+
+CHOICE {
+	"Det var kul":
+		Pixie "Ja, visst var det?!"
+		Pixie "Jag har nästan aldrig varit där förut"
+	"Mycket intressant":
+		Pixie "Mm, verkligen"
+	"Lite för spännande för min smak":
+		Pixie "Hehe, ok"
+		Pixie "Jag tyckte det var roligt"
+}
+
+Pixie "Vi måste rapportera till Frank hur det gick"
+Pixie "Problemet är att jag måste gå på en dejt med Ivan"
+
+CHOICE {
+	"Jaha...":
+	"OK?":
+	"OK?!":
+}
+
+Pixie "Så jag tänkte att du kunde briefa Frank på egen hand?"
+
+CHOICE {
+	"Ja...":
+	"Men han är läskig!":
+		Pixie "Äsch, Frank är supersnäll"
+		Pixie "Du måste bara strunta i hur grym han är på datorer"
+		Pixie "Och på att DJ:a..."
+		Pixie "Och hur snyggt han klär sig"
+		CHOICE {
+			"Mm?":
+			"OK jag ska försöka":
+		}
+	"Oj då":
+	"Briefa?":
+		Pixie "Ja, berätta hur det gick på uppdraget"
+}
+
+IF Frank.IsInRoom(Lodge_Room2) {
+	Pixie "Jag tror att han är i fikarummet"	
+} ELSE {
+	Pixie "Jag vet inte var han är... du får leta"
+}
+
+Pixie "Men nu måste jag sticka"
+Pixie "Ivan väntar nog redan på mig"
+Pixie "Å, jag är nervös... han lät så speciell på rösten"
+Pixie.StopTalking()
+Pixie.SetTimetable(PixieCakeParty)
+Ivan.SetTimetable(IvanCakeParty)
+UnlockDoor(Plaza_DoorToPixiesApartment)
+
+DEFOCUS
+BROADCAST HasTalkedToPixie
+Pixie "Vi ses!"
+
+
+
+
+
+LISTEN Sebastian_talk_Frank
+FOCUS
+
+Frank.StartTalking()
+Frank "Tja!"
+Frank "Vad har du på Monad nu då?"
+Frank "Vad fick ni reda på?"
+
+CHOICE {
+	"Hon är väldigt välklädd":
+		Pixie "Haha ja herre gud"
+		Frank "Jo det är hon"
+		Frank "Men vad sa hon egentligen?"
+
+	"Hon pratar inte så mycket":
+		GOTO ANYTHING
+
+	"Jag vet inte...":
+		[ANYTHING]
+		Frank "Men något måste hon väl ha sagt?"
+}
+
+Typer4.SetTimetable(Typer4_LodgeBreak)
+Typer4.Pos(Lodge_Entry_Point1)
+
+Felix.Pos(Lodge_Entry_Point1)
+Felix.SetTimetable(WarnFrankAndSebbe)
+Felix.SetRunning(true)
+Felix.StopTalking()
+
+CHOICE {
+	"Jag pratade inte med henne direkt":
+		Frank "Men det var ju ditt uppdrag!"
+		CHOICE {
+			"Jag visste inte hur hon såg ut":
+				Frank "Va? Pixie skulle ju berätta det för dig!"
+				CHOICE {
+					"Jag typ glömde bort":
+					"Jo men det gjorde hon":
+						Frank "OK, men du misslyckades ändå?"
+						CHOICE {
+							"Jupp":
+							"Ja, typ...":
+						}
+					"Ja varför gjorde hon inte det?!":
+						Frank "Jag ska ta ett snack med henne"
+						Frank "Skit också!"
+						Frank "Ja ja... såg du NÅGOT?"
+						GOTO WHAT_DID_YOU_SEE
+				}
+
+			"Hon kom aldrig, tror jag...":
+				Frank "Va?"
+				Frank "Jo, hon måste ha varit där"
+				CHOICE {
+					"Nej":
+					"Alltså, jag tror inte det":
+				}
+				Frank "Skumt"
+				Frank "Mycket konstigt..."
+				Frank "OK, men såg du något annat där inne då? Några observationer?"
+				GOTO WHAT_DID_YOU_SEE
+		}
+
+	"Hon var rätt så trevlig tycker jag":
+		Frank "Jaså?"
+		Frank "Ja hon har ett rykte om sig att kunna charma de flesta"
+		Frank "Akta dig!"
+		CHOICE {
+			"Äsch, så farlig kan hon inte vara":
+			"OK, OK!":
+				Frank "Bra"
+		}
+		Frank "Hmm..."
+
+	"Hon är väldigt svår att komma in på livet":
+		[HARD_TO_TALK_TO]
+		Frank "Jaha?"
+		CHOICE {
+			"Och sen drog hon":
+				Frank "Bara så där?"
+				CHOICE {
+					"Mm...":
+					"Jupp, typ":
+					"Ja!":
+				}
+
+			"Hon ville inte berätta något om sig själv":
+
+			"Hon pratade mest om att spela":
+				Frank "Aha"
+		}
+
+	"Hon blev väldigt konstig efter ett tag...":
+		GOTO HARD_TO_TALK_TO
+}
+
+Frank "Kan hon ha misstänkt något pga av att hon kände igen dig eller Pixie?"
+
+CHOICE {
+	"Pixie var i princip aldrig i närheten av henne, så vitt jag vet":
+	"Det tror jag inte":
+	"Kanske?":
+		Frank "Vi får väl se..."
+		WAIT 1
+		Frank "Så inga mer observationer?"
+		GOTO WHAT_DID_YOU_SEE
+}
+
+Frank "OK"
+
+[WHAT_DID_YOU_SEE]
+
+CHOICE {
+	"Jag vann lite pengar!":
+		Frank "Mhm"
+
+	"Jag blev väldigt sugen på att försöka hacka deras enarmade banditer":
+		CHOICE {
+			"Måste vara hur enkelt som helst":
+			"Kan inte vara så svårt...":
+		}
+		Frank "Om du får in en modifierare där ja"
+		Frank "Deras säkerhetsrutiner är inte att leka med"
+		Frank "Du vet att de scannar varenda cell i kroppen på dig?"		
+		CHOICE {
+			"Jo visst, men man kan väl få drömma":
+			"Jaha... OK då":
+		}
+
+	"Det var ett häftigt ställe":
+		[YOU_MUST_CONCENTRATE]
+		Frank "Haha, ja?"
+		Frank "Men du måste fokusera när du är ute på uppdrag!"
+		Frank "Stället kryllar ju av byråkrater"
+
+	"Det var bra musik":
+		GOTO YOU_MUST_CONCENTRATE
+}
+
+CHOICE {
+	"Jag är ledsen att jag inte hittade mer information":
+	"Jaha, vad händer nu då..?":
+	"Vad är det med hon här Monad egentligen? Jag fattar ingenting":
+}
+
+WAIT Felix.IsWithinDistance(Frank, 20)
+Felix "Ey, det verkar som att vi har problem"
+Felix "Det står en snubbe från Ministeriet ute hos mig"
+Frank "Fan!"
+Frank "Felix, du får springa in till Araki och varna henne"
+Felix "Ajaj kapten"
+Felix.SetTimetable(WarnAraki)
+
+WAIT Felix.IsWithinDistance(Araki, 10) {
+	Felix "Araki!"
+	Felix "Det är en byråkrat ute vid min dörr"
+	Araki "Mhm..."
+	Araki "Det var dåliga nyheter"
+	Araki "Jag ska undersöka utposterna på nätet med en gång"
+	Felix "Bra"
+	Felix.SetRunning(false)
+	Felix.SetTimetable(Felix_BeInLodgeUnderwater)
+}
+
+Frank "Sebastian, du kan fly ut genom dörren i Arakis rum också"
+
+CHOICE {
+	"Den som leder ut genom trädet?":
+		Frank "Ja precis"
+		CHOICE {
+			"OK, hej då":
+				GOTO CAREFUL
+
+			"Men jag vill hjälpa till här!":
+				GOTO HELP_OUT
+		}
+
+	"Nej, jag vill göra något vettigt!":
+		[HELP_OUT]
+		Frank "Ja..?"
+		Frank "Du vet om att de är livsfarliga de här typerna?"
+		CHOICE {
+			"Jag går och pratar med honom":
+			"Jo...":
+				Sebastian "Men jag måste göra något i alla fall"
+			"Mm ok, jag kanske sticker härifrån då":
+		}
+		[CAREFUL]
+		Frank "Ta det försiktigt"
+}
+
+Frank.StopTalking()
+Frank.SetTimetable(Frank_TalkYulian)
+
+DEFOCUS
+
+
+
+WAIT Frank.IsWithinDistance(Yulian, 5) AND Yulian.NotTalkingButIgnore(Frank) AND Frank.NotTalkingButIgnore(Yulian)
+Frank.StartTalking()
+Yulian.StartTalking()
+
+
+Frank "Det står en byråkrat ute hos Felix"
+Yulian "Fy fan"
+Frank "Vad ska vi göra åt den?"
+Yulian "Jag har god lust att skjuta honom"
+Frank "Du vet lika väl som jag att det är en utomordentligt dålig idé"
+Yulian "Jag är bara så jävla trött på dem"
+Yulian "De kan inte få hålla på"
+Frank "Men vi måste upprätthålla vår fasad"
+Frank "Om vi skapar oreda här kommer stället krylla av kontorsråttor inom några minuter"
+Yulian "Ja..."
+Yulian "Vi kan ju vänta ett litet tag och se om han ger sig av sig själv?"
+
+Frank.StopTalking()
+Yulian.StopTalking()
+
+
+Frank.SetTimetable(Frank_Overtime)
+Yulian.SetTimetable(Yulian)
+
+
+LISTEN Sebastian_talk_Frank [NOT_GOOD] {
+	Frank "Det är inte bra det här..."
+}
+
+LISTEN Sebastian_talk_Felix {
+	FOCUS
+	Felix.StartTalking()
+	Felix "Mm?"
+
+	[MORE]
+	CHOICE {
+		"Har du sett Pixie?":
+			Felix "Hon skulle väl på en dejt med Ivan?"
+			CHOICE {
+				"Ja men det var ju jättelänge sen?":
+					Felix "OK?"
+					Felix "Hon kanske är på Yvonne?"
+					CHOICE {
+						"Kanske...":
+						"Nu?!":
+							Felix "Jag vet inte dude"
+					}
+
+				"Ja just det":
+					Felix "Chilla dude"
+
+				"OK":
+			}
+
+		"Läskigt med snubbar från Ministeriet här nere!":
+			Felix "Ja fy fan"
+			Felix "Jag får kalla kårar"
+			GOTO MORE
+	}
+
+	Felix.StopTalking()
+	DEFOCUS
+}
+
+
+
+WAIT Sebastian.HasKnowledge("Typer4Shoes")
+CANCEL NOT_GOOD
+LISTEN Sebastian_talk_Frank
+FOCUS
+Frank.StartTalking()
+CHOICE {
+    "Det var ingen fara med byråkraten tror jag":
+    "Haha!":
+}
+Frank "Vad då?"
+CHOICE {
+    "Han ville bara byta sina skor":
+    "Han har gått nu":
+}
+
+Frank "Jaha... OK"
+Frank "Det är ändå oroväckande att de är här nere"
+Frank "Vi har redan bytt tillhåll två gånger"
+
+CHOICE {
+    "Oj då":
+    "Ja, vad jobbigt":
+}
+
+Frank.StopTalking()
+DEFOCUS

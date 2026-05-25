@@ -1,0 +1,46 @@
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+
+IF Petra.HasKnowledge(Sebastian) {
+    Petra "Hej, Sebastian!"
+    CHOICE {
+        "Tjena, läget?":
+            Petra "Det är bra"
+        "Hallå där":
+    }
+    Petra "Vad gör du?"
+    CHOICE {
+        "Inget särskilt":
+        "Jag har börjat jobba med Pixie!":
+            Petra "Verkligen?!"
+            Petra "Wow"
+            Petra "Du verkar målmedveten"
+            CHOICE {
+                "Heh, ja...":
+                "Mm":
+                "Jag vet inte":
+            }
+            Petra "Är det kul då?"
+            CHOICE {
+                "Inte hunnit göra så mycket än":
+                "Ja, fast svårt!":
+                    Petra "Jo det förstår jag"
+                "Rätt så":
+                    Petra "OK"
+            }
+    }
+    Petra "Ha det gött"
+    CHOICE {
+        "Du med":
+        "Tack detsamma":
+        "Ja... det ska jag!":
+    }
+} ELSE {
+    Petra "Hej, hej"
+    Petra "Jag orkar inte prata just nu"
+}
+
+Petra.StopTalking()
+DEFOCUS

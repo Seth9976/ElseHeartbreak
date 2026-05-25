@@ -1,0 +1,100 @@
+
+WAIT Sebastian.IsAwake()
+WAIT 15
+
+Police.SetTimetable(Police_SebastianCaught)
+
+WAIT Police.IsWithinDistance(Sebastian, 10)
+
+FOCUS
+Police "Hallå där"
+Police.StartTalking()
+
+IF Sebastian.HasKnowledge("MetPolice") {
+    CHOICE {
+        "Är det du?":
+            Police "Öh, jag det är jag som är polischefen ja"
+        "Är jag på polisstationen?":
+            Police "Japp"
+    }
+}
+ELSE {
+    CHOICE {
+        "Var är jag?":
+            [I_AM]
+            Police "Det här är Dorisburgs polisstation"
+        "Vem är du?":
+            Police "Jag är polis"
+            GOTO I_AM
+    }
+}
+
+Police "Du är arresterad"
+Police "Intrång på Datorministeriet"
+
+CHOICE {
+    "Jaha...":
+    "Mm, OK":
+    "Skit också!":
+}
+
+Police "Svante har gett mig rapporten redan"
+Police "Jag måste förhöra dig"
+
+CHOICE {
+    "Jag vill ha min advokat!":
+        Police "Du har ingen advokat"
+
+    "Jag har inte gjort något!":
+        Police "Så du var inte på Datorministeriet?"
+        [INSIDE]
+        CHOICE {
+            "Nej!":
+                Police "Jag har loggarna"
+                Police "Jag ser tydligt att du varit inne på ministeriet"
+                GOTO INSIDE
+            "Jo...":
+            "Kanske":
+        }
+
+    "Hjälp... mamma":
+        Police "Så farligt är det inte"
+}
+
+Police "Lugna bara ner dig så kommer det här gå bra..."
+
+CHOICE {
+    "OK":
+    "Ja... jag ska försöka samla mig!":
+    "Det är kört. Mitt liv är förstört!":
+}
+
+Police "Rättegången är om några dagar"
+
+Police.SetTimetable(Police)
+Police.StopTalking()
+DEFOCUS
+
+Police.SetTimetable(Police_Fika)
+Police "Jag går och tar en fika så länge"
+
+WAIT Sebastian.IsNotInRoom(PoliceOfficeInterior)
+# LATER
+
+
+Police.SetTimetable(Police)
+
+
+LISTEN Sebastian_talk_Police
+FOCUS
+Police.StartTalking()
+Police "Stick härifrån!"
+Police.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Police
+FOCUS
+Police.StartTalking()
+Police "Nej sa jag!"
+Police.StopTalking()
+DEFOCUS

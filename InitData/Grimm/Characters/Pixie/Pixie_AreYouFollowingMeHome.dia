@@ -1,0 +1,58 @@
+
+WAIT Pixie.IsInRoom(PixiesApartment) {
+	STOP
+}
+
+#LISTEN THREAD {
+#	WAIT 30
+#	WAIT Pixie.NotTalking()
+#	Log("The thread has waited for 30 secs.")
+#	Pixie.SetTimetable("PixieGoHome")
+#	Pixie.StopTalking()
+#	STOP
+#}
+#BROADCAST THREAD
+
+
+WAIT Pixie.IsWithinDistance(Sebastian, 10) AND Pixie.IsInEitherRoom(Plaza, PlazaBackstreet)
+Log("Busted!")
+
+WAIT 1
+Pixie.CancelWalking()
+FOCUS
+Pixie.SetTimetable(TalkToSebastian)
+
+Pixie "Eh..."
+
+WAIT Pixie.IsWithinDistance(Sebastian, 5)
+Pixie.StartTalking()
+
+Pixie "Följer du efter mig?!"
+
+CHOICE {
+	"Va, eh.. nej":
+		Pixie "OK, det verkade typ så"
+		Pixie "Vi ses, ha det bra"
+
+	"Uhm, förlåt. Jag vet inte vad som flög i mig":
+		Pixie "OK, det är lugnt. Hörs imorgon, stalker dude"
+
+	"Får man inte gå hem från krogen eller?!":
+		Pixie "Jo. Men var inte så weird är du snäll."
+		Pixie "Ses!"
+}
+
+Pixie.StopTalking()
+Pixie.SetTimetable("PixieGoHome")
+
+CHOICE {
+	"Ja...":
+	"Jepp!":
+	"Mmm":
+}
+CHOICE {
+	"Eh":
+	"Ses!":
+}
+
+DEFOCUS

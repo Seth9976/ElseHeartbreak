@@ -1,0 +1,30 @@
+
+Typer3.Pos(Hotel_Lobby_Point)
+Typer4.Pos(Hotel_Lobby_Point)
+Typer5.Pos(Hotel_Lobby_Point)
+
+Typer3.SetFieldToFloat("sleepiness", 0)
+Typer4.SetFieldToFloat("sleepiness", 0)
+Typer5.SetFieldToFloat("sleepiness", 0)
+
+Ministry_Offices1_MinistryAntennaBox_1.Pos(Hotel_Lobby_P1)
+Ministry_Offices1_MinistryAntennaBox_2.Pos(Hotel_Lobby_P2)
+Ministry_Offices1_MinistryAntennaBox_3.Pos(Hotel_Lobby_P3)
+Ministry_Offices1_MinistryAntennaBox_4.Pos(Hotel_Lobby_P4)
+
+
+IF Dorian.HasKnowledge(Sebastian) {
+    DorianApartment_Diskette_Diskette10_1.Pos(Hotel_Room1_Point)
+    Log("Dorian will send love letter")
+}
+ELSE {
+    Log("Dorian won't send love letter")
+}
+
+
+
+WAIT Sebastian.IsInRoom(Hotel_Lobby) AND Typer3.IsInRoom(Hotel_Lobby)
+
+WAIT 500
+
+Story("InvestigationHasBeenNoticed")

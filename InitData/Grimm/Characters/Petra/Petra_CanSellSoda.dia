@@ -1,0 +1,220 @@
+
+WAIT Petra.IsInRoom(PetrasApartment) AND Sebastian.IsWithinDistance(Petra, 10) AND Petra.IsAwake() {
+	INTERRUPT BreakInPetra
+}
+
+
+#RunMakeTransactionFunctionOnCreditCard("PetraCreditCard", 100)
+
+WAIT Petra.IsNotInRoom(PetrasApartment) LISTEN Sebastian_talk_Petra
+
+FOCUS
+Petra.StartTalking()
+
+CHOICE {
+	"Hej igen!":
+		IF Petra.HasKnowledge(Sebastian) {
+			Petra "Hej!"
+			IF Petra.IsInRoom(BarYvonne) {
+				Petra "Vad roligt att du är här!"
+				Petra "Jag ska DJ:a hela kvällen"
+				CHOICE {
+					"Coolt":
+					"Vad trevligt":
+					"OK":
+				}
+				Petra "Ja, hoppas du får det skoj"
+				Petra "Var inte rädd för att bjuda upp på dansgolvet"
+				CHOICE {
+					"Heh, nä...":
+					"OK":
+					"Mmm":
+				}
+			} 
+			ELSE {
+				Petra "Vad händer?"
+				CHOICE {
+					"Jag är ute och säljer läsk, vill du ha?":
+						GOTO SELL
+					"Inte mycket":
+						Petra "OK, hehe"
+				}
+			}
+		}
+		ELSE {
+			Petra "Hej, vem är du?"
+			CHOICE {
+				"Jag heter Sebastian":
+				"Du kan kalla mig Sebbe":
+			}
+			Petra "Tjena, känner vi varandra?"
+			CHOICE {
+				"Nej, jag måste tagit fel":
+				"Jag trodde det":
+			}
+			Petra "OK"
+			Petra "Trevligt att träffas i alla fall"
+		}
+
+	"Hej, vill du köpa läsk av mig?":
+		[SELL]
+		Petra "Jag dricker egentligen inte läsk"
+		Petra "Är den god?"
+		CHOICE {
+			"Ja, jättegod!":
+			"Jag vet inte... jag tycker den är OK":
+			"Typ":
+		}
+		Petra "OK, nä men jag testar en"
+		Petra "Vad kostar de?"
+		CHOICE {
+			"$2":
+				Petra.SetKnowledge("Soda_price_2")				
+			"$3":
+				Petra.SetKnowledge("Soda_price_3")
+			"$4":
+				Petra.SetKnowledge("Soda_price_4")
+		}
+		Petra "Ok, jag tar en"
+		IF Sebastian.HasDrinkOfType("soda") {
+			Petra.StartWaitForGift()
+			[TRY_GIVE_AGAIN]
+			LISTEN Sebastian_give_Petra
+			WAIT Petra.HasAnyHandItem()
+			IF Petra.HasHandItemOfType(Drink) {
+				Petra.StopWaitForGift()
+				Petra "Tack! Här har du pengarna"
+
+				IF Petra.HasKnowledge("Soda_price_2") {
+					RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 2)
+				} ELIF Petra.HasKnowledge("Soda_price_3") {
+					RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 3)
+				} ELIF Petra.HasKnowledge("Soda_price_4") {
+					RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 4)
+				}
+
+				CHOICE {
+					"Tack själv!":
+					"Hoppas den smakar bra":
+				}	
+				Petra "Spännande"
+				Petra.UseHandItem()
+				WAIT Petra.IsIdle()
+				Petra "Mm..."
+				Petra "Intressant smak"
+				Petra.PutAwayHandItem()
+			} ELSE {
+				Petra "Det här ser inte ut som en läsk..."
+				Petra.Give()
+				WAIT Petra.HasNoHandItem()
+				GOTO TRY_GIVE_AGAIN
+			}
+			
+		} ELSE {
+			Sebastian "Eller vänta, jag måste ha glömt att ta med burkar"
+			Sebastian "Har fan inga burkar i väskan..."
+			Petra "Oj då, synd"
+			Sebastian "Ja"
+			Petra "En annan gång då!"
+			Sebastian "Mm..."
+		}
+
+	"Hej, vem är du?":
+		Petra "Jag heter Petra"
+		Sebastian.SetKnowledge(Petra)
+		Petra "Vem är du?"
+		CHOICE {
+			"Sebastian":
+			"Sebbe":
+		}
+		Petra "OK, trevligt att träffas"
+		CHOICE {
+			"Du vill inte köpa en läsk?":
+				Petra "Du säljer det eller?"
+				CHOICE {
+					"Jepp":
+					"Mm":
+					"Ja, exakt!":
+				}
+				GOTO SELL
+			"Ja!":
+				IF Petra.IsInRoom(Cafe_Room1) {
+					Petra "Du måste testa kanelbullarna här, de är sjukt bra!"
+					CHOICE {
+						"OK, det ska jag göra!":
+						"Najs":
+						"Ok":
+					}
+				}
+		}
+
+	"Hej, har vi träffats förut?":
+		IF Petra.HasKnowledge(Sebastian) {
+			Petra "Ja, vi sågs väl igår?"
+		}
+		ELSE {
+			Petra "Vet inte..?"
+		}
+		Petra "Vad gör du en vacker dag som denna?"
+		CHOICE {
+			"Jag säljer läsk!":
+				Sebastian "Vill du köpa?"
+			"Promenerar runt, försöker sälja läsk typ":
+				Petra "Jaha, är det ditt jobb?"
+				CHOICE {
+					"Mm, vill du köpa en burk?":
+					"Jepp":
+						Sebastian "Ska du ha en?"
+				}
+		}
+		GOTO SELL
+}
+
+IF Petra.IsAtTask(Fikatime) {
+	IF Petra.HasKnowledge(Sebastian) {
+		GOTO BYE
+	}
+	Petra "Men du är ny i stan eller?"
+	CHOICE {
+		"Ja, jag kom igår":
+		"Ja jag kom hit för några dagar sen":
+		"Jo typ":
+	}
+	INTERRUPT GetInvitedToBarYvonne
+}
+ELSE {
+	[BYE]
+	Petra "Hej då!"
+	CHOICE {
+		"Hej":
+		"Ha det gött!":
+	}
+}
+
+Petra.SetKnowledge(Sebastian)
+
+Petra.StopTalking()
+DEFOCUS
+
+
+# later #
+[LATERGATER]
+
+WAIT Petra.IsNotInRoom(PetrasApartment) LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+
+IF Petra.IsInRoom(Cafe_Room1) {
+	Petra "Måste dra snart"
+}
+ELIF Petra.IsInRoom(BarYvonne) {
+	Petra "Måste sköta om skivspelaren nu"
+}
+ELSE {
+	Petra "Hallå där"	
+}
+
+Petra.StopTalking()
+DEFOCUS
+
+GOTO LATERGATER

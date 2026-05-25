@@ -1,0 +1,9 @@
+18:15 - 08:00 Sleeping Sleep GlennApartment_Testing_Poor_Bed_Poor_Bed_6_1
+08:00 - 11:00 Working BeInRoom Factory_Floor1
+11:00 - 13:00 _ Smoke Factory_Lobby_SmokePoint1
+13:00 - 15:00 Working BeInRoom Factory_Floor1
+15:00 - 18:15 _ Smoke Factory_Lobby_SmokePoint1
+
+[Glenn_DayOff]
+08:00 - 18:00 _ Smoke Factory_Lobby_SmokePoint1
+18:00 - 08:00 _ Sleep    Factory_Office_Point1

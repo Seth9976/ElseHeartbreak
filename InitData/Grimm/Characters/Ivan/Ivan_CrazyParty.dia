@@ -1,0 +1,13 @@
+
+LISTEN Sebastian_talk_Ivan
+FOCUS
+
+CHOICE {
+    "Läget?":
+        Ivan "Uttråkad"
+
+    "God kväll":
+        Ivan "Tjena"
+}
+
+DEFOCUS

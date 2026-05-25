@@ -1,0 +1,13 @@
+
+# När man just har kommit till Felix som ska ha fest
+
+INTERRUPT SkipToTryFindLodge
+Felix.SetKnowledge(Sebastian)
+Felix.Pos(FelixApartment_Point1)
+Story(CanSellSoda)
+Story(AfterStalking)
+Sebastian.Pos(OutsideFelixApartment_Point1)
+SetHour(18) # party starts!
+BROADCAST PyjamasPartyIsOn
+WAIT 2
+Sebastian.Interact(Felix)

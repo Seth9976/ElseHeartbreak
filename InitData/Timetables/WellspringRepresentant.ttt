@@ -1,0 +1,23 @@
+11:00 - 16:00 _ BeAtTing Plaza_Testing2_ParkBenchSeat1_1_3
+16:00 - 20:00 _ BeAtTing Plaza_Testing2_ParkBenchSeat1_1_1
+20:00 - 22:00 _ BeInRoom BarYvonne
+22:00 - 01:00 _ Smoke    WellspringSmokeSpot
+01:00 - 08:00 _ BeAtTing Plaza_Testing2_ParkBenchSeat1_1_3
+08:00 - 11:00 _ BeInRoom BurrowsNorth
+
+
+[WellspringRepresentant_LookingForSebastian]
+00:00 - 08:00 _ Sit         Plaza_Testing2_ParkBenchSeat1_1_1 Plaza_Testing2_ParkBenchSeat1_1_3
+08:00 - 11:00 _ BeInRoom    Plaza
+11:00 - 14:00 _ Sit         Plaza_Testing2_ParkBenchSeat1_1_1 Plaza_Testing2_ParkBenchSeat1_1_3
+14:00 - 00:00 _ BeInRoom    Hotel_Lobby
+
+
+[WellspringRepresentant_LookingForSebastian_OutsideCafe]
+00:00 - 24:00 _ Sit         Cafe_Exterior_DesignedChair_TheLodge_ComputerTerminal_DesignedChair_1 Cafe_Exterior_DesignedChair_TheLodge_ComputerTerminal_DesignedChair2_1 Cafe_Exterior_DesignedChair_TheLodge_ComputerTerminal_DesignedChair_3
+
+[WellspringRepresentant_LookingForSebastian_InHotel]
+00:00 - 24:00 _ BeInRoom    Hotel_Lobby
+
+[WellspringRepresentant_GuideToStorage]
+00:00 - 24:00 ShowingTheWay 	GuideTo HarborWest_SodaStorageComputer Sebastian

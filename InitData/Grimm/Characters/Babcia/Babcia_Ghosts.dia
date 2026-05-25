@@ -1,0 +1,52 @@
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+
+# bara om man blivit teleporterad
+
+
+CHOICE {
+    "Hur hamnade jag här?":
+        Babcia "Inte vet jag"
+        Babcia "Du har väl suttit här nere ett bra tag?"
+        Babcia "Du är väl inte full?!"
+
+    "God dag":
+        Babcia "God dag"
+
+    "Var är jag?!":
+        Babcia "Devotchka hotell"
+}
+
+Babcia "Du ser väldigt svag ut"
+Babcia "Sover du ordentligt?"
+
+[SLEEP_WELL]
+CHOICE {
+    "Va..?":
+        Babcia "SOVER ni ordentligt sa jag"
+        GOTO SLEEP_WELL
+
+    "Öhhh - sover var?":
+        Babcia "Ni bor väl på rum 1?"
+        CHOICE {
+            "Jo...":
+            "Kanske?":
+            "Nej, ni måste ha misstagit mig för någon annan!":
+                Babcia "Jaha..."
+                Babcia "Ja kanske"
+        }
+
+    "Ja, det tror jag":
+        Babcia "Det ser inte så ut..."
+}
+
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+Babcia "Som sagt, du måste verkligen sova!"
+Babcia "Du är alldeles svart under ögonen"
+DEFOCUS

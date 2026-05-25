@@ -1,0 +1,6 @@
+Path(Factory_Lobby_Point1, Plaza_Point)
+Path(Factory_Lobby_Point2, Plaza_Point)
+Path(Factory_Lobby_Point3, Plaza_Point)
+Path(Plaza_Point, Factory_Lobby_Point1)
+Path(Plaza_Point, Factory_Lobby_Point2)
+Path(Plaza_Point, Factory_Lobby_Point3)

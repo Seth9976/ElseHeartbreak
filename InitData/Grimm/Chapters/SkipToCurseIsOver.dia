@@ -1,0 +1,20 @@
+
+SetClock(10, 15, 00, 00)
+
+START GetHackdev
+
+STOP _Arrival
+Story("CanSellSoda")
+Story("YouAreMemberNow")
+Story("Ghosts")
+Story("AfterGhostVisit")
+Story("CurseIsOver")
+
+#Sebastian.Pos(Pixie)
+Sebastian.Pos(PixiesApartment_Point)
+#Sebastian.Pos(HarborEast_Point)
+
+Ivan.Pos(PixiesApartment_Point)
+Ivan.SetFieldToFloat(corruption, 0)
+Ivan.SetTimetable("Ivan_CurseIsOver")
+Heart.SetCode(TheHeart)

@@ -1,0 +1,5 @@
+
+[AGAIN]
+LISTEN RingBell
+LockDoor(DorisGardens_East_DoorToLodge)
+GOTO AGAIN

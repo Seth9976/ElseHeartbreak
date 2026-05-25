@@ -1,0 +1,33 @@
+FOCUS
+
+Pixie "Men du, jag måste dra till jobbet nu"
+
+CHOICE {	
+	"OK, vi kanske hörs senare då..?":
+		Pixie "Ja, självklart"
+		Pixie "Jag går nog till Yvonne ikväll"
+		CHOICE {
+			"Yvonne?!":
+				Pixie "Bar Yvonne menar jag, dummer"
+				CHOICE {
+					"Ah... det var det jag tänkte":
+					"Aha, OK":
+				}
+				Pixie "Ses sen då, hej hej"
+			"OK, cool...":
+				Pixie "Ciao!"
+		}
+	
+	"Jag tror inte att du har sagt var du jobbar":
+		Pixie "Nä, det kanske jag inte har gjort"
+		Sebastian "Så var är det?"
+		Pixie "Värst vad du är nyfiken då!"
+		CHOICE {
+			"Förlåt, jag bara undrade":
+				Pixie "Inga problem, ha det bra!"
+			"Snälla, kan du inte säga det":
+				Pixie "Haha, fan sluta. Jag måste dra nu som sagt. Hörs!"
+		}
+}
+
+DEFOCUS

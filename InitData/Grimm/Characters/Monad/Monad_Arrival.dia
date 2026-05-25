@@ -1,0 +1,124 @@
+
+START DetectFoundDoctorsOffice
+
+WAIT Sebastian.IsInRoom(MonadsApartment) AND Monad.IsInRoom(MonadsApartment) AND Monad.IsAwake() AND Sebastian.IsAwake() {
+    START Monad_BreakIntoMonads
+}
+
+WAIT Monad.IsAtTask(Party) LISTEN Sebastian_talk_Monad {
+    Monad "Grabben, jag försöker njuta av musiken"
+    WAIT Monad.IsAtTask(Party) LISTEN Sebastian_talk_Monad
+    Monad "Nej sa jag ju"
+}
+
+WAIT Sebastian.IsInRoom(BurrowsNorth) [GUIDANCE] {
+    Monad.Pos(MonadSmokePos)
+    Monad.CreateCigarette(MonadCig1)
+    Monad.SetHandItem(MonadCig1)
+    Monad.SetTimetable(SmokeCigInBurrows)
+    LISTEN Sebastian_talk_Monad
+    FOCUS
+    Monad.StartTalking()
+
+    CHOICE {
+        "God kväll":
+        "Ursäkta mig":
+        "Hej!":
+    }
+
+    Monad "...ja?"
+    Monad.SetKnowledge(Sebastian)
+
+    [QUESTIONS]
+    CHOICE {
+        "Jag tror att jag är lite vilse":
+            Monad "Är vi inte alla det?"
+            GOTO QUESTIONS
+
+        "Jag letar efter mitt hotell":
+            Monad "Jaha..?"
+            Monad "Ska du bo på Devotchka?"
+            CHOICE {
+                "Ja, precis!":
+                "Exakt":
+                "Tror det..?":
+                "Kanske":
+            }
+            Monad "Gå över bron här till vänster, den över spårvagnsspåren"
+            Monad "Och sedan bara rakt fram"
+            CHOICE {
+                "Tack, tack, tack!!!":
+                "Å, vad bra. Tack så hemskt mycket":
+                "Men det var ju därifrån jag kom...":
+            }
+            Monad "Det är en enda röra här i stan"
+            Monad "Inte konstigt om man går vilse"
+            CHOICE {
+                "Nej jag är ju ny i stan å så":
+                "Mm, kom precis hit till Dorisburg":
+                "Mm...":
+                    GOTO BYE
+            }
+            Monad "Jag förstår"
+            Monad "Kom du med båten?"
+            CHOICE {
+                "Ja, precis":
+                "Mm...":
+                "Nej jag flög":
+                    Monad "Mhm..?"
+            }
+            Monad "Hopas du hittar ditt hotell då"
+            [BYE]
+            Monad "Adjö"
+            CHOICE {
+                "God natt!":
+                "Adjö":
+                "Hej då":
+            }
+
+        "Fin kväll":
+            Monad "Ja, inte sant?"
+            [HORRIBLE]
+            Monad "Har haft en sån hemsk dag bara"
+            CHOICE {
+                "Aha, jobbigt":
+                "Usch då, var jobbar du?":
+                    Monad "Jag är chef på en forskningsavdelning här i närheten"
+                    Monad "Det är ett intressant arbete vi gör"
+                    Monad "Jag önskar bara att mina kollegor hade lite mer kompetens..."
+                    CHOICE {
+                        "Hehe, OK":
+                        "Mm...":
+                    }
+            }
+            GOTO QUESTIONS
+
+        "Uppe sent?":
+            Monad "Ja, klockan är rätt mycket va?"
+            Monad "Borde väl gå och knoppa"
+            GOTO HORRIBLE
+
+        "Det var inget":
+
+        "Adjö":
+            Monad "Adjö"
+    }
+
+    Monad.StopTalking()
+    DEFOCUS
+    WAIT 30
+    Monad.SetTimetable(Monad)
+}
+
+
+
+WAIT IsHour(05) 
+Monad.SetTimetable(Monad)
+CANCEL GUIDANCE
+
+LISTEN Sebastian_talk_Monad
+FOCUS
+Monad.StartTalking()
+Monad "Ursäkta, jag har extremt bråttom"
+Monad.StopTalking()
+DEFOCUS

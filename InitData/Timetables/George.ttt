@@ -1,0 +1,17 @@
+
+09:00 - 18:00 OfficeHours 		BeInRoom 	LongsonOffice
+18:00 - 24:00 _                 BeInRoom    Hospital_Exterior
+24:00 - 09:00 Zzz				Sleep 	 	LongsonApartment_Testing_Poor_Bed_Poor_Bed_7_1
+
+[GeorgeGambling]
+10:00 - 19:00 OfficeHours 	Fika        LongsonOffice
+19:00 - 21:00 Gambling		BeInRoom 	Casino_Floor1
+21:00 - 24:00 Gambling		Party	    Casino_Floor2
+24:00 - 01:20 Gambling      BeInRoom    Casino_Floor1
+01:20 - 10:00 Zzz			Sleep 	 	LongsonApartment_Testing_Poor_Bed_Poor_Bed_7_1
+
+[George_InteractWithSebastian]
+00:00 - 24:00 _ Interact Sebastian
+
+[George_InteractWithGuard]
+00:00 - 24:00 _ Interact CityHallGuard

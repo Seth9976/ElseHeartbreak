@@ -1,0 +1,181 @@
+
+IF ExtraKeyLodge.IsInRoom(Yulian_inventory) {
+	ExtraKeyLodge.Pos(Lodge_Room2_Point)
+}
+
+Yulian.SetTimetable(Yulian_WorkOvertime)
+
+
+
+WAIT Sebastian.IsWithinDistance(Yulian, 10) AND Yulian.IsAtTask(Working) AND Sebastian.NotTalking()
+
+Yulian "Sebastian!"
+Yulian.SetTimetable("")
+
+IF Sebastian.IsWithinDistance(Yulian, 5) {
+
+} ELSE {
+	Yulian "Kan du komma hit ett slag?"
+}
+
+LISTEN Sebastian_talk_Yulian
+FOCUS
+Yulian.StartTalking()
+
+Yulian "Vad bra att du är här"
+Yulian "Jag skulle behöva lite assistans nämligen"
+Yulian "Förresten... följde du med Pixie till fabriken?"
+
+CHOICE {
+	"Mm":
+		Yulian "Ok, bra"
+	"Jajemän!":
+		Yulian "Utmärkt"
+	"Nej...":
+		Yulian "Ok, på så vis"
+}
+
+Yulian "Hur som som helst, jag håller på med en grej här"
+
+CHOICE {
+	"Ok?":
+		Yulian "Jo det är så här..."
+
+	"Vad kan jag stå till tjänst med?":
+		Yulian "Jag behöver dig för ett uppdrag"
+
+	"Jag har lite bråttom idag, jag kan inte hjälpa dig imorgon?":
+		Yulian "Ja, du får strunta i dina planer"
+}
+
+Yulian "Vi har fått in extremt intressanta uppgifter angående borgmästaren, George Longson"
+Yulian "Du känner till honom antar jag?"
+
+CHOICE {
+	"Ja, mycket väl":
+		Yulian "Utmärkt"
+	"Jag har sett honom tror jag...":
+		Yulian "Ja, han rör sig förhållandevis mycket ute på stan"
+		Yulian "Och så är han ju en stor hasardspelare"
+	"Man har väl hört en del om honom":
+		Yulian "Ja, svårt att undgå här i stan"
+	"Nej, inte alls":
+		Yulian "Inte?"
+		Yulian "Ok, hur som helst"
+}
+
+Yulian "Han bor i kommunhuset vid Plaza, riktigt flådig kåk"
+Yulian "Har dessutom skaffat massa underlig konst"
+Yulian "Garanterat finansierad med hjälp av mutor och fiffel med skattepengar"
+
+CHOICE {
+	"OK, fy tusan":
+		Yulian "Ja det är förjävligt"
+	"Ja, jag tror att jag har sett det":
+		Yulian "Bra"
+	"Mm där har jag varit":
+		Yulian "Grymt, det kommer vara till stor hjälp"
+}
+
+[QUESTIONS]
+CHOICE {
+	"Vad är det för information ni har kommit över?":
+		Yulian "Jag kan inte riktigt avslöja det ännu"
+		Yulian "Det är ändå bäst att du vet så lite som möjligt"
+		CHOICE {
+			"Ok...":
+			"Vadå då?":
+				Yulian "Om de skulle få tag på dig och pressa dig på vad du vet"
+		}
+		CHOICE {
+			"Vad är det jag ska göra egentligen?":
+			"Jag gillar inte riktigt vad jag hör här":
+				Yulian "Inte?"
+		}
+
+	"Vad är det jag ska göra?":
+
+	"Skulle jag kunna få ta en kaffe lite snabbt, är så jäkla trött":
+		Yulian "Hrm, visst..."
+		Yulian "Skynda dig på bara"
+		DEFOCUS
+		IF IsDay() {
+			Yulian "Jag har inte hela dagen på mig"
+		} ELSE {
+			Yulian "Jag har inte hela natten på mig"
+		}
+		LISTEN Sebastian_talk_Yulian
+		FOCUS
+		Yulian "Så, var var vi?"
+		GOTO QUESTIONS
+}
+
+[WHAT_TO_DO]
+Yulian "Din uppgift är att undersöka hans dagliga rutiner närmare"
+Yulian "Vi är extra intresserade av hans kärleksliv"
+Yulian "Enligt officiella uppgifter har han en fru men vi vet inte vem hon är"
+
+[ABOUT_MISSION]
+CHOICE {
+	"Spännande":
+
+	"Vet ni vad hon heter?":
+		Yulian "Nej, ingen har någonsin sett dem tillsammans"
+		Yulian "Och vi har ingen aning om hur hon ser ut"
+		GOTO ABOUT_MISSION
+
+	"Var ligger hans hus mer exakt?":
+		Yulian "Det är vid Plaza som sagt"
+		Yulian "Ett hus med massa växter på utsidan"
+		CHOICE {
+			"Ok":
+			"Men det finns ju flera hus där... Hur vet jag vilket som är hans?":
+				Yulian "Han har det största, det har tre ingångar"
+		}
+		GOTO ABOUT_MISSION
+
+	"Ok, något mer jag bör veta?":
+}
+
+Yulian "Du rapporterar till mig inom ett par dagar"
+Yulian "Och du måste sköta det här snyggt"
+Yulian "Blir han misstänksam kan vi förlora en oerhörd chans"
+
+CHOICE {
+	"Jag ska försöka att inte göra dig besviken":
+		Yulian "Det hoppas jag!"
+
+	"Hmm... du kanske ska låta Pixie göra det istället?":
+		Yulian "Vad nu?"
+		Yulian "Hon har definitivt inte tid, hon kommer att sitta med analys i minst en vecka till"
+		Yulian "Du måste ju klara ett sånt här uppdrag..?"
+		CHOICE {
+			"Ok, jag ska försöka":
+			"Du kan inte göra det själv?":
+				Yulian "Sluta fjanta dig"
+				Yulian "Jag beordrar dig att utföra det här uppdraget nu"
+				Yulian "Jag har viktigare saker att ordna med här"
+				Yulian "Det här är ett simpelt spaningsuppdrag"
+				Yulian "Av stor betydelse, men inte särskilt svårt"
+		}
+
+	"Ok, verkar inte så svårt":
+		Yulian "Nej det är det nog inte"
+}
+
+Yulian "Kom tillbaka och rapportera när du har fått reda på något"
+
+CHOICE {
+	"Jepp":
+	"Ok, ha det!":
+	"Ska bli":
+}
+
+Yulian "Hej då"
+
+Yulian.StopTalking()
+Yulian.SetTimetable("Yulian")
+DEFOCUS
+
+BROADCAST PleaseInvestigateTheMayor
+

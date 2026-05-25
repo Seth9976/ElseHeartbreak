@@ -1,0 +1,70 @@
+﻿using System;
+using System.Globalization;
+using Newtonsoft.Json.Utilities;
+
+namespace Newtonsoft.Json.Converters
+{
+	// Token: 0x02000043 RID: 67
+	public class JavaScriptDateTimeConverter : DateTimeConverterBase
+	{
+		// Token: 0x060002AA RID: 682 RVA: 0x0000A718 File Offset: 0x00008918
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			long num;
+			if (value is DateTime)
+			{
+				DateTime dateTime = ((DateTime)value).ToUniversalTime();
+				num = JsonConvert.ConvertDateTimeToJavaScriptTicks(dateTime);
+			}
+			else
+			{
+				if (!(value is DateTimeOffset))
+				{
+					throw new Exception("Expected date object value.");
+				}
+				num = JsonConvert.ConvertDateTimeToJavaScriptTicks(((DateTimeOffset)value).ToUniversalTime().UtcDateTime);
+			}
+			writer.WriteStartConstructor("Date");
+			writer.WriteValue(num);
+			writer.WriteEndConstructor();
+		}
+
+		// Token: 0x060002AB RID: 683 RVA: 0x0000A790 File Offset: 0x00008990
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			Type type = (ReflectionUtils.IsNullableType(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType);
+			if (reader.TokenType == JsonToken.Null)
+			{
+				if (!ReflectionUtils.IsNullableType(objectType))
+				{
+					throw new Exception("Cannot convert null value to {0}.".FormatWith(CultureInfo.InvariantCulture, new object[] { objectType }));
+				}
+				return null;
+			}
+			else
+			{
+				if (reader.TokenType != JsonToken.StartConstructor || string.Compare(reader.Value.ToString(), "Date", StringComparison.Ordinal) != 0)
+				{
+					throw new Exception("Unexpected token or value when parsing date. Token: {0}, Value: {1}".FormatWith(CultureInfo.InvariantCulture, new object[] { reader.TokenType, reader.Value }));
+				}
+				reader.Read();
+				if (reader.TokenType != JsonToken.Integer)
+				{
+					throw new Exception("Unexpected token parsing date. Expected Integer, got {0}.".FormatWith(CultureInfo.InvariantCulture, new object[] { reader.TokenType }));
+				}
+				long num = (long)reader.Value;
+				DateTime dateTime = JsonConvert.ConvertJavaScriptTicksToDateTime(num);
+				reader.Read();
+				if (reader.TokenType != JsonToken.EndConstructor)
+				{
+					throw new Exception("Unexpected token parsing date. Expected EndConstructor, got {0}.".FormatWith(CultureInfo.InvariantCulture, new object[] { reader.TokenType }));
+				}
+				if (type == typeof(DateTimeOffset))
+				{
+					return new DateTimeOffset(dateTime);
+				}
+				return dateTime;
+			}
+		}
+	}
+}

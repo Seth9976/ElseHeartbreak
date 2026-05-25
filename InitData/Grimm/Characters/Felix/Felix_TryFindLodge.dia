@@ -1,0 +1,275 @@
+
+WAIT 1
+
+WAIT Felix.IsNotAtTask(Guard) AND Felix.IsNotInRoom(FelixApartment) LISTEN Sebastian_talk_Felix {
+	IF Felix.HasKnowledge(Sebastian) {
+		Felix.StartTalking()
+		Felix "Ey, det är ju du ju!"
+		Felix "Ta det lugnt dude"
+		Felix.StopTalking()
+		WAIT Felix.IsNotAtTask(Guard) AND Felix.IsNotInRoom(FelixApartment) LISTEN Sebastian_talk_Felix
+		GOTO YO_MAN
+	} ELSE {
+		[YO_MAN]
+		Felix "Yo man!"
+		WAIT Felix.IsNotAtTask(Guard) AND Felix.IsNotInRoom(FelixApartment) LISTEN Sebastian_talk_Felix
+		Felix "Peace"
+		WAIT Felix.IsNotAtTask(Guard) AND Felix.IsNotInRoom(FelixApartment) LISTEN Sebastian_talk_Felix
+		GOTO YO_MAN
+	}
+}
+
+
+WAIT Felix.IsInRoom(FelixApartment) AND Sebastian.IsWithinDistance(Felix, 10) {
+	FOCUS
+	Felix.SetTimetable("")
+	Felix.Interact(Sebastian)
+
+	Felix "Hallå"
+	Felix.StartTalking()
+
+	Felix "Ey, det är du som är Ivans kompis va?"
+	Felix "Med gräset?"
+	CHOICE {
+		"Va? Eh nä...":
+		"Ja..?":
+	}
+
+	IF Felix.HasKnowledge(Sebastian) {
+		Felix "Eller va? Det var ju du som var nere i hos mig i The Lodge!"
+		CHOICE {
+			"Ja just det":
+			"The Lodge?":
+		}
+		Felix "Ja vad gjorde du där?!"
+		Felix "Eller jag vill inte veta förresten"
+	} ELSE {
+		Felix "Eller va? Vem är du egentligen?"
+		Felix "Har vi setts tidigare?"
+		CHOICE {
+			"Vet inte":
+			"Jo, tror det":
+				Felix "Verkligen?"
+			"Nej... inte vad jag vet":
+		}
+		Felix "Jaja"
+		Felix "Mi casa su casa, dude"
+	}
+
+	Felix "Ta en öl om du vill, jag tänkte softa här hemma ikväll"
+	Felix "Vet inte om det kommer över någon som vill festa, väntar bara på en snubbe"
+	Felix.StopTalking()
+	Felix.SetTimetable("Felix")
+	DEFOCUS
+
+	WAIT Felix.IsNotAtTask(Guard) AND Felix.IsInRoom(FelixApartment) LISTEN Sebastian_talk_Felix
+	Felix "Vad är det dude?"
+	FOCUS
+	CHOICE {
+		"Så det är bara att ta öl?":
+			Felix "Javisst, kör hårt"
+			Felix "Du ser ut att behöva en sup eller två"
+
+		"Tänkte dra hem nu": # tar inte hänsyn till om man kommit dit en senare dag
+			Felix "Ok, cool dude"
+			Felix "Ses någon annan gång"
+	}
+	DEFOCUS
+}
+
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+
+IF Felix.HasKnowledge("Sebastian") {
+	Felix "Du igen?!"
+	CHOICE {
+		"Jag heter faktiskt Sebastian":
+			Felix "OK whatever... Varför snokar du omkring här?"
+
+		"Ja":
+			Felix "Vad gör du här?"
+	}
+}
+ELSE {
+	Felix "Ey, vem är du?"
+	CHOICE {
+		"Mitt namn är Sebastian":
+		"Jag heter Sebbe":
+	}
+}
+
+Felix.SetKnowledge("Sebastian")
+#Felix "OK... så?"
+
+[MORE]
+CHOICE {
+	"Läget?":
+		Felix "Det är rätt lugnt"
+		GOTO MORE
+
+	"Vad gör du?":
+		GOTO STORAGE
+
+	"Vad är det här för ställe?":
+		[STORAGE]
+		Felix "Vi har lagret för skoaffären här nere"
+		CHOICE {
+			"Så vad är ditt jobb?":
+				Felix "Jag vaktar skorna"
+				CHOICE {
+					"OK, jag förstår":
+					"Är de verkligen så dyrbara?":
+						Felix "Mm, mycket gamla special editions och sånt"
+					"Det låter nästan som ett tråkigare jobb än mitt...":
+				}
+			"Aha":
+		}
+		Felix "OK, var det något annat?"
+		Felix "Annars måste jag be dig att dra"
+		[MORE_MORE]
+		CHOICE {
+			"Hmm...":
+				Felix "Ja?"
+				GOTO MORE_MORE
+
+			"Nä jag ska gå, ha en bra dag!":
+				Felix "Tja då"
+				Felix.StopTalking()
+				DEFOCUS
+				LISTEN Sebastian_talk_Felix
+				FOCUS
+				Felix.StartTalking()
+				Felix "Ja?"
+				CHOICE {
+					"Jag letar efter en person som heter Pixie tror jag":
+					"Jobbar Pixie här nere?":
+				}
+
+			"Jag letar efter en tjej, Pixie heter hon tror jag":
+		}
+}
+
+BROADCAST AskedForPixie
+
+Felix "Vafan"
+Felix "Känner du Pixie?!"
+CHOICE {
+	"Ja, och jag måste få träffa henne!":
+	"Typ...":
+	"Njae, men vi fick liksom bra kontakt":
+}
+
+Felix "Alltså..."
+
+CHOICE {
+	"Det är sjukt viktigt, jag måste få träffa henne!":
+	"Mitt liv kan hänga på att jag får prata med henne":
+	"Snäällllaaa, var är hon?":
+}
+
+Felix "Ok, ok... lugna ner dig"
+Felix "Du vet att hon har pojkvän va?"
+
+CHOICE {
+	"Ja, vad har det med saken att göra?":
+	"Mm...":
+	"Jag ska bara prata med henne, inget annat":
+}
+
+Felix "Asså..."
+
+[LET_ME_IN]
+
+IF Pixie.IsInRoom(Lodge_Room1) {
+	Felix "Jag får absolut inte släppa in folk här, chefen sparkar mig direkt"
+	Felix "Men jag ska höra om hon kan komma ut hit och träffa dig"
+
+	Felix.TakeOutItem(FelixPhone)
+	WAIT Felix.HasHandItemWithName(FelixPhone)
+	WAIT 1
+	Felix.UseHandItem()
+	WAIT 2
+	Felix "Ja, hejsan"
+	Felix "Det är Felix"
+	Felix "Kan du komma ut?"
+	WAIT 1
+	Felix "Det är någon som måste träffa dig här tydligen"
+	WAIT 3
+	Felix.PutAwayHandItem()
+	WAIT Felix.HasNoHandItem()
+	Felix "Hon lät lite irriterad men jag tror att hon kommer"
+
+	BROADCAST FelixFetchesPixie
+}
+ELSE {
+	IF IsBeforeHour(12) {
+		Felix "Hon är inte här än, ingen morgonmänniska direkt"
+		Felix "Du kanske kan kommma tillbaka senare?"
+
+		CHOICE ETERNAL {
+			"Kan jag inte få vänta på henne här?":
+				Felix "Ok, ok"
+			"Hon kanske har gått in utan att du märkte det?":
+				Felix "Det tror jag inte"
+				Felix "Men vänta på henne här då, hon lär väl dyka upp"
+		}
+		CHOICE {
+			"Tack snälla du!":
+			"Ja, tack!!!":
+			"Du är bäst":
+			"Fasen vad schysst":
+		}
+
+		Felix.StopTalking()
+		DEFOCUS
+
+#		[AGAIN]
+#		LISTEN Sebastian_talk_Felix
+#		FOCUS
+#		Felix.StartTalking()
+#
+#		Felix "Tråkigt att vänta?"
+#
+#		CHOICE ETERNAL {
+#			"Mm":
+#			"Ja usch":
+#		}
+#
+#		Felix "Det kan nog ta ett tag innan hon kommer"
+#
+#		Felix.StopTalking()
+#		DEFOCUS
+#
+#		GOTO AGAIN
+
+	} ELSE {
+		Felix "Grejen är att hon har gått för dagen"
+		Felix "Du kanske kan kommma tillbaka imorgon?"
+
+		CHOICE ETERNAL {
+			"Jaha...":
+			"OK, jag gör så":
+		}
+
+		Felix.StopTalking()
+		DEFOCUS
+
+#		LISTEN Sebastian_talk_Felix
+#		Felix "Chilla, dude"
+#
+#		LISTEN Sebastian_talk_Felix
+#		Felix "Hon kommer när hon kommer"
+	}	
+}
+
+Felix.StopTalking()
+DEFOCUS
+
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+
+Sebastian "Är hon här nu?"
+
+GOTO LET_ME_IN

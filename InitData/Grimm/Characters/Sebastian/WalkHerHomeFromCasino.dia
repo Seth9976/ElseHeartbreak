@@ -1,0 +1,41 @@
+
+Pixie "Kom då!"
+
+WAIT 30
+Pixie "Det var kul i kväll"
+WAIT 5
+Pixie "Att jobba med dig alltså"
+
+WAIT Pixie.IsInRoom(PlazaBackstreet)
+
+WAIT 5
+Pixie.CancelWalking()
+Pixie.SetTimetable("") 
+WAIT 1
+
+IF Sebastian.IsWithinDistance(Pixie, 20) {
+
+    Pixie.SetTimetable("TalkToSebastian") 
+    Pixie "Ok, god natt då Sebbe!"
+    FOCUS
+    CHOICE {
+        "God natt":
+        "Tack för promenaden":
+        "Vi ska inte...":
+            Pixie "Ja?"
+            CHOICE {
+                "Eh, det var inget":
+                "Du vill inte dricka en kopp te?":
+                    [SLEEP]
+                    WAIT 2
+                    Pixie "Jag måste sova Sebbe"
+                    Pixie "God natt"
+                "...":
+                    GOTO SLEEP
+            }
+    }
+    DEFOCUS
+
+}
+
+Pixie.SetTimetable("Pixie")

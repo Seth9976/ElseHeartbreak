@@ -1,0 +1,17 @@
+FOCUS
+Araki "Mm?!"
+[AGAIN]
+CHOICE {
+    "Eh...":   
+        Araki "Ja?"
+        GOTO AGAIN
+    "Hej, jag heter Sebastian!":
+        Araki "Araki"
+    "Vem är du?":
+        Araki "Araki"
+    "Araki..?":
+        Araki "Ja"
+}
+Araki.SetKnowledge(Sebastian)
+Sebastian.SetKnowledge(Araki)
+DEFOCUS

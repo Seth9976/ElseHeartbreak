@@ -1,0 +1,9 @@
+
+[AGAIN]
+WAIT Trumph.IsAtTask(Playing)
+Log("Start playing trumpet")
+TrumpetMusicBox.StartMusic()
+WAIT Trumph.IsNotAtTask(Playing)
+Log("Stop playing trumpet")
+TrumpetMusicBox.StopMusic()
+GOTO AGAIN

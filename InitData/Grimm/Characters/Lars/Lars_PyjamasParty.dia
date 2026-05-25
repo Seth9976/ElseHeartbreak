@@ -1,0 +1,55 @@
+
+LISTEN Sebastian_talk_Lars
+FOCUS
+Lars.StartTalking()
+
+Lars "Jamän?"
+
+[AGAIN]
+CHOICE {
+    "Vet du var en kille som heter Felix bor?":
+        Lars "Nääh..."
+        Lars "Ingen aning"
+        Lars "Låter som en av de där jobbiga typerna som spelar dunka dunka"
+        CHOICE {
+            "Haha, ja det kan han nog göra":
+            "Ja... han ska bo i närheten av caféet sa han":
+        }
+        Lars "Å fy"
+        Lars "Säg inte att det är han som har uteplatsen på baksidan av kommunhuset?"
+        CHOICE {
+            "Jo kanske?":
+            "Nej det är det väl inte..?":
+        }
+        Lars "Nä det kan jag inte tro, du lyssnar väl på bättre musik än så?"
+        CHOICE {
+            "Jag vet inte...":
+            "Jo, precis":
+        }
+        Lars "Ja ja"
+        Lars "Om det är där han bor så går du in genom en liten blå dörr som vetter mot parken"
+        Lars "Jag brukar sova där inne när regnet överfaller mig"
+        Lars "Vet du att man kan höra borgmästaren genom väggen där, hur han håller på om nätterna?"
+        Lars "Ja fy tusan"
+        CHOICE {
+            "OK, tack för hjälpen":
+            "Ska kolla där":
+            "Hehe, hej då då!":
+        }
+
+    "Allt väl?":
+        Lars "Jodå"
+        GOTO AGAIN
+
+    "Vad händer?":
+        Lars "Njuter av livet"
+        GOTO AGAIN
+}
+
+Lars "Ha det!"
+Lars.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Lars
+Lars "En sekund grabben"

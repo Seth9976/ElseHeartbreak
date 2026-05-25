@@ -1,0 +1,290 @@
+
+BROADCAST KickOutWallenstam
+
+Harry.SetTimetable("")
+Harry.Pos(Tram_Interior_HarborSouth_SofaSeat_1_4)
+
+
+WAIT Sebastian.IsInEitherRoom(Tram_Interior, Tram_Interior2, Tram_Interior3, Tram_Interior4)
+
+IF Sebastian.IsInRoom(Tram_Interior) {
+    Harry.Pos(Tram_Interior_HarborSouth_SofaSeat_1_4)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior2) {
+    Harry.Pos(Tram_Interior2_SofaSeat_5)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior3) {
+    Harry.Pos(Tram_Interior3_SofaSeat_8)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior4) {
+    Harry.Pos(Tram_Interior4_SofaSeat_10)
+}
+
+
+
+WAIT 4
+WAIT Sebastian.IsWithinDistance(Harry, 8)
+Sebastian.CancelWalking()
+FOCUS
+Harry.StartTalking()
+Harry "En annan resenär, ser man på"
+
+CHOICE {
+    "Hej":
+        Harry "Hej på dig"
+    "God dag":
+        Harry "God dagens, god dagens"
+    "Vadårå?":
+        Harry "Äsch, det är inte så många som åker med vagnen"
+        Harry "Vet inte vad de tycker det är för fel på den..."
+        CHOICE {
+            "Den luktar lite skumt":
+                Harry "Tycker du?"
+            "Nej, vad konstigt":
+            "Det kanske mest är skumma typer som åker med den?":
+                Harry "Heh, kan hända"
+        }
+        Harry "Nåväl"
+}
+
+Harry "Du ser bekymrad ut?"
+
+[DO_I]
+CHOICE {
+    "Gör jag?!":
+        Harry "Jupp"
+        GOTO DO_I
+
+    "Äsch, det är inget...":
+        Harry "Jo, kläm fram det nu"
+        Harry "Du kan lita på mig"
+        CHOICE {
+            "Nej, tack men jag måste vara själv":
+                [I_UNDERSTAND]
+                Harry "Jag förstår grabben"
+                Harry "Ta hand om dig!"
+                GOTO ENDING
+
+            "Det är en tjej, jag kan inte sluta tänka på henne":
+                [JAJAJA]
+                Harry "Ja ja ja..."
+                [NOT_EASY]
+                Harry "Det är inte lätt att vara ung!"
+                Harry "Hmm"
+                Harry "Vad heter hon?"
+                CHOICE {
+                    "Strunta i det du!":
+                        Harry "Oj, det var en het potatis"
+                        Harry "Sorry"
+                        GOTO I_UNDERSTAND
+
+                    "Pixie... tror jag":
+                        Harry "Pixie?"
+                        Harry "Verkligen?!"
+                        Harry "Hah, det är ju syrrans unge"
+                        CHOICE {
+                            "Va?!":
+                            "Oj... verkligen?":
+                                Harry "Jajemän"
+                            "Är alla släkt i den här stan eller?":
+                                Harry "Hmm..."
+                                Harry "Inte ALLA"
+                                Harry "Men jag är Pixies morbror"
+                                GOTO PIXIE
+                        }
+                        Harry "Se inte så förvånad ut, den här stan är inte så stor som man kan tro"
+                        [PIXIE]
+                        CHOICE {
+                            "Då vet du kanske var hon är nu?!":
+                                [WHERE]
+                                Harry "Hmm, jo kanske"
+                                Harry "Hon jobbar väl"
+                                CHOICE {
+                                    "Ja men var jobbar hon???":
+                                        [WORKS]
+                                        Harry "Skoaffären, hon har slitit där i flera år nu"
+                                        CHOICE {
+                                            "I kassan?":
+                                                Harry "Njae... tror hon är i lagret"
+                                                [IN_THE_BASEMENT]
+                                                Harry "I källarn alltså"
+                                                CHOICE {
+                                                    "Jaha...":
+                                                    "OK, verkligen?":
+                                                        Harry "Japp, jag är rätt säker faktiskt"
+                                                    "Wow, coolt":
+                                                }
+                                                CHOICE {
+                                                    "Jag måste dit med en gång!":
+                                                        
+                                                    "Vilken station ska jag gå av på för att komma dit?":
+                                                        GOTO WHAT_STATION
+                                                }
+                                                GOTO GET_OFF
+
+                                            "Jaha, coolt! Jag sticker dit på en gång":
+                                                [GET_OFF]
+                                                Harry "Du måste väl gå av spårvagnen först?"
+                                                CHOICE {
+                                                    "Jo jo... men sen!":
+                                                    "Heh ja":
+                                                    "Ja, vilken station?":
+                                                        [WHAT_STATION]
+                                                        Harry "Plaza kanske?"
+                                                        Harry "Och så går du över till Burrows där ifrån"
+                                                        CHOICE {
+                                                            "Nice":
+                                                            "Tack!!!":
+                                                        }
+                                                }
+
+                                            "Jag var där förut, hon var inte där!":
+                                                Harry "Nej alltså, hon jobbar i lagret"
+                                                GOTO IN_THE_BASEMENT
+                                        }
+
+                                    "Jaha, skit också":
+                                        Harry "Du kanske kan träffa henne efter jobbet?"
+                                        CHOICE {
+                                            "Ja, smart":
+
+                                            "Jo, men jag vill träffa henne nu!":
+                                                Sebastian "Vet du var hon jobbar?"
+                                                Harry "Japp"
+                                                GOTO WORKS
+                                        }
+                                }
+
+                            "Då vet du hur fantastisk hon är!":
+                                Harry "Hehe, ja hon har mycket skinn på näsan"
+                                Harry "Och en stark vilja, det är säkert"
+                                CHOICE {
+                                    "Ja...":
+                                    "Ja!":
+                                    "Har hon?":
+                                        Harry "Ja, du kan inte känna henne så väl?"
+                                        CHOICE {
+                                            "Nej, vi träffades igår":
+                                            "Jo, vi träffades i förrgår":
+                                            "Kanske inte":
+                                        }
+                                }
+                                [GOTTA_FIND_HER]
+                                CHOICE {
+                                    "Å, jag måste hitta henne... vet du var hon håller hus?":
+                                        GOTO WHERE
+
+                                    "Jag måste imponera på henne på något sätt":
+                                        Harry "Äsch, var bara dig själv"
+                                        CHOICE {
+                                            "Så säger alla!":
+                                                Harry "Jo men det funkar"
+                                            "Lättare sagt än gjort!":
+                                            "Jo just det":
+                                        }
+                                        GOTO GOTTA_FIND_HER
+                                }
+
+                            "Så stor trodde jag väl inte att den var i och för sig":
+                                Harry "Inte?"
+                                Harry "Nej du kanske är van vid större, jag förstår"
+                                Harry "Vissa ska alltid förhäva sig, jag säger då det..."
+                                CHOICE {
+                                    "Sorry... men Pixie!":
+                                        Harry "Ja?"
+                                        GOTO PIXIE
+
+                                    "Äsch, strunt samma":
+                                        Harry "Mm"
+                                        Sebastian "Men åter till Pixie..."
+                                        GOTO PIXIE
+                                }
+                        }
+
+                    "Jag vet inte":
+                        Harry "På så vis"
+                        Harry "Hoppas det löser sig"
+                        CHOICE {
+                            "Det tror jag knappast":
+                            "Ja...":
+                        }
+                }
+
+        }
+
+    "Kärleksbekymmer":
+        Harry "Jag förstår"
+        GOTO NOT_EASY
+
+    "Jag vet inte vad jag ska göra...":
+        Harry "Nähä? Hur menar du?"
+        CHOICE {
+            "Jag åkte hit till stan för att få ett jobb men det går åt skogen":
+                Harry "Jaså, jaha"
+                Harry "Mm... jobb jobb jobb"
+                Harry "Jobb är inte hela livet!"
+                CHOICE {
+                    "Men jag har aldrig haft ett jobb":
+                        Harry "Nej men det kommer du hinna ha"
+                        Harry "Och du kommer hinna bli trött på det flera gånger om!"
+                        Harry "Det kan jag lova"
+
+                    "Nej, sant":
+                }
+                Harry "Njut lite av vädret istället"
+                CHOICE {
+                    "Det regnar":
+                        Harry "Äsch, det blir nog sol snart igen ska du se"
+
+                    "Jo OK, ska försöka":
+                        Harry "Efter regn kommer solsken!"
+                }
+                CHOICE {
+                    "Mm":
+                    "Sen är jag olyckligt kär också":
+                        Harry "Ha!"
+                        Harry "Förlåt... men jag tänkte väl att det var något mer"
+                        GOTO JAJAJA
+                }
+
+            "Det är en tjej":
+                Harry "Tänkte väl det"
+                GOTO NOT_EASY
+        }
+}
+
+
+
+Harry "Trevligt att talas vid"
+
+CHOICE {
+    "Ja, det samma":
+    "Mm...":
+    "Verkligen, tack för all hjälp!":
+        Harry "Ingen orsak"
+}
+
+[ENDING]
+
+Harry.StopTalking()
+DEFOCUS
+
+Harry "*gäsp*"
+Harry "Herregud vad trött jag är"
+
+WAIT 3
+Harry.Sleep(1)
+
+
+
+WAIT Sebastian.NotInSameRoom(Harry)
+Harry.SetTimetable(Harry)
+Harry.Pos(Hotel_Exterior_Point)
+
+
+
+LISTEN Sebastian_talk_Harry
+Harry "Sorry grabben, måste jobba nu"

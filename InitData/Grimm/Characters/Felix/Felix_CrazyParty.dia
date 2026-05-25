@@ -1,0 +1,118 @@
+
+Felix.SetTimetable(Felix)
+Felix.StopTalking()
+
+WAIT Felix.IsNotInRoom(PetrasApartment) LISTEN Sebastian_talk_Felix [PRE_TALK] {
+    FOCUS
+    Felix.StartTalking()
+    Felix "Tjena!"
+    Felix "Ska du till Petras?"
+    CHOICE {
+        "Eh... kanske?":
+            Felix "OK, cool"
+        "Nä":
+            Felix "Synd"
+        "Ja för tusan!":
+            Felix "Fett, vi ses där"
+        "Ska hon ha fest?":
+            Felix "Ja, tror det?"
+            Felix "Pixie sa det i alla fall..."
+    }
+    Felix.StopTalking()
+    DEFOCUS
+}
+
+WAIT Felix.IsInRoom(PetrasApartment) LISTEN Sebastian_talk_Felix [PRE_TALK_IN_ROOM] {
+    Felix "..."
+    WAIT Felix.IsInRoom(PetrasApartment) LISTEN Sebastian_talk_Felix
+    Felix "X___X"
+}
+
+LISTEN RealPartyHasStarted {
+    # när Pixie säger hej till en
+    CANCEL PRE_TALK_IN_ROOM
+}
+
+
+
+LISTEN RoamingPartyStarted
+CANCEL PRE_TALK
+CANCEL PRE_TALK_IN_ROOM
+
+
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix "Nu ska vi se..."
+Felix.TakeOutItem(FelixCitnap1)
+WAIT Felix.HasHandItemWithName(FelixCitnap1)
+Felix "Här"
+Felix.Give()
+WAIT Felix.HasNoHandItem()
+Felix "Berätta vad du tyckte sen!"
+Felix.SetTimetable(Felix_CrazyParty)
+DEFOCUS
+
+LISTEN Sebastian_talk_Felix 
+[MORE_TALK_WITH_FELIX]
+FOCUS
+Felix.StartTalking()
+Felix "Var det coolt?!"
+CHOICE {
+    "Jag har inte testat än...":
+        Felix "OK"
+        Felix.StopTalking()
+        DEFOCUS
+        LISTEN Sebastian_talk_Felix
+        GOTO MORE_TALK_WITH_FELIX
+
+    "Ja, det kändes skitskumt!":
+        Felix "Ja, hahaha!!!"
+        Felix "Tänkte väl att du skulle gilla det"
+
+    "Kände ingenting...":
+        Felix "Va???"
+}
+Felix.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Felix
+Felix.StartTalking()
+FOCUS
+WAIT 3
+Felix "X___X"
+Felix "Öh, va?"
+CHOICE {
+    "Skulle man kunna få lite mer?":
+        Felix "Sure"
+        Felix.TakeOutItem(FelixCitnap2)
+        WAIT Felix.HasHandItemWithName(FelixCitnap2)
+        Felix.Give()
+        WAIT Felix.HasNoHandItem()
+        Felix "Här, jag tror att jag har en till..."
+        WAIT 1
+        Felix.TakeOutItem(FelixCitnap3)
+        WAIT Felix.HasHandItemWithName(FelixCitnap3)
+        WAIT 1
+        Felix.Give()
+        WAIT Felix.HasNoHandItem()
+        CHOICE {
+            "Wow, tack!":
+            "Sjukt snällt!!!":
+            "Tackar":
+        }
+        Felix "Inga problem, dude"
+
+    "Äsch, det var inget":
+}
+Felix.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Felix
+WAIT 3
+Felix "O__O"
+Felix "O___O"
+Felix "O____O"
+Felix "O_____O"
+Felix "O______O"
+Felix "O_______O"

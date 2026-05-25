@@ -1,0 +1,402 @@
+
+Fib.SetTimetable(Fib_BeInGarden)
+Fib.SetHandItem(FibsHackdev)
+
+
+LISTEN Sebastian_talk_Fib
+
+FOCUS
+Fib.StartTalking()
+
+IF Fib.HasKnowledge("Sebastian") {
+	
+	Fib "Tjena Sebastian!"
+	CHOICE {
+		"Hej!":
+		"Tja, hur är läget?":
+			Fib "Bara bra tack, jag funderar lite på vad jag ska göra med mina tulpaner"
+	}
+	Fib "Och hur är läget med dig?"
+	CHOICE {
+		"Jag vet inte, har klantat till det lite med en tjej":
+			Fib "Äsch, sånt som händer va?"
+			Fib "Du får gå och lukta lite på blommorna så känns det nog bättre sen"
+
+		"Det är bra":
+			Fib "Gött"
+	}
+
+} ELSE {
+	INTERRUPT GetToKnowFib
+	FOCUS
+}
+
+[MORE_QUESTIONS]
+CHOICE {
+	"Känner du till något om det här ministeriet här i stan?":
+		Fib "Njae... lite"
+		Fib "Jag försöker att inte bry mig om dem"
+		Fib "Bara de låter mig fixa med mina blommor så är jag nöjd"
+		CHOICE {
+			"Ja, vad är det du gör med blommorna?":
+				Fib "Har du inte sett?"
+				IF IsDay() {
+					Fib "Du måste komma hit på kvällen, då är det som vackrast"	
+				} ELSE {
+					Fib "Nu på natten är det som finast, du får gå runt och kolla"
+				}
+
+			"OK, ja det förstår jag":				
+		}
+		CHOICE {
+			"Så du använder den där grejen du håller i för att göra blommorna fina?":
+				[YES_EVERYTHING_IS_CONNECTED]
+				Fib "Ja typ, allting är ihopkopplat genom olika system"
+				Fib "Så jag ändrar på deras kod med modifieraren"
+
+			"Var har du vanliga trädgårdsmästarsaker då?":
+				Fib "Vad menar du?"
+				Sebastian "Ja men typ krattor och spadar och sånt"
+				Fib "Hehe, nä sånt använder jag inte"
+				Fib "Modifieraren är mitt enda verktyg"
+				CHOICE {
+					"Är det den där saken som du håller i?":
+						GOTO YES_EVERYTHING_IS_CONNECTED
+					"Ok, konstigt":
+						Fib "Hehe, ja lite kanske"
+				}
+		}
+
+
+		GOTO MORE_QUESTIONS
+
+	"Jag ska gå och försöka luska i lite saker nu, ha det bra!":
+		Fib "Du med, vi ses"
+		Fib.StopTalking()
+		DEFOCUS
+		LISTEN Sebastian_talk_Fib
+		FOCUS
+		Fib.StartTalking()
+		Fib "Hej igen"
+		CHOICE {
+			"Hej hej":
+			"Tjena!":
+		}
+		Sebastian "Jag tänkte fråga dig en grej"
+		Fib "Jaha, låt höra"
+		GOTO MORE_QUESTIONS
+
+	"[Supercheat] (show some code)":
+		GOTO SUPERCHEAT
+
+	"Jag har en modifierare nu, skulle du kunna lära mig något om hur man använder den?":
+		IF Sebastian.HasHandItemOfType(Hackdev) {
+			Fib "Å, javisst!"
+			GOTO HOW_ABOUT_IF
+		}
+		ELIF Sebastian.HasItemOfType(Hackdev) {
+			Fib "Å, javisst!"
+			GOTO HOW_ABOUT_IF
+		}
+		ELSE {
+			Fib "Jaha, var har du den då?"
+			CHOICE ETERNAL {
+				"Ööö... vet inte":
+				"I min väska":
+					Sebastian "Fast nu är den inte här längre"
+			}
+			Fib "Inga problem"
+			GOTO I_HAVE_ONE
+		}
+
+	"En sån där modifierare... hur får man tag på en sån?":
+		Fib "Å, du vill lära dig?"
+		Fib "Ja det är verkligen fantastiska apparater"
+		Fib "Hmmmm"
+		[I_HAVE_ONE]
+		Fib "Jag tror att jag har en liggande hemma i skjulet faktiskt"
+		Fib "Vi kan gå och kolla om du vill?"
+
+		CHOICE {
+			"Ja, jättegärna!":
+				Fib "Ok, kom med"
+				[GO_GET_MODIFIER]
+				Fib.StopTalking()
+				DEFOCUS
+				UnlockDoor(DorisGardens_West_DoorToSchack)
+				Fib.SetTimetable(Fib_GoGetModifier)
+				
+				WAIT Fib.HasHandItemWithName(FibsExtraModifier)
+				Fib "Här är den!"
+				Fib.SetTimetable(Fib_InteractWithSebastian)
+				
+				WAIT Fib.HasConversationTarget(Sebastian)
+				#Fib.SetRunning(false)
+				Fib.Give()
+				Fib "Varsågod!"
+
+				FOCUS
+
+				WAIT Fib.HasNoHandItem()
+				
+				CHOICE {
+					"Vänta, får jag låna den??!":
+						Fib "Javisst, jag har ändå en extra"
+						Fib "Jag kan lära dig lite hur man använder den också"
+						Fib "Men inte nu, jag måste jobba lite först"
+						CHOICE {
+							"Ok, inga problem":
+							"Tack tack tack!!!":
+						}
+					"Vad fin!":
+						Fib "Tja, den är väl inte nyaste modellen"
+						Fib "Men den duger"
+
+					"Vad vill du ha för den?":
+						Fib "Äsch, du kan låna den på obestämd framtid"
+						Fib "Jag behöver den inte just nu ändå"
+				}
+				
+				Fib "Kom tillbaka lite senare så ska jag lära dig hur den funkar"
+				Fib.SetKnowledge("WillTeachProgrammingLater")
+
+				CHOICE {
+					"Men jag måste lära mig nu!!!":
+						Fib "Hehe, roligt att du är entusiastisk"
+						Fib "Du bor på hotellet va?"
+						CHOICE {
+							"Ja":
+							"Mm, typ":
+						}
+						Fib "Han vaktisen där... vad heter han..."
+						CHOICE {
+							"Hank":
+								Fib "Just det"
+							"Eh, jag vet inte":
+							"Olof tror jag":
+								Fib "Gör han?"
+						}
+						Fib "Han kan väl en del om programmering, han kan nog hjälpa dig att komma igång"
+						CHOICE {
+							"Tror du? OK":
+							"Bra tips!":
+								Fib "Inga problem"
+						}
+
+					"Ok, perfekt":
+				}
+
+				Fib "Ha det fint, vi ses!"
+
+			"Nej det är lugnt":
+				Fib "Ok, ok"
+				Fib "Vi hörs!"
+				[CHANGE_MIND_REGARDING_MODIFIER]
+				Fib.StopTalking()
+				DEFOCUS
+				LISTEN Sebastian_talk_Fib
+				FOCUS
+				Fib.StartTalking()
+				Fib "Ja?"
+				CHOICE {
+					"Den där modifieraren...":
+						Fib "Jag går och hämtar den"
+						GOTO GO_GET_MODIFIER
+
+					"Känner du Pixie?":
+						Fib "Hmm... nej det tror jag inte"
+						Fib "Hurså?"
+						CHOICE {
+							"Nej, det var inget":
+							"Jag kan inte sluta tänka på henne":
+								Fib "På så vis"
+								GOTO CHANGE_MIND_REGARDING_MODIFIER
+						}
+				}
+		}
+}
+
+Fib.StopTalking()
+DEFOCUS
+Fib.SetTimetable(Fib_BeInGarden)
+
+
+LISTEN Sebastian_talk_Fib [NOT_NOW] {
+	Fib "Ursäkta, kan vi ta det om en halvtimme typ?"
+}
+
+
+WAIT 20
+CANCEL NOT_NOW
+
+
+LISTEN Sebastian_talk_Fib
+FOCUS
+Fib.StartTalking()
+
+[HOW_IS_IT_GOING]
+CHOICE {
+	"Hur går det?":
+		Fib "Jo tack, jobbar och sliter"
+		GOTO HOW_IS_IT_GOING
+
+	"Sköter du om alla trädgårdar i Dorisburg?":
+		Fib "I princip"
+		Fib "Det finns inte så många i och för sig"
+		GOTO HOW_IS_IT_GOING
+
+	"Har du tid att lära mig något nu?":
+}
+
+Fib "Javisst"
+[HOW_ABOUT_IF]
+Fib "Hur mycket kan du om 'if'?"
+
+CHOICE {
+	"Vad är det?":
+		Fib "Det är ett ord man kan använda när man programmerar"
+		Fib "Om man vill att olika saker ska kunna hända"
+		CHOICE {
+			"Det låter praktiskt":
+				Fib "Det är det sannerligen"
+				Fib "Jag vet inte hur man skulle kunna få något gjort utan 'if'"
+
+			"Hur fungerar det då?":
+		}
+		Fib "Så, du skriver 'if' i koden..."
+		Fib "Och sen direkt efteråt har du något du vill testa"
+		Fib "Typ, '2 > 5'"
+		Fib "Två är större än fem alltså"
+		CHOICE {
+			"Ja..?":
+				Fib "Men det är ju inte sant"
+			"Det är det ju inte!":
+				Fib "Nej, precis"
+		}		
+		Fib "Så då kommer det du skriver efter 'if 2 > 5' inte att hända"
+		CHOICE {
+			"Aha":
+			"Gäller det resten av mitt program då alltså?":
+				Fib "Nej"
+		}
+		Fib "Du skriver 'end' sen för att avsluta if-et"
+		Fib "Fattar du?"
+		CHOICE {
+			"Typ...":
+			"Inte alls!":
+		}
+		[SUPERCHEAT]
+		Fib.PutAwayHandItem()
+		Fib "Jag ska visa lite kod"
+		WAIT Fib.IsIdle()
+		Fib.Interact(Sebastian)
+		WAIT Fib.IsIdle()
+		Fib.TakeOutItem("FibsIfExampleObject")
+		WAIT Fib.IsIdle()
+		Fib.Give()
+		Fib "Kolla här i den här grejen"
+		WAIT Fib.HasNoHandItem()
+		Fib "Ät den inte bara!"
+		DEFOCUS
+
+		WAIT Sebastian.HasNoHandItem() [DETECT_EATING] {
+			CANCEL DETECT_HACKING
+			FOCUS
+			GOTO BY_THE_WAY
+		}
+
+		WAIT Sebastian.IsHacking() [DETECT_HACKING] {
+			CANCEL DETECT_EATING
+			FOCUS
+			WAIT Sebastian.IsIdle()
+			GOTO DO_YOU_SEE
+		}
+
+		LISTEN Forever
+
+		[DO_YOU_SEE]
+		Fib "Ser du?"
+		CHOICE {
+			"Ja!":
+				Fib "Härligt"
+			"Det är så svårt att läsa kod...":
+				Fib "Ja, det kräver mycket övning"
+				Fib "Ibland är det lättare att skriva sin egen"
+				Fib "Men försök att titta på hur jag gjort där"
+				Fib "Du kan kopiera det mönstret till dina egna program"
+				CHOICE {
+					"Ja, jag ska studera det":
+					"Får jag behålla programmet?":
+						Fib "Javisst, ta med det"
+				}
+			"Orka":
+				Fib "Du måste anstränga dig om du ska bli bra!"
+		}
+		[BY_THE_WAY]
+		Fib "Förresten, vill du se ett av mina bästa program?"
+
+	"Rätt mycket":
+		Fib "Vad bra"
+		Fib "Men undrar vad ska jag lära dig då..."
+		Fib "Du kanske vill titta lite på mitt program jag skrivit?"
+}
+
+Fib "Jag är rätt så nöjd med det, om jag får säga det själv"
+
+CHOICE {
+	"Det är bra tror jag":
+		GOTO OKOK
+
+	"Javisst!":
+	"Självklart":
+
+	"Nej jag måste dra nu":
+		[OKOK]
+		Fib "OK, OK"
+		Fib "Lycka till nu - vi ses!"
+		CHOICE {
+			"Tack detsamma, hej då":
+			"Ha det fint":
+			"God kväll":
+		}
+		GOTO BYEBYE
+}
+
+Fib "Å, vad kul"
+Fib.TakeOutItem("BeautifulObject")
+WAIT Fib.IsIdle()
+Fib.Interact(Sebastian)
+WAIT Fib.HasConversationTarget(Sebastian)
+Fib.Give()
+
+Fib "Visst är den fin?!"
+WAIT Fib.HasNoHandItem()
+
+CHOICE {
+	"Ja, superfin":
+	"Vad är det..?":
+		Fib "Jag vet inte"
+}
+
+Fib "Du kan låna den ett tag om du vill"
+Fib "Men var snäll och lämna den inne på mitt kontor sen"
+Fib "Jag vill inte bli av med den!"
+
+CHOICE {
+	"OK, tack så mycket":
+	"Wow, snällt!":
+	"Jag förstår...":
+}
+
+Fib "Vi ses"
+
+
+[BYEBYE]
+Fib.StopTalking()
+DEFOCUS
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+Hank.SetTimetable("")
+Hank.Pos(Hotel_Corridor_Point)
+Sebastian.Pos(Hank)
+
+Hank.TakeOutItem(HanksHackdev)
+WAIT Hank.HasHandItemWithName(HanksHackdev)
+Hank.Hack(Hotel_Corridor_Door1)

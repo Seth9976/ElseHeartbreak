@@ -1,0 +1,303 @@
+
+Pixie.SetTimetable(Pixie)
+
+
+WAIT Pixie.IsNotInRoom(PixiesApartment) # wait until she gets outside the apt
+
+
+IF Pixie.HasKnowledge("ClubDotCatastrophy") {
+	# This is when you're following her directly after Backdrunk
+
+	WAIT Sebastian.IsWithinDistance(Pixie, 10) [FollowProtection] {
+		Pixie.SetTimetable("")
+		Pixie.GetUpAndInteract(Sebastian)
+		Pixie.StartTalking()
+		FOCUS
+		Pixie "Va?"
+		Pixie "Var det något?"
+		CHOICE {
+			"Eh.. ja!":
+				Pixie "Vad då?"
+				CHOICE {
+					"Jag tänkte bara säga tack!":
+						Pixie "För vad då?"
+						CHOICE {
+							"För att du tog hand om mig igår":
+								Pixie "Jaja, självklart!"
+							"För att du är du":
+								Pixie "Ehh... OK?"
+								Pixie "Jag måste dra och jobba nu Sebbe, vi får höras senare"
+						}
+					"Var tror du att jag kan sälja mycket läsk?":
+						Pixie "Du, jag vet faktiskt inte..."
+				}
+			"Nä, sorry":
+		}
+		DEFOCUS
+		Pixie "Hej då, vi ses senare"
+		Pixie.SetTimetable(Pixie)
+		Pixie.StopTalking()
+		WAIT 10
+
+		WAIT Sebastian.IsWithinDistance(Pixie, 10)
+		[STALKING_AGAIN]
+		Pixie.SetTimetable("")
+		Pixie.Interact(Sebastian)
+		Pixie "Men vad håller du på med?"
+		Pixie "Följer du efter mig?"
+		Pixie "Sluta med det!"
+		Pixie "Gå härifrån"
+		Pixie.CancelWalking()
+		WAIT Sebastian.IsOutsideDistance(Pixie, 20)
+		Pixie "Tack"
+		Pixie.SetTimetable("Pixie")
+		WAIT Sebastian.IsWithinDistance(Pixie, 10)
+		GOTO STALKING_AGAIN # loop
+	}
+
+	WAIT Pixie.IsInEitherRoom(Lodge_FirstCorridor, Lodge_Entry, Lodge_Room1)
+	CANCEL FollowProtection
+}
+
+
+
+
+WAIT IsWithinDistance(Pixie, Sebastian, 10) AND Sebastian.NotTalkingButIgnore(Pixie) AND Pixie.IsInEitherRoom(Lodge_FirstCorridor, Lodge_Entry) {
+	Log("Busted!")
+	Pixie.SetTimetable("")
+	Pixie.Interact(Sebastian)
+	Story("FoundLodge")
+	STOP
+}
+
+WAIT Pixie.IsInRoom(BarYvonne) LISTEN Sebastian_talk_Pixie [MEET_PIXIE_AT_BAR] {
+	FOCUS
+	Pixie.StartTalking()
+	CHOICE {
+		"Hej!":
+			Pixie "Hej Sebbe! Jag såg inte dig"
+			Pixie "Hur är det? Mår du bra?"
+
+		"Läget Pixie?":
+			Pixie "Å, hej Sebbe!"
+			Pixie "Jag mår bra tack"
+			Pixie "Hur mår du?"
+	}
+	CHOICE {
+		"Bara bra":
+			Pixie "Gött"
+
+		"Lite trött men annars är det bra":
+			Pixie "Hehe, ok"
+
+		"Jag är partysugen!":
+			Pixie "Haha, verkligen?"
+	}
+	INTERRUPT TalkAboutClubDotGig1
+	FOCUS
+
+	CHOICE {
+		"Går du hit varje kväll eller?":
+			Pixie "Typ"
+			Pixie "Är det något fel med det eller?"
+			CHOICE {
+				"Nej, nej! Verkligen inte":
+					Pixie "Jag gillar musiken här när Petra DJ:ar"
+				"Blir det inte tjatigt?":
+					Pixie "Nä, Petra spelar så bra musik hela tiden"
+			}
+		"Känner du några andra här inne?":
+			Pixie "Haha, ja flera stycken"
+			Pixie "Chuck som står i baren... vi var tillsammans ett tag"
+			Pixie "Han är så jäkla skum"
+			Pixie "Och så Petra förstås, hon som DJ:ar"
+			CHOICE {
+				"Aha?":
+				"Ja, jag har pratat lite med henne":
+					Pixie "Ok"
+			}
+	}
+	Pixie "Hon är min bästis"
+	CHOICE {
+		"Jaha, det visste jag inte":
+			Pixie "Nu vet du!"
+
+		"Jag förstår":
+			Pixie "Hon är världens snällaste"
+			Pixie "Men man får inte störa henne när hon DJ:ar"
+			Pixie "Hon tar sitt jobb på allvar, vill bli berömd och sånt"
+			CHOICE {
+				"Ok":
+				"Smart":
+					Pixie "Mm"
+			}
+
+		"Ja jag vet, hon sa det!":
+			Pixie "Å, så ni har pratat?"
+			Pixie "Vi har känt varandra sen vi var pyttesmå"
+	}
+
+	CHOICE {
+		"Men du Pixie... vad är det du gör om dagarna?":
+			Pixie "Vad menar du?"
+			CHOICE {
+				"Ja men om du jobbar eller så?":
+				"Du kan väl inte bara sitta och dricka kaffe på caféet eller?":
+					Pixie "Nä..."
+			}
+			Pixie "Jag kan tyvärr inte prata om vad jag jobbar med"
+			CHOICE {
+				"Ok...":
+				"Varför inte?":
+					Pixie "Därför"
+			}
+
+		"Ska dra vidare nu tror jag, ha det fint!":
+			Pixie "Du med, vi ses!"
+	}
+
+	Pixie.StopTalking()
+	DEFOCUS
+
+	[YAY]
+	WAIT Pixie.IsInRoom(BarYvonne) LISTEN Sebastian_talk_Pixie
+	Pixie "Sebastian!"
+	CHOICE {
+		"Pixie!":
+			Pixie "Hahaha"
+			Pixie "Jag gillar dig"
+			CHOICE {
+				"Jag gillar dig med!":
+				"Tack":
+				"Vad bra":
+			}
+
+		"Ska dra hem snart":
+			Pixie "OK, vi ses en annan dag!"
+
+		"Vilken trevlig kväll här":
+			Pixie "Ja, vad bra"
+			Pixie "Har du gjort något med ansiktet förresten?"
+			Pixie "Du ser typ... manligare ut ikväll?"
+			CHOICE {
+				"Va... gör jag?":
+				"Nej, jag har inte gjort nåt!":
+				"Haha, va?!":
+			}
+			Pixie "Kanske bara är ljuset"
+	}
+	GOTO YAY
+}
+
+WAIT Sebastian.NotTalking() AND IsWithinDistance(Pixie, Sebastian, 10) AND Pixie.IsInEitherRoom(Plaza, PlazaBackstreet, ShoeStore, BurrowsNorth)
+Log("Met Pixie downtown!")
+
+FOCUS
+Pixie.SetTimetable("")
+Pixie.CancelWalking()
+Pixie.Interact(Sebastian)
+WAIT 2
+Pixie "Nämen hej, är du här?"
+
+WAIT Pixie.IsWithinDistance(Sebastian, 5)
+Pixie.StartTalking()
+
+CHOICE {
+	"Ja, jag är ute och försöker sälja läsk": # OBS! this will not match if not CanSellSoda!
+		Pixie "Hur går det?"
+		CHOICE {
+			"Det går jättebra!":
+				Pixie "Å, vad skönt!"
+				Pixie "Blir man rik på det där jobbet?"
+				CHOICE {
+					"Inte så värst...":
+						Pixie "OK"
+					"Ja, det är jävligt bra":
+						Pixie "Nice!"
+				}
+			
+			"Jo det går väl sådär":
+				Pixie "OK... hoppas du träffar en riktig läsk-narkoman snart!"
+			
+			"Det går skitdåligt":
+				Pixie "Å, tråkigt att höra"
+				Pixie "Jag kan köpa en läsk av dig"
+				CHOICE {
+					"Men du gillade väl inte ens Wellspring?":
+						Pixie "Nä... men jag kan ge den till någon annan"
+						
+					"Ok!":
+				}
+				Pixie "Vad kostar de?"
+				Sebastian "$3"
+				Pixie "Oj, det var dyrt. Får bli en annan gång."
+		}
+		
+	"Mm, tänkte ta en promenad":
+		Pixie "Jaha"
+}
+
+INTERRUPT TalkAboutClubDotGig1
+FOCUS
+
+IF IsBetweenHours(4, 12) {
+	INTERRUPT GottaGoToWork
+} ELIF IsBeforeHour(20) {
+	Pixie "Jag är på väg till Bar Yvonne, ska du följa med?"
+	CHOICE {
+		"Nej det är bra tror jag":
+			Pixie "Ok, vi ses någon annan dag då"
+			Pixie "Ha det"
+		"Ok!":
+			Pixie "Najs"
+			CANCEL MEET_PIXIE_AT_BAR
+			DEFOCUS
+			START GoWithPixieToBar
+			LISTEN FOREVER
+
+		"Var just där":
+			Pixie "Ok, ses senare då"
+	}
+} ELSE {
+	Pixie "Tänkte nog dra hem nu, vi ses"
+	CHOICE {
+		"God natt":
+			Pixie "God natt Sebastian"
+		"Ok, ha det så bra":
+			Pixie "Tack Sebastian"
+	}
+}
+
+Pixie.SetTimetable("Pixie")
+Pixie.StopTalking()
+DEFOCUS
+
+
+
+[MEET_PIXIE_AGAIN]
+WAIT IsHour(04) # wait until next day
+
+
+WAIT Pixie.IsInEitherRoom(Plaza, PlazaBackstreet, ShoeStore, BurrowsNorth) LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+Pixie "Hallå där Sebbe, läget?"
+CHOICE {
+	"Det är bra, driver mest runt":
+		Pixie "Ok, najs"
+
+	"Har lite tråkigt":
+		Pixie "Går det dåligt med försäljningen?"
+		CHOICE {
+			"Nä det funkar":
+				Pixie "Ok, vad bra"
+			"Ja, skitkasst":
+				Pixie "Ok, segt"
+		}
+}
+Pixie "Vi ses!"
+Pixie.StopTalking()
+DEFOCUS
+
+GOTO MEET_PIXIE_AGAIN
+

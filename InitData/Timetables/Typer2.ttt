@@ -1,0 +1,22 @@
+
+08:10 - 11:30 Work 		BeInRoom	 	Ministry_Offices2
+11:30 - 13:00 Eat       BeInRoom        Ministry_GuardKitchen
+13:00 - 20:30 Work      BeInRoom        Ministry_ChamberOfNumbers
+20:30 - 08:10 Sleep		Sleep			BureucratApartment2_FerryCabinSofaBed_FerryCabinSofaBed_1
+
+[Typer2_Razzia]
+00:00 - 24:00 _      BeInRoom Hotel_Lobby
+
+[HelpTyper1AfterExplosion]
+00:00 - 24:00 _      Interact        Typer1
+
+[Typer2_HuntAraki]
+00:00 - 24:00 _ BeInRoom BurrowsNorth
+
+[Typer2_Gambling]
+08:10 - 18:00 Work      BeAtTing    Ministry_ChamberOfNumbers_SofaSeat_2
+18:00 - 02:00 Gambling  BeInRoom    Casino_Floor2
+02:00 - 08:10 Sleep     Sleep       BureucratApartment2_FerryCabinSofaBed_FerryCabinSofaBed_1
+
+[Typer2_Hunt]
+00:00 - 24:00 Hunt Interact Sebastian

@@ -1,0 +1,116 @@
+
+Hank.Pos(PoliceOffice_Exterior_Trigger_2) # move far away
+Hank.SetTimetable(Hank)
+
+
+LISTEN Sebastian_talk_Hank
+Hank.StartTalking()
+
+IF Hank.HasKnowledge("Sebastian") {
+	FOCUS
+	Hank "Tjena... Sebbe var det du hette va?"
+	CHOICE {
+		"Ja precis":
+		"Mm, eller Sebastian":
+			Hank "Ja just det"
+	}
+}
+ELSE {
+	INTERRUPT GetToKnowHankSnippet
+	FOCUS # this does nothing at the moment
+	WAIT 2
+	FOCUS
+	Hank "Så Sebastian..."
+	Hank "Var det något speciellt du ville?"
+}
+
+FOCUS # should not be needed but is right now... :(
+
+[AGAIN]
+
+CHOICE {
+	"Jag letar efter caféet":
+		Hank "Aha..."
+		Hank "Det finns väl några stycken"
+		Hank "Men du vill förmodligen till Ponty, det är nog det mest populära här i stan"
+
+		CHOICE {
+			"OK, där har jag redan varit dock":
+				Hank "Jaha, ok"
+				Hank "Du kan ju gå till hamnen, det finns ett trevligt fik för dem som arbetar där"
+				CHOICE {
+					"OK, det låter intressant":
+					"Hmm...":
+				}
+				Hank "Annars vet jag inte så noga"
+				CHOICE {
+					"Tack för tipset, jag kollar runt!":
+						Hank "Gör så, vi ses"
+
+					"Nej men det ska nog gå, ha det fint så länge":
+						Hank "Du med"
+				}
+
+			"Var ligger det?":
+				Hank "Du får gå in mot Plaza och centrum, förbi Burrows"
+				Hank "Det ligger bakom rådhuset och parken"
+				CHOICE {
+					"OK, tack för hjälpen!":
+						Hank "Inga problem"
+						Hank "Vi hörs kompis!"
+
+					"Hmm... jag har verkligen svårt att hitta i den här stan":
+						Hank "Haha, du är inte den förste att säga det"
+						Hank "Men man lär sig"
+				}
+		}
+
+	"Nej, det e lugnt":
+		Hank "OK, ses"
+}
+
+Hank.StopTalking()
+DEFOCUS
+
+
+
+[TALK_MORE]
+LISTEN Sebastian_talk_Hank
+FOCUS
+Hank.StartTalking()
+
+CHOICE ETERNAL {
+	"Vet du vem det var som letade efter mig här förut?":
+		Hank "Hmm..."
+		Hank "Jag tror att jag såg en snubbe som sprang omkring i morse eller när det nu var"
+		Hank "Rödlätt, med skägg?"
+		CHOICE {
+			"OK?!":
+			"Ja, jag vet ju inte hur han ser ut då":
+		}
+		Hank "Jag tror att han brukar hålla till nere vid Plaza"
+		CHOICE {
+			"OK? Tack, tack, tack!!!":
+			"Wow, jag går dit med en gång!":
+		}
+
+	"Vem är det som bor i sviterna på övervåningen?":
+		Hank "Babcia bor i en av dem"
+		Hank "Och Michail, kocken, i den andra"
+		CHOICE {
+			"Hyr ni inte ut dem till gäster?":
+				Hank "Njae... du får fråga Babcia om det där"
+			"Vad kostar det att hyra en?":
+				Hank "Ingen aning, jag vet inte om de går att hyra nu"
+		}
+
+	"Varför är fontänen trasig?":
+		Hank "Eh, jag har bara inte orkat ordna med den"
+		Hank "Är så mycket som är trasigt här på hotellet"
+		Hank "Men jag ska ta tag i det någon dag, jag lovar!"
+}
+
+Hank.StopTalking()
+DEFOCUS
+GOTO TALK_MORE
+

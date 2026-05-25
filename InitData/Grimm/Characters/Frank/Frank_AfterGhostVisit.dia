@@ -1,0 +1,155 @@
+[FROM_THE_BEGINNING]
+LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+
+IF Sebastian.HasKnowledge("Albert") {
+	GOTO ALBERT
+} ELSE {
+	Frank "Öh"
+	Frank "Hej Sebastian, jag är lite upptagen just nu"
+	Frank "Kan vi snacka senare?"
+	Frank.StopTalking()
+	DEFOCUS
+	GOTO FROM_THE_BEGINNING
+}
+
+[ALBERT]
+
+Sebastian "Frank?"
+Frank "Öh ja vad är det Sebastian?"
+
+CHOICE {
+	"Felix sa att du visste en del om den här personen 'Albert'":
+		[WORKED_HERE_BEFORE_RIGHT]
+		CHOICE {
+		 	"Han jobbade tydligen på The Lodge förut?":
+				Frank "Mm, jo just det"
+				[PRECISELY]
+				Frank "Precis"
+				Frank "Jävligt fin människa..."
+
+			"Var ni goda vänner?":
+				Frank "Albert och jag?"
+				Frank "Ja... o ja"
+				GOTO PRECISELY
+		}
+
+	"Jag har sett en riktigt konstig sak":
+		Frank "Jaså?"
+		CHOICE {
+			"Ett spöke":
+				Frank "Hm?"
+			"En uppenbarelse":
+				Frank "Ok..?"
+			"Det var någon på mitt hotellrum":
+				Frank "Ok?"
+		}
+		CHOICE {
+			"Det var mitt på natten, som ett ljussken":
+				Frank "Oj då... det låter intressant"
+
+			"Hank sa att du kanske visste något om det":
+				Frank "Jaha?"
+				CHOICE {
+					"Eller, han sa att det påminde honom om en man som hette Albert":
+						GOTO WORKED_HERE_BEFORE_RIGHT
+
+					"Gör du det?":
+						Frank "Kanske"
+						Frank "Kanske inte"
+						Frank "Jag har gjort en del efterforskningar på så kallade spöken"
+						#Frank "Och deras eventuella sammankoppling med överdriven datoranvändning"
+						Frank "Vad sa Hank?"
+						CHOICE {
+							"Han nämnde en person som hette Albert...":
+							"Jag vet inte, han verkade bekymrad":
+								Frank "Pratade han om Albert?"
+								CHOICE {
+									"Ja...":
+									"Ja precis!":
+								}
+						}
+						GOTO WORKED_HERE_BEFORE_RIGHT
+				}
+		}
+}
+
+[MORE_QUESTIONS]
+Frank.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+
+CHOICE {
+	"Vet du hur man använder det här 'Slurp'?":
+		Frank "Heh, jo då"
+		Frank "Men det är Araki som är experten på det här"
+		Frank "Har du pratat med henne om det?"
+		CHOICE {
+			"Nej, men det kan jag ju göra":
+				Frank "Ja, testa det"
+				Frank "Och var försiktig, Slurp är inget att leka med!"
+			"Jo, hon var lite kryptisk":
+				Frank "Jaså?"
+				Frank "Ja men det är inte så konstigt med Slurp"
+				Frank "Eller alltså... det är jävligt konstigt egentligen"
+				Frank "Men det är inte så svårt att använda"
+				Frank "Det fungerar med de flesta saker som är uppkopplade"
+				Frank "Datorer är ju standard"
+				Frank "Och elskåp"
+				CHOICE {
+					"Jaha...":
+					"OK, men hur använder jag det sen?":
+						Frank "Det är bara att skriva Slurp() i koden"
+						Frank "Och sen när du kör programmet så..."
+						Frank "Ja, det händer liksom"
+						CHOICE {
+							"Händer?":
+								Frank "Ja, det är något skumt"
+							"Eh?":
+								Frank "Jag kan nog inte förklara det bättre"
+							"OK...":
+							"Hmmmm":
+						}
+						Frank "Du får testa mer själv"
+						Frank "Men var försiktig, det är inte helt ofarliga grejer det där"
+				}
+		}
+		GOTO MORE_QUESTIONS
+
+	"Vad tror du om allt det här med Ivan?":
+		Frank "Vilken soppa"
+		Frank "Någon måste göra något åt Ministeriet, det står allt mer klart"
+		Frank "Vi har bara så lite resurser"
+		Frank "Men jag ska tänka ut något..."
+		GOTO MORE_QUESTIONS
+
+	"God kväll":
+		Frank "God kväll"
+
+	"Läget då?":
+		Frank "Det är bra"
+		Frank "Stressad över allt som måste göras"
+		Frank "Själv?"
+		CHOICE {
+			"Det är väl bra antar jag":
+				Frank "OK, skönt att höra"
+			"Piss":
+				Frank "Mm, jag förstår"
+			"Jag är orolig för Pixie":
+				Frank "Ja..."
+				Frank "Jag med"
+		}
+
+	"Hej då":
+		Frank "Ses"
+}
+
+Frank.StopTalking()
+DEFOCUS
+

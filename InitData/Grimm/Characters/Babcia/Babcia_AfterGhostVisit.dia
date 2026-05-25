@@ -1,0 +1,80 @@
+[AGAIN]
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+Babcia.StartTalking()
+Babcia "Jag lyssnar på dig"
+
+CHOICE {
+	"Jag tänkte bara säga att jag uppskattar ditt hotell mer och mer":
+		CHOICE {
+			"Först tyckte jag att det var lite konstigt men det växer på mig":
+			"Det är mysigt":
+		}
+		Babcia "Jaha, tack då"
+
+	"Ni låser dörrarna på hotellet ordentligt under natten väl?":
+		Babcia "Nej, aldrig"
+		Babcia "De är öppna dygnet runt"
+		CHOICE {
+			"Kan ni inte vara snäll och låsa dem?":
+				Babcia "Nej, våra gäster kan komma när som helst"
+				Babcia "Det är en service att vi alltid har öppet"
+				Babcia "Hurså?"
+			"Jaha, jobbigt":
+				Babcia "Vadå då?"
+		}
+		CHOICE {
+			"Äsch strunt samma, det var inget":
+			"Jag misstänker att någon bröt sig in på mitt rum när jag sov":
+				Babcia "Jaha, det var allvarligt"
+				Babcia "Är låset förstört?"
+				CHOICE {
+					"Nej, det tror jag inte":
+					"Vet inte":
+					"Jag tror inte att personen i fråga behövde bryta upp låset":
+						Babcia "Nähä?"
+				}
+				Babcia "Kom till saken är ni snäll"
+				CHOICE {
+					"En man tog sig in på mitt hotellrum":
+					"Jag blev väckt mitt i natten av att någon var på mitt rum":
+				}
+		}
+
+	"Vem är det som bor på rum 3?":
+		Babcia "Vi lämnar inte ut namnet på våra gäster"
+		CHOICE {
+			"Ok, ok":
+			"Jaha ja det är väl bra antar jag":
+		}
+}
+
+Babcia.StopTalking()
+DEFOCUS
+
+
+
+GOTO AGAIN
+
+
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+Babcia.StartTalking()
+Babcia "Mm?"
+
+CHOICE {
+	"Du känner inte till något om spöken här på hotellet?":
+		Babcia "Nej, verkligen inte. Vad är det för struntprat?"
+
+	"Hur länge har du ägt det här hotellet?":	
+		Babcia "25 år i år!"
+		CHOICE {
+			"Imponerande":
+			"Ok":
+		}
+}
+
+Babcia.StopTalking()
+DEFOCUS

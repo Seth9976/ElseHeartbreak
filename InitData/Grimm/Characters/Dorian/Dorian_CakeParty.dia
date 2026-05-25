@@ -1,0 +1,91 @@
+LISTEN Sebastian_talk_Dorian
+FOCUS
+Dorian.StartTalking()
+
+Dorian "Förfärligt, det här med Ivan"
+CHOICE {
+    "Mm":
+    "Ja verkligen!":
+    "Ja...":
+}
+
+Dorian "Vet du vad de ska göra med honom?"
+CHOICE {
+    "Ingen aning":
+        [NO_IDEA]
+        Dorian "Pixie verkar väldigt orolig"
+        GOTO WORRY
+    "Nej, vet du..?":
+        Dorian "Nope"
+        Dorian "Men Pixie verkar väldigt orolig"
+        [WORRY]
+        CHOICE {
+            "Ja...":
+            "Mm":
+            "Tycker du?":
+                Dorian "Ser du inte det?"
+        }
+        Dorian "Hon älskar honom verkligen"
+        CHOICE {
+            "Är du säker?":
+            "Ja":
+            "Mm det verkar så":
+        }
+    "De ska testa honom på något sätt eller?":
+        Dorian "Jaha, är det så"
+        CHOICE {
+            "Eller jag vet ju inte riktigt":
+            "Jag förstod det som så...":
+        }
+        GOTO NO_IDEA
+}
+
+Dorian "Kärleken alltså"
+Dorian "Är du kär?"
+
+CHOICE {
+    "Va?":
+        Dorian "Är du kär i någon?"
+        [OR_HAS_BEEN]
+        Dorian "Eller har varit"
+        CHOICE {
+            "Jag vet inte jag":
+            "Njae...":
+            "Kanske?":
+        }
+        GOTO SIMPLE_QUESTION
+    "Öh...":
+        GOTO OR_HAS_BEEN
+    "Vad är det för fråga?":
+        [SIMPLE_QUESTION]
+        Dorian "En enkel fråga"
+        Dorian "Men den kan få den största av män att vackla"
+}
+
+Dorian "'Älskar du mig?'"
+CHOICE {
+    "...":
+    "Vänta, frågar du mig det nu?":
+    "Jag känner dig ju inte så bra...":
+}
+
+Dorian "Det var så han frågade"
+Dorian "Det var så hon frågade"
+Dorian "Vad skulle jag svara?"
+Dorian "Vad betyder ett svar?"
+
+CHOICE {
+    "Jag förstår inte riktigt om du pratar med mig nu":
+    "Eh, jag måste nog tänka på det":
+    "Jag gillar dig, var inte orolig":
+}
+
+Dorian "Å, denna dimma"
+Dorian.Interact(Ivan)
+Dorian "Var är min fyr i natten?"
+Dorian "VAR ÄR MIN FYR?!"
+Ivan "Nu får du fan lugna ner dig Dorian"
+Ivan "Du stör grannarna"
+
+Dorian.StopTalking()
+DEFOCUS

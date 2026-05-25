@@ -1,0 +1,93 @@
+
+WAIT Sebastian.IsInEitherRoom(Hotel_Lobby, Hotel_Exterior)
+#Typer1.Pos(RentingApartmentsLobby_Trigger_1)
+#Typer1.Pos(HarborEast_Point2)
+#Typer1.Pos(Hotel_Exterior_StreetLight1)
+Typer1.Pos(Hotel_Exterior_Point)
+Typer1.SetHandItem(Typer1Modifier)
+Typer1.SetTimetable(Typer1_FixLamp1)
+
+Hotel_Exterior_StreetLight1.SetCodeAndRun(LigistLamp)
+WAIT 1
+Hotel_Exterior_StreetLight3.SetCodeAndRun(LigistLamp)
+
+LISTEN Sebastian_talk_Typer1 [FirstLamp] {
+    FOCUS
+
+    Typer1 "Förbannade ligister"
+    Typer1.StartTalking()
+
+    CHOICE {
+        "Va?":
+        [DAMN]
+        Typer1 "De ska bara förstöra"
+        CHOICE {
+            "Vad jobbar du med?":
+                [SHITSTORM]
+                Typer1 "En riktig skitstorm"
+                Typer1 "Du ser väl själv hur det ser ut här?!"
+
+            "Vilka då?":
+                Typer1 "Om vi det visste!"
+                Typer1 "Ligister är de i alla fall"
+        }
+        "Ursäkta, vet du var caféet ligger?":
+        Typer1 "Jag går aldrig dit"
+        CHOICE {
+            "OK, synd":
+            Typer1 "Adjö"
+            "Vad jobbar du med här då?":
+            GOTO SHITSTORM
+        }
+        "Ja, dagens ungdom!":
+        GOTO DAMN
+        "Vad gör du för något?":
+        GOTO DAMN
+    }
+
+    DEFOCUS
+
+    WAIT 2
+    Typer1 "Men vänta nu..."
+    WAIT 1
+    Typer1 "Ha!"
+    Hotel_Exterior_StreetLight1.SetCodeAndRun("StreetLight")
+    Typer1 "Äntligen!"
+
+    Typer1.StopTalking()
+
+    CANCEL SebastianLeft
+    GOTO SECOND_LAMP
+}
+
+WAIT Sebastian.IsInEitherRoom(HarborEast, BurrowsNorth, StationNorth) [SebastianLeft] {
+    CANCEL FirstLamp
+    Hotel_Exterior_StreetLight1.SetCodeAndRun("StreetLight")
+    GOTO SECOND_LAMP
+}
+
+LISTEN FOREVER
+
+
+
+[SECOND_LAMP]
+
+Typer1.SetTimetable(Typer1_FixLamp2)
+LISTEN Typer1_hack_Hotel_Exterior_StreetLight3
+WAIT 4
+Typer1 "Set..."
+Typer1 "Color..."
+WAIT 3
+Typer1 "0.4 blir nog bra"
+WAIT 2 
+Hotel_Exterior_StreetLight3.SetCodeAndRun("StreetLight")
+Typer1.SetTimetable(Typer1)
+
+
+
+[AGAIN]
+LISTEN Sebastian_talk_Typer1
+FOCUS
+Typer1 "Inte nu"
+DEFOCUS
+GOTO AGAIN

@@ -1,0 +1,6 @@
+
+Sebastian.Pos(MysticalCube2)
+
+Bower.SetTimetable("")
+Bower.Pos(MysticalCube2)
+Bower.Interact(TestComputer2)

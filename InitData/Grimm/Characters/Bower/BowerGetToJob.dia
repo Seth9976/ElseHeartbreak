@@ -1,0 +1,11 @@
+Bower.SetTimetable("")
+Bower.Interact(Ministry_Lobby_MinistryElevatorDoor_1)
+
+WAIT Bower.IsInRoom(Ministry_Elevator1)
+Bower.Interact(Ministry_Elevator1_Computer)
+
+WAIT 2
+Bower "Bower"
+
+WAIT 2
+Bower.SetTimetable("Bower")

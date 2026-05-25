@@ -1,0 +1,87 @@
+
+Siri.SetTimetable(Siri_Bolder)
+
+
+WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri {
+	Siri "hej"
+	WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+	Siri "jag orkar inte prata"
+}
+
+
+WAIT Siri.IsAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+FOCUS
+
+Sebastian "Hej"
+Siri "hej"
+Siri.StartTalking()
+
+CHOICE {
+	"Sitter du här igen?":
+		Siri "mm"
+	
+	"Jag heter Sebastian":
+		Siri "ok"
+		
+	"Mår du bra?":
+		Siri "mm"
+		CHOICE {
+			"Du ser inte ut att må så bra":
+				Siri "jag är nog bara lite trött"
+			"OK, så bra":
+				Siri ""
+		}
+}
+
+CHOICE {		
+	"Du bor väl här på hotellet?":
+		Siri "jo"
+		CHOICE {
+			"Trivs du?":
+				Siri "det går väl an"
+			
+			"Jag också":
+				Siri "ok"
+		}
+
+	"Ska jag gå?":
+		WAIT 2
+}
+
+CHOICE {
+	"Får jag sätta mig ner här bredvid?":	
+		Siri "ja..... ska nog gå och lägga mig snart"
+		CHOICE {
+			"Jaha OK":
+			"Jag sitter här ett tag i alla fall":
+		}
+
+	"Eh... god natt då!":
+		Siri "god natt....."
+}
+
+Siri.StopTalking()
+DEFOCUS
+
+
+
+WAIT Sebastian.IsSitting() AND Siri.IsSitting() AND Sebastian.IsWithinDistance(Siri, 8) {
+	FOCUS
+	WAIT 4
+
+	Siri.StartTalking()
+	Siri "jag gillar lugnet här på natten"
+	CHOICE {
+		"Ja, det är fint":
+		"Mm?":
+	}
+	Siri "man känner sig speciell som får uppleva det"
+	Siri.StopTalking()
+
+	DEFOCUS
+}
+
+
+
+WAIT Siri.IsAtTask(Sleeping)
+START Siri3

@@ -1,0 +1,69 @@
+WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri {
+	Siri "Hej Sebastian!"
+	WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+	Siri "Vi kan prata sen va?"
+}
+
+WAIT Siri.IsAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+FOCUS
+
+Siri.StartTalking()
+Siri "Hej"
+
+CHOICE {
+	"Hej...":
+	"God kväll":
+	"Hej, sitter du här igen?":
+}
+
+Siri "Sätt dig ner är du snäll"
+Sebastian "OK"
+
+WAIT Sebastian.IsNotInRoom("Hotel_Diner") [LEAVING_EARLY] {
+	STOP
+}
+
+LISTEN Sebastian_interact_DinerKitchenChair2
+
+CHOICE {
+	"Är det något särskilt du vill prata om?":
+		Siri "Jag har en fråga"
+		
+	"Hur är läget?":
+		Siri "Jag vet inte..."
+		Siri "Jag har funderat på en sak"
+}
+
+Sebastian "OK?"
+Siri "Tycker du att jag..."
+#Siri.PlayAnimation("NervousScratching")
+
+CHOICE {		
+	"Vad pratar du om?!":
+		Siri "Jag vet inte. Förlåt."
+		#Siri.PlayAnimation("NervousScratching")
+		Siri ""
+		Siri "Kan du gå är du snäll?"
+		CHOICE {
+			"OK":
+				STOP
+			"Nej men snälla, berätta vad du menar":
+				#Siri.PlayAnimation("NervousScratching")
+				Siri ""
+		}
+		
+	"Du är vadå..?":
+		#Siri.PlayAnimation("Sigh")
+		
+	"Va? Nej!":
+		Siri "Nej ok..."
+		CHOICE {
+			"Eller vad menade du?":
+				
+			"Gjort något kul på sista tiden?":
+				
+		}
+}
+
+Siri.StopTalking()
+DEFOCUS

@@ -1,0 +1,14 @@
+[AGAIN]
+
+WAIT 400
+SetRain(100)
+WAIT 100
+SetRain(0)
+WAIT 300
+SetRain(200)
+WAIT 30
+SetRain(20)
+WAIT 60
+SetRain(0)
+
+GOTO AGAIN

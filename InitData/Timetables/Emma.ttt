@@ -1,0 +1,13 @@
+13:00 - 20:30 PreParty  Fika 		Cafe_Room1
+20:30 - 23:30 Partaj	Party 		Hospital_Exterior
+23:30 - 13:00 Zzz		Sleep		EmmaBedRoom_Testing_Poor_Bed_Poor_Bed_7_1
+
+[Emma_PartyAtFelixApartment]
+00:00 - 24:00 Partaj	Sit 		FelixApartment_SofaSeat_1 FelixApartment_SofaSeat_2
+
+[Emma_SmokeOutside]
+00:00 - 24:00 _ Smoke Cafe_Exterior_Point
+
+[EmmaGambling]
+17:30 - 02:15 Gambling		BeInRoom 	Casino_Floor2
+02:15 - 17:30 Zzz			Sleep		EmmaBedRoom_Testing_Poor_Bed_Poor_Bed_7_1

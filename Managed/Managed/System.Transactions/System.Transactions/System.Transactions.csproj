@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DEA798CD-0519-48F3-97A9-97DC24025773}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>System</RootNamespace>
+    <AssemblyName>System.Transactions</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Consts.cs" />
+    <Compile Include="Locale.cs" />
+    <Compile Include="MonoDocumentationNoteAttribute.cs" />
+    <Compile Include="MonoExtensionAttribute.cs" />
+    <Compile Include="MonoInternalNoteAttribute.cs" />
+    <Compile Include="MonoLimitationAttribute.cs" />
+    <Compile Include="MonoNotSupportedAttribute.cs" />
+    <Compile Include="MonoTODOAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transactions\CommittableTransaction.cs" />
+    <Compile Include="Transactions\DependentCloneOption.cs" />
+    <Compile Include="Transactions\DependentTransaction.cs" />
+    <Compile Include="Transactions\Enlistment.cs" />
+    <Compile Include="Transactions\EnlistmentOptions.cs" />
+    <Compile Include="Transactions\EnterpriseServicesInteropOption.cs" />
+    <Compile Include="Transactions\HostCurrentTransactionCallback.cs" />
+    <Compile Include="Transactions\IDtcTransaction.cs" />
+    <Compile Include="Transactions\IEnlistmentNotification.cs" />
+    <Compile Include="Transactions\IPromotableSinglePhaseNotification.cs" />
+    <Compile Include="Transactions\ISimpleTransactionSuperior.cs" />
+    <Compile Include="Transactions\ISinglePhaseNotification.cs" />
+    <Compile Include="Transactions\IsolationLevel.cs" />
+    <Compile Include="Transactions\ITransactionPromoter.cs" />
+    <Compile Include="Transactions\PreparingEnlistment.cs" />
+    <Compile Include="Transactions\SinglePhaseEnlistment.cs" />
+    <Compile Include="Transactions\SubordinateTransaction.cs" />
+    <Compile Include="Transactions\Transaction.cs" />
+    <Compile Include="Transactions\TransactionAbortedException.cs" />
+    <Compile Include="Transactions\TransactionCompletedEventHandler.cs" />
+    <Compile Include="Transactions\TransactionEventArgs.cs" />
+    <Compile Include="Transactions\TransactionException.cs" />
+    <Compile Include="Transactions\TransactionInDoubtException.cs" />
+    <Compile Include="Transactions\TransactionInformation.cs" />
+    <Compile Include="Transactions\TransactionInterop.cs" />
+    <Compile Include="Transactions\TransactionManager.cs" />
+    <Compile Include="Transactions\TransactionManagerCommunicationException.cs" />
+    <Compile Include="Transactions\TransactionOptions.cs" />
+    <Compile Include="Transactions\TransactionPromotionException.cs" />
+    <Compile Include="Transactions\TransactionScope.cs" />
+    <Compile Include="Transactions\TransactionScopeOption.cs" />
+    <Compile Include="Transactions\TransactionStartedEventHandler.cs" />
+    <Compile Include="Transactions\TransactionStatus.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

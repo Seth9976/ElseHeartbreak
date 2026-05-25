@@ -1,0 +1,14 @@
+
+Bob.SetTimetable("")
+
+Bob.Pos(Sebastian)
+
+Bob.SetHandItem(CityHallGuard_Taser)
+
+Bob.InteractUsingHandItem(Sebastian)
+Bob "Nu du!"
+
+#WAIT Bob.HasConversationTarget(Sebastian)
+
+
+

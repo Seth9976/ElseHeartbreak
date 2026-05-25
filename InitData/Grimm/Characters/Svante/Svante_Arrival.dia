@@ -1,0 +1,36 @@
+[GUARD_AGAIN]
+
+WAIT IsWithinDistance(Svante, Sebastian, 10)
+
+Svante.SetTimetable("")
+Svante.CancelWalking()
+Svante.StartTalking()
+
+FOCUS
+Svante "Stopp där!"
+Svante "Vem är du?"
+
+Svante.TakeOutItem(SvanteTaser)
+Svante.StopTalking()
+WAIT 1
+
+Svante.InteractUsingHandItem(Sebastian)
+DEFOCUS
+
+WAIT Sebastian.IsSleeping()
+WAIT 30
+
+Sebastian.Pos(PoliceOfficeInterior_Poor_Toilet_Poor_Toilet_1)
+Svante.SetTimetable(Svante_Guard)
+
+IF Svante.HasKnowledge(CaughtSebastian) {
+    # later time...
+} ELSE {
+    BROADCAST ImprisonedSebastian
+}
+
+Svante.SetKnowledge(CaughtSebastian)
+
+WAIT Sebastian.IsAwake()
+
+GOTO GUARD_AGAIN

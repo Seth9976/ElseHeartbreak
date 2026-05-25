@@ -1,0 +1,8 @@
+#FinanceComputer.RunMasterProgram()
+StartLogging(FinanceComputer)
+StartLogging(SebastianCreditCard)
+WAIT 1
+Sebastian.SetHandItem(SebastianCreditCard)
+WAIT 1
+Sebastian.UseHandItem()
+WAIT 1

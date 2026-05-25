@@ -1,0 +1,33 @@
+
+STOP _DetectFindingHotel
+STOP _FoundHotel
+STOP _CheckedIn
+STOP _GotIntoRoom
+STOP SebastianInspectsFuseboxes
+
+Story(QueenOfTheInternet)
+
+Gunnar.StopTalking()
+Nini.StopTalking()
+Emma.StopTalking()
+Amanda.StopTalking()
+Bouncer.StopTalking()
+Babcia.StopTalking()
+Hank.StopTalking()
+Typer1.StopTalking()
+Typer2.StopTalking()
+Typer3.StopTalking()
+Typer4.StopTalking()
+Typer5.StopTalking()
+
+Gunnar.Pos(Plaza_Point)
+Nini.Pos(ShoeStore_Point)
+Emma.Pos(EmmaApartment_Trigger_1)
+Amanda.Pos(AmandaApartment_Trigger_1)
+Bouncer.Pos(DorisGardens_East_Trigger_1)
+
+LISTEN HasMetIvanAsGhost {
+	Story("AfterGhostVisit")
+}
+
+LISTEN DONT_STOP

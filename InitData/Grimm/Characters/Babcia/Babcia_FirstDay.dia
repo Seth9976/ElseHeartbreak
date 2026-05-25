@@ -1,0 +1,230 @@
+Babcia.SetTimetable("")
+Babcia.SetFieldToFloat("sleepiness", 0)
+Babcia.Pos(Hotel_Lobby_WorkPoint)
+
+WAIT IsWithinDistance(Sebastian, Babcia, 14)
+
+FOCUS
+Babcia.Interact(Sebastian)
+WAIT 2
+
+IF Babcia.HasKnowledge(Sebastian) {
+	Babcia "Sebastian."
+	Babcia "Där är du ju."	
+	CHOICE {
+		"Huh?":
+		"Javisst, här är jag!":
+		"[CHEAT]": GOTO CHEAT
+	}
+}
+ELSE {
+	Babcia "Ursäkta, vem är ni?"
+	CHOICE {
+		"Jag heter Sebastian":
+		"Du kan kalla mig Sebbe":
+	}
+	Babcia "Ni skulle checkat in igår, inte sant?"
+	CHOICE {
+		"Jo, kanske det...?":
+		"Ah! Jag hittade inte hotellet":
+			Babcia "På så vis"
+	}
+	SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+	Babcia.TakeOutItem(KeyRoom1)
+	Babcia "Ni har rum nr 1" 
+	Babcia "Gå genom matsalen för att komma till det"
+	WAIT Babcia.HasHandItemWithName(KeyRoom1)
+	Babcia.Give()
+	Babcia "Varsågod, här är nyckeln"
+	Babcia "Så... en sak till"
+	GOTO MAN_HERE
+}
+
+IF Sebastian.HasKnowledge(WasMovedToHotelBed) {
+	Babcia "Du somnade på golvet så jag släpade in dig på ditt rum"
+	CHOICE {
+		"Öh... jaha!":
+		"OK":
+			Babcia "Ett tack vore på sin plats"
+		"Va?":
+			Babcia "Ja vi kan ju inte ha gäster som sover på golvet"
+	}
+	Babcia "Förresten..."
+}
+
+[MAN_HERE]
+Babcia "Det var visst en man här nyss. Han sökte dig."
+
+CHOICE {
+	"Ojdå, sa han vad det gällde?":
+		Babcia "Nej, jag frågade inte"
+
+		CHOICE {
+			"Vad tycker du att jag ska göra?":
+				Babcia "Det vet väl inte jag"
+				Babcia "Du kanske kan spring ikapp honom, om du är snabb"
+				CHOICE {
+					"OK, vart kan han ha sprungit då?":
+						GOTO WHERE_TO
+					"Suck... ja":	
+				}
+
+			"Åt vilket håll stack han?":
+				[WHERE_TO]
+				Babcia "Jag vet inte så noga"
+				Babcia "Han kanske gick till caféet, många gillar att sitta där"
+				CHOICE {
+					"OK, jag försöker med det...":
+					"Var ligger caféet?":
+						Babcia "Mitt i stan kan man säga"
+						Babcia "Börja med att gå genom Burrows, det ligger rätt över bron här utanför"
+						Babcia "Du får fråga dig runt om du inte hittar"
+				}
+		}
+		Babcia.SetKnowledge("LookForWellspringSeller")
+
+	"OK, jag hinner inte med det nu, måste iväg":
+		Babcia "Jaså, skit samma då"
+		GOTO NOO
+}
+
+IF Sebastian.HasHandItemWithName(AIGP1205) {
+	GOTO ASK_ABOUT_FLOPPY
+}
+ELIF AIGP1205.IsInRoom(Sebastian_inventory) {
+	[ASK_ABOUT_FLOPPY]
+	CHOICE {
+		"OK jag får skynda mig då... hej då!":
+		"Förresten... jag hittade en diskett uppe i korridoren":
+			Babcia "Jag kan ta den"
+			CHOICE {
+				"Nej, jag vill ha den själv!":
+					Babcia "Ge mig den"
+					CHOICE {
+						"NEJ!":
+							Babcia "På så vis"
+							GOTO NOO
+						"OK":
+					}
+				"Vad skönt...":
+				"Ja, vad bra!":
+			}
+			[TRY_FIND_FLOPPY_AGAIN]
+			Babcia.StartWaitForGift()
+			LISTEN Sebastian_give_Babcia 
+			WAIT Babcia.HasAnyHandItem()
+			IF Babcia.HasHandItemOfType(Floppy) {
+				Babcia "Tackar"
+				Babcia.StopWaitForGift()
+				WAIT Babcia.IsIdle()
+				Babcia.PutAwayHandItem()
+				WAIT Babcia.HasNoHandItem()
+			} ELSE {
+				Babcia "Är det här en diskett..?"
+				Babcia.Give()
+				WAIT Babcia.HasNoHandItem()
+				GOTO TRY_FIND_FLOPPY_AGAIN
+			}
+			Babcia.StopWaitForGift()
+			CHOICE {
+				"Måste dra nu, hej då!":
+				"Ha det fint":
+				"Nej nu måste jag sticka till caféet och kolla om jag hittar den där mannen":
+			}
+		"Tack för hjälpen!":
+	}
+}
+ELSE {
+	CHOICE {
+		"Tack för hjälpen!":
+		"OK jag får skynda mig då... hej då!":
+	}
+}
+
+[NOO]
+[CHEAT]
+DEFOCUS
+
+Story("WellspringContact")
+
+Babcia.Walk(Hotel_Diner_Point)
+Babcia ""
+Babcia "Håhå jaja"
+
+
+WAIT Babcia.IsInRoom(Hotel_Diner) {
+	WAIT 5
+	Babcia.SetTimetable(Babcia)
+}
+
+
+LISTEN Sebastian_talk_Babcia
+
+IF Sebastian.HasKnowledge(FoundWellspringMan) {
+	GOTO ASK_ABOUT_WELLSPRING
+}
+
+FOCUS
+Babcia.StartTalking()
+
+Babcia "Ja?"
+IF Babcia.HasKnowledge("LookForWellspringSeller") {
+	Sebastian "Vart var det han tog vägen sa du?"
+	Babcia "Caféet"
+	CHOICE {
+		"Ah, ok. Tack!":
+			Babcia "Inga problem"
+		"OK, var ligger det?":
+			Babcia "Du går ner till centrum"
+			Babcia "Det heter Ponty, de har en stor rosa skylt utanför"
+			Babcia "Du kan alltid försöka läsa vägskyltarna"
+			CHOICE {
+				"Ja, bra idé!":
+				"Jo jag har försökt...":
+			}
+	}
+}
+ELSE {
+	Sebastian "Du nämnde något om en man förut?"
+	Babcia "Ja?"
+	Sebastian "Vad var det han ville?"
+	Babcia "Vet inte så noga"
+	Babcia "Jag tror att han skulle till caféet"
+	CHOICE {
+		"Aha, tack för hjälpen!":
+		"OK, var ligger det?":
+			Babcia "Nere i centrum"
+			CHOICE {
+				"Ok...":
+				"Jaha, tack så mycket!":
+			}
+	}
+	Babcia "Nej, nu måste jag ordna lite med andra grejer"
+}
+
+Babcia.StopTalking()
+DEFOCUS
+
+Babcia.SetTimetable(Babcia)
+
+
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+
+[ASK_ABOUT_WELLSPRING]
+Babcia.StartTalking()
+Babcia "Du hittade mannen eller?"
+
+CHOICE ETERNAL {
+	"Ja":
+	"Nej":
+	"Ja, har du glömt det?":
+}
+
+Babcia.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

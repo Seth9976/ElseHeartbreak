@@ -1,0 +1,13 @@
+
+[AGAIN]
+
+Hugin.RunFunctionOnComputer(OnMessage, "Anybody there?", 2)
+LISTEN RingBell
+Hugin.RunFunctionOnComputer(OnMessage, "I'm looking for Dr. Monad", 1)
+LISTEN RingBell
+Hugin.RunFunctionOnComputer(OnMessage, "1337", 0)
+LISTEN RingBell
+Hugin.RunFunctionOnComputer(OnMessage, "Hello?!", 1)
+LISTEN RingBell
+
+GOTO AGAIN

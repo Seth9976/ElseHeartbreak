@@ -1,0 +1,39 @@
+
+WAIT Receptionist.IsNotInRoom(Ministry_Lobby) AND Receptionist.IsNotInRoom(ReceptionistApartment) LISTEN Sebastian_talk_Receptionist {
+    [MORE]
+    Receptionist "Jag har lite bråttom"
+    WAIT Receptionist.IsNotInRoom(Ministry_Lobby) AND Receptionist.IsNotInRoom(ReceptionistApartment) LISTEN Sebastian_talk_Receptionist
+    Receptionist "Nej, inte nu"
+    WAIT Receptionist.IsNotInRoom(Ministry_Lobby) AND Receptionist.IsNotInRoom(ReceptionistApartment) LISTEN Sebastian_talk_Receptionist
+    GOTO MORE
+}
+
+
+WAIT Receptionist.IsInRoom(ReceptionistApartment) LISTEN Sebastian_talk_Receptionist {
+    Receptionist "Ut ur mitt hus!"
+    WAIT Receptionist.IsInRoom(ReceptionistApartment) LISTEN Sebastian_talk_Receptionist
+    Receptionist "Vad gör ni här?!"
+    Receptionist "Gå innan jag tillkallar polis"
+}
+
+
+[AGAIN]
+
+WAIT Receptionist.IsInRoom(Ministry_Lobby) LISTEN Sebastian_talk_Receptionist
+
+FOCUS
+Receptionist.StartTalking()
+
+Receptionist "Vem söker ni?"
+CHOICE {
+	"Ehmmm":
+	"Ehööö":
+	"Vet inte":
+}
+Receptionist "Det är nog bäst att ni lämnar här snarast"
+
+Receptionist.StopTalking()
+DEFOCUS
+
+
+GOTO AGAIN

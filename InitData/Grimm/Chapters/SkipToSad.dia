@@ -1,0 +1,9 @@
+Story("CanSellSoda")
+Story("AfterStalking")
+Story("LookForModifier")
+Story("YouAreMemberNow")
+
+Story("Sad")
+
+SetHour(13)
+Sebastian.Pos(Lodge_Room1_Point1)

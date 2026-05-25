@@ -1,0 +1,218 @@
+
+STOP HelpFindSodaMan
+
+# Man måste gå till wellspringdatorn och registrera sin 
+# vinst varje dag. Denna mängd dras från ens kort.
+# Den som säljer mest får ett pris.
+
+
+WAIT Sebastian.NotTalking() AND WellspringRepresentant.IsWithinDistance(Sebastian, 15)
+
+Sebastian.SetKnowledge("MoreInstructions")
+
+IF HarborWest_DoorToSodaStorage.IsUnlocked() {
+	BROADCAST TimeToBreakIntoSodaStorage
+}
+
+FOCUS
+WellspringRepresentant.SetTimetable("")
+WellspringRepresentant "Eyyyy!"
+WellspringRepresentant "Sebastian!"
+WellspringRepresentant.GetUpAndInteract(Sebastian)
+LISTEN WellspringRepresentant_talk_Sebastian
+WellspringRepresentant "Vänta vänta, här är jag"
+WellspringRepresentant "Jag är så förbannat trött, har sålt läsk hela natten"
+WellspringRepresentant.Interact(Sebastian)
+
+WellspringRepresentant "Hej Sebastian"
+WellspringRepresentant "Bra att jag hittade dig"
+
+CHOICE {
+	"Hej... vad du nu heter?":
+		WellspringRepresentant "Morgan"
+		CHOICE {
+			"Ok":
+			"Hej Morgan!":
+		}
+		Sebastian.SetKnowledge("Morgan")
+
+	"Hej!":
+	"Du jag är lite stressad just nu, är på väg till en grej":
+		WellspringRepresentant "Ja men det här går snabbt"
+}
+
+WellspringRepresentant "Det var en viktig grej som jag inte hann gå igenom med dig sist vi sågs"
+WellspringRepresentant "Det gäller pengarna du tjänar när du säljer läsk"
+
+CHOICE {
+	"Ja just det":
+	"Ja jag undrade faktiskt vad jag skulle göra med dem":
+	"Vilka pengar, hehe":
+		WellspringRepresentant "Går det dåligt?"
+		WellspringRepresentant "Du kanske inte har rätta anlaget för att sälja då"
+		CHOICE {
+			"Äsch, det ska nog lösa sig":
+				Sebastian "Måste bara jobba på mer"
+			"Nej, kanske inte":
+		}
+		WellspringRepresentant "Hur som helst, de här pengarna"
+} 
+
+WellspringRepresentant "Du måste rapportera in till Wellspring AB"
+WellspringRepresentant "Hur mycket du har sålt för och antal burkar"
+
+CHOICE {
+	"Det har jag redan börjat göra":
+		WellspringRepresentant "..jaha?"
+		WellspringRepresentant "Ja men vad bra"
+		WellspringRepresentant "I så fall var det inget mer"
+		GOTO GOOD_LUCK
+
+	"Ok, verkar rimligt":
+		WellspringRepresentant "Ja, det är det"
+		WellspringRepresentant "De är rätt petiga med det där"
+
+	"Var gör man det då?":
+}
+
+WellspringRepresentant "Du kan göra det på datorn utanför lagret"
+WellspringRepresentant "Man ska skriva typ 'register' och sen trycka på enter"
+WellspringRepresentant "Och sen ska man mata in vad man har sålt för och ladda över pengarna"
+
+CHOICE {
+	"På datorn som sköter dörren?":
+		WellspringRepresentant "Ja"
+
+	"Det låter ju inte så svårt":
+		WellspringRepresentant "Nej det är det inte"
+
+	"Det låter svårt":
+		WellspringRepresentant "Ja, man måste vara noggrann"
+}
+
+[GOOD_LUCK]
+WellspringRepresentant "Se till att göra det en gång per dag, annars blir cheferna sjukt sura"
+WellspringRepresentant "Inte för att jag någonsin har glömt det men jag kan tänka mig"
+
+CHOICE {
+	"Hehe, ok":
+	"Ja det ska jag tänka på då":
+}
+
+WellspringRepresentant "Bra. Och just det..."
+WellspringRepresentant "Säljer man mest så får man ett pris"
+
+[WOW]
+CHOICE {
+	"Å, wow!":
+		GOTO WOW
+
+	"Vad då för pris?":
+		WellspringRepresentant "Det är olika"
+
+	"Har du vunnit någon gång?":
+		WellspringRepresentant "Typ alla gånger"
+		WellspringRepresentant "Men det finns inte så stor konkurrens här i Dorisburg i och för sig"
+}
+
+WellspringRepresentant "Appropå det, nu ska jag vidare och jobba"
+WellspringRepresentant "Man får inte ligga på latsidan!"
+WellspringRepresentant "Lycka till med säljandet"
+WellspringRepresentant "Och kom ihåg..."
+
+CHOICE {
+	"Inget skitsnack om Wellspring":
+	"Jag minns inte?":
+		WellspringRepresentant "Inget skitsnack om Wellspring!"
+		CHOICE {
+			"Ok":
+			"Mm, just det":
+			"Nä precis":
+		}
+}
+
+DEFOCUS
+WellspringRepresentant.StopTalking()
+
+WellspringRepresentant.SetTimetable("WellspringRepresentant")
+
+
+
+
+# later
+
+
+[MORE_QUESTIONS]
+
+LISTEN Sebastian_talk_WellspringRepresentant
+FOCUS
+WellspringRepresentant.StartTalking()
+
+CHOICE {
+	"Hej!":
+	"God dag":
+	"Du...":
+}
+
+[MORE]
+CHOICE ETERNAL {
+	"Jag fattar verkligen inte hur jag ska få folk att köpa läsk!":
+		WellspringRepresentant "Nej, det kräver list"
+		WellspringRepresentant "Och charm"
+		WellspringRepresentant "Etc, etc"
+		WellspringRepresentant "Det är inget man lär sig på en kväll!"
+		WellspringRepresentant "Om man inte har naturlig fallenhet för det, givetvis"
+		GOTO MORE
+
+	"Hur är läget?":
+		WellspringRepresentant "Bra"
+		CHOICE {
+			"Gött":
+			"OK":
+			"Du verkar lite sur?":
+				WellspringRepresentant "Va, jag?!"
+				WellspringRepresentant "Varför tror du det?!!!"
+				WellspringRepresentant "Jag är inte sur!"
+				WellspringRepresentant "Hmph"
+				WellspringRepresentant.StopTalking()
+				DEFOCUS
+				WAIT 60
+				GOTO MORE_QUESTIONS
+		}
+		GOTO MORE
+
+	"Du... måste jag registrera försäljning varje dag?":
+		WellspringRepresentant "Jepp, det tror jag"
+		WellspringRepresentant "Det är vad de har sagt till mig i alla fall"
+		GOTO MORE
+
+	"Vad var det jag skulle ta för en läsk?":
+		WellspringRepresentant "Tjena! $3 är det rekommenderade priset"
+		WellspringRepresentant "Om du kan få någon att betala mer så är det ju bra såklart"
+		WellspringRepresentant "Jag har lite trick som jag brukar använda"
+		CHOICE {
+			"Kan tänka mig det...":
+			"Jaha, vadå för trick?":
+				WellspringRepresentant "Hemligt"
+				CHOICE {
+					"Seriöst?":
+					"Jaha, OK":
+				}
+		}
+		GOTO MORE
+
+	"Ska väl dra vidare och försöka sälja nån mer burk":
+		WellspringRepresentant "Jepp, jepp"
+
+	"Vi ses!":
+		WellspringRepresentant "Antar det"
+}
+
+
+WellspringRepresentant.StopTalking()
+DEFOCUS
+
+GOTO MORE_QUESTIONS
+
+
+

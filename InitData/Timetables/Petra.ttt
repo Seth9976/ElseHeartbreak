@@ -1,0 +1,40 @@
+07:30 - 17:00 Fikatime 	Fika Cafe_Room1
+17:00 - 03:00 Djing 	Interact BarYvonneMusic
+03:00 - 07:30 Sleep		Sleep PetrasBed
+
+[PetraSleepEarly]
+07:30 - 17:00 Fikatime  Fika Cafe_Room1
+17:00 - 01:00 Djing     Interact BarYvonneMusic
+01:00 - 07:30 Sleep     Sleep PetrasBed
+
+[PetraFindSebastian]
+00:00 - 24:00 LookForSebbe Interact Sebastian
+
+[PetraFindDorian]
+00:00 - 24:00 LookForDorian Interact Dorian
+
+[Petra_CrazyParty]
+03:00 - 07:30 Sleep		Sleep PetrasBed
+07:30 - 17:00 Fikatime Fika Cafe_Room1
+17:00 - 03:00 _ Sit PetrasApartment_SofaSeat_5 PetrasApartment_SofaSeat_6
+
+[Petra_GuideToHarborEast]
+00:00 - 24:00  	_ BeAtTing HarborEast_Point2
+
+[Petra_GoHome]
+00:00 - 24:00 _ BeInRoom PetrasApartment
+
+[Petra_GetIntoElevator]
+00:00 - 24:00 _ BeAtTing Ministry_Elevator1_Point
+
+[Petra_SitDownExperimentHall]
+00:00 - 24:00   _ Sit Ministry_ExperimentHall_SofaSeat_5 Ministry_ExperimentHall_SofaSeat_2 Ministry_ExperimentHall_SofaSeat_6
+
+[PetraDjAtHome]
+00:00 - 24:00 Djing    Interact PetrasMusicBox
+
+[PetraCakeParty]
+00:00 - 24:00   Sad Sit PixiesApartment_SofaSeat_1 PixiesApartment_SofaSeat_1
+
+[PetraTalkToPixie]
+00:00 - 24:00 _ Interact Pixie

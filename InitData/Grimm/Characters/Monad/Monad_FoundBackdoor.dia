@@ -1,0 +1,79 @@
+
+WAIT Sebastian.IsInRoom(MonadsApartment) AND Monad.IsInRoom(MonadsApartment) AND Monad.IsAwake() AND Sebastian.IsAwake() {
+    START Monad_BreakIntoMonads
+}
+
+
+WAIT Sebastian.IsInRoom(Ministry_MonadsOffice) AND Monad.IsInRoom(Ministry_MonadsOffice)
+
+Monad.SetTimetable("Monad_SitInOfficeChair")
+
+LISTEN Monad_sit_Ministry_MonadsOffice_MonadChair
+
+Monad "God dag Sebastian"
+Monad.SetKnowledge(SebastianBrokeIntoOffice)
+Monad.SetKnowledge(Sebastian)
+
+IF IsWithinDistance(Sebastian, Monad, 10) {
+	GOTO DISCUSSION
+}
+ELSE {
+	Monad "Kom närmare är du snäll"
+}
+
+WAIT IsWithinDistance(Sebastian, Monad, 10)
+
+[DISCUSSION]
+
+FOCUS
+Monad.StartTalking()
+Monad "Du kom till slut"
+
+CHOICE {
+	"Vet du vem jag är?":
+    "Va?":
+}
+
+Monad "Du måste sluta med det du håller på med"
+Monad "Förstår du vidden av vad som händer här?"
+
+CHOICE {
+    "Jag vet inte...":
+    "Det är du som måste sluta!":
+}
+
+Monad "Nu gör vi så här"
+Monad "Du lämnar mitt kontor lugnt och stilla"
+Monad "Och så vill jag inte se dig mer"
+Monad "Varken här eller på internet"
+Monad "Förstått?!"
+
+CHOICE {
+    "Ja...":
+    "Jag kommer inte att sluta kämpa":
+        Monad "Inte?"
+}
+
+Monad.StopTalking()
+DEFOCUS
+
+
+
+# beat
+
+
+
+FOCUS
+Monad.StartTalking()
+
+Monad "Ja?"
+CHOICE {
+    "Ni är elaka!":
+        Monad "Det beror på vem du frågar"
+
+    "Jag kommer att stoppa er!":
+        Monad "Mm?"
+}
+
+Monad.StopTalking()
+DEFOCUS

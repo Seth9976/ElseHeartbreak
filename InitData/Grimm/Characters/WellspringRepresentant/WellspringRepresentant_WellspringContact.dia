@@ -1,0 +1,272 @@
+
+WellspringRepresentant.CreateCigarette(Wellspring_Cigg1)
+WellspringRepresentant.CreateCigarette(Wellspring_Cigg2)
+WellspringRepresentant.CreateCigarette(Wellspring_Cigg3)
+
+WellspringRepresentant.PutIntoInventory(SodaStorage_WellspringSoda_7)
+WellspringRepresentant.PutIntoInventory(SodaStorage_WellspringSoda_8)
+WellspringRepresentant.PutIntoInventory(SodaStorage_WellspringSoda_9)
+
+WellspringRepresentant.SetFieldToFloat("sleepiness", 0)
+WellspringRepresentant.Pos(Hotel_Exterior_Point)
+WellspringRepresentant.SetTimetable(WellspringRepresentant_LookingForSebastian)
+
+WAIT IsWithinDistance(Sebastian, WellspringRepresentant, 20)
+WellspringRepresentant.SetFieldToFloat("sleepiness", 0)
+
+WellspringRepresentant "Hmmph"
+
+LISTEN Sebastian_talk_WellspringRepresentant
+WellspringRepresentant.SetFieldToFloat("sleepiness", 0)
+
+STOP HelpFindSodaMan # not needed anymore (and it messes things up if kept on running)
+
+FOCUS
+WellspringRepresentant.StartTalking()
+WellspringRepresentant "Ja?"
+
+CHOICE {
+	"Vet du var caféet ligger?":
+		WellspringRepresentant "Ja självklart"
+		IF WellspringRepresentant.IsInRoom(Plaza) {
+			WellspringRepresentant "Det är jättenära"
+		} ELIF WellspringRepresentant.IsInRoom(Cafe_Exterior) {
+			WellspringRepresentant "Det är ju här!"
+			WellspringRepresentant "Jag brukar hänga här och sälja till folk som ska gå och fika"
+			GOTO SELL_THERE
+		} ELSE {
+			WellspringRepresentant "Det är nära Plaza, du tar höger vid fontänen"
+		}
+		WellspringRepresentant "Bakom stadshuset skulle man kunna säga"
+		WellspringRepresentant "Brukar vara där och sälja ibland, är alltid mycket folk runt caféet"
+		[SELL_THERE]
+		CHOICE {
+			"Vad säljer du?":
+				WellspringRepresentant "En fantastisk läskande dryck"
+			"Oj, jag är också försäljare!":
+				WellspringRepresentant "Jaså?"
+				CHOICE {
+					"Ja... fast jag har inte börjat än":
+						GOTO OH_REALLY
+
+					"Mm, jag säljer läsk":
+						WellspringRepresentant "Vilket sammanträffande, det gör jag också"
+						GOTO WAIT_A_MINUTE
+				}
+
+		}
+
+	"Hej, jag tänkte bara kolla läget!":
+		WellspringRepresentant "Jo det är prima"
+		WellspringRepresentant "Hur är det själv?"
+		CHOICE {
+			"Det är bra":
+				WellspringRepresentant "Härligt att höra"
+				WellspringRepresentant "Ni kanske är sugen på en burk svalkande läsk?"
+				GOTO YOU_SELL_SODA
+			"Lite vilse...":
+				WellspringRepresentant "Du vet att de har kartor på turistbyrån va?"
+				CHOICE {
+					"Ja, men jag är dålig på kartor":
+					"Nej det visste jag inte, får pröva med det":
+				}
+				WellspringRepresentant "Förresten... om ni känner er lite nere?!"
+				WellspringRepresentant "Ni kanske är sugen på en burk läsk?"
+				[YOU_SELL_SODA]
+				CHOICE{
+					"Vadå, ger du bort läsk?":
+						WellspringRepresentant "Nej, jag säljer"
+					"Nej tack, det är bra":
+						GOTO NO_THANKS
+				}
+			"Lite trött...":
+				WellspringRepresentant "Jaha, ni kanske är sugen på en burk upppiggande läsk?"
+				GOTO YOU_SELL_SODA
+		}
+}
+
+
+WellspringRepresentant "Jag representerar Wellspring Inc. här i Dorisburg"
+WellspringRepresentant "Jag råkar vara en av deras mest framstående försäljare, globalt sett"
+
+CHOICE {
+	"Oj! Jag ska jobba för er tror jag...":
+		[OH_REALLY]
+		WellspringRepresentant "Jaså?"
+		[WAIT_A_MINUTE]
+		WellspringRepresentant "Vänta nu, vem är ni?"
+
+	"Vilken tur att jag träffade er":
+		Sebastian "Jag kom just till stan och ska börja jobba för Wellspring"
+		GOTO OH_REALLY
+
+	"Det var värst":
+		WellspringRepresentant "Ja, det är ingen lätt uppgift"
+		CHOICE {
+			"Om du säger det så. Jag ska dra vidare nu men ha det bra!":
+				WellspringRepresentant "Ni ska inte ha en burk läsk förresten?"
+				CHOICE {
+					"Nej tack, det är bra":
+						[NO_THANKS]
+						WellspringRepresentant "Visst visst, ha en bra dag!"
+						WellspringRepresentant "Säg till om ni ändrar er"
+						[NOTHING]
+						WellspringRepresentant.StopTalking()
+						DEFOCUS
+						LISTEN Sebastian_talk_WellspringRepresentant
+						FOCUS
+						WellspringRepresentant.StartTalking()
+						WellspringRepresentant "Mm?"
+						CHOICE ETERNAL {
+							"Ni sa att ni sålde läsk va?":
+								WellspringRepresentant "Ja precis"
+								Sebastian "Jag letar efter någon som kan hjälpa mig att börja arbeta för Wellspring"
+								GOTO OH_REALLY
+							"Det var inget":
+								GOTO NOTHING
+						}
+
+					"Ok, visst":
+						WellspringRepresentant "Det blir $5, tack"
+						WellspringRepresentant "Kan jag få låna ert kreditkort?"
+						[TRY_FIND_CARD_AGAIN]
+						WellspringRepresentant.StartWaitForGift()
+
+						LISTEN Sebastian_give_WellspringRepresentant {
+							WAIT WellspringRepresentant.HasAnyHandItem()
+							IF WellspringRepresentant.HasHandItemOfType(CreditCard) {
+								WAIT WellspringRepresentant.IsIdle()
+								WAIT 1
+								WellspringRepresentant.CharacterTakesMoneyFromCreditCard(-5)
+								WAIT WellspringRepresentant.IsIdle()
+								WAIT 3
+								WellspringRepresentant.Give()
+								WAIT WellspringRepresentant.HasNoHandItem()
+								WAIT 1
+								WellspringRepresentant.TakeOutItem(SodaStorage_WellspringSoda_9)
+								WAIT WellspringRepresentant.HasAnyHandItem()
+								WAIT 1
+								WellspringRepresentant.Give()
+								WAIT WellspringRepresentant.HasNoHandItem()
+								GOTO NOTHING
+							} ELSE {
+								Babcia "Kreditkortet sa jag..."
+								Babcia.Give()
+								WAIT Babcia.HasNoHandItem()
+								GOTO TRY_FIND_CARD_AGAIN
+							}
+						}
+
+						IF Sebastian.HasItemOfType(CreditCard) {
+							Log("No need to present dialogue options about dropping the card")
+							LISTEN DONT_GO_PAST_HERE
+						}
+
+						CHOICE {
+							"Hmm, jag tror att jag måste ha tappat det...":
+							"Jag har inget kreditkort":	
+						}
+
+						WellspringRepresentant "Jaha, verkligen?"
+						WellspringRepresentant "Så tråkigt då, ha en bra dag!"
+						GOTO NOTHING
+				}
+
+			"Hmm... jag tror att jag kanske ska jobba för er..?":
+				GOTO OH_REALLY
+		}
+}
+
+CHOICE {
+	"Jag heter Sebastian":
+		WellspringRepresentant "Mhm? Ja just det."
+	"Sebbe":
+		WellspringRepresentant "Jaha?"
+	"[cheat]":
+		GOTO SKIP
+}
+
+Sebastian.SetKnowledge(FoundWellspringMan)
+
+WellspringRepresentant "Verkligen? Jag har letat efter honom hela dagen"
+WellspringRepresentant "Har ni en identifikation?"
+
+CHOICE {
+	"En vadå?":
+	"Du menar typ en foto-legitimation?":
+		WellspringRepresentant "Ja precis"
+}
+
+WellspringRepresentant "Något sätt att visa att du verkligen är 'Sebastian' alltså"
+WellspringRepresentant "Ett intyg av något slag kanske?"
+
+CHOICE {
+	"Nä det har jag nog inte tyvärr":
+		WellspringRepresentant "Hmm ok det var dumt det"
+	"Jag kanske kan be min mamma att skicka hit en med posten...":
+		WellspringRepresentant "Mm... det tar nog alldeles för lång tid"
+}
+
+WellspringRepresentant "Men ni lovar alltså att ni är Sebastian?"
+
+CHOICE {
+	"Haha ja!":
+	"Ja, jag svär på heder och samvete":
+	"Det är sanningen":
+}
+
+WellspringRepresentant "Mm men då får vi göra så att... hmm..."
+WellspringRepresentant "Det får gå ändå. Du verkar någorlunda pålitlig."
+Sebastian "Hrm?"
+WellspringRepresentant "OK, så jag har fått i uppdrag att instruera dig"
+WellspringRepresentant "Det är rätt mycket du måste veta om du ska kunna göra ett bra jobb"
+CHOICE {
+	"Oj då":
+	"Jo det kan jag tänka mig":
+}
+WellspringRepresentant "Men jag har bara tid att lära dig det viktigaste idag"
+WellspringRepresentant "Vi hämtar läskburkarna i ett lager i hamnen"
+WellspringRepresentant "Jag kan ta med dig dit nu om du har tid?"
+
+CHOICE {
+	"Jag antar det...":
+
+	"Nej, inte direkt":
+		WellspringRepresentant "Ok, då får du säga till mig när du kan"
+		WellspringRepresentant "Jag kommer att jobba i staden, du får leta upp mig"
+		WellspringRepresentant "Adjö så länge"
+		CHOICE {
+			"Adjö":
+			"Hej då!":
+		}
+		[NOPE]
+		WellspringRepresentant.SetKnowledge(WillShowStorageLater)
+		WellspringRepresentant.StopTalking()
+		DEFOCUS
+		LISTEN Sebastian_talk_WellspringRepresentant
+		FOCUS
+		WellspringRepresentant "Hallå där"
+		WellspringRepresentant "Har ni tid att se vårt lager för läskburkarna nu?"
+		CHOICE ETERNAL {
+			"Ja":
+			"Nej... inte än":
+				WellspringRepresentant "Inte? Säg till när ni kan då"
+				WellspringRepresentant "Du måste börja jobba snart om du ska hinna sälja tillräckligt mycket"
+				CHOICE ETERNAL {
+					"Jag förstår":
+					"Mm...":
+				}
+				GOTO NOPE
+		}
+}
+
+[SKIP]
+
+WellspringRepresentant "OK, då går vi"
+WellspringRepresentant.StopTalking()
+
+DEFOCUS
+#WellspringRepresentant.Interact(HarborWest_SodaStorageComputer)
+WellspringRepresentant.SetTimetable("WellspringRepresentant_GuideToStorage")
+
+START WellspringRepresentant_ShowingTheStorage

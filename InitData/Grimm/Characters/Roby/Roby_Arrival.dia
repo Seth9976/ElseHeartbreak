@@ -1,0 +1,11 @@
+[DISS]
+LISTEN Sebastian_talk_Roby
+FOCUS
+Roby.StartTalking()
+
+Roby "Hallå där"
+Roby "Måste jobba, kan vi snacka senare?"
+
+Roby.StopTalking()
+DEFOCUS
+GOTO DISS

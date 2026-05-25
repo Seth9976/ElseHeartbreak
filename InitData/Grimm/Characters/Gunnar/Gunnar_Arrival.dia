@@ -1,0 +1,89 @@
+
+START LockHut
+
+
+
+WAIT Gunnar.IsAtTask(Tinker) LISTEN Sebastian_talk_Gunnar {
+	INTERRUPT Gunnar_Intrude
+}
+
+
+WAIT IsHour(0) {
+	Gunnar.SetTimetable(Gunnar)
+	STOP
+}
+
+
+WAIT Gunnar.IsNotAtTask(Tinker) LISTEN Sebastian_talk_Gunnar
+FOCUS
+Gunnar.StartTalking()
+
+CHOICE {
+	"Hej":
+	"Ursäkta":
+	"Tjena!":
+}
+
+IF IsNight() {
+	Gunnar "God kväll"	
+} ELSE {
+	Gunnar "God dag"
+}
+
+[MORE]
+
+CHOICE {
+	"Var ligger hotellet?":
+		Gunnar "Vilket av dem?"
+		CHOICE {
+			"Ehm...":
+			"Det började på bokstaven 'd' tror jag":
+			"Finns det flera?":
+		}
+		Gunnar "Om jag var du skulle jag gå och fråga på turistbyrån"
+		CHOICE {
+			"Jag har redan varit där tror jag":
+				Gunnar "Men så bra"
+				Gunnar "Då kan jag nog inte hjälpa dig mer, adjö"
+			"Var ligger den då?":
+				Gunnar "Vid kajen"
+				Gunnar "Kom du med båten?"
+				CHOICE {
+					"Mm":
+					"Kanske...":
+					"Nej":
+				}
+				Gunnar "Turistbyrån ligger där i alla fall"
+				Gunnar "Mer kan jag inte hjälpa till med, adjö"
+		}
+
+	"Var är jag nu?":
+		Gunnar "Vad menar du?"
+		CHOICE {
+			"Vad heter den här stadsdelen?":
+				Gunnar "Du är i den norra delen av hamnen, den har inget riktigt namn"
+			"Vet inte":
+				Gunnar "Hmph"
+		}
+		Gunnar "Adjö"
+		CHOICE {
+			"Adjö":
+			"Vänta!":
+				GOTO MORE
+		}
+
+	"Vad heter du?":
+		Gunnar "Känner vi varandra?"
+		Gunnar "Nej givetvis inte"
+		#Gunnar "Vilken oerhört fräck fråga"
+		#Gunnar "Det är naturligtvis inte din sak att veta mitt namn"
+		Gunnar "Adjö"
+}
+
+Gunnar.SetTimetable("Gunnar")
+Gunnar.StopTalking()
+DEFOCUS
+
+
+
+LISTEN DontStop

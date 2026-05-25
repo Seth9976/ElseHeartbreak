@@ -1,0 +1,18 @@
+
+#Sebastian.Pos(Hotel_Lobby_Point)
+Sebastian.Pos(Hotel_Exterior_Point)
+#Sebastian.Pos(Plaza_Point)
+#Sebastian.Pos(BarYvonne_PixiePoint)
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+Story("CanSellSoda")
+Story("ClubDotMorning")
+
+Pixie.Pos(Lodge_Room1_Point1)
+
+SetHour(12)
+
+# SetHour(16)
+

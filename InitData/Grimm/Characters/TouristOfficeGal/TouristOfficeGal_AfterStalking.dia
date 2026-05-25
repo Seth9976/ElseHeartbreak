@@ -1,0 +1,86 @@
+[BEGINNING]
+
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+
+FOCUS
+TouristOfficeGal.StartTalking()
+
+TouristOfficeGal "Hej du"
+CHOICE {
+	"Hej!":
+	"Hej igen":
+	"Förlåt, det var inget":
+		GOTO BEGINNING
+}
+
+TouristOfficeGal "Vad kan jag stå till tjänst med?"
+
+[QUESTIONS]
+CHOICE {
+	"Några nya tips på turistmål?":
+		TouristOfficeGal "Vettefan..."
+		TouristOfficeGal "Du hade kollat in statyn på Plaza eller?"
+		CHOICE {
+			"Ja":
+			"Nä":
+				TouristOfficeGal "Skit också..."
+				TouristOfficeGal "Du, jag får återkomma senare"
+				TouristOfficeGal "Kommer inte på något just nu faktiskt"
+				TouristOfficeGal "Var det något mer du undrade?"
+				GOTO QUESTIONS
+		}
+
+	"Jag skulle vilja ha mer information om det här 'datorministeriet'":
+		TouristOfficeGal "Jaha... jag tror tyvärr inte att jag vet så mycket om dem"
+		TouristOfficeGal "Det är ju en imponerande byggnad men det är inte något jättepopulärt turistmål"
+		TouristOfficeGal "Annars då?"
+		CHOICE {
+			"Jo, jag tänkte på en sak":
+				GOTO QUESTIONS
+			"Tack för hjälpen!":
+				TouristOfficeGal "Inga problem, ha det"
+		}
+
+	"Känner du Pixie?":
+		TouristOfficeGal "Pixie..."
+		TouristOfficeGal "Jag tror hon är några år äldre än jag"
+		TouristOfficeGal "Hon är aktivist väl...? Vän med Yulian?"
+		CHOICE {
+			"Jag vet inte, typ något sånt":
+				TouristOfficeGal "Hurså?"
+				CHOICE {
+					"Äsch, jag vet inte":
+					"Håller på och försöker ta reda på lite mer om den här grejen hon jobbar med":
+						TouristOfficeGal "Jaha?"
+				}
+
+			"Vem är den här Yulian?":
+				TouristOfficeGal "Å han bor här i närheten"
+				TouristOfficeGal "Assnygg!!!"
+				TouristOfficeGal "Jag och de andra här på kontoret brukar gå ut och spionera på honom när vi har rast"
+				[LOOKS]
+				CHOICE {
+					"Jaha":
+					"Ok, tack för infon":
+					"Hur ser han ut?":
+						TouristOfficeGal "Långt blont hår"
+						TouristOfficeGal "Ok häftiga kläder, typ värsta 80-talsoutfitten"
+						GOTO LOOKS
+					"Vadå, hänger han alltid här utanför?":
+						TouristOfficeGal "Nej han jobbar väl på dagarna"
+						TouristOfficeGal "Men han brukar sitta i hamnen här rätt ofta"
+						GOTO LOOKS
+				}
+		}
+		TouristOfficeGal "Så mycket mer vet jag inte, vi hänger inte direkt"
+		TouristOfficeGal "Var det något annat?"
+		CHOICE {
+			"Ja...":
+				GOTO QUESTIONS
+			"Måste gå nu, hej då":
+				TouristOfficeGal "OK, ha det"
+		}
+}
+
+TouristOfficeGal.StopTalking()
+DEFOCUS

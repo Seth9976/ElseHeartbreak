@@ -1,0 +1,27 @@
+
+WAIT Pixie.IsWithinDistance(Sebastian, 20) 
+
+FOCUS
+Pixie.SetTimetable("")
+Pixie.Interact(Sebastian)
+Pixie "Sebastian, vad hände?"
+Pixie "Varför gick du inte in i vagnen?!"
+
+WAIT Pixie.IsWithinDistance(Sebastian, 10)
+
+Pixie.Interact(Sebastian)
+
+CHOICE {
+	"Va, har den åkt?":
+	"Öh, jag vet inte vad jag tänkte...":
+}
+
+Pixie.StartTalking()
+
+Pixie "Den stod ju där!"
+Pixie "Jag går hem och sover nu"
+Pixie.SetTimetable("Pixie")
+
+Pixie.StopTalking()
+
+DEFOCUS

@@ -1,0 +1,50 @@
+
+Araki.SetTimetable(Araki)
+
+LISTEN Sebastian_talk_Araki
+FOCUS
+Araki.StartTalking()
+
+Araki "Hejsan"
+Araki "Hur gick det för dig på Casinot?"
+
+CHOICE {
+    "Eh... så där":
+    "Vet inte riktigt":
+    "Jag struntade i det":
+    "Det gick kanon!":
+        Araki "Vad bra"
+}
+
+CHOICE {
+    "Hittade du något där?":
+        Araki "Det är något riktigt skumt med Longson alltså"
+        Araki "Som vi misstänkte"
+        Araki "Fast han höll sig rätt lugn igår ändå"
+
+    "Du har inget som behöver göras här nere?":
+        Araki "Njae, inte direkt"
+        Araki "Sitter med mitt sökprogram"
+        Araki "Tror att det kan bli riktigt användbart för att utforska internet"
+        CHOICE {
+            "Coolt!":
+            "Internet?":
+                Araki "Ja, har du inte varit ute på internet?!"
+                CHOICE {
+                    "Nej...":
+                        Araki "OK, det måste du test"
+                        Araki "Slurp() heter funktionen"
+                        Araki "Den finns tillgänglig på de flesta datorer"
+
+                    "Jo, självklart":
+                        Araki "Tänkte väl det, det är det bästa som finns"
+                }
+        }
+        Araki "Jag jobbar mycket med våra utposter på nätet"
+        Araki "Du får kolla in det om du är där och utforskar"
+
+    "Ska gå och jobba lite, ha det gött":
+}
+
+Araki.StopTalking()
+DEFOCUS

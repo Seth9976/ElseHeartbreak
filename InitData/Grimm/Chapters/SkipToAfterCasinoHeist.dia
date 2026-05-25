@@ -1,0 +1,18 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("CasinoNightIsOver")
+
+Pixie.Pos(Lodge_Room1_Point1)
+Sebastian.Pos(Lodge_Room1_Point2)
+Yulian.Pos(Lodge_Room2_Point)
+
+SetClock(7, 10, 15, 0)
+
+
+# TEST THE THING WITH NON-TRANSLATED SENCTENCE:
+# SetLanguage(eng)
+# Sebastian.Pos(Lodge_Entry_Point1)
+# Typer4.SetTimetable(Typer4_LodgeBreak)
+# Typer4.Pos(Sebastian)

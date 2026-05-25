@@ -1,0 +1,274 @@
+
+Felix.SetTimetable(Felix_BeforePyjamasParty)
+Felix.SetFieldToFloat("sleepiness", 0)
+
+Log("FELIX PYJAMAS PARTY")
+
+[FROM_THE_BEGINNING]
+
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix {
+	FOCUS
+	Felix.StartTalking()
+	[MORE_QUESTIONS]
+	CHOICE ETERNAL {
+		"Var var det du bodde sa du?":
+			Felix "Bredvid café Ponty, det ligger nere på stan"
+			Felix "Du går in på vänster sidan av huset"
+			Felix "Det är en uteplats ovanpå, min lilla festplats som jag ordnat"
+			CHOICE ETERNAL {
+				"OK, är det nära parken?":
+					Felix "Ja, mitt emot ingången där ja"
+				"Nice, då hittar jag nog":
+			}
+			Felix "Ses vi ikväll då? Kommer bli grym fest som vanligt"
+			CHOICE ETERNAL {
+				"Ja gärna":
+					Felix "Härligt att höra"
+					Sebastian "Blir nog kul"
+				"Mm, ska försöka komma förbi":
+					Felix "Klart du ska!"
+					Sebastian "Ja, ok"
+				"Kanske":
+					Felix "Kom igen, det kommer bli fett"
+					Sebastian "Mm..."
+			}
+			GOTO MORE_QUESTIONS
+
+		"Tror du att Pixie är arg på mig?":
+			Felix "Äsch, hon brukar inte vara långsint"
+			Felix "Det är bara å softa dude"
+			Felix "Försök att inte klanta till det mer bara"
+			GOTO MORE_QUESTIONS
+
+		"Är det inte tråkigt att jobba här nere?":
+			Felix "Nä då, jag har bra underhållning här på datorn"
+			Felix "Och så är det jävligt slappt"
+			Felix "Ska mest hålla koll på om det är några skumma typer som stryker omkring"
+			GOTO MORE_QUESTIONS
+
+		"Alltså hmm... finns det en chans för mig att få jobba här hos er?":
+			Felix "Öh, kan du programmera då?"
+			IF Sebastian.HasItemOfType(Hackdev) {
+				CHOICE ETERNAL {
+					"Jag har en modifierare!":
+					"Japp":
+					"Typ...":
+				}
+				Felix "OK, men har du lärt dig att använda den?"
+				CHOICE ETERNAL {
+					"Ja, jag är grym":
+						Felix "OK, OK"
+						Felix "Om du vill jobba här måste du klara något slags test"
+						Felix "Jag ska se om bossen är inne"
+						GOTO EARLY_TRIALS
+
+					"Njae...":
+						Felix "Gör så här dude"
+						Felix "Leta upp någon som kan lära dig lite grejer"
+						Felix "Fib som sköter om parken är soft, han borde kunna ge dig lite tips"
+						Felix "Så kan du komma tillbaka hit igen sen"
+						CHOICE {
+							"Ja, det låter som en bra idé":
+								Felix "Cool"
+								Felix "Glöm inte att komma på min fest ikväll bara!"
+								Felix.StopTalking()
+								DEFOCUS
+								GOTO FROM_THE_BEGINNING
+
+							"Nej jag vill göra arbetsintervjun nu!":
+								Felix "Woah, chilla lite nu"
+								Felix "OK... de har inte en arbetsintervju"
+								Felix "Det är mer som ett test"
+								Felix "Men visst, om du känner dig redo"
+								[EARLY_TRIALS]
+								#Felix.StopTalking() <- Don't do this, he might walk away. Let him free later, when Seb talks to Pixie.
+								DEFOCUS
+								BROADCAST FelixCallsYulian
+								STOP
+						}
+				}
+			}
+			ELSE {
+				Felix "Och har du en modifierare?"
+				CHOICE ETERNAL {
+					"Njae...":
+					"Typ":
+					"Ja jag är grym":
+						Felix "Men har du en?"
+						Sebastian "Nä..."
+					"Modifierare?! Vad är det?":
+				}
+				Felix "Det måste du ha, annars kan du inte göra intagningsprovet"
+				Felix "Men du kanske kan få tag på en"
+				Felix "Det är rätt många i staden som har dem, du kanske känner någon?"
+				CHOICE ETERNAL {
+					"Ja, kanske...":
+					"Inte direkt":
+						Felix "Du kan ju kolla med Fib som sköter om parken, han är soft"
+				}
+				Felix "Glöm inte bort festen hos mig ikväll bara!"
+			}
+			
+
+		"Ska dra nu, ha det":
+			Felix "Vi hörs dude"
+	}
+	Felix.StopTalking()
+	DEFOCUS
+
+	LISTEN Sebastian_talk_Felix
+	FOCUS
+	Felix.StartTalking()
+	GOTO MORE_QUESTIONS
+}
+
+
+
+WAIT Felix.IsAtTask(Hanging) AND Sebastian.IsWithinDistance(Felix, 6)
+
+Felix.SetTimetable("")
+Felix "Tja, där är du ju dude! Kul att du kunde komma över!"
+Felix "Slå dig ner"
+
+WAIT Sebastian.IsSitting() AND Sebastian.IsWithinDistance(Felix, 10)
+
+#Felix.Interact(Sebastian)
+
+FOCUS
+Felix.StartTalking()
+#Felix.Interact(Sebastian)
+Felix "Läget?"
+
+CHOICE {
+	"Jo det är utmärkt":
+		Felix "Härligt att höra"
+	"Jag är lite förkyld men annars är det bra":
+		Felix "Segt"
+	"Jag är väldigt trött, mitt jobb tar knäcken på mig":
+		Felix "Fan vad drygt"
+	"[CHEAT: PARTY]":
+		GOTO PARTY
+}
+
+Felix "Men du Sebbe, jag har tänkt på en sak"
+Felix "Du känns jäkligt stiff ibland"
+
+CHOICE {	
+	"Vad fan säger du?!":
+		Felix "Ta det lugnt, du är bara lite stel liksom"
+		
+	"Ja, jag vet...":
+		
+	"Vad menar du med det?":
+		Felix "Jo men du är lite stel liksom"
+		
+	"Tycker du?":
+		Felix "Alltså, det är inte något allvarligt"
+}
+
+Felix "Jag gillar dig, men du borde slappna av mer bara"
+
+CHOICE {
+	"OK...":
+		Felix "Du blir inte sur nu va?"
+		CHOICE {
+			"Alltså, jag vet bara inte riktigt hur jag ska bete mig":
+			"Nä...":
+		}
+		
+	"Ja jag antar det":
+	
+	"Jag vet inte om jag förstår vad du pratar om":
+		Felix "Det kan vara svårt att se sånt här själv"
+}
+
+Felix "Men jag tror jag vet vad vi ska göra åt dina problem"
+
+CHOICE {
+	"OK?!":		
+	
+	"Hmm, ok...":
+		Felix "Dude, var inte så skeptisk"
+} 
+
+Felix "Jag har bjudit in lite tjejer hit ikväll"
+Felix "De är jävligt fräscha"
+
+[PARTY]
+
+Felix "Om du spelar dina kort rätt kan du kanske få ragg"
+
+CHOICE {
+	"OK, hur gör man det?":
+	"Vilka kort kan man spela då?":
+	"Jag vet inte om jag vill ha ragg...":
+		Felix "Kom igen, klart du vill!"
+}
+
+Emma.StopTalking()
+Emma.Pos(OutsideFelixApartment_Point1)
+Emma.SetTimetable(Emma_PartyAtFelixApartment)
+
+Felix "Alltså..."
+Felix "Du måste nog bara softa lite mer"
+
+Amanda.StopTalking()
+Amanda.Pos(OutsideFelixApartment_Point1)
+Amanda.SetTimetable(Amanda_PartyAtFelixApartment)
+
+Felix "Inte använda så skumma ord..."
+Felix "Släppa ner axlarna en decimeter, chilla liksom"
+
+
+LISTEN START_THREAD [THREAD] {
+    WAIT 10
+    IF Emma.IsNotInRoom(FelixApartment) {
+    	Emma.Pos(FelixApartment_Point1)
+    }
+    WAIT 2
+    IF Amanda.IsNotInRoom(FelixApartment) {
+    	Amanda.Pos(FelixApartment_Point1)
+    }
+}
+BROADCAST START_THREAD
+
+
+WAIT Emma.IsInRoom(FelixApartment)
+
+WAIT 2
+Emma "Här kommer vi"
+Felix "Nej oj jävlar, kommer de redan?!"
+Felix "Fan, vi får ta det där någon annan gång Sebbe"
+Felix "Hej, välkomna allihopa!"
+
+WAIT Amanda.IsInRoom(FelixApartment) {
+	WAIT 2
+	Amanda "Tja grabbar!"
+	Felix "Hej hej, Amanda!"
+	Felix "Du förresten Sebbe?"
+	Sebastian "Ja?"
+	Felix "Jag måste dra iväg och fixa en grej"
+	Felix.Interact(Sebastian)
+	Felix "Men du kan väl hänga här med tjejerna så länge?"
+	CHOICE {
+		"Javisst!":
+			Felix "Härligt, ses snart"
+		"OK...":
+			Felix "De är inte farliga"
+		"Kan jag inte följa med dig?":
+			Felix "Nä jag måste ordna med lite saker själv"
+			Felix "Sorry man"
+	}
+	Felix "Ciao, allihopa!"
+	Emma "Hej då Felix"
+	Felix.SetTimetable("")
+	Felix.StopTalking()
+	Felix.Walk(OutsideFelixApartment_Point1)
+	Amanda "Vi kommer att sakna dig"
+	DEFOCUS
+}
+
+WAIT Felix.IsInRoom(OutsideFelixApartment)
+
+BROADCAST FelixHasLeftTheParty
+

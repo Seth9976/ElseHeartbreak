@@ -1,0 +1,138 @@
+
+LISTEN KickOutWallenstam {
+	Wallenstam.SetTimetable(Wallenstam)
+	Wallenstam.Pos(StationNorth_Point)
+	STOP
+}
+
+WAIT Sebastian.IsInEitherRoom(Tram_Interior, Tram_Interior2, Tram_Interior3, Tram_Interior4)
+
+IF Sebastian.IsInRoom(Tram_Interior) {
+	Wallenstam.Pos(Tram_Interior_HarborSouth_SofaSeat_1_4)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior2) {
+	Wallenstam.Pos(Tram_Interior2_SofaSeat_5)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior3) {
+	Wallenstam.Pos(Tram_Interior3_SofaSeat_8)
+}
+
+IF Sebastian.IsInRoom(Tram_Interior4) {
+	Wallenstam.Pos(Tram_Interior4_SofaSeat_10)
+}
+
+WAIT 4
+WAIT Sebastian.IsWithinDistance(Wallenstam, 8)
+Sebastian.CancelWalking()
+FOCUS
+Wallenstam.StartTalking()
+
+Wallenstam "Det är ju du"
+Wallenstam "Jag såg dig..."
+Wallenstam "På en skärm"
+
+CHOICE {
+	"Va?":
+	"Jag har aldrig sett dig tror jag":
+	"Jaha, vilken skärm?":
+		Wallenstam "Min skärm"
+}
+
+Wallenstam "Hehe"
+Wallenstam "Den är så långsam"
+
+CHOICE {
+	"Skärmen?":
+		Wallenstam "Nej, spårvagnen"
+	"Vad är långsamt?":
+		Wallenstam "Spårvagnen"
+	"Är den?":
+		Wallenstam "Ja"
+}
+
+Wallenstam "Det är oftast snabbare att gå"
+Wallenstam "Men jag gillar att vila fötterna"
+
+CHOICE {
+	"Jag förstår":
+	"OK":
+	"Vet du var jag ska gå av?":
+		Wallenstam "Ja, gå av vid Plaza"
+		CHOICE {
+			"Men det var där jag klev på":
+				Wallenstam "Jaha..."
+				Wallenstam "Ja då vet jag inte"
+			"Varför?":
+				Wallenstam "Jag har läst det"
+				CHOICE {
+					"Hmm...":
+					"Jaha":
+					"Läst?! Var..?!":
+						Wallenstam "Skärmen"
+				}
+			"OK, bra idé":
+		}
+}
+
+Wallenstam "Suck..."
+Wallenstam "Den stora frågan är vad man ska kalla saker"
+Wallenstam "Bara man vet namnet så är resten enkelt..."
+CHOICE {
+	"Är det så?":
+	"Namnet på vadå?":
+	"OK...":
+}
+Wallenstam "Lösningen finns i namnet"
+CHOICE {
+	"I vilket namn?":
+	"Lösningen..?!":
+	"Va?!":
+}
+Wallenstam "Men när det är dags så kommer du ha glömt bort det!"
+Wallenstam "GLÖM DET INTE!!!"
+
+Wallenstam.StopTalking()
+DEFOCUS
+
+WAIT 2
+Wallenstam.SetTimetable(Wallenstam)
+Wallenstam.Pos(StationNorth_Point)
+
+# "Log lady"
+# Går runt och säger 'inte här' överallt
+
+LISTEN Sebastian_talk_Wallenstam {
+	[MORE_CRAZY_TALK]
+	Wallenstam "Öhhh!! Va?!?!"
+	Wallenstam "Nej, nej, nej..."
+	LISTEN Sebastian_talk_Wallenstam
+	Wallenstam "Jag har inte gjort något!"
+	LISTEN Sebastian_talk_Wallenstam
+	Wallenstam "Ah, nej, ummm"
+	LISTEN Sebastian_talk_Wallenstam
+	Wallenstam "Va? Har det hänt något..?"
+	Wallenstam "Öhhhhh"
+	Wallenstam "Vad var det jag tänkte på"
+	LISTEN Sebastian_talk_Wallenstam
+	Wallenstam "Vet du?"
+	GOTO MORE_CRAZY_TALK
+}
+
+
+
+[AGAIN]
+WAIT 60
+IF Sebastian.IsWithinDistance(Wallenstam, 30) {
+	Wallenstam "Inte här..."
+}
+WAIT 80
+IF Sebastian.IsWithinDistance(Wallenstam, 30) {	
+	Wallenstam "Inte här heller..!"
+}
+WAIT 70
+IF Sebastian.IsWithinDistance(Wallenstam, 30) {
+	Wallenstam "Är den här?"
+}
+GOTO AGAIN

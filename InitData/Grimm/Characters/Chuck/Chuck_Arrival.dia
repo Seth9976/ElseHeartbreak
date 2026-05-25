@@ -1,0 +1,148 @@
+
+WAIT Chuck.IsNotAtTask(Work) AND Chuck.NotTalkingButIgnore(Sebastian) LISTEN Sebastian_talk_Chuck {
+	FOCUS
+	Chuck.StartTalking()
+
+	Chuck "Hey man"
+	Chuck "Wanna go smash some cans?"
+	CHOICE {
+		"Eh, va?":
+			GOTO WHAT
+		"Yeah man!":
+		"Smash... vadå?!":
+			[WHAT]
+			Chuck "Dricka ööl"
+			Chuck "Beer!"
+			CHOICE {
+				"Ah, jaha":
+				"OK":
+				"Nej tack":
+			}
+	}
+	Chuck "Jag jobbar på the bar"
+	Chuck "Yvonne"
+	CHOICE {
+		"Ah, där har jag varit":
+			Chuck "Cool man"
+		"Jaha, var ligger den?":
+			Chuck "Plaza"
+			GOTO COME_BY
+		"OK, coolt":
+			[COME_BY]
+			Chuck "Kom förbi på kvällen"
+			Chuck "Det är where it's at, man"
+	}
+	Chuck "Cya around"
+	CHOICE {
+		"Jajemän":
+		"Nej, vänta va?":
+		"Yeah man!":
+	}
+	Chuck "Awesome dude"
+	Chuck "Gotta go"
+
+	Chuck.StopTalking()
+	DEFOCUS
+
+	[YO]
+	WAIT Chuck.IsNotAtTask(Work) AND Chuck.NotTalkingButIgnore(Sebastian) LISTEN Sebastian_talk_Chuck
+	Chuck "Yo man"
+	WAIT 10
+	GOTO YO
+}
+
+
+
+[AGAIN]
+
+WAIT Chuck.IsAtTask(Work) AND Chuck.NotTalkingButIgnore(Sebastian) LISTEN Sebastian_talk_Chuck
+
+FOCUS
+Chuck.StartTalking()
+
+Chuck "Beer?"
+
+[BEER]
+CHOICE ETERNAL {
+	"Ja tack":
+		GOTO BUY
+	"Nej det e bra":
+		Chuck "Cool man"
+	"Va?":
+		Chuck "Öl alltså"
+		CHOICE {
+			"Aha, jaha nu förstår jag. Visst!":
+				GOTO BUY
+			"Eh...":
+				GOTO BEER
+		}
+}
+GOTO NOPE
+
+[BUY]
+
+Chuck "Kreditkort?"
+
+IF Sebastian.HasItemOfType(CreditCard) {
+	Chuck.StartWaitForGift()
+
+	WAIT Chuck.HasAnyHandItem()
+	Chuck.StopWaitForGift()
+
+	IF Chuck.HasHandItemOfType(CreditCard) {
+		WAIT Chuck.HasHandItemOfType(CreditCard)
+		WAIT Chuck.IsIdle()
+		Chuck.CharacterTakesMoneyFromCreditCard(-5)
+		WAIT Chuck.IsIdle()
+		WAIT 2
+		Chuck.Give()
+		WAIT Chuck.HasNoHandItem()
+		WAIT 2
+		Chuck "Ok, här har du den"
+		Chuck.CreateBeerInHand()
+		Chuck.Give()
+		WAIT Chuck.HasNoHandItem()
+		CHOICE {
+			"Thanks!":
+			"Tack!":
+			"Najs":
+		}
+	} ELSE {
+		Chuck "Huh?"
+		WAIT Chuck.IsIdle()
+		Chuck.Give()
+		WAIT Chuck.HasNoHandItem()
+		GOTO BUY
+	}
+
+	Chuck.StopWaitForGift()
+} ELSE {
+	Sebastian "Oj, verkar ha glömt det"
+	Chuck "Du får en på huset"
+	Chuck.CreateBeerInHand()
+	Chuck.Give()
+	WAIT Chuck.HasNoHandItem()
+	CHOICE {
+		"Oj vad snällt":
+		"Ok, tack så mycket!":
+	}
+}
+
+Chuck "Inga problem, man"
+
+[NOPE]
+
+IF IsOverHour(06) {
+	IF IsBeforeHour(19) {
+		Chuck "Kom tillbaka senare ikväll när det är lite folk här!"
+	} ELSE {
+		Chuck "Cya around"
+	}
+} ELSE {
+	Chuck "Cya around"
+}
+
+Chuck.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

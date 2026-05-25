@@ -1,0 +1,111 @@
+﻿using System;
+using System.Collections;
+using System.Runtime.InteropServices;
+
+namespace System.Runtime.Serialization
+{
+	/// <summary>Generates IDs for objects.</summary>
+	// Token: 0x020004F7 RID: 1271
+	[MonoTODO("Serialization format not compatible with.NET")]
+	[ComVisible(true)]
+	[Serializable]
+	public class ObjectIDGenerator
+	{
+		/// <summary>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> class.</summary>
+		// Token: 0x060032FC RID: 13052 RVA: 0x000A4DD4 File Offset: 0x000A2FD4
+		public ObjectIDGenerator()
+		{
+			this.table = new Hashtable(ObjectIDGenerator.comparer, ObjectIDGenerator.comparer);
+			this.current = 1L;
+		}
+
+		/// <summary>Returns the ID for the specified object, generating a new ID if the specified object has not already been identified by the <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" />.</summary>
+		/// <returns>The object's ID is used for serialization. <paramref name="firstTime" /> is set to true if this is the first time the object has been identified; otherwise, it is set to false.</returns>
+		/// <param name="obj">The object you want an ID for. </param>
+		/// <param name="firstTime">true if <paramref name="obj" /> was not previously known to the <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" />; otherwise, false. </param>
+		/// <exception cref="T:System.ArgumentNullException">The <paramref name="obj" /> parameter is null. </exception>
+		/// <exception cref="T:System.Runtime.Serialization.SerializationException">The <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> has been asked to keep track of too many objects. </exception>
+		// Token: 0x060032FE RID: 13054 RVA: 0x000A4E08 File Offset: 0x000A3008
+		public virtual long GetId(object obj, out bool firstTime)
+		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
+			object obj2 = this.table[obj];
+			if (obj2 != null)
+			{
+				firstTime = false;
+				return (long)obj2;
+			}
+			firstTime = true;
+			this.table.Add(obj, this.current);
+			long num;
+			this.current = (num = this.current) + 1L;
+			return num;
+		}
+
+		/// <summary>Determines whether an object has already been assigned an ID.</summary>
+		/// <returns>The object ID of <paramref name="obj" /> if previously known to the <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" />; otherwise, zero.</returns>
+		/// <param name="obj">The object you are asking for. </param>
+		/// <param name="firstTime">true if <paramref name="obj" /> was not previously known to the <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" />; otherwise, false. </param>
+		/// <exception cref="T:System.ArgumentNullException">The <paramref name="obj" /> parameter is null. </exception>
+		// Token: 0x060032FF RID: 13055 RVA: 0x000A4E70 File Offset: 0x000A3070
+		public virtual long HasId(object obj, out bool firstTime)
+		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
+			object obj2 = this.table[obj];
+			if (obj2 != null)
+			{
+				firstTime = false;
+				return (long)obj2;
+			}
+			firstTime = true;
+			return 0L;
+		}
+
+		// Token: 0x17000997 RID: 2455
+		// (get) Token: 0x06003300 RID: 13056 RVA: 0x000A4EB0 File Offset: 0x000A30B0
+		internal long NextId
+		{
+			get
+			{
+				long num;
+				this.current = (num = this.current) + 1L;
+				return num;
+			}
+		}
+
+		// Token: 0x0400152D RID: 5421
+		private Hashtable table;
+
+		// Token: 0x0400152E RID: 5422
+		private long current;
+
+		// Token: 0x0400152F RID: 5423
+		private static ObjectIDGenerator.InstanceComparer comparer = new ObjectIDGenerator.InstanceComparer();
+
+		// Token: 0x020004F8 RID: 1272
+		private class InstanceComparer : IComparer, IHashCodeProvider
+		{
+			// Token: 0x06003302 RID: 13058 RVA: 0x000A4ED8 File Offset: 0x000A30D8
+			int IComparer.Compare(object o1, object o2)
+			{
+				if (o1 is string)
+				{
+					return (!o1.Equals(o2)) ? 1 : 0;
+				}
+				return (o1 != o2) ? 1 : 0;
+			}
+
+			// Token: 0x06003303 RID: 13059 RVA: 0x000A4F08 File Offset: 0x000A3108
+			int IHashCodeProvider.GetHashCode(object o)
+			{
+				return object.InternalGetHashCode(o);
+			}
+		}
+	}
+}

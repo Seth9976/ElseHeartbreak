@@ -1,0 +1,10 @@
+
+Bob.SetTimetable("")
+Bob.StartLogging()
+
+Bob.Pos(Casino_Floor1_Point)
+Sebastian.Pos(Bob)
+WAIT 3
+Bob.Interact(Casino_Floor1_DoorToExterior)
+
+#Bob.Interact(Casino_Floor1_Fence_1)

@@ -1,0 +1,10 @@
+
+[NEXT_DAY]
+
+LISTEN Yulian_open_Lodge_Entry_DoorToRoom1
+
+WAIT 8
+
+Yulian "God morgon damer och herrar"
+
+GOTO NEXT_DAY

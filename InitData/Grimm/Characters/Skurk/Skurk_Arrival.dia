@@ -1,0 +1,68 @@
+
+WAIT Skurk.IsInRoom(HarborWestHouseRoom1) AND Sebastian.IsWithinDistance(Skurk, 15) {
+    [FOUND_AGAIN]
+    Skurk.SetTimetable("")
+    FOCUS
+    Skurk.Interact(Sebastian)
+    Skurk "Hrm hrm"
+    Skurk "Vad gör du här?"
+    CHOICE {
+        "Jag...":
+        "Eh":
+        "Öööööö":
+    }
+    Skurk "Sluta snoka runt"
+    Skurk "Hrm"
+    CHOICE {
+        "Vad gör du här inne?":
+            GOTO NOT_YOUR_THING
+
+        "OK, förlåt":
+
+        "Jag letar efter en sak...":
+            Skurk "Ja, det finns inget här"
+
+        "Vem är ni?":
+            [NOT_YOUR_THING]
+            Skurk "Det är inte din sak"
+    }
+    Skurk "Gå nu"
+    DEFOCUS
+    WAIT 10
+    IF Sebastian.IsInRoom(HarborWestHouseRoom1) {
+        Skurk "Gå då!"
+        Skurk "Hrm"
+    }
+    Skurk.SetTimetable(Skurk)
+    WAIT Skurk.IsInRoom(HarborWestHouseRoom1) AND Sebastian.IsWithinDistance(Skurk, 15)
+    GOTO FOUND_AGAIN
+}
+
+
+
+[AGAIN]
+
+WAIT Skurk.IsNotInRoom(HarborWestHouseRoom1) LISTEN Sebastian_talk_Skurk
+
+Skurk "Hrm, va?"
+
+Skurk.SetRunning(true)
+Skurk.SetTimetable(Skurk_Escape)
+
+FOCUS
+CHOICE {
+    "Vänta!":
+    "Hej!":
+    "God dag":
+    "Vem är ni?":
+    "Vart är du på väg?":
+    "Hallå?!":
+}
+DEFOCUS
+
+WAIT 500
+
+Skurk.SetRunning(false)
+Skurk.SetTimetable("Skurk")
+
+GOTO AGAIN

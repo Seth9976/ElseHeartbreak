@@ -1,0 +1,13 @@
+
+SetHour(20)
+
+Sebastian.Pos(BarYvonne_Point3)
+Petra.SetTimetable("")
+Chuck.Pos(BarYvonne_ChuckPoint)
+Chuck.SetTimetable(Chuck)
+
+Amanda.Pos(BarYvonne_Point2)
+Amanda.SetTimetable(PandaParty)
+
+#StartLogging(Chuck)
+StartLogging(Amanda)

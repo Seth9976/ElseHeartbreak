@@ -1,0 +1,46 @@
+
+WAIT CasinoGuard1.IsAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1
+
+FOCUS
+CasinoGuard1.StartTalking()
+
+CasinoGuard1 "God kväll och välkommen till Killian Casino!"
+
+CHOICE {
+    "Tack, tack!":
+
+    "Vad kostar det ikväll?":
+        CasinoGuard1 "Det är gratis"
+}
+
+CasinoGuard1 "Inte så mycket folk här idag tyvärr"
+CasinoGuard1 "Men hoppas att ni får det trevligt"
+
+CasinoGuard1.StopTalking()
+DEFOCUS
+
+
+
+
+
+
+[MORE]
+WAIT CasinoGuard1.IsAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1
+FOCUS
+CasinoGuard1.StartTalking()
+
+CasinoGuard1 "Ja?"
+
+CHOICE {
+    "Det var inget":
+
+    "Tänkte bara säga hej":
+        CasinoGuard1 "Hej hej"
+        
+    "Tänkte bara säga hej då":
+        CasinoGuard1 "Välkommen åter!"
+}   
+
+CasinoGuard1.StopTalking()
+DEFOCUS
+GOTO MORE

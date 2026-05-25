@@ -1,0 +1,9 @@
+
+Typer2.SetTimetable(Typer2)
+
+LISTEN Sebastian_talk_Typer2
+Typer2 "Jag pratar inte med främlingar"
+
+LISTEN Sebastian_talk_Typer2
+Typer2 "Adjö"
+

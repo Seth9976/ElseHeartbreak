@@ -1,0 +1,82 @@
+
+LISTEN Sebastian_talk_Ivan
+FOCUS
+Ivan.StartTalking()
+
+Ivan "Ja..."
+WAIT 1
+Ivan "...eh, du heter Sebbe va?"
+
+[AGAIN]
+CHOICE {
+    "Mm":
+        GOTO AGAIN
+
+    "Vad är det som ska hända imorgon egentligen?":
+
+    "Hur är läget?":
+        Ivan "Asså... det är lugnt"
+        Ivan "Jävligt skum grej jag ska på imorgon"
+        CHOICE {
+            "Ja, vad är det för något? Ingen har riktigt berättat":
+
+            "Mm...":
+                GOTO CYA
+        }
+}
+
+Ivan "Tjänster och gentjänster typ"
+Ivan "Jag ska låta en gammal vän testa en grej hon jobbat på"
+
+CHOICE {
+    "Ok spännande, lycka till!":
+
+    "Vadå för grej?":
+        Ivan "Jag vet inte riktigt... det är någon slags apparat"
+        Ivan "Tydligen måste den testas på en människa"
+        Ivan "Och jag har sagt att jag kan vara frivillig"
+        CHOICE {
+            "Jaha":
+            "Ok, varför det?":
+        }
+        Ivan "Eller ja, de gav mig inte så mycket val"
+        Ivan "Men men..."
+}
+Ivan "Det blir nog cool"
+
+CHOICE {
+    "Hoppas det":
+    "Ja, det tror jag!":
+    "Alla verkar rätt oroliga?":
+        Ivan "Ja men det är ingen fara"
+        Ivan "De är bara lite nojiga av sig"
+}
+
+[CYA]
+
+Ivan.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Ivan
+FOCUS
+Ivan.StartTalking()
+
+Ivan "Har du tagit tårta?"
+CHOICE {
+    "Nej, finns det tårta?":
+        Ivan "Ja... den var här någonstans"
+        CHOICE {
+            "Jag ser den inte":
+            "OK, schysst":
+        }
+
+    "Nej":
+
+    "Japp":
+        Ivan "OK"
+}
+
+Ivan.StopTalking()
+DEFOCUS

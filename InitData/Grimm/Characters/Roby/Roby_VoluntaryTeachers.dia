@@ -1,0 +1,184 @@
+
+Roby.SetTimetable(Roby_WaitOutsideHotel)
+Roby.SetRunning(false)
+
+LISTEN Sebastian_talk_Roby
+FOCUS
+Roby.StartTalking()
+
+Roby "Tjena mannen, vad händer?"
+CHOICE {
+    "Jag håller på och ska försöka lära mig att programmera":
+        [OH_REALLY]
+        Roby "Jaså?"
+        Roby "Coolt..."
+        Roby "Nåt du undrar? Jag är ganska bra"
+        CHOICE {
+            "Kan du programmera?":
+                Roby "Ja, hur tror du annars jag kan sköta alla datorer på stationen?"
+                Roby "Det är mycket hackande... *suck*"
+
+            "Å, jag har tusen frågor":
+                Roby "Heh, OK... så många hinner jag inte svara på!"
+
+            "Alltså, jag är inte så bra än":
+                Roby "Vem är det så där i början?"
+        }
+        Roby "Jag kan ge dig ett tips"
+        CHOICE {
+            "Visst":
+            "OK":
+            "Gärna!":
+        }
+        Roby "Glöm inte citat-tecknen!"
+        CHOICE {
+            "Vad är det?":
+                [LIKE_THIS]
+                Roby " '' "
+                Roby " '' "
+                Roby "Ser du?"
+                Roby "Du kan använda bara ' också"
+                Roby " ' "
+                Roby " ' "
+                Roby "Du måste sätta dem kring text"
+                Roby "Till exempel ett namn"
+                CHOICE {
+                    "Jaha...":
+                    "OK?":
+                }
+                Roby "Så du kan inte bara skriva:"
+                Roby "Roby"
+                Roby "Du måste skriva"
+                Roby "''Roby''"
+                CHOICE {
+                    "Va, varför det?":
+                        [IF_NOT]
+                        Roby "Om du skriver bara Roby så tror datorn att det är en variabel"
+                        CHOICE {
+                            "Vari...?":
+                                Roby "Variabel!"
+                                Roby "Du skapar dem med ordet var"
+                                Roby "Typ så här:"
+                                Roby "var name = 'Roby'"
+                                Roby "Fattar du?"
+                                CHOICE {
+                                    "Kanske..?":
+                                        Roby "Bra"
+                                        GOTO LATER
+                                    "Nej":
+                                        Roby "OK..."
+                                        [LATER]
+                                        Roby "Ska se om jag kommer på en bättre förklaring senare"
+                                }
+
+                            "Ah!":
+                                Roby "Rätt så rimligt, va?"
+                                Roby "Jaja, bra att tänka på i alla fall"
+
+                            "OK, dumma datorn":
+                                Roby "Ja, den är lite korkad"
+                                Roby "Men var inte för hård mot den... den tänker logiskt"
+                                CHOICE {
+                                    "Mm...":
+                                    "Jo":
+                                }
+                        }
+
+                    "OK, jag förstår":
+                        Roby "Bra!"
+
+                    "Vad händer om jag inte skriver citat-tecknen?":
+                        GOTO IF_NOT
+                }
+
+            "Citat-tecken?!":
+                Roby "Jupp"
+                Roby "Du vet hur de ser ut va?"
+                Roby "Så här:"
+                GOTO LIKE_THIS
+
+            "Nej, men det brukar jag inte göra":
+                Roby "OK, tur"
+                Roby "Jag glömmer dem alltid"
+                Roby "Eller brukade, när jag var n00b"
+                Roby "Ingenting funkar då"
+        }
+
+    "Inte mycket":
+        Roby "Samma här, tar ett litet break från radiostationen"
+        Roby "Bara lite frisk luft"
+        CHOICE {
+            "OK, OK":
+            "Jaha":
+        }
+
+    "Har fått tag på en modifierare":
+        GOTO OH_REALLY
+}
+
+
+IF Roby.HasKnowledge(GotBag) {
+    Roby "Förresten, innan jag glömmer"
+    Roby "Tack som fan för att du fixade det där med väskan!"
+    CHOICE {
+        "Å, det var lätt":
+        "Varsågod!":
+    }
+    Roby "Kommer inte att glömma det, mannen"
+}
+
+Roby "Vi ses!"
+
+Roby.StopTalking()
+DEFOCUS
+
+Roby.SetTimetable(Roby)
+
+WAIT Roby.IsInRoom(RadioStationElevator)
+Roby.Pos(RadioStation_Point)
+
+
+# later
+
+LISTEN Sebastian_talk_Roby
+FOCUS
+Roby.StartTalking()
+
+Roby "Lyssnat nåt på radion?"
+CHOICE {
+    "Japp!":
+        Roby "Grymt"
+    "Nope":
+        Roby "Gör det"
+}
+Roby "Vi spelar riktigt fet musik"
+
+Roby.StopTalking()
+DEFOCUS
+
+
+
+# laterlater
+
+[SMALLTALK]
+LISTEN Sebastian_talk_Roby
+FOCUS
+Roby.StartTalking()
+
+Roby "Läget då?"
+CHOICE ETERNAL {
+    "Helt OK":
+        Roby "Gött"
+        Roby "Vi ses"
+
+    "Lite trött":
+        Roby "Jag med"
+        Roby "Jobbar för mycket"
+        Roby "Ha det gött!"
+
+    "...":
+}
+
+Roby.StopTalking()
+DEFOCUS
+GOTO SMALLTALK

@@ -1,0 +1,58 @@
+
+WAIT 7
+
+Hank.SetFieldToFloat("sleepiness", 0)
+Hank.Pos(HankSpawnPoint)
+Hank.TakeOutItem(HanksHackdev)
+WAIT Hank.HasHandItemWithName(HanksHackdev)
+Hank.SetTimetable(Hank_InteractWithBabcia)
+
+LISTEN Hank_talk_Babcia
+Hank "Vilken dörr var det sa du?"
+Babcia "1:ans"
+Hank "Va, den fixade jag ju förra veckan!"
+
+#Hank.Walk(Hotel_Corridor_Point)
+Hank.SetTimetable(Hank_FixDoor)
+
+WAIT 2
+Hank "Hrm hrm"
+WAIT 1
+Hank "Fy fan va det ska krångla då"
+
+WAIT 2
+Babcia "Nu tar Hank sig en titt på dörren"
+Babcia "Du kan ju följa med honom upp om du vill"
+
+
+LISTEN THREAD_1 {
+    WAIT 100
+    IF Hank.IsInRoom(Hotel_Corridor) {
+        Log("HANK HOTFIX")
+        SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+        Hotel_Lobby_DoorToHotelExterior.SetDoorTarget(Hotel_Exterior_DoorToHotel)
+        Hank.SetTimetable("Hank")
+    }
+}
+BROADCAST THREAD_1
+
+
+LISTEN Hank_hack_Hotel_Corridor_Door1
+
+WAIT Sebastian.IsWithinDistance(Hank, 6) [HaltSebbe] {
+    Sebastian.CancelWalking()
+    FOCUS
+    GOTO SeeingHankHack
+}
+
+WAIT 17
+CANCEL HaltSebbe
+
+[SeeingHankHack]
+WAIT 3
+DEFOCUS
+
+Hank "Sisådärja, det var ju inte så svårt!"
+
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+Story("DoorFixed")

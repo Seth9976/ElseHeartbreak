@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{542BC885-C936-42CD-BB47-FD71C7F0BE44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TingTing</RootNamespace>
+    <AssemblyName>TingTing</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GameTypes">
+      <HintPath>..\..\..\GameTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Relay">
+      <HintPath>..\..\..\Relay.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>..\..\..\System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CantFindTingException.cs" />
+    <Compile Include="EditableInEditor.cs" />
+    <Compile Include="IPreloadable.cs" />
+    <Compile Include="MultiRoomNetwork.cs" />
+    <Compile Include="Pathfinding\Datastructures\AStarStack.cs" />
+    <Compile Include="Pathfinding\IPoint.cs" />
+    <Compile Include="Pathfinding\Path.cs" />
+    <Compile Include="Pathfinding\PathLink.cs" />
+    <Compile Include="Pathfinding\PathSolver.cs" />
+    <Compile Include="Pathfinding\PathStatus.cs" />
+    <Compile Include="PointTileNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Room.cs" />
+    <Compile Include="RoomRunner.cs" />
+    <Compile Include="ShowInEditor.cs" />
+    <Compile Include="SimpleRoomBuilder.cs" />
+    <Compile Include="TileType.cs" />
+    <Compile Include="Ting.cs" />
+    <Compile Include="TingDuplicateException.cs" />
+    <Compile Include="TingRunner.cs" />
+    <Compile Include="TingTingException.cs" />
+    <Compile Include="WorldCoordinate.cs" />
+    <Compile Include="WorldCoordinateException.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

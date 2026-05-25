@@ -1,0 +1,10 @@
+
+[AGAIN]
+
+WAIT IsHour(03)
+
+BarYvonneMusic.StopMusic()
+
+WAIT IsHour(04)
+
+GOTO AGAIN

@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":200,"values":["\"Room\"","\"BetweenFelixAndLongson\"","[]","false","{\"x\":180,\"y\":-138}","\"000000001000011111000011111001011111000011111000011111100111111000111111100001111100001111000000010\"","{\"x\":9,\"y\":11}","{\"x\":-10,\"y\":-13}"]}

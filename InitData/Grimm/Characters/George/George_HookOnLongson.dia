@@ -1,0 +1,39 @@
+
+LISTEN Sebastian_talk_George
+FOCUS
+George.StartTalking()
+
+George "Hrm, ja?"
+
+CHOICE {
+    "Du ligger illa till!":
+        [WHAT]
+        George "Va?"
+        CHOICE {
+            "VA?!":
+                Sebastian "Va va va va?!!!"
+            "Snart har du inte mycket kvar av ditt rike!":
+            "Du är äcklig":
+        }
+        George "Vad är det här för sätt att tala till en äldre man?"
+        CHOICE {
+            "Jag skiter i vad du tycker":
+            "Ha!":
+            "Du ska inte berätta hur jag ska tala med dig":
+        }
+        CHOICE {
+            "Du är körd!":
+            "Ha ett bra liv":
+        }
+
+    "God dag":
+
+    "Din perverse jävel, jag vet minnsan ett och annat om dig!":
+        GOTO WHAT
+
+    "God kväll":
+}
+
+George.StopTalking()
+DEFOCUS
+

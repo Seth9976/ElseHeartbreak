@@ -1,0 +1,17 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("CakeParty")
+
+SetClock(8, 18, 00, 0)
+
+Pixie.Pos(PixiesApartment_Point)
+Ivan.Pos(Pixie)
+Felix.Pos(Pixie)
+
+Sebastian.Pos(PlazaBacktreet_Point1)
+
+WAIT 3
+Petra.Pos(Hotel_Exterior_Point)
+

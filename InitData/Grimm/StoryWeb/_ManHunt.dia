@@ -1,0 +1,129 @@
+
+Yulian.SetTimetable(Yulian_WorkOvertime)
+Bob.SetTimetable(Bob_JustFika)
+
+WAIT 25
+
+Typer1.Pos(Casino_Exterior_PointOnGround)
+Typer2.Pos(Mines_ClubDot_Point)
+Typer3.Pos(Factory_Exterior_Point1)
+Typer4.Pos(Ministry_Exterior_Trigger_1)
+Typer5.Pos(Ministry_ChamberOfNumbers_Point1)
+
+
+Typer1.SetTimetable(Typer1_Hunt)
+Typer2.SetTimetable(Typer2_Hunt)
+Typer3.SetTimetable(Typer3_Hunt)
+Typer4.SetTimetable(Typer4_Hunt)
+Typer5.SetTimetable(Typer5_Hunt)
+
+Monad.SetTimetable("")
+
+WAIT Typer1.IsWithinDistance(Sebastian, 4) AND Sebastian.IsNotSlurped() [TYPER_1_HUNT] {
+    FOCUS
+    Typer1 "Nu kommer du inte undan"
+    Monad.Pos(Typer1)
+    Typer1.SetTimetable("")
+    Typer1.Pos(Ministry_MonadsOffice_MonadPoint)
+    GOTO KILL
+}
+
+WAIT Typer2.IsWithinDistance(Sebastian, 4) AND Sebastian.IsNotSlurped() [TYPER_2_HUNT] {
+    FOCUS
+    Typer2 "Nu kommer du inte undan"
+    Monad.Pos(Typer2)
+    Typer2.SetTimetable("")
+    Typer2.Pos(Ministry_MonadsOffice_MonadPoint)
+    GOTO KILL
+}
+
+WAIT Typer3.IsWithinDistance(Sebastian, 4) AND Sebastian.IsNotSlurped() [TYPER_3_HUNT] {
+    FOCUS
+    Typer3 "Nu kommer du inte undan"
+    Monad.Pos(Typer3)
+    Typer3.SetTimetable("")
+    Typer3.Pos(Ministry_MonadsOffice_MonadPoint)
+    GOTO KILL
+}
+
+WAIT Typer4.IsWithinDistance(Sebastian, 4) AND Sebastian.IsNotSlurped() [TYPER_4_HUNT] {
+    FOCUS
+    Typer4 "Nu kommer du inte undan"
+    Monad.Pos(Typer4)
+    Typer4.SetTimetable("")
+    Typer4.Pos(Ministry_MonadsOffice_MonadPoint)
+    GOTO KILL
+}
+
+WAIT Typer5.IsWithinDistance(Sebastian, 4) AND Sebastian.IsNotSlurped() [TYPER_5_HUNT] {
+    FOCUS
+    Typer5 "Nu kommer du inte undan"
+    Monad.Pos(Typer5)
+    Typer5.SetTimetable("")
+    Typer5.Pos(Ministry_MonadsOffice_MonadPoint)
+    GOTO KILL
+}
+
+
+
+
+
+
+LISTEN FOREVER
+
+[KILL]
+CANCEL TYPER_1_HUNT
+CANCEL TYPER_2_HUNT
+CANCEL TYPER_3_HUNT
+CANCEL TYPER_4_HUNT
+CANCEL TYPER_5_HUNT
+
+Typer1.SetTimetable(Typer1)
+Typer2.SetTimetable(Typer2)
+Typer3.SetTimetable(Typer3)
+Typer4.SetTimetable(Typer4)
+Typer5.SetTimetable(Typer5)
+
+#WAIT 1
+#Typer1.Pos(Monad)
+#Monad.Pos(Ministry_MonadsOffice_MonadPoint)
+#WAIT 0.5
+#Monad.Pos(Typer1)
+#Typer1.Pos(Ministry_MonadsOffice_MonadPoint)
+
+WAIT 2
+Monad "Å... Sebastian"
+Monad.Interact(Sebastian)
+WAIT 2
+Monad "Du har ställt till med tillräcklig oreda här nu"
+
+Monad.TakeOutItem(LoneTaser)
+WAIT Monad.HasHandItemWithName(LoneTaser)
+
+CHOICE {
+    "Kan vi inte prata om det här?":
+    "Nej, det är du som måste sluta":
+        [NO_CHANCE]
+        Monad "Du är chanslös mot mig"
+    "Jag har räddat Ivan, du kan inte komma åt honom":
+        Monad "Vad menar du?"
+        GOTO NO_CHANCE
+#    "[CHEAT]":
+#        STOP
+}
+
+WAIT 2
+Monad "Nu ska du dö!"
+
+Beat()
+
+Monad.InteractUsingHandItem(Sebastian)
+WAIT 3
+Monad.InteractUsingHandItem(Sebastian)
+WAIT 2
+Monad.InteractUsingHandItem(Sebastian)
+WAIT 1
+DEFOCUS
+WAIT 1
+
+BROADCAST InternetEndingSequence

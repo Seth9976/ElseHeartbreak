@@ -1,0 +1,328 @@
+Babcia.SetTimetable("")
+Babcia.Pos(Hotel_Lobby_WorkPoint)
+Babcia.Dir(Down)
+
+
+LISTEN Sebastian_use_Hotel_Lobby_ComputerCashier [KEEP_HANDS_OFF] {
+	Babcia "Bort med tassarna!"	
+}
+
+
+LISTEN Sebastian_talk_Babcia
+FOCUS
+
+CANCEL KEEP_HANDS_OFF
+
+Babcia.Interact(Sebastian)
+
+CHOICE {
+	"God kväll. Är det här Hotel Devotchka?":
+		Babcia "Det stämmer"
+		CHOICE {
+			"Jag tror att jag ska bo här...":
+			"Jag heter Sebastian":
+				GOTO COMPUTER_LOOKUP
+		}
+	
+	"Hejsan, jag skulle vilja checka in":
+		Babcia "Jaha"
+		
+	"Jag heter Sebastian och jag vill checka in här":
+		Babcia "Lugn i stormen! En sekund"
+		GOTO COMPUTER_LOOKUP
+
+	"[Payment]":
+		GOTO MAYBE_IN_THE_BAG
+		
+	"[Cheat]":
+		Sebastian.PutIntoInventory(KeyRoom1)
+		GOTO CHEAT
+}
+
+Babcia "Hur var namnet?"
+CHOICE {
+	"Sebastian":
+		Babcia "Sebastian..."
+
+	"Sebbe":
+}
+
+[COMPUTER_LOOKUP]
+
+Babcia.SetKnowledge(Sebastian)
+
+Babcia "OK"
+Babcia.Interact(Hotel_Lobby_ComputerCashier)
+Babcia "Låt mig kolla i datorn..."
+
+#LISTEN Babcia_use_Hotel_Lobby_ComputerCashier BAD IDEA, dialog can be too slow
+
+WAIT Babcia.IsUsingComputer()
+WAIT 1
+Babcia.TypeIntoComputer("Sebastian")
+Babcia.TypeIntoComputer("ENTER")
+WAIT 1
+Babcia "Här har vi dig ja. Bokad av Wellspring Soda AB?"
+
+CHOICE {
+	"Ja precis!":
+	"Mm, jo men så heter de nog":
+}
+
+Babcia.Interact(Sebastian)
+
+Babcia "Det blir 499 kronor"
+
+CHOICE {
+	"Va?":
+		Babcia "Några problem?!"
+		CHOICE {
+			"Jag trodde allt var betalat av mitt företag?":
+				Babcia "Jodå. Men det här är en depositionsavgift i händelse av förstörda föremål"
+				CHOICE {
+					"Eh, tar ni kort?":
+						Babcia "Vi tar endast kort"
+					"OK, jag tror att jag har mitt kort här någonstans...":
+				}
+			"Nej, det var inget":
+				Babcia "Ni har väl kreditkort?"
+				Sebastian "Eh... jadå det tror jag"
+		}
+		
+	"OK, jag ska bara ta fram mitt kort...":
+}
+
+Sebastian "Undrar var jag lagt det..."
+
+[MAYBE_IN_THE_BAG]
+Babcia "Kanske i väskan..?"
+
+[TRY_FIND_CARD_AGAIN]
+Babcia.StartWaitForGift()
+BROADCAST BabciaWaitsForCreditCard
+
+LISTEN Sebastian_give_Babcia {
+	WAIT Babcia.HasAnyHandItem()
+	IF Babcia.HasHandItemOfType(CreditCard) {
+		GOTO GOT_THE_CARD
+	} ELSE {
+		Babcia "Kreditkortet sa jag..."
+		Babcia.Give()
+		WAIT Babcia.HasNoHandItem()
+		GOTO TRY_FIND_CARD_AGAIN
+	}
+}
+
+IF Sebastian.HasItemOfType(CreditCard) {
+	Log("No need to present dialogue options about dropping the card")
+	LISTEN DONT_GO_PAST_HERE
+}
+
+CHOICE {
+	"Hmm, jag tror att jag måste ha tappat det...":
+	"Det verkar tyvärr som att jag har blivit av med mitt kort":
+}
+
+Babcia.StopWaitForGift()
+Babcia "Jaha?"
+
+CHOICE {
+	"Det finns ingen möjlighet att skriva upp det på rummet eller så?":
+		Babcia "Jo det kan vi nog ordna"
+		Babcia "Vissa administrativa avgifter tillkommer givetvis"
+		Sebastian "OK..."
+		Babcia "Du får återkomma snarast när du har hittat kortet"
+		CHOICE {
+			"Ja, det ska jag!":
+			"OK":
+		}
+		GOTO PAYMENT_DONE
+
+	"Jag får nog ta och gå och leta rätt på det...":
+		Babcia "Ja ja, gör så du"
+		Babcia.StopTalking()
+		DEFOCUS
+
+		[BACK_FROM_CARD_HUNT]
+		LISTEN Sebastian_talk_Babcia
+		FOCUS
+		Babcia.StartTalking()
+		Babcia "Ja?"
+		CHOICE ETERNAL {
+			"Jag har kortet nu":
+				Babcia "Jaha, kan man få se det?"
+				Babcia.StartWaitForGift()
+				LISTEN Sebastian_give_Babcia {
+					GOTO GOT_THE_CARD
+				}
+				CHOICE ETERNAL {
+					"Eller vänta... nu hittar jag det inte igen":
+					"Ehmmmm vad tusan":
+				}
+				Sebastian "Jag återkommer"
+				Babcia.StopWaitForGift()
+
+			"Det var inget":
+		}
+		Babcia.StopTalking()
+		DEFOCUS
+		GOTO BACK_FROM_CARD_HUNT
+}
+
+
+[GOT_THE_CARD]
+#Log("Should remove dangling dialogue options next...")
+RemoveDanglingDialogueOptions("Babcia_Arrival")
+#Log("Should be removed now!")
+
+Babcia.StopWaitForGift()
+Babcia "Tack"
+
+WAIT Babcia.HasHandItemOfType(CreditCard)
+WAIT Babcia.IsIdle()
+Babcia.CharacterTakesMoneyFromCreditCard(-499)
+WAIT Babcia.IsIdle()
+WAIT 2
+
+Babcia.Give()
+WAIT Babcia.HasNoHandItem()
+
+WAIT 1
+Babcia "Då var det avklarat"
+[PAYMENT_DONE]
+Babcia "Några frågor?"
+
+CHOICE {
+	"Nej allt är glasklart, jag går till mitt rum nu":
+		GOTO YOU_FORGOT_TO_ASK
+
+	"Jo jag tänkte på en sak":
+		Babcia "Jaha?"
+}
+
+[ANY_QUESTIONS]
+
+CHOICE {
+	"Vilket rum har jag?":
+		Babcia.TakeOutItem(KeyRoom1)
+		Babcia "Rum nr 1" 
+		Babcia "Gå genom matsalen för att komma till det"
+		WAIT Babcia.HasHandItemWithName(KeyRoom1)
+		Babcia.StopWaitForGift() # just to be sure
+		Babcia.Give()
+		Babcia "Här är nyckeln"
+		GOTO REQUIRED_OUTCOME
+		
+	"Vad kan man göra här i stan?":
+		Babcia "Ja du..."
+		Babcia "Jag sliter mest här på hotellet"
+		Babcia "Folk ränner väl på krogen, det har de alltid gjort"
+		CHOICE {
+			"Var ligger krogen?":
+				Babcia "Nere i centrum antar jag"
+				Babcia "Men jag är inte rätt person att fråga"
+				Babcia "Min sprit den dricker jag bara på mitt rum"
+			"Finns det några bra barer som du känner till?":
+				Babcia "Jag vet inte så noga"
+				Babcia "Det är någon som har ett kvinnonamn..."
+				WAIT 1
+				Babcia "Jag minns inte, jag är ändå för gammal för sånt där"
+		}
+	
+	"Vad heter du?":
+		WAIT 1
+		Babcia "Babcia"
+		Sebastian.SetKnowledge(Babcia)
+		WAIT 1
+		CHOICE {
+			"OK":
+			"Fint namn! Är det ryskt?":
+				Babcia "Polskt"
+		}
+		WAIT 2
+}
+
+Babcia "Har du några fler frågor?"
+CHOICE {
+	"Nej, jag ska nog ta och gå till mitt rum":
+		[YOU_FORGOT_TO_ASK]
+		Babcia "Fast du kanske ska ha nyckeln först?"
+		Babcia.TakeOutItem(KeyRoom1)
+		CHOICE {
+			"Eh, jo just det":
+			"Ja tack!":
+		}
+		WAIT Babcia.HasHandItemWithName(KeyRoom1)
+		Babcia.Give()
+		Babcia "Varsågod"
+		Babcia "Du har rum nr 1"
+		Babcia "Gå genom matsalen för att komma till det"
+		GOTO REQUIRED_OUTCOME
+	"Jo det var en grej till...":
+		GOTO ANY_QUESTIONS
+}
+
+GOTO ANY_QUESTIONS
+
+[REQUIRED_OUTCOME]
+Babcia "Ordningsföreskrifterna finns att läsa på rummet."
+Babcia "Jag har inte mycket till övers för de gäster som bryter mot våra regler här på hotellet."
+Babcia "Jag hoppas att du kommer att trivas"
+CHOICE {
+	"Jag med...":
+	"Det tror jag säkert!":
+	"Mm":
+}
+
+[CHEAT]
+
+DEFOCUS
+Story("CheckedIn")
+
+
+WAIT 3
+
+
+[ASK_ABOUT_ROOM]
+LISTEN Sebastian_talk_Babcia
+FOCUS
+
+CHOICE ETERNAL {
+	"Alltså... var ligger mitt rum? Jag hittar det inte":
+		[WHERE]
+		Babcia "Gå förbi den stora trappan här och ta sedan vänster inne i matsalen"
+		Babcia "Sedan är det bara att följa skyltarna upp till övervåningen"
+		CHOICE {
+			"Ok, tack!":
+			"Ja det var det jag trodde, ville bara dubbelkolla":
+		}
+	
+	"Vilket rum var det jag hade nu igen?":
+		Babcia "Nr 1"
+		Sebastian "Och det ligger var någonstans..?"
+		GOTO WHERE
+
+	"Ehm, jag verkar ha tappat bort min nyckel...":
+		Babcia "Jaha redan? Det var dumt"
+		Babcia "Hmm"
+		Babcia "Jag kan låsa upp åt dig nu"
+		Babcia.SetTimetable("")
+		Babcia "Men du måste hitta nyckeln, annars blir du betalningsskyldig"
+		Babcia.Interact(Hotel_Lobby_ComputerCashier)
+		UnlockDoor(Hotel_Corridor_Door1)
+		SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+		Hotel_Lobby_DoorToHotelExterior.SetDoorTarget(Hotel_Exterior_DoorToHotel)
+		WAIT 5
+		Babcia "Så, nu kan du gå upp till ditt rum så borde du kunna komma in där"
+		Babcia.SetTimetable("Babcia")
+		CHOICE {
+			"Tack":
+			"Jag ska hitta nyckeln!":
+		}
+		Babcia "Mm"
+}
+
+
+
+DEFOCUS
+GOTO ASK_ABOUT_ROOM

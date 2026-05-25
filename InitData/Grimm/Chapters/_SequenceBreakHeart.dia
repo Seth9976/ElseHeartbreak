@@ -1,0 +1,13 @@
+
+LISTEN TheHeartIsBroken
+
+Log("Sequence breaked the heart!")
+
+Sebastian.StopAction()
+WAIT 1
+FOCUS
+Sebastian "Jag är sjukt 1337"
+Sebastian "Mowhahaha"
+DEFOCUS
+
+Story("ManHunt")

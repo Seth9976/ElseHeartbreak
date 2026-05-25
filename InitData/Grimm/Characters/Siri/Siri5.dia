@@ -1,0 +1,53 @@
+WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri {
+	Siri "Hej, vi får prata sen"
+	WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+	Siri "OK?"
+}
+
+WAIT Siri.IsAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+FOCUS
+Siri.StartTalking()
+
+Siri "hej"
+Sebastian "hej"
+
+Siri "Svårt att sova igen?"
+
+CHOICE {
+	"Mm ja":
+		Siri "Jag vet hur det är"
+		Siri "Ibland ligger jag och bara tittar upp taket flera timmar"
+		Siri "Och sen vaknar jag mitt i natten också"
+		CHOICE {
+			"Oj":
+				Siri "ja..."
+				
+			"Å, det gör jag också ibland":
+				Siri "vet du varför?"
+				CHOICE {
+					"Jag tror att det är någon som går omkring på natten!":
+						Siri "det har jag inte hört tror jag"
+					"Nej, vet du?":
+						Siri "jag tänker på saker"
+				}
+		}
+	
+	"Njae... jag var mest sugen att prata med dig":
+		Siri "Oj, jaha"
+		Siri ""
+		Siri "Något särskilt?"
+		CHOICE {
+			"Nej inte direkt":
+			"Tänkte bara se hur du mår och så?":
+				Siri "jag mår väl bra"
+		}
+	
+	"Nej jag hade bara vägarna förbi":		
+}
+
+
+Siri.StopTalking()
+DEFOCUS
+
+WAIT Siri.IsAtTask(Sleeping)
+START Siri6

@@ -1,0 +1,12 @@
+
+[AGAIN]
+WAIT Gunnar.IsInRoom(Hut)
+UnlockDoor(HarborNorth_DoorToHut)
+Log("Unlocked hut")
+
+WAIT Gunnar.IsNotInRoom(Hut)
+LockDoor(HarborNorth_DoorToHut)
+Log("Locked hut")
+
+GOTO AGAIN
+

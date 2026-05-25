@@ -1,0 +1,14 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("Ghosts")
+Story("AfterGhostVisit")
+
+SetHour(17)
+
+#Sebastian.Pos(Hotel_Room1_Point)
+Sebastian.Pos(Ministry_MonadsOffice_MonadPoint)
+
+Monad.SetKnowledge(Sebastian)
+#Hotel_Room1_FuseBox.SetCode("ConnectToMiman")

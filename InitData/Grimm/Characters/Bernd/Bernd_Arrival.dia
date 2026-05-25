@@ -1,0 +1,21 @@
+
+LISTEN Sebastian_talk_Bernd
+
+FOCUS
+Bernd.StartTalking()
+
+
+Bernd "Hej, dig känner jag inte igen"
+Bernd "Jag måste gå och sova snart"
+Bernd "Kan vi prata imorgon?"
+
+CHOICE {
+	"Jag hittar inte mitt rum":
+		Bernd "Du kanske kan prata med fru Babcia i receptionen?"
+		Sebastian "Ok"
+
+	"Javisst":
+}
+
+Bernd.StopTalking()
+DEFOCUS

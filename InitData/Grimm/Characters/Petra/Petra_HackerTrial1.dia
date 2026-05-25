@@ -1,0 +1,13 @@
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+Petra "Hej, hur går det?"
+
+CHOICE {
+    "Jag ska börja jobba med Pixie":
+    "Helt OK":
+}
+
+Petra.StopTalking()
+DEFOCUS

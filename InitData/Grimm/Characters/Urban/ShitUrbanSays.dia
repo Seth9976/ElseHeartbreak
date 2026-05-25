@@ -1,0 +1,41 @@
+
+WAIT IsWithinDistance(Sebastian, Urban, 15) AND Urban.NotTalking()
+Urban "Äsch..."
+Urban "Håll käften!"
+WAIT Urban.IsInRoom(Hotel_Exterior) AND Sebastian.IsNotInRoom(Hotel_Exterior)
+
+WAIT IsWithinDistance(Sebastian, Urban, 15) AND Urban.NotTalking()
+Urban "Hallå snygging!"
+#FOCUS
+Urban "Ska du inte komma hit och hålla en gammal man sällskap?"
+#CHOICE {
+#	"Ehm...":
+#	"Njae...":
+#	"Helst inte":
+#}
+Urban "Ja ja ja!"
+#DEFOCUS
+WAIT Urban.IsInRoom(Hotel_Exterior) AND Sebastian.IsNotInRoom(Hotel_Exterior)
+
+WAIT IsWithinDistance(Sebastian, Urban, 15) AND Urban.NotTalking()
+Urban "Ja fy fan"
+Urban "Fy faan"
+WAIT 3
+Urban "Jag säger då det..."
+Urban "Fy fan"
+WAIT Sebastian.IsNotInRoom(Hotel_Exterior)
+
+WAIT IsWithinDistance(Sebastian, Urban, 15) AND Urban.NotTalking()
+Urban "Vad glor du på?"
+WAIT 2
+Urban "Ja, DU!"
+WAIT Urban.IsInRoom(Hotel_Exterior) AND Sebastian.IsNotInRoom(Hotel_Exterior)
+
+WAIT IsWithinDistance(Sebastian, Urban, 15) AND Urban.NotTalking()
+Urban "Jag tror att jag är kär"
+WAIT Urban.IsInRoom(Hotel_Exterior) AND Sebastian.IsNotInRoom(Hotel_Exterior)
+
+WAIT IsWithinDistance(Sebastian, Urban, 15) AND Urban.NotTalking()
+Urban "Denna dagen ett liv!"
+
+WAIT Urban.IsInRoom(Hotel_Exterior) AND Sebastian.IsNotInRoom(Hotel_Exterior)

@@ -1,0 +1,273 @@
+
+WAIT IsWithinDistance(Pixie, Sebastian, 7) AND Sebastian.NotTalking()
+
+FOCUS
+Pixie "Sebastian!"
+Pixie.SetTimetable("")
+Pixie.GetUpAndInteract("Sebastian")
+WAIT 3
+Pixie.StartTalking()
+
+CHOICE {
+	"Hej":
+	"Hej!":
+	"Tjena":
+}
+
+Pixie "Hur är läget?"
+
+CHOICE {
+	"Är du arg på mig fortfarande?":
+		Pixie "Nej, det är lugnt"
+		Pixie "Oroa dig inte för det"
+
+	"Det är bra":
+		Pixie "OK, vad bra!"
+		GOTO DONT_BE_SAD
+
+	"Jo det är väl ok":
+		[DONT_BE_SAD]
+		Pixie "Var inte ledsen för det där som hände förut"
+		CHOICE {
+			"OK":
+			"Nej det är jag inte":
+				Pixie "Bra"
+		}
+}
+
+IF Pixie.IsInRoom(FelixApartment) {
+	Pixie "Vad tycker du om festen då?"
+	CHOICE {
+		"Jo men den är rolig":
+		"Det är ganska trevligt här":
+		"Inte superkul...":
+			Pixie "Jo, kom igen nu!"
+			GOTO GOTTA_TALK
+	}
+	Pixie "Bra!"
+	[GOTTA_TALK]
+	Pixie "Du jag måste snacka lite med Ivan nu men vi får prata mer sen"
+	DEFOCUS
+	Pixie.GetUpAndInteract(Ivan)
+	WAIT Pixie.IsWithinDistance(Ivan, 5)
+	Pixie "<3"
+	Pixie "Hur är det älskling?"
+	WAIT 2
+	Ivan "Ahh, jag spelar!"
+	WAIT 1
+	Pixie "Går det bra?"
+	WAIT 2
+	Ivan "AAAAHH nej!!!"
+	Ivan "Inte när någon pratar med mig"
+	Pixie "Skit i det då"
+}
+ELSE {
+	Pixie "Du är på väg till festen eller?"
+	CHOICE {
+		"Ja":
+			Pixie ""
+
+		"Nej, jag är på väg därifrån":
+			Pixie "Jaha..."
+			Pixie "Ska du inte följa med och hänga lite mer då?"
+	}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+Pixie.SetTimetable(Pixie_PyjamasParty)
+
+
+# later #
+
+
+WAIT Pixie.IsInRoom(FelixApartment)
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "HEJ SEBASTIAN!!! Har du KUUUL?"
+CHOICE {
+	"Jovars":
+		Pixie "Ta en öl annars!"
+	"Ja!":
+		Pixie "Fan va härligt!"
+	"Njae, tänkte snart gå hem":
+		Pixie "NEEEJ"
+		Pixie "Stanna!"
+}
+
+Pixie "Så hur känner du Felix?"
+
+[WHO_IS_FELIX]
+CHOICE {
+	"Felix?":
+		Pixie "Ja, han som vi är hemma hos just nu"
+		Sebastian "Jaha..."
+		GOTO WHO_IS_FELIX
+	"Ehm... lång historia":
+		Pixie "Haha, ok"
+	"Vi snackade lite mer efter att jag träffade dig där i källaren på skoaffären":
+		Pixie "Ah, ja såklart"
+}
+
+[MORE_QUESTIONS]
+CHOICE {
+	"Jag förstod det som att du inte gillar det här ministeriet här i stan..?":
+		Pixie "Datorministeriet?"
+		Pixie "Nej de är riktiga jävla idioter"
+		Pixie "Är det Felix som snackat om dem?"
+		CHOICE {
+			"Eh, ja han sa något om att de var otrevliga":
+				Pixie ""
+
+			"Njae... jag har länge tyckt illa om Datorministeriet":
+				Pixie "OK?"
+				CHOICE {
+					"Ja, de övervakar folk å sånt":
+						Pixie "Ja exakt!"
+					"Mm, de är dumma":
+						Pixie "Heh, ja så kan man ju säga"
+					"Jag avskyr ministerier i allmänhet":
+						Pixie "Haha, ja fy fan för ministerier!"
+				}
+		}
+
+	"Så... hur länge har du och Ivan varit tillsammans":
+		Pixie "1 år snart"
+		WAIT 1
+		Pixie "Mm"
+		Sebastian "OK, så..."
+		GOTO MORE_QUESTIONS
+}
+
+CHOICE {
+	"Hur kan man kämpa mot dem då?":
+		Pixie "Man måste få folk att se igenom deras falska yta!"
+		Pixie "Men det är svårt"
+		Pixie "De har enorma resurser"
+		Pixie "Plus att de fuskar"
+		CHOICE {
+			"Hur då?":
+				Pixie "Jag kan inte gå in på det här och nu"
+				Pixie "Men lita på mig, de fuskar"
+			"Fasen vad jobbigt":
+				Pixie "Heh, ja..."
+		}
+		Pixie "I slutändan så måste vi fuska bättre bara"
+		Pixie "Det är så vi kommer att slå dem!"
+		CHOICE {
+			"Vilka är 'ni'?":
+			"Ja, hoppas ni lyckas!":
+				Pixie "Ja..."
+				Sebastian "Så du är med i något slags företag?"
+				Pixie "Nä, inte direkt"
+				Pixie "Eller det kanske man kan säga"
+			"Är det det som ni gör där nere i källaren?":
+				Pixie "Mm, exakt"
+		}
+		Pixie "Vi är en grupp som använder ministeriets teknik emot dem själva"
+		Pixie "De flesta är idealister och aktivister, vissa är mest intresserade av utmaningen"
+		CHOICE {
+			"Jag kan inte så mycket om sånt där tyvärr":
+				GOTO DONT_KNOW_MUCH_ABOUT_THAT
+			"Coolt":
+				Pixie "Det är viktiga grejer det här"
+				Pixie "Har du engagerat dig i någon viktig fråga någon gång?"
+				CHOICE {
+					"Jag var med i elevrådet en gång":
+						Pixie "Ok, hehe"
+					"Nej, inte direkt. Men jag vill!":
+						Pixie "Ja, du borde!"
+						Pixie "Ivan är nästan helt ointresserad..."
+					"Nej, tyvärr":
+						Pixie "OK, du kanske borde"
+				}
+		}
+
+	"Jag fattar inte så mycket av sånt där":
+		[DONT_KNOW_MUCH_ABOUT_THAT]
+		Pixie "Vadå?"
+		CHOICE {
+			"Alltså, det är något med datorer va?":
+				Pixie "Typ"
+			"Ja men ministeriet och hur de kan göra dåliga saker här i staden och så":
+				Pixie "Ah, ja det är lite speciellt"
+		}
+		Pixie "Jag kan inte riktigt prata om det så här på en fest"
+		Pixie "Men det finns en hel del människor här i staden som kan hjälpa dig att förstå"
+		CHOICE {
+			"Ok...":
+			"Jaha":
+			"Intressant!":
+		}
+		Sebastian.SetKnowledge("Activists")
+		Pixie "Men nu tycker jag vi tar och dricker lite mer bärs!"
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+
+# later
+
+
+
+[LATER]
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+[MORE_PIXIE]
+CHOICE ETERNAL {
+	"Jag tror jag ska sticka hem nu":
+		Pixie "OK, kul att du kom hit ikväll Sebastian"
+		Pixie "Vi ses!"
+		Pixie.StopTalking()
+		DEFOCUS
+
+		LISTEN Sebastian_talk_Pixie
+		FOCUS
+		Pixie.StartTalking()
+		Pixie "Skulle inte du sticka sa du?"
+		CHOICE {
+			"Jo...":
+			"Snart!":
+			"Jag ändrade mig":
+				Pixie "OK"
+		}
+
+	"Felix, kan man lita på honom?":
+		Pixie "Ja då"
+		Pixie "Eller alltså"
+		Pixie "Jo..."
+		Pixie "Ibland!"
+
+	"Felix sa att jag borde vara mindre stel...":
+		Pixie "Haha"
+		Pixie "Han snackar mycket"
+		Pixie "Jag tycker du är cool Sebastian"
+		Pixie "Du har din egen stil"
+		CHOICE {
+			"Har jag?":
+			"Jaha, vad bra!":
+		}
+		Pixie "Det är en lite speciell stil"
+		Pixie "Men jag gillar den"
+		CHOICE {
+			"Jag gillar din stil också":
+				Pixie "Gött!"
+			"Tack":
+		}
+
+	"Ivan verkar lite aggresiv?":
+		Pixie "Nej nej, han är världens snällaste"
+		GOTO MORE_PIXIE
+}
+
+Pixie.StopTalking()
+DEFOCUS
+GOTO LATER

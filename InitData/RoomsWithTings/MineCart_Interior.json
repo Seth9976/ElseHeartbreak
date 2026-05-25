@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":189,"values":["\"Room\"","\"MineCart_Interior\"","[]","false","{\"x\":443,\"y\":-209}","\"00010000000000000001000000000000111111010101010011111111111111000111111110111110011111111011111011111111111111110110111110111110011000111011111011101111111111001110000101010100\"","{\"x\":16,\"y\":11}","{\"x\":-35,\"y\":-6}"]}

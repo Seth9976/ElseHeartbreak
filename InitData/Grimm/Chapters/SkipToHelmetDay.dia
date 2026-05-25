@@ -1,0 +1,11 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("HelmetDay")
+
+SetHour(11)
+
+Petra.Pos(Ministry_Lobby_Point2)
+Pixie.Pos(Ministry_Lobby_Point2)
+Sebastian.Pos(Ministry_Lobby_Point1)

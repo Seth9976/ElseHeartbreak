@@ -1,0 +1,9 @@
+SetClock(01, 10, 00, 0)
+
+Sebastian.Pos(Lodge_Room1_Point2)
+
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+Pixie.Pos(Lodge_Room1_Point1)
+Pixie.SetTimetable(PixieOvertime)
+
+START LetMeBeAHacker

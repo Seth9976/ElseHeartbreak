@@ -1,0 +1,80 @@
+
+LISTEN Sebastian_talk_Elsa
+FOCUS
+Elsa.StartTalking()
+
+Elsa "Va, ja?"
+CHOICE {
+    "Hejsan":
+    "Tja!":
+    "Hej på dig":
+    "God morgon":
+    "God dag":
+    "God kväll":
+}
+
+IF Elsa.HasKnowledge(Sebastian) {
+    Elsa "Du igen?"
+} 
+ELSE {
+    Elsa "Hej, vem är du?"
+    CHOICE {
+        "Mitt namn är Sebastian":
+        "Du kan kalla mig Sebbe":
+    }
+    Elsa "Tjena"
+    Elsa.SetKnowledge(Sebastian)
+}
+
+[MORE]
+CHOICE {
+    "Felix pratade om dig, så jag gick hit":
+        Elsa "Haha, Felix?!"
+        CHOICE {
+            "Ja?":
+            "Jupp":
+            "Mhm":
+        }
+        Elsa "Vilken jöns han är"
+        CHOICE {
+            "Va, han är ju tuff?!":
+            "Är han?":
+            "Ja...":
+        }
+        GOTO MORE
+
+    "Vad grejar du med?":
+        Elsa "Ah, samma gamla vanliga program"
+        Elsa "Det blir aldrig klart"
+        Elsa "Jag har jobbat på det i flera veckor nu"
+        CHOICE {
+            "Oj då":
+            "Wow":
+            "Vadårå?":
+                Elsa "Jag trodde det skulle ta några dagar"
+                Elsa "Varför är det alltid så?"
+        }
+        GOTO MORE
+
+    "Ska dra mig, vi ses":
+        Elsa "Hej då"
+
+    "Ha det gött":
+        Elsa "Du med"
+}
+
+Elsa.StopTalking()
+DEFOCUS
+
+
+
+
+
+LISTEN Sebastian_talk_Elsa
+FOCUS
+Elsa.StartTalking()
+
+
+
+Elsa.StopTalking()
+DEFOCUS

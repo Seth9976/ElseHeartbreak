@@ -1,0 +1,121 @@
+[ALL_OVER_AGAIN]
+
+
+WAIT Kafka.IsAtTask(Working) LISTEN Sebastian_talk_Kafka
+
+FOCUS
+Kafka.StartTalking()
+
+Kafka "Välkommen!"
+
+[YES]
+Kafka "Vad får det lov att vara?"
+
+[MORE]
+CHOICE {
+    "Du visste inget mer om Pixie eller?":
+        Kafka "Pixie?"
+        Kafka "Hörru, jag är caféägare"
+        Kafka "Inte centralen för Dorisburgs skvaller"
+        CHOICE {
+            "Flåt":
+            "Heh, ursäkta min frågvishet":
+            "Så det är ett nej?":  
+                Kafka "Ja, aldrig hört talas om tjejen"
+        }
+        Kafka "Skulle du ha något eller?"
+        CHOICE {
+            "Nej det är bra":
+            "En kaffe, tack":
+        }
+
+    "Jag måste gå, hej då!":
+
+    "En kaffe":
+        [COFFEE]
+        Kafka.ClearHandItem()
+        WAIT Kafka.HasNoHandItem()
+        Kafka "Kortet, tack"
+        IF Sebastian.HasItemOfType(CreditCard) {
+            Kafka.StartWaitForGift()
+
+            [BUY]
+            WAIT Kafka.HasAnyHandItem()
+            IF Kafka.HasHandItemOfType(CreditCard) {
+                WAIT Kafka.IsIdle()
+                Kafka.CharacterTakesMoneyFromCreditCard(-2)
+                WAIT Kafka.IsIdle()
+                WAIT 3
+                Kafka.Give()
+                Kafka "Här har du det"
+                WAIT Kafka.IsIdle()
+                Kafka.CreateCoffeeInHand()
+                Kafka.Give()
+                Kafka "Varsågod, hoppas det smakar!"
+                WAIT Kafka.HasNoHandItem()
+                CHOICE {
+                    "Det tror jag säkert!":
+                    "Mm... vi får se":
+                    "Tack!":
+                }
+                Kafka "Något mer?"
+                GOTO MORE
+            } ELSE {
+                Kafka "Huh?"
+                Kafka.Give()
+                WAIT Kafka.HasNoHandItem()
+                GOTO BUY
+            }
+
+            Kafka.StopWaitForGift()
+        } ELSE {
+            Sebastian "Oj, verkar ha glömt det"
+        }
+
+        Kafka "Jaha, synd. Du får komma tillbaka en annan gång."
+        Kafka "Eller var det något annat?"
+        GOTO MORE
+
+    "Jag letar efter någon som kan lära mig att programmera...":
+        Kafka "Jaha..?"
+        Kafka "OK"
+        Kafka "Hmm"
+        Kafka "Sånt där kan jag inte mycket om"
+        Kafka "Är inte Hank bra på sånt där?"
+        CHOICE {
+            "Vem är Hank?":
+                Kafka "Han jobbar på hotellet"
+                Kafka "Devotchka alltså"
+                Kafka "Om du vet var det ligger?"
+                CHOICE {
+                    "Ja, jag bor där!":
+                        Kafka "Haha, jaha"
+                    "Typ":
+                }
+                Kafka "Kolla med honom"
+
+            "Ja... det kanske han är?":
+                Kafka "Kolla med honom"                
+
+            "Jo, han har redan hjälpt mig lite":
+                Kafka "OK..."
+                Kafka "I så fall vet jag inte riktigt"
+        }
+        CHOICE {
+            "OK, tack för hjälpen i alla fall. Hej då!":
+                GOTO OVER
+
+            "Förresten...":
+        }
+        GOTO MORE
+
+    "Nej, tack för idag!":
+}
+
+[OVER]
+Kafka "Ha det"
+Kafka.StopTalking()
+DEFOCUS
+
+
+GOTO ALL_OVER_AGAIN

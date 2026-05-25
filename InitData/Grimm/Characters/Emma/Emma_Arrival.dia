@@ -1,0 +1,75 @@
+
+LISTEN Sebastian_talk_Emma
+FOCUS
+Emma.StartTalking()
+
+Emma "Hej, har du sett min hamster?"
+
+CHOICE {
+	"Eh, nä...":
+	"Nej tyvärr!":
+}
+
+Emma "OK, säg till om du hör nåt om den"
+
+CHOICE {
+	"Ja, det ska jag göra!":
+	"OK":
+}
+DEFOCUS
+Emma.StopTalking()
+
+
+# later
+
+
+LISTEN Sebastian_talk_Emma
+
+FOCUS
+Emma.StartTalking()
+Emma "Har du hittat den?"
+
+CHOICE {
+	"Nej...":
+	"Hittat vadå?":
+		Emma "Min hamster såklart!"
+		CHOICE {
+			"Nej tyvärr":
+				Emma "OK... undrar var fan den kan ha tagit vägen"
+
+			"Har du pratat med polisen?":
+				Emma "Nä... känns lite överdrivet för en hamster eller?"
+				Sebastian "Jo, kanske"
+		}
+}
+
+Emma.StopTalking()
+DEFOCUS
+
+
+# even later...
+
+
+[AGAIN]
+LISTEN Sebastian_talk_Emma
+
+Emma.StartTalking()
+Emma "Hittat den?"
+
+FOCUS
+CHOICE ETERNAL {
+	"Ehm, nej":
+	"Nä":
+	"Nope":
+	"Hamstern?":
+		Emma "Ja"
+		CHOICE ETERNAL {
+			"Nej tyvärr":
+			"Nej...":
+		}
+}
+DEFOCUS
+
+Emma.StopTalking()
+
+GOTO AGAIN

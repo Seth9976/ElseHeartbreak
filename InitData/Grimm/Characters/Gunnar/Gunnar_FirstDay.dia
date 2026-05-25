@@ -1,0 +1,141 @@
+
+WAIT Gunnar.IsAtTask(Tinker) LISTEN Sebastian_talk_Gunnar {
+	INTERRUPT Gunnar_Intrude
+}
+
+
+
+Gunnar.SetTimetable("Gunnar")
+
+WAIT Gunnar.IsNotAtTask(VisitCafe) LISTEN Sebastian_talk_Gunnar {
+	FOCUS
+	Gunnar.StartTalking()
+	Gunnar "Mhm?"
+	CHOICE {
+		"Hejsan":
+		"God dag":
+		"Tjena!":
+	}
+	Gunnar "God dag, god dag"
+
+	[DO_YOU_KNOW]
+	CHOICE {
+		"Ni känner inte till något om Wellspring?":
+			Gunnar "Va?"
+			CHOICE {
+				"Wellspring, företaget":
+				"Jag söker någon från Wellspring. Jag ska börja jobba där!":
+			}
+			Gunnar "Wellspring?"
+			Gunnar "Intressant"
+			Gunnar "Jag känner till att de har en filial här i staden"
+			Gunnar "Ni vet händelsevis inte vem som är er chef?"
+			CHOICE {
+				"Nej, inte än":
+				"Jag har inte hittat på någon därifrån än, det är därför jag frågar runt ju!":
+			}
+			Gunnar "Jag har tyvärr inte mer information att ge er"
+			Gunnar "Mer än att jag själv också skulle vilja veta mer om de här..."
+			Gunnar "..."
+			Gunnar "Wellspring..."
+			Gunnar "Adjö"
+
+		"Vackert väder":
+			Gunnar "Hm?"
+			GOTO DO_YOU_KNOW
+
+		"Vart är ni på väg?":
+			Gunnar "Det är väl knappast er sak att fråga"
+			Gunnar "Adjö"
+	}
+
+	Gunnar.StopTalking()
+	DEFOCUS
+}
+
+
+WAIT Gunnar.IsAtTask(VisitCafe) LISTEN Sebastian_talk_Gunnar
+FOCUS
+Gunnar.StartTalking()
+
+CHOICE {
+	"Hejsan":
+	"God dag":
+	"Tjena!":
+}
+Gunnar "Hej på dig du"
+
+[AGAIN]
+CHOICE {
+	"Får man slå sig ner här?":
+		Gunnar "Det finns ju massor av andra lediga bord"
+		CHOICE {
+			"Jo, sant":
+			"Ja men det verkade så trevligt här":
+				Gunnar "Ja varför tror du att jag valde det?"
+				CHOICE {
+					"Bra poäng":
+					"Heh":
+				}
+		}
+
+	"Är du från Wellspring?":
+		Gunnar "Well-vadå?"
+		Gunnar "Nej det är jag inte"
+		CHOICE {
+			"OK, jag ska jobba för dem nämligen":
+				Gunnar "Mhm"
+			"...":
+		}
+
+	"Jag letar efter en man":
+		Gunnar "OK"
+		Sebastian "Vet inte riktigt, egentligen letade han väl efter mig..."
+		Gunnar "Jaha"
+		Gunnar "Jag har inte sett någon"
+		GOTO DONE
+}
+GOTO AGAIN
+
+[DONE]
+Gunnar.StopTalking()
+DEFOCUS
+
+
+
+
+[MORE]
+WAIT Gunnar.IsAtTask(VisitCafe) LISTEN Sebastian_talk_Gunnar
+FOCUS
+Gunnar.StartTalking()
+Gunnar "Mhm?"
+CHOICE {
+	"Hur är det att bo i Dorisburg då?":
+		Gunnar "Hrm"
+		Gunnar "Det fungerar"
+		Gunnar "Men det kunde ha varit en så mycket bättre plats, det vill jag lova"
+		CHOICE {
+			"Om du fick bestämma eller, hehe?":
+				Gunnar "Ja, i princip"
+			"OK?":
+		}
+		Gunnar "Allt är förstört"
+		CHOICE {
+			"Av vem då?":
+				Gunnar "Det är väl flera personer"
+				Gunnar "De jävlarna!"
+
+			"Jaha... oj":
+		}
+
+	"Går ni ofta hit?":
+		Gunnar "Varje dag"
+		Gunnar "En av få ljuspunkter i en allt mer svartnande vardag"
+
+	"Vilket jobbigt väder vi har fått då":
+		Gunnar "Ja, förskräckligt"
+}
+Gunnar.StopTalking()
+DEFOCUS
+GOTO MORE
+

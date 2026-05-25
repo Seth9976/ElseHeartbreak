@@ -1,0 +1,5 @@
+
+START Harry_Arrival
+
+Harry.Pos(StationNorth_Point)
+Harry.SetTimetable(Harry)

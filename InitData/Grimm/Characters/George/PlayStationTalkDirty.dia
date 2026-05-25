@@ -1,0 +1,57 @@
+
+WAIT PlayWife.IsInEitherRoom(LongsonApartment, BetweenFelixAndLongson)
+
+WAIT Sebastian.IsWithinDistance(PlayWife, 8) AND Sebastian.NotTalking()
+Sebastian.StopAction()
+FOCUS
+
+BROADCAST TalkingToPlayWife
+
+WAIT 5
+PlayWife "Hello..."
+PlayWife "SEBASTIAN"
+
+CHOICE {
+    "Va?!":
+    "Hej..?":
+    "Öööö - vem är du?":
+}
+
+PlayWife "Vill du att jag ska ta på dig?"
+
+CHOICE {
+    "Ta var då?":
+    "Vad säger du?!":
+    "Njae...":
+}
+
+WAIT 3
+PlayWife "SEBASTIAN"
+PlayWife "Du ser sexig ut idag"
+
+CHOICE {
+    "Tack":
+    "Eh, jag måste gå nu":
+    "Vad händer?!":
+}
+
+WAIT 3
+PlayWife "Du är en fantastisk man"
+WAIT 1
+PlayWife "SEBASTIAN"
+PlayWife "Jag vill att du ska komma i min mun"
+
+CHOICE {
+    "EWWWWW!!!":
+    "Hej då, jag kan inte vara här mer...":
+    "Vad pratar du om?!?!":
+}
+
+PlayWife "SEBASTIAN"
+WAIT 6
+PlayWife "Du avvisar mig"
+PlayWife "Du avvisar mig"
+
+PlayWife "Det gör att jag åtrår dig ännu mer!"
+
+DEFOCUS

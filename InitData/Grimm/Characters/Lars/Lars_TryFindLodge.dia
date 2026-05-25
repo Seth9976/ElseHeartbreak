@@ -1,0 +1,152 @@
+
+[ASK_ABOUT_PIXIE]
+
+Lars.SetTimetable("LarsVisitCafe")
+
+LISTEN Sebastian_talk_Lars [TALK_BEFORE_CHATEAU] {
+    FOCUS
+    Lars.StartTalking()
+
+    IF Sebastian.HasKnowledge(Lars) {
+        Sebastian "Hej igen Lars!"
+        Lars "Goddagens, goddagens"
+    } ELSE {
+        Sebastian "Hejsan!"
+        Lars "Goddagens, Lars var namnet"
+        Sebastian.SetKnowledge(Lars)
+        CHOICE {
+            "OK, jag heter Sebbe!":
+            "Hejsan, mitt namn är Sebastian":
+        }
+    }    
+
+    [MORE]
+    CHOICE {
+        "Du, jag letar efter en person!":
+            IF Lars.HasKnowledge(SebastianLookingForPerson) {
+                Lars "Jaså, igen?!"
+                Lars "Vem är det nu då?"
+            } ELSE {
+                Lars "Jaså, vem då?"
+            }            
+            CHOICE {
+                "Pixie heter hon":
+                    GOTO OH_REALLY
+
+                "Vet inte riktigt...":
+                    Lars "Är det en man eller kvinna?"
+                    CHOICE {
+                        "Jag tror att det var en man":
+                        "En kvinna, tror jag":
+                    }
+                    Lars "Det går förbi så många här"
+                    Lars "Jag har nog tyvärr inte sett någon som jag kommer ihåg"
+            }
+            GOTO MORE
+
+        "Vackert väder idag":
+            Lars "Jovars"
+            Lars "Var ju bättre förr..."
+            GOTO MORE
+
+        "Suck... jag vet inte vad jag ska ta mig till":
+            Lars "Olycklig kärlek?"
+            CHOICE {
+                "Va?! Hur visste du det?":
+                    Lars "Sånt där ser jag på kilometers avstånd"
+                    Lars "Är ju en gammal råmantiker..."
+                    Lars "Så att säga!"
+                "Njae...":
+                    Lars "Jo men kläm fram det nu"
+                "Mmm":
+            }
+            CHOICE {
+                "Det är den tjej jag träffat":
+                    Lars "Du kan inte sluta tänka på'na?"
+                    CHOICE {
+                        "Ja, exakt så!":
+                        "Typ, det är något speciellt...":
+                    }
+
+                "Jag vet inte om jag vill berätta":
+                    Lars "Nej nej nej"
+                    Lars "Jag är inte den som snokar"
+                    Lars "Sånt där är ju privat"
+            }
+            Lars "Vad heter hon?"
+            CHOICE {
+                "Pixie":
+                    [OH_REALLY]
+                    Lars "Ja ja ja... men henne känner jag!"
+                    Lars "Är ju min systerdotters barn"
+                    Lars "Andra äktenskapet, ja jädrar vilket liv hon levt"
+                    Lars "Mamman alltså"
+                    Lars "Filippa känner jag inte så väl"
+                    CHOICE {
+                        "OK?":
+                        "Jaha... vänta nu förstår jag inte riktigt":
+                            Lars "Nej det är ju en riktigt soppa hennes familj"
+                            Lars "Min systers man stack ju med en man från Argentina"
+                            Lars "Sjöman dårå"
+                            Lars "För att inte tala om hennes kusin..."
+                    }
+                    Sebastian "Vet du var Pixie är någonstans?!"
+                    Lars "Njae... hrmmmm..."
+                    Lars "Jobbar hon inte där på Blå Knuten?"
+                    Lars "Där de säljer baguetter, du vet?"
+                    CHOICE {
+                        "Ja..?":
+                        "Var är det?":
+                            Lars "Ja men där i Burrows"
+                    }
+                    Lars "Eller om det var någon annan affär där"
+                    Lars "Det var länge sen jag såg henne"
+                    Lars "Hon har ju varit som uppslukad sen hon träffade han där... vad heter han...?"
+                    Lars "Ja, hon har varit så våldsamt intresserad av politik i alla fall"
+                    CHOICE {
+                        "Jaha?":
+                        "OK..?":
+                        "Det visste jag inte":
+                    }
+                    Lars "Jag var ju själv lite av en politisk kämpe när jag var i den där åldern"
+                    Lars "Vi ockuperade kommunhuset här bredvid"
+                    Lars "Ja det var tider det!"
+                    CHOICE {
+                        "OK, tack för hjälpen i alla fall!":
+                            Lars "Inga problem, lycka till med ditt sökande"
+
+                        "Måste rusa":
+                    }
+
+                "Nä men jag vill inte säga":
+                    Lars "Åkej, åkej"
+            }
+
+        "Ska dra vidare tror jag":            
+    }
+
+    Lars "Au revoir!"
+    Lars.StopTalking()
+    DEFOCUS
+}
+
+
+WAIT Sebastian.IsSleepingOnGround() AND Sebastian.IsInEitherRoom(Plaza, PlazaBackstreet, BurrowsNorth, Hospital_Exterior, PoliceOffice_Exterior, HarborEast, HarborSouth, HarborWest, HarborNorth, PoorDesolateBuilding1_Exterior, DorisGardens_East, DorisGardens_West, Ministry_Exterior) LISTEN Sebastian_fellAsleep
+CANCEL TALK_BEFORE_CHATEAU
+
+IF Sebastian.HasKnowledge(HasWokenUpAtLarsPlace) {
+    # nothing
+} ELSE {
+    INTERRUPT MovedToLars
+    GOTO ASK_ABOUT_PIXIE
+}
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Lars
+Lars "Hallå hallå!"
+
+LISTEN Sebastian_talk_Lars
+Lars "Tjenamors"
+
+GOTO AGAIN

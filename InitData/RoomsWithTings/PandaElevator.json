@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":255,"values":["\"Room\"","\"PandaElevator\"","[]","false","{\"x\":0,\"y\":0}","\"111100111100111101111100110100001000\"","{\"x\":6,\"y\":6}","{\"x\":2,\"y\":2}"]}

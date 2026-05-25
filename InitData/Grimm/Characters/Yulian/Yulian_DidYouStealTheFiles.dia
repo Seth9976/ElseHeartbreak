@@ -1,0 +1,24 @@
+
+Yulian.SetTimetable(Yulian)
+
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Yulian
+
+FOCUS
+Yulian.StartTalking()
+
+Yulian "Sebastian, kan vi ta det om en kvart eller så, jag är mitt uppe i en grej här?"
+CHOICE {
+    "Javisst!":
+    "OK då":
+    "Ja, jag vill inte störa":
+}
+Yulian "Bra"
+Yulian "Vi tar det sen då?"
+
+Yulian.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

@@ -1,0 +1,16 @@
+SetClock(0, 19, 13, 0)
+SetClockSpeed(30)
+
+
+WAIT 3
+
+[AGAIN]
+WAIT IsHour(00)
+BROADCAST RingBell
+WAIT IsHour(06)
+BROADCAST RingBell
+WAIT IsHour(12)
+BROADCAST RingBell
+WAIT IsHour(18)
+BROADCAST RingBell
+GOTO AGAIN

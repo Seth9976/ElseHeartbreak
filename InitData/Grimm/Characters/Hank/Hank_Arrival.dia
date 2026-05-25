@@ -1,0 +1,41 @@
+
+START FoundServerBasement
+
+WAIT Hank.IsInRoom(HanksApartment) AND Sebastian.IsWithinDistance(Hank, 12) [Intrude] {
+	WAIT 1
+	Hank "Va, vem där?!"
+	GOTO TALK
+}
+
+
+
+LISTEN Sebastian_talk_Hank
+
+CANCEL Intrude
+[TALK]
+Hank.StartTalking()
+
+INTERRUPT GetToKnowHankSnippet
+FOCUS
+
+WAIT 1
+
+[AGAIN]
+CHOICE {
+	"Förlåt, jag ska inte störa mer":
+	"Hur är det att jobba på hotellet då?":
+		Hank "Jag gillar det"
+		Hank "Jävligt mycket att göra bara"
+		Hank "Gammalt hus, och så vidare..."
+		CHOICE {
+			"OK... ja...":
+			"Mm":
+		}
+		GOTO AGAIN
+	"Jag ska nog dra vidare nu, mycket att se så här när man just kommit till en ny stad":
+}
+
+Hank "L8rs"
+
+Hank.StopTalking()
+DEFOCUS

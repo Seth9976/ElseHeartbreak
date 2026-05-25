@@ -1,0 +1,22 @@
+15:00 - 20:30 PreParty  Fika 		Cafe_Room1
+20:30 - 02:00 Partaj	Smoke  	    Plaza_Point
+02:00 - 10:00 Zzz		Sleep		AmandasBed
+10:00 - 15:00 Hang      BeInRoom    Cafe_Exterior
+
+[AmandaTopfloor]
+15:00 - 20:30 PreParty  Fika        Cafe_Room1
+20:30 - 02:00 Partaj    Party       Hospital_Exterior
+02:00 - 10:00 Zzz       Sleep       AmandasBed
+10:00 - 15:00 Hang      BeInRoom    Cafe_Exterior
+
+[Amanda_PartyAtFelixApartment]
+00:00 - 24:00 Partaj	Sit 		FelixApartment_SofaSeat_5 FelixApartment_SofaSeat_4
+
+[AmandaGambling]
+17:35 - 02:30 Gambling		BeInRoom 	Casino_Floor2
+02:30 - 17:35 Zzz			Sleep		AmandasBed
+
+[AmandaClubDot]
+13:00 - 16:30 PreParty  Fika 		Cafe_Room1
+16:30 - 03:00 Partaj	BeInRoom 	Mines_ClubDot
+03:00 - 13:00 Zzz		Sleep		AmandasBed

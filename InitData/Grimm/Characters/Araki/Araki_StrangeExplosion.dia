@@ -1,0 +1,29 @@
+
+Araki.SetTimetable(Araki_StealFloppyAfterExplosion)
+Araki.Pos(DorisGardens_East_Trigger_1)
+Araki.SetRunning(true)
+
+# This parallel thread is for the situation where something prevents Araki from picking up the floppy
+WAIT Araki.IsWithinDistance(Typer2, 5) {
+    # let's get out of here
+    Araki.SetTimetable(Araki)
+    STOP
+}
+
+WAIT Sebastian.HasHandItemWithName(SecretFloppy) {
+    Sebastian.SetKnowledge("HasSecretFloppy")
+    GOTO GET_AWAY
+}
+
+LISTEN Araki_pickup_SecretFloppy
+WAIT 1
+
+[GET_AWAY]
+DorisGardens_East_DoorToLodge.UseForRoomPathfinding(true)
+Araki.SetTimetable(Araki)
+
+WAIT Araki.IsInRoom(Lodge_Underwater)
+
+DorisGardens_East_DoorToLodge.UseForRoomPathfinding(false)
+Araki.SetRunning(false)
+Araki.PutAwayHandItem()

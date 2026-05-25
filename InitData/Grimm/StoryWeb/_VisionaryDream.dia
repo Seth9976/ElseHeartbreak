@@ -1,0 +1,61 @@
+
+WAIT Sebastian.IsSleeping()
+
+WAIT 10
+
+Log("Time to start the dream!")
+Sebastian.Pos(DreamForest_Point1)
+Sebastian.WakeUp()
+
+WAIT Sebastian.IsInRoom(DreamForest)
+
+Pixie.SetTimetable("")
+Pixie.Pos(DreamForest_Point2)
+Pixie.Dir(East)
+
+LISTEN Sebastian_talk_Pixie
+
+Pixie "Där är du"
+Pixie "Titta på det här"
+
+Pixie.Walk(DreamForest_Point1)
+
+WAIT 5
+
+FOCUS
+Pixie "Sebastian..."
+Pixie "Har du någon flickvän?"
+
+CHOICE {
+    "Pixie...":
+    "Ja...":
+    "Nej...":
+    "Jag vet inte...":
+}
+
+Pixie "Du är en speciell kille"
+
+CHOICE {
+    "Tack...":
+    "Är jag...?":
+    "Du är också speciell...":
+}
+
+DEFOCUS
+
+Sebastian.Sleep(9)
+
+WAIT 20
+
+Sebastian.CarefulLayInBed(Hotel_Room1_Bed)
+#Sebastian.SetFieldToFloat(sleepiness, 100)
+
+Pixie.Pos(Lodge_Room1_Point1)
+Pixie.SetTimetable(Pixie)
+
+
+Story("TryFindLodge")
+
+
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+Hotel_Corridor_Door1.UnlockDoor()

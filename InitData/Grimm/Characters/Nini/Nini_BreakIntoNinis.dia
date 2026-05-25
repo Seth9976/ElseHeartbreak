@@ -1,0 +1,73 @@
+
+#Nini.Pos(Plaza_Point)
+#Nini.Walk(NiniApartment_Trigger_1)
+
+IF Nini.HasKnowledge("SebastianBrokeIn") {
+    Nini "Du IGEN?!!"
+    Nini "Gå ut härifrån!"
+    Nini "NUUUUU"
+    STOP
+}
+
+FOCUS
+Nini.StartTalking()
+
+Nini "HALLÅ?!"
+Nini "Vad gör duuu här?"
+Nini.SetKnowledge("SebastianBrokeIn")
+
+CHOICE {
+    "Hej, jag heter Sebastian":
+    "Det stod öppet":
+    "Fin lägenhet det här, vet du vem som bor här?":
+}
+
+IF Nini.HasKnowledge(SebastianGaveCigarette) {
+    Nini "Jag känner igen dig!"
+    Nini "Det är ju du som gav mig en cigarett"
+}
+ELSE {
+    Nini "Whaaat?!"
+}
+
+Nini "Vad gör du i min lägenhet?"
+CHOICE {
+    "Det stod ju öppet":
+    "Jag går runt och kollar in stan":
+    "Jag ville veta vem som bodde här":
+    "Jag letar efter en grej":
+}
+
+IF Nini.HasKnowledge(SebastianGaveCigarette) {
+    Nini "Jag vet ju att du är schysst"
+    Nini "Men lite oartigt att bara stövla in hos folk så där"
+}
+ELSE {
+    Nini "Inte lite oartigt att bara stövla in hos folk så där!"
+}
+
+CHOICE {
+    "Jo... tänkte inte på det":
+        Nini "Jaja, ingen skada skedd"
+        
+    "Ja, sant. Men vad många skor du har!":
+        Nini "Hehe ja"
+        Nini "Lite av en samlare"
+        CHOICE {
+            "De är jättefina":
+                Nini "Tack!"
+            "Wow":
+        }
+}
+
+Nini "Men du får ta och gå nu"
+
+CHOICE {
+    "OK, hej då!":
+        Nini "Hej hej"
+    "Jepp... ursäkta att jag bara gick in":
+        Nini "Det är lugnt, jag får börja låsa dörren"
+}
+
+Nini.StopTalking()
+DEFOCUS

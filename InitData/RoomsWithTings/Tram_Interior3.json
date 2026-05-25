@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":169,"values":["\"Room\"","\"Tram_Interior3\"","[]","false","{\"x\":195,\"y\":68}","\"1001111111111111111100111011011011011011110111111111111111111011111111111111111111111111111111011111111111111111111111111111111100001111111111011010000011111111111111000010000100000000000000\"","{\"x\":19,\"y\":10}","{\"x\":-36,\"y\":-4}"]}

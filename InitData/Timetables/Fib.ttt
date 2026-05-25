@@ -1,0 +1,16 @@
+07:00 - 12:00 Gardening		BeAtTing	Hospital_Exterior_Hotel_Exterior_HarborWest_Testing2_ParkBenchSeat1_4_1_1_1
+12:00 - 12:30 LunchBreak    BeInRoom    FibSchack
+12:30 - 22:00 Gardening     BeAtTing    Hospital_Exterior_Hotel_Exterior_HarborWest_Testing2_ParkBenchSeat1_4_1_1_1
+22:00 - 07:00 Zzz     		Sleep		FibsBed
+
+[Fib_BeInGarden]
+07:00 - 12:00 Gardening		WorkWithModifier	DorisGardens_West
+12:00 - 12:10 LunchBreak    BeInRoom            FibSchack
+12:10 - 20:00 Gardening     WorkWithModifier    DorisGardens_West
+20:00 - 07:00 Zzz			Sleep		        FibsBed
+
+[Fib_GoGetModifier]
+00:00 - 24:00 _             Interact    FibsExtraModifier
+
+[Fib_InteractWithSebastian]
+00:00 - 24:00 _             Interact    Sebastian

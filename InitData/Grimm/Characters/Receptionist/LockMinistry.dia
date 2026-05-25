@@ -1,0 +1,35 @@
+
+[AGAIN]
+
+WAIT Receptionist.IsInRoom(Ministry_Exterior)
+
+IF IsBetweenHours(3, 12) {
+    UnlockDoor(Ministry_DoorToMinistryLobby)
+    Log("Unlock ministry!")
+    Svante.SetTimetable(Svante_Rest)
+}
+ELSE {
+    LockDoor(Ministry_DoorToMinistryLobby)
+    Log("Lock ministry!")
+    Svante.SetTimetable(Svante_Guard)
+}
+
+# Reset these once in a while
+IF Ministry_Elevator1.RoomIsEmpty() {
+    Ministry_Elevator1_Computer.SetCodeAndRun(MinistryElevator1)    
+}
+
+IF Ministry_Elevator2.RoomIsEmpty() {
+    Ministry_Elevator2_Computer.SetCodeAndRun(MinistryElevator2)
+}
+
+IF Ministry_Elevator3.RoomIsEmpty() {
+    Ministry_Elevator3_Computer.SetCodeAndRun(MinistryElevator3)
+}
+
+IF Ministry_Elevator4.RoomIsEmpty() {
+    Ministry_Elevator4_Computer.SetCodeAndRun(MinistryElevator4)
+}
+
+WAIT 100
+GOTO AGAIN

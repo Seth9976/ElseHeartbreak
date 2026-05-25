@@ -1,0 +1,270 @@
+
+WAIT Sebastian.IsInEitherRoom(Factory_Corridor, Factory_Office) AND Dave.IsWithinDistance(Sebastian, 15) {
+    FOCUS
+    Dave.SetTimetable("")
+    Dave.Interact(Sebastian)
+    Dave.SetFieldToFloat("sleepiness", 0)
+    Dave.SetFieldToFloat("drunkenness", 0)
+
+    Jorgen.Pos(Factory_Lobby_Point2)
+    Jorgen.SetTimetable("TalkToSebastian")
+
+    WAIT Jorgen.IsWithinDistance(Sebastian, 8) {
+        Jorgen.CancelWalking()
+        Jorgen.SetTimetable("")
+    }
+
+    #Factory_Lobby_DoorToCorridor.ResetCode()
+    #Factory_Lobby_DoorToFloor1.ResetCode()
+
+    Dave "Vad nu?!"
+    Dave "Vem är ni?"
+    Dave "Vad gör ni här?"
+
+    WAIT Dave.HasConversationTarget(Sebastian)
+
+    Dave "Jag sa VAD GÖR NI HÄR INNE?!!"
+    Dave "Det här är avspärrat område"
+    Dave "Inga obehöriga personer får vistas här!"
+
+    START LongWindingTalk
+    LISTEN DONE
+    WAIT 1
+    FOCUS
+
+    Dave "Schhhh"
+    Dave "Jörgen, vi verkar ha fått besök under natten"
+    Jorgen "Jaså?"
+    Dave "Jag träffade just på den här unge mannen här inne"
+
+    GOTO COMMON
+}
+
+WAIT Sebastian.IsInRoom(Factory_Floor1) AND Jorgen.IsWithinDistance(Sebastian, 20) {
+    FOCUS
+    Jorgen.SetTimetable("")
+    Jorgen.Interact(Sebastian)
+    Dave.Pos(Factory_Lobby_Point2)
+    Dave.SetTimetable("TalkToSebastian")
+    Dave.SetFieldToFloat("sleepiness", 0)
+    Dave.SetFieldToFloat("drunkenness", 0)
+
+    WAIT Dave.IsWithinDistance(Sebastian, 8) {
+        Dave.CancelWalking()
+        Dave.SetTimetable("")
+    }
+
+    #Factory_Lobby_DoorToCorridor.ResetCode()
+    #Factory_Lobby_DoorToFloor1.ResetCode()
+
+    Jorgen "Du!"
+    Jorgen "Vad gör du här?!"
+
+    WAIT Jorgen.HasConversationTarget(Sebastian)
+
+    Jorgen "Jag sa VAD GÖR DU HÄR INNE?!!"
+    Jorgen "Det här är avspärrat område"
+    Jorgen "Inga obehöriga personer får vistas här!"
+
+    START LongWindingTalk
+    LISTEN DONE
+    WAIT 1
+    FOCUS
+
+    Jorgen "Håll klaffen, tack"
+    Jorgen "Chefen, vi verkar ha fått besök under natten"
+    Dave "Jaså?"
+
+    GOTO COMMON
+}
+
+
+LISTEN DontStop
+
+
+[COMMON]
+FOCUS
+
+Dave.SetKnowledge(SebastianBrokeIntoFactory)
+Jorgen.SetKnowledge(SebastianBrokeIntoFactory)
+
+Jorgen "Ska jag kontakta polisen?"
+Dave "Vi väntar med det..."
+Dave "Hmm"
+Dave "Det var precis något sådant här som Monad varnade mig för"
+
+#IF Sebastian.HasHandItemOfType(Hackdev) {
+#    Dave "Ta hans modiferare"
+#} ELSE {
+#    Dave "Visitera honom, kontrollera att han inte har någon modifierare"
+#}
+
+#Jorgen.Interact(Sebastian)
+#WAIT Jorgen.HasConversationTarget(Sebastian)
+#WAIT 1
+
+#Jorgen.StealItemOfType(Sebastian, Hackdev)
+
+Jorgen "Ska jag knocka honom då?"
+
+CHOICE {
+    "Hallå, så kan ni inte göra!":
+    "Vänta nu... vad håller ni på med?!!!":
+    "Jag vill kontakta min advokat":
+    "[YOU_CAN_GO]":
+        GOTO YOU_CAN_GO
+}
+
+Dave "Gör inget motstånd"
+Dave "För er egen skull"
+
+Dave "Jag kommer att låta dig gå"
+Dave "Varken du eller jag är intresserad av att blanda in polisen i det här"
+Dave "Inte sant?"
+
+CHOICE {
+    "Helst inte...":
+        Dave "Exakt"
+    "Nä!":
+        Dave "Bra"
+    "Njae, eller kanske?!":
+        Dave "Nej, nej"
+        Dave "Det blir bara jobbigt"
+        Dave "Bättre att vi drar ett streck över allting, inte sant?"
+}
+
+Dave "Men först vill jag att du svarar på några frågor"
+Dave "Vem hjälpte dig att ta dig in här?"
+
+CHOICE {
+    "Ingen":
+        Dave "Inte?"
+        CHOICE {
+            "Jag tog mig in alldeles själv":
+                GOTO BY_MYSELF
+
+            "Eller alltså, jag hade lite hjälp av en person":
+                GOTO ONE_PERSON
+        }
+
+    "Vad menar du?":
+        Dave "Du fick väl hjälp av någon?"
+        Dave "Några kumpaner, så att säga?"
+        CHOICE {
+            "Ja, en person":
+                [ONE_PERSON]
+                Dave "Jaha..?"
+                Dave "Och vad heter han?"
+                CHOICE {
+                    "Det är en hon, faktiskt!":
+                        Dave "Mhm?"
+                        CHOICE {
+                            "Anna":
+                            "Petra":
+                            "Lisa":
+                            "Pixie":
+                        }
+                        Dave "På så vis..."
+                    "Stefan":
+                        Dave "Mhm?"
+                        Dave "Och vem är den här Stefan?"
+                    "Hank":
+                        Dave "Jaha?"
+                        Sebastian "Han jobbar på hotellet"
+                }
+
+            "Nej, jag klarade mig alldeles själv":
+                [BY_MYSELF]
+                Dave "Alldeles själv?!"
+                Dave "Så duktigt"
+                Dave "Och hur lyckades du med det då?"
+                CHOICE {
+                    "Tja... det var bara att gå in genom grinden":
+                        Dave "Men grinden är ju låst?"
+                        CHOICE {
+                            "Jo men det gick bra ändå":
+                            "Eller alltså, jag modifierade grinden":
+                        }
+                        Dave "Mhm?"
+
+                    "Jag tog gruvvagnen":
+                        Dave "Mhm?"
+                }
+
+            "Ja, vi är ett litet gäng":
+                Dave "Jaha, berätta mer?"
+                IF Sebastian.HasKnowledge("LodgeMember") {
+                    CHOICE {
+                    "Ja, det är Yulian... Araki":
+                        CHOICE {
+                            "Frank, Pixie...":
+                                CHOICE {
+                                    "Det kan vara någon mer också, jag är inte riktigt säker":
+                                    "Och så jag då!":
+                                }
+                            "Frank... kanske någon mer. Jag vet inte så noga":
+                        }
+                        Dave "Jag förstår"
+                        GOTO YOU_CAN_GO
+
+                    "Njae alltså, det är ett gäng kompisar liksom":
+                        [A_GANG]
+                        CHOICE {
+                            "Vi gillar att hitta på bus":
+                            "Vi ger varandra utmaningar, typ att bryta sig in så här":
+                        }
+                        Dave "Mhm?"
+                    }    
+                } ELSE {
+                    Sebastian "Vi är några kompisar..."
+                    GOTO A_GANG
+                }                
+        }
+
+    "En vän":
+        GOTO ONE_PERSON
+}
+
+CHOICE {
+    "Kan jag gå nu?":
+        [NOT_SO_FAST]
+        Dave "Inte så snabbt"
+    "Är vi klara? Jag hittar ut själv":
+        GOTO NOT_SO_FAST
+    "Något mer du undrar?":
+}
+
+Dave "Känner du Yulian?"
+
+CHOICE {
+    "Va?! Nej, det namnet har jag aldrig hört":
+    "Chefen? Ja för tusan, han är cool":
+    "Det ringer ingen klocka":
+        Dave "OK"
+    "Jag känner till namnet...":
+        CHOICE {
+            "Men jag har aldrig träffat karln!":
+                Dave "OK"
+            "Vem är det?":  
+        }
+}
+
+[YOU_CAN_GO]
+Dave "Det var allt"
+Dave "Jörgen, du får ta hand om att släpa ut honom"
+Dave.TakeOutItem("DavesTaser")
+WAIT Dave.IsIdle()
+Dave.InteractUsingHandItem(Sebastian)
+
+WAIT 30
+Sebastian.Pos(Factory_Exterior_TrashPilePoint)
+WAIT 1
+
+Dave.PutAwayHandItem()
+WAIT Dave.IsIdle()
+Dave.SetTimetable("Dave")
+Jorgen.SetTimetable("Jorgen")
+
+DEFOCUS
+
+STOP

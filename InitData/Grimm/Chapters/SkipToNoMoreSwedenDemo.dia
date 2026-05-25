@@ -1,0 +1,29 @@
+
+Story("FirstDay")
+
+START GetHackdev
+
+#Sebastian.Pos(Cafe_Exterior_Point)
+Sebastian.Pos(Burrows_North_Point)
+
+Kafka.Pos(Cafe_Room1_ClerkPoint)
+Kafka.SetTimetable(Kafka)
+
+Typer1.SetTimetable(Typer1_NoMoreSweden)
+Typer1.Pos(Cafe_Room1_Point)
+#Typer1.SetFieldToFloat("sleepiness", 100)
+
+Bouncer.SetTimetable("")
+Ivan.SetTimetable("")
+
+SetHour(10)
+
+WAIT 10
+
+Gunnar.SetTimetable(Gunnar)
+Gunnar.Pos(Cafe_Room1_Point)
+
+WAIT 10
+
+Petra.SetTimetable(Petra)
+Petra.Pos(Cafe_Room1_Point)

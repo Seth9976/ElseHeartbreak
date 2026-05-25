@@ -1,0 +1,136 @@
+Ivan.SetFieldToFloat("sleepiness", 0)
+Pixie.SetFieldToFloat("sleepiness", 0)
+Bower.SetFieldToFloat("sleepiness", 0)
+Petra.SetFieldToFloat("sleepiness", 0)
+
+Ivan.Pos(Ministry_ExperimentHall_TheChair)
+Ivan.SetTimetable("")
+
+Pixie.SetTimetable("PixieInteractIvan")
+
+Bower.SetTimetable("")
+Bower.Pos("Ministry_ExperimentHall_Trigger_2")
+
+Petra.SetTimetable("Petra_SitDownExperimentHall")
+
+#GOTO SHOWTIME
+
+Pixie.SetTimetable(TalkToIvan)
+WAIT Pixie.IsWithinDistance(Ivan, 5)
+WAIT 2
+Pixie "Ivan!!!"
+Ivan "Ta det lugnt Pixie"
+Pixie "*snyft*"
+Pixie "Ivan jag älskar dig"
+Ivan "Det kommer att gå bra, var inte orolig"
+
+Bower "Jag måste be dig att sätta dig i en av åskadarstolarna nu"
+
+Pixie "Men, vänta!!"
+Bower "Vi börjar inom någon minut, sätt er ner sa jag"
+
+IF Sebastian.IsSitting() {
+	Bower.Interact("Ministry_ExperimentHall_Trigger_2")
+} ELSE {
+	Bower.SetTimetable(Bower_TalkToSebastian)
+	WAIT Bower.IsWithinDistance(Sebastian, 5)
+	Bower "Min herre, ni måste sätta er ner omedelbart"
+	WAIT 3
+	IF Sebastian.IsSitting() {
+		###
+	}
+	ELSE {
+		Bower "Hör ni inte vad jag säger! Sitt ner"
+	}
+}
+
+[SHOWTIME]
+Pixie.SetTimetable("Pixie_SitDownExperimentHall")
+
+WAIT Sebastian.IsSitting()
+FOCUS
+
+WAIT Pixie.IsSitting()
+Bower.SetTimetable("")
+Bower "Aktivera armen"
+
+BROADCAST FoldUpProbe
+
+WAIT 1
+SetCameraTarget("LookFromHere", "ToHere")
+
+WAIT 3
+BROADCAST SmallBoom
+
+Pixie "Vad gör ni?!?!?!"
+Pixie "Vad i helvete!"
+Bower.Interact(Pixie)
+Bower "Lugna er"
+Bower "Allt är under kontroll"
+
+WAIT 2
+Bower.Interact(Ivan)
+
+BROADCAST FoldOutFlower
+WAIT 2
+Bower.CancelWalking()
+BROADCAST StartShootingWithProbe
+BROADCAST Boom
+WAIT 1
+Ivan "AAAAAAHHHHHHHH!!!"
+WAIT 3
+BROADCAST Boom
+Ivan.SetCorruption(100)
+Ivan.GetTasedGently()
+Ivan "AAAAAAAAAAAAAHHHHHHHH!!!!!!!" # riktigt ljud som skrik?
+BROADCAST Boom
+Bower.Sleep(1)
+Ivan.Pos(Ivan_Ghost_Point)
+Ivan.SetTimetable("")
+WAIT 3
+Pixie "Vart tog han vägen?!"
+WAIT 3
+Pixie "VAR ÄR HAN?!!!"
+BROADCAST IvanIsDead
+SetCameraTarget("", "")
+
+Sebastian.SetKnowledge(IvanKilledDuringExperiment)
+
+Petra.Sleep(1)
+WAIT 1
+Pixie.Sleep(1)
+WAIT 0.25
+
+Sebastian.Sleep(24)
+DEFOCUS
+WAIT Sebastian.IsSleeping()
+WAIT IsOverHour(18)
+WAIT 10
+
+Sebastian.Pos(Hotel_Lobby_DevotchkaArmChair_1)
+Sebastian.SetFieldToFloat("sleepiness", 70)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+
+Hank.Pos(Hotel_Exterior_Point)
+Babcia.Pos(Hotel_Lobby_WorkPoint)
+
+Pixie.Pos(Plaza_Point)
+Petra.Pos(Plaza_Point)
+Pixie.SetTimetable(Pixie_AfterExperiment)
+Petra.SetTimetable(Petra)
+
+Bower.Pos(Ministry_Elevator2_Trigger_1)
+Bower.SetTimetable(Bower)
+
+SetCameraAutoRotateSpeed(0)
+Story("Ghosts")
+
+
+# en radio med konstig musik står bredvid en och spelar jättehögt
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+
+Bower.SetTimetable("")
+Bower.Pos(Plaza_SeasidePoint)
+
+Bower.Interact(Tagg_Cigarrette)
+
+[AGAIN]
+WAIT 5
+Bower.UseHandItem()
+GOTO AGAIN

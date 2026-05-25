@@ -1,0 +1,53 @@
+WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri {
+	Siri "Hej, hej"
+	WAIT Siri.IsNotAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+	Siri "Ja?"
+}
+
+
+WAIT Siri.IsAtTask(HangOutInDiner) LISTEN Sebastian_talk_Siri
+FOCUS
+
+IF Siri.HasKnowledge("Sebastian") { 
+	GOTO SIRI_OPENS_UP
+}
+ELSE { 
+	GOTO TRY_TO_BEFRIEND_SIRI
+}
+
+[TRY_TO_BEFRIEND_SIRI]
+Sebastian "Hej igen" 
+Siri.StartTalking()
+
+CHOICE {
+	"Du borde rycka upp dig":
+		Siri "..."
+		#START SiriGetsMadAndGoesToHerRoom
+		Siri.StopTalking()
+		DEFOCUS
+		STOP
+		
+	"Får jag sitta här?":
+		Siri "ja, ok"
+		Siri.SetKnowledge("Sebastian")
+		GOTO SIRI_OPENS_UP
+}
+
+[SIRI_OPENS_UP]
+
+CHOICE {
+	"Du gillar att sitta här va?":
+		Siri "Ja"
+		WAIT 1
+		Siri "Jag gillar surrandet från kylskåpet"
+	
+	"Så hur länge har du bott här på hotellet?":
+		Siri "Vet inte..."
+		Siri "Rätt länge nu antar jag"
+}
+
+Siri.StopTalking()
+DEFOCUS
+
+WAIT Siri.IsAtTask(Sleeping)
+START Siri4

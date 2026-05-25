@@ -1,0 +1,144 @@
+
+Monad.Pos(MonadSmokePos)
+Monad.CreateCigarette(MonadCig2)
+Monad.SetHandItem(MonadCig2)
+Monad.SetTimetable(SmokeCigInBurrows)
+
+LISTEN Sebastian_talk_Monad
+
+FOCUS
+Monad.StartTalking()
+Monad.SetKnowledge(Sebastian)
+
+[HEJ]
+CHOICE {
+    "Hej...":
+        Monad "Hej hej"
+        GOTO HEJ
+    "Vad gör du?":
+        Monad "Ser du inte det?"
+        CHOICE {
+            "Jo du röker":
+                Monad "Mm"
+            "Hänger?":
+                Monad "Mm precis"
+        }
+        Monad "Behövde lite frisk luft"
+        Monad "Och en paus från mina kollegor"
+        Monad "De är så inkompetenta ibland!"
+        Monad "Suck"
+}
+
+[MORE]
+CHOICE {
+    "OK, ha en bra dag!":
+
+    "Jag är också frustrerad...":
+        Monad "Jaså?"
+        CHOICE {
+            "Jag skulle göra ett test men det är jättesvårt":
+                Monad "Jaså, på så vis"
+            "Måste ta en öl typ":
+                Monad "Jo, så kan man också lösa sina problem"
+        }
+
+    "Jobbigt!":
+        Monad "Ja du anar inte"
+        GOTO MORE
+}
+
+Monad "Förresten..."
+Monad "Vänta en sekund"
+Monad "Nu när jag ändå pratar med dig"
+Monad "Du vill inte tjäna några extra kronor?"
+
+CHOICE {
+    "Eh...?":
+    "Jo, vadårå?":
+    "Hur då?":
+}
+
+Monad "Det är lätt"
+
+CHOICE {
+    "Vad bra!":
+    "OK?":
+}
+
+Monad "Jo det är så här..."
+Monad "Vi håller på med ett forskningförsök på mitt jobb"
+Monad "Och behöver något att testa på"
+Monad "...förlåt, jag menade någon"
+
+[ANSWERS]
+CHOICE {
+    "Inte intresserad":
+        Monad "Inte?"
+        Monad "Nähäpp"
+        Monad "Vi betalar bra"
+        CHOICE {
+            "Nej, tack":
+                [NO_THANKS]
+                Monad "Ja ja... adjö då"
+                CHOICE {
+                    "Lycka till!":
+                    "...":
+                    "God eftermiddag":
+                }
+            "Hur mycket?":
+                GOTO HOW_MUCH
+        }
+
+    "Hur mycket får jag för det?":
+        [HOW_MUCH]
+        Monad "3000"
+        CHOICE {
+            "Vad måste jag göra?":
+                GOTO WHAT_TO_DO
+            "Det är alldeles för lite...":
+                Monad "Jaha, ja då får det vara"
+                GOTO NO_THANKS
+            "Grymt, jag är på!":
+                GOTO SURE
+        }
+
+    "Vad måste jag göra?":
+        [WHAT_TO_DO]
+        Monad "Å, det är inte mycket"
+        Monad "Ni sitter i en stol"
+        Monad "Vi kommer ställa lite frågor efteråt"
+        GOTO ANSWERS
+
+    "Jag testar gärna":
+        [SURE]
+        Monad "Strålande!"
+        Monad "Kan ni komma till ministeriets lobby imorgon bitti?"
+        CHOICE {
+            "Javisst":
+            "OK":
+            "Det ska väl gå...":
+                Monad "Seså, lite positivitet nu om jag får be!"
+        }
+        Monad "Se till att sova ordentligt innan"
+        [OKOK]
+        CHOICE {
+            "OK! Ses!":
+                Monad "Det gör vi"
+            "Mm...":
+                Monad "Adjö, och kom inte för sent"
+            "Var skulle vi ses sa du?":
+                Monad "Ministeriet, i lobbyn"
+                Monad "Det är alldeles bredvid här"
+                GOTO OKOK
+        }
+        Monad.SetKnowledge(SebastianExperiment)
+        BROADCAST SebastianWillDoExperiment
+}
+
+Monad.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Monad
+Monad "Nej"
+
+Monad.SetTimetable(Monad_SleepAtHome)

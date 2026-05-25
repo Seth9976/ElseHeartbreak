@@ -1,0 +1,145 @@
+
+FOCUS
+
+Sebastian.Interact(Nini)
+WAIT Sebastian.HasConversationTarget(Nini)
+
+[TRY_GIVE_AGAIN]
+Nini.StartWaitForGift()
+Log("Started waiting for gift")
+
+LISTEN Sebastian_give_Nini
+Log("Got gift!")
+
+RemoveDanglingDialogueOptions("Nini_Arrival")
+WAIT 1
+
+WAIT Nini.HasAnyHandItem()
+Log("Nini got something...")
+
+IF Nini.HasHandItemOfType(Cigarette) {
+	Story("GaveCigarette")
+} ELSE {
+	Nini "Det här är ju inte en cigarett!"
+	Nini.Give()
+	WAIT Nini.HasNoHandItem()
+	GOTO TRY_GIVE_AGAIN
+}
+
+Nini.StopWaitForGift()
+
+
+
+Nini "Å, tack tack tack!"
+Nini "Du är ju världens snällaste"
+Nini.PutAwayHandItem()
+Nini "Det ska bli sjukt gott med en cigg!"
+WAIT Nini.IsIdle()
+
+Nini.SetKnowledge("SebastianGaveCigarette")
+Nini.StopTalking()
+DEFOCUS
+
+
+WAIT 2
+Nini.SetTimetable("Nini_GoSmoking")
+
+
+LISTEN Sebastian_talk_Nini [ThanksForCigarette] {
+    Nini "Tjena! Tack så hemskt mycket för ciggen"
+    [HI_HI]
+    LISTEN Sebastian_talk_Nini
+    Nini "Hej hej!"
+    GOTO HI_HI    
+}
+
+WAIT Sebastian.HasKnowledge(Pixie)
+CANCEL ThanksForCigarette
+
+
+[AFTERTALK]
+LISTEN Sebastian_talk_Nini
+FOCUS
+Nini.StartTalking()
+[MORE]
+CHOICE ETERNAL {
+    "Var den något att ha, ciggen?":
+        Nini "Asbra, så jäkla gött"
+        Nini "Jag vet att jag borde sluta men det är svårt"
+        CHOICE {
+            "Ja, det är farligt sånt där!":
+            "Jo jag vet":
+            "Mm":
+        }
+        GOTO MORE
+
+    "Öh, var ligger baren?":
+        Nini "Bar Yvonne?"
+        Nini "Det är jättenära"
+        Nini "Gå bara över till Plaza här bredvid"
+        Nini "Jag bor där borta så jag hör klubben varje natt"
+        Nini "Men det är lugnt, jag somnar bra ändå"
+        GOTO MORE
+
+    "Är det kul att ha en skoaffär?":
+        Nini "Jodå"
+        Nini "Oftast"
+        Nini "Folk här i stan är ganska så intresserade av skor"
+        Nini "En del i alla fall, så det är kul!"
+        GOTO MORE
+
+    "Ska dra vidare, ha det fint!":
+        Nini "Tja då"
+
+    "Känner du någon som heter Pixie?":
+        Nini "Öh... kanske?"
+        Nini "Hur så?"
+        CHOICE {
+            "Jag undrar var hon är, jag måste få träffa henne igen!":
+                Nini "OK..."
+                Nini "Är det en så bra idé?"
+                Nini "Jag känner henne"
+            "Jag träffade henne på en klubb och jag skulle vilja prata med henne igen":
+                Nini "OK..."
+                Nini "Kan du inte träffa henne där igen då?"
+                CHOICE {
+                    "Jo, antar det":
+                    "Ja kanske...":
+                    "Men jag vill träffa henne nu!":
+                }
+                Nini "Jag känner henne"
+            "Hon är... speciell":
+                Nini "Mm?"
+                Nini "Jo, det är hon"
+        }
+        Nini "Fast jag..."
+        Nini "Alltså du borde gå"
+        Nini "Snälla"
+        CHOICE {
+            "Vadå?":
+                Nini "Snälla!"
+                Nini "Jag kommer att hamna i trubbel"
+                Nini "Hej då"
+            "OK, hej då":
+            "Jaha... ja det kan jag väl göra":
+        }
+        GOTO NOPE
+
+    "Hej då":
+        Nini "Hej hej"
+}
+Nini.StopTalking()
+DEFOCUS
+GOTO AFTERTALK
+
+
+[NOPE]
+Nini.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Nini
+FOCUS
+Nini.StartTalking()
+Nini "Nej jag vill inte prata mer"
+Nini.StopTalking()
+DEFOCUS

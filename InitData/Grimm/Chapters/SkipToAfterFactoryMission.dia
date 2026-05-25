@@ -1,0 +1,42 @@
+Pixie.StartLogging()
+
+Story("FirstDay")
+Story("CanSellSoda")
+Story("FoundLodge")
+Story("AfterStalking")
+Story("YouAreMemberNow")
+Story("FactoryMission")
+Story("DidYouStealTheFiles")
+
+START GetHackdev
+START GetKey
+START GetMap
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+UnlockDoor(Lodge_Room1_DoorToRoom2)
+
+SetHour(10)
+Pixie.Pos(Lodge_Room1_Point1)
+#Sebastian.Pos(Lodge_Room1_Point2)
+Sebastian.Pos(Lodge_Room1_FrankPoint)
+
+Felix.Pos(Lodge_Entry_Point1)
+Yulian.Pos(Lodge_Entry_Point1)
+
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette10_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette10_2)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette9_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette9_2)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette4_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette8_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette7_2)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette6_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette5_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette5_2)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette9_4)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette4_2)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette9_5)
+
+Dorian.SetKnowledge(Sebastian)

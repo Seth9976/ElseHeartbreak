@@ -1,0 +1,15 @@
+#Will.Pos(Testing2_Beer_2)
+#Will.Dir(South)
+
+STOP Bob_Arrival
+
+Bob.StartWaitForGift()
+Bob.Pos(Testing_DevotchkaArmChair_1)
+Bob.SetTimetable("")
+
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_1)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_2)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_3)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_4)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_5)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_6)

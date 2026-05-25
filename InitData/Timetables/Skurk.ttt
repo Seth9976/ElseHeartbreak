@@ -1,0 +1,11 @@
+
+00:00 - 07:00 Zzz Sleep SkurkBed
+07:00 - 14:00 Roam BeInRoom DorisGardens_West
+14:00 - 19:00 Roam BeInRoom HarborWest
+19:00 - 00:00 Rest Sit HarborWestHouseRoom1_SofaSeat_1
+
+[Skurk_BreakIn]
+00:00 - 24:00 _ Drink SodaStorage
+
+[Skurk_Escape]
+00:00 - 24:00 Rest Sit HarborWestHouseRoom1_SofaSeat_1

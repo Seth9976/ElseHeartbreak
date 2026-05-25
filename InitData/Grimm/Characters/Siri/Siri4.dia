@@ -1,0 +1,92 @@
+LISTEN Sebastian_talk_Siri
+FOCUS
+Siri.StartTalking()
+
+CHOICE {
+	
+	"Får man fråga vad är det du gör om dagarna?":
+		Siri "Mmm..."
+		Siri "Jag gör väl inte så mycket"
+		Siri "Är mest på hotellrummet"
+		CHOICE {
+			"Blir det inte ensamt?":
+				Siri "Jo rätt så"
+				Siri "Men..."
+				CHOICE {
+					"Ja?":
+						Siri "Äsch, nej det var inget"
+					"Mmm, jag förstår":
+						Siri "Det är inte så lätt helt enkelt"
+						Sebastian "Nej det är det inte"
+				}
+
+			"Jaha, ok":
+		}
+	
+	"Vad gillar du för musik?":
+		Siri "Oj, vilken svår fråga"
+		Siri "Det var länge sen jag lyssnade på musik"
+		CHOICE {
+			"Jag kan tänka mig att du är en person som gillar typ opera...":
+				Siri "Hi hi, nej usch jag avskyr opera"
+				CHOICE {
+					"Jaha...":
+					"Va? Men du måste lyssna på någon slags musik?":
+				}
+			
+			"Om jag bara gissade skulle jag tro att du lyssnar på indiepop":
+				Siri "Indiepop, vad är det?"
+				CHOICE {
+					"Alltså, det är oftast gitarrer...":
+					"Det brukar handla om känslor oftast...":
+				}
+				CHOICE {
+					"...och så ska det låta lite hemmagjort typ":
+					"...och sångaren ska sjunga lite falskt helst":
+				}
+				Siri "det låter konstigt när du beskriver det"
+				CHOICE {
+					"Hehe, ja... ":
+						Siri ""
+					"Mmm, men jag tror att du skulle gilla det!":
+						Siri "Ja kanske"
+						Siri ""
+				}
+		}
+		
+		Siri "Jag antar att jag gillar jazz rätt mycket"
+		Siri "Instrumentell jazz alltså"
+		
+		CHOICE {
+			"Jaha, coolt":
+				Siri "Tycker du?"
+				CHOICE {
+					"Jazz är ju asgrymmt":
+						Sebastian "Min pappa lyssnar mycket på jazz och blues och sånt"
+					"Alltså, jag kan inte så mycket om jazz":
+						Sebastian "Men jag gillar musiken de spelar här på hotellet"
+				}
+			"Jazz?!":
+				Siri "Ja, är det konstigt?"
+				CHOICE {
+					"Alltså, jag kan inte så mycket om jazz":
+						CHOICE {
+							"Men jag är säker på att det är bra om man lyssnar in sig på det...":
+								Siri "mm"
+								Siri ""
+							"Men du kanske kan visa mig lite låtar som du gillar?":
+								Siri "Ja, kanske senare"
+								Siri ""
+						}
+
+					"Nej, inte alls. Ursäkta, det kändes bara inte som din grej":
+						Siri "Nähä, nä jag gillar väl inte jazz jättemycket egentligen"
+				}
+		}
+}
+
+Siri.StopTalking()
+DEFOCUS
+
+WAIT Siri.IsAtTask(Sleeping)
+START Siri5

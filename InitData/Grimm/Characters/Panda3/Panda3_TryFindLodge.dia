@@ -1,0 +1,5 @@
+
+Panda3.SetTimetable(Panda3)
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Hej du!"

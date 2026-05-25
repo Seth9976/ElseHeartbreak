@@ -1,0 +1,87 @@
+
+LISTEN Sebastian_talk_Ivan
+
+FOCUS
+Ivan.StartTalking()
+
+CHOICE {
+	"Hejsan, vill du köpa en burk läsk?":
+
+	"Ursäkta, vet du var man kan köpa en bit mat här i stan?":
+		Ivan "Jag brukar gå till Kasinot och käka"
+		Ivan "Det är jävligt bra"
+		Ivan "Fast du kanske inte har råd"
+		CHOICE {
+			"Jo det tror jag nog!":
+				Ivan "Mm..."
+			"Nä kanske inte, du vet inte något billigt ställe då?":
+				Ivan "Bar Yvonne har väl typ pizza"
+				Ivan "Annars vet jag inte"
+				CHOICE {
+					"Ah, bra idé!":
+					"Bar Yvonne..?":
+						Ivan "Du hittar inte så bra här va?"
+						Ivan "Det ligger vid Plaza"
+						Sebastian "Aha"
+				}
+		}
+		CHOICE {
+			"Du vill inte köpa en läsk förresten?":
+				
+			"OK, tack för hjälpen – ha en bra dag!":
+				GOTO SKIP_SELLING
+			
+			"Hej då dude":
+				GOTO SKIP_SELLING
+		}
+}
+
+Ivan "Nej det är bra hörru"
+Ivan "Jag äter eller dricker inte saker med socker i"
+Ivan "Folk som gör det får så jävla ful kropp"
+
+CHOICE {
+	"Nä, man blir lycklig av läsk!":
+	"Ja så kanske det är":
+	"Heh ja...":
+}
+
+Ivan "Nä nu vill jag vara i fred, bye bye med dig"
+
+CHOICE {
+	"OK, hej då":
+	"Ha en bra dag!":
+	"Hejsvejs":
+}
+
+Ivan.SetKnowledge(Sebastian)
+
+[SKIP_SELLING]
+
+Ivan.StopTalking()
+DEFOCUS
+
+
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Ivan 
+
+FOCUS
+Ivan.StartTalking()
+
+Ivan "Nej jag vill fortfarande inte ha någon läsk"
+
+CHOICE ETERNAL {
+	"Nähä, ok...":
+	"Säker???":
+		Ivan "Ja"
+	"Jag tänkte bara fråga vad du heter":
+		Ivan "Hörru, jag har inte tid att prata med främlingar"
+		Ivan "Försöker softa lite här innan jag ska till jobbet"
+}
+
+Ivan.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

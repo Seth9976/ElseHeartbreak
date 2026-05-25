@@ -1,0 +1,29 @@
+
+WAIT Nini.IsInRoom(ShoeStore) AND Sebastian.IsInRoom(BurrowsNorth)
+
+Araki.Pos(Ministry_Exterior_Trigger_1)
+Araki.SetFieldToFloat("sleepiness", 0)
+Araki.SetTimetable("Araki")
+
+
+LISTEN Sebastian_talk_Araki
+FOCUS
+Araki.StartTalking()
+
+Araki "Vad nu?!"
+CHOICE {
+    "Eh...":
+    "Hej, jag heter Sebastian!":
+    "Jag är lite vilse":
+}
+Araki "Jag måste sticka"
+Araki "Ursäkta"
+Araki.SetRunning(true)
+
+Araki.StopTalking()
+DEFOCUS
+
+
+WAIT 30
+Araki.SetRunning(false)
+

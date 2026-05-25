@@ -1,0 +1,8 @@
+
+SetHour(7) # makes nini start her day
+
+Story("FirstDay")
+Sebastian.Pos(Burrows_North_Point)
+Sebastian.Interact(Nini)
+
+Sebastian.CreateCigarette(SebbeCigg1)

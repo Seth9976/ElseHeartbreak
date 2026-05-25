@@ -1,0 +1,16 @@
+
+Sebastian.Pos(Hotel_Lobby_Point)
+#Sebastian.Pos(Hotel_Exterior_Point)
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+Story("CanSellSoda")
+Story("ClubDotGig1")
+Story("TheRedBag")
+
+SetHour(10)
+
+Roby.Pos(Felix)
+LISTEN RobySpokeToFelix
+Roby.Pos(Sebastian)

@@ -1,0 +1,56 @@
+[AGAIN]
+
+WAIT Sebastian.IsInRoom(LongsonApartment) AND George.IsWithinDistance(Sebastian, 15)
+
+FOCUS
+Sebastian.StopAction()
+George.SetTimetable(George_InteractWithSebastian)
+
+WAIT George.IsWithinDistance(Sebastian, 5)
+
+IF George.HasKnowledge(SebastianIsBurglar) {
+    George "Du igen!?!??!!"
+    GOTO CALL_FOR_GUARD
+}
+
+George.SetKnowledge(SebastianIsBurglar)
+George "Vad gör ni i mitt hus?!"
+George "För i helvete!"
+George "Stanna där du är medan jag ringer polisen"
+
+CHOICE {
+    "Va, nej!":
+    "Ehhh":
+    "Jag har inte gjort något":
+}
+DEFOCUS
+
+George "Din jävel, vänta så ska jag hämta min vakt"
+Sebastian.SetFieldToFloat("sleepiness", 0)
+
+[CALL_FOR_GUARD]
+George.SetTimetable(George_InteractWithGuard)
+WAIT George.IsWithinDistance(CityHallGuard, 5)
+George "Ta fast honom"
+CityHallGuard.SetTimetable(CityHallGuard_ChaseSebastian)
+CityHallGuard.SetRunning(true)
+CityHallGuard.TakeOutItem(CityHallGuard_Taser)
+George.SetTimetable(George)
+
+WAIT CityHallGuard.IsWithinDistance(Sebastian, 5) [CHASING] {
+    CityHallGuard "Nu har jag dig!"
+    CityHallGuard.UseHandItem()
+    Sebastian.Sleep(3)
+    CityHallGuard.PutAwayHandItem()
+    WAIT 10
+    Sebastian.Pos(Plaza_Point)
+    GOTO CHASE_IS_OVER
+}
+
+WAIT Sebastian.IsInEitherRoom(Cafe_Exterior, BurrowsNorth, BarYvonne, PlazaBackstreet, Hotel_Exterior)
+[CHASE_IS_OVER]
+CANCEL CHASING
+CityHallGuard.SetRunning(false)
+CityHallGuard.SetTimetable(CityHallGuard)
+
+GOTO AGAIN

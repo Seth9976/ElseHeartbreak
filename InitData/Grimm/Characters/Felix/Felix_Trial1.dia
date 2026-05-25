@@ -1,0 +1,67 @@
+
+WAIT 1
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+
+Felix "Ey dude"
+Felix "'sup?"
+
+CHOICE {
+    "Jag fattar inget alls där inne!":
+        [BAD]
+        Felix "Ah segt"
+        Felix "Jag vet hur det känns, jag är också helt nollställd när det kommer till datorer"
+        CHOICE {
+            "Vad ska jag ta mig till?":
+            "Suck...":
+                GOTO SIGH
+            "Skit också!":
+                [SIGH]
+                CHOICE {
+                    "Hon kommer att tro att jag är en total nolla":
+                        Felix "Äh, nej då"
+                        Felix "Du har ju precit börjat med sånt där"
+                    "Jag trodde jag skulle vara grym!":
+                        Felix "Alla är väl dåliga i början..?"
+                        CHOICE {
+                            "Ja kanske, men jag får panik nu!":
+                            "Jo...":
+                            "Men jag trodde att jag var lite bättre än så här i alla fall!":
+                        }
+                }
+        }   
+        Felix "Ta det lugnt"
+        Felix "Du kanske bara måste ta en paus"
+        CHOICE {
+            "Mm...":
+            "Ja OK":
+            "Bra idé":
+        }
+        Felix "Gå och ta en kaffe typ"
+        CHOICE {
+            "OK, testar det":
+            "Jepp":
+            "Ska tänka på saken":
+        }
+        Felix "Ses, dude"
+
+    "Inte mycket. Vad händer här?":
+        Felix "Sitter mest och chillar"
+        Felix "Jäkligt sweet vibe här nere idag"
+        Felix "Hur går testet?"
+        CHOICE {
+            "Jo men det går bra":
+                Felix "Fett"
+            "Helt åt skogen":
+                GOTO BAD
+        }
+}
+
+Felix.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Felix
+Felix "Chill, dude"
+Felix "Det kommer att ordna sig"

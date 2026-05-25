@@ -1,0 +1,66 @@
+FOCUS
+
+Bob "Jag har inte så mycket pengar"
+
+CHOICE {
+	"OK, de kostar $3 per styck":
+	"OK, de kostar $4 per styck":
+	"OK, de kostar $5 per styck":
+	"[DONE_SELLING]":
+		GOTO DONE_SELLING
+}
+
+Bob "Jag ger dig $2"
+
+[AGAIN]
+CHOICE {
+	"Njae....":
+		Bob "Det är allt jag har"
+		GOTO AGAIN
+
+	"Nej då får det vara":
+		Bob "OK"
+
+	"OK, det blir bra":
+		[CHEAT]
+		[TRY_GIVE_AGAIN]
+		Bob.PutAwayHandItem()
+		Bob.StartWaitForGift()
+		LISTEN Sebastian_give_Bob {
+			Log("Giving....")
+			RemoveDanglingDialogueOptions("Bob_CanSellSoda")
+			WAIT Bob.HasAnyHandItem()
+			Log("Bob got something...")
+			IF Bob.HasHandItemOfDrinkType("soda") {
+				Bob "Tack!"
+				Bob "Vi ses"
+				RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 2)
+				Sebastian.SetKnowledge("HasSoldSodaToBob")
+			} ELSE {
+				Bob "Det här är väl ingen läsk?"
+				Bob.Give()
+				WAIT Bob.HasNoHandItem()
+				WAIT Sebastian.HasAnyHandItem()
+				GOTO TRY_GIVE_AGAIN
+			}
+			Bob.StopWaitForGift()
+			GOTO DONE_SELLING
+		}
+		IF Sebastian.HasDrinkOfType("soda") {
+			LISTEN Forever
+		} ELSE {
+			CHOICE {
+				"Hmm, jag verkar ha glömt att ta med några burkar att sälja...":
+				"Oj det här var pinsamt":
+					Bob "Vadå?"
+					Sebastian "Har inte några burkar med mig"
+			}
+			Bob "Aha, synd"
+			Bob "En annan gång då"
+			Bob.StopWaitForGift()
+			GOTO DONE_SELLING
+		}
+}
+
+[DONE_SELLING]
+DEFOCUS

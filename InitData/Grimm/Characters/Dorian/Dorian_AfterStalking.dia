@@ -1,0 +1,140 @@
+
+LISTEN Sebastian_talk_Dorian
+
+
+IF Dorian.HasKnowledge(Sebastian) {
+    Dorian "Å, vem är det jag ser!"
+    Dorian "Min vän Sebastian, hur står det till?"
+    GOTO LATER
+} ELSE {
+    INTERRUPT GetToKnowDorian
+}
+
+
+# later
+WAIT 30
+
+
+LISTEN Sebastian_talk_Dorian
+
+IF Dorian.HasKnowledge(Sebbe) {
+    Dorian "Hur är det med dig, Sebbe?"
+} ELSE {
+    Dorian "Hur är det med dig, Sebastian?"
+}
+
+[LATER]
+FOCUS
+Dorian.StartTalking()
+
+CHOICE {
+    "Jag har trasslat till det ordentligt":
+        Dorian "Jaha?"
+    "Sådär":
+    "Vet inte...":
+    "Det är OK":
+}
+
+Dorian "Kärleksbekymmer?"
+CHOICE {
+    "Jo, typ":
+    "Mm...":
+    "Näää":
+        Dorian "Inte?"
+        CHOICE {
+            "Eller jo":
+            "Kanske":
+            "Nej inte direkt":
+                Dorian "OK"
+                Dorian "Då kan jag inte hjälpa dig"
+                Dorian "Världsliga problem är inget för mig"
+                Dorian "Det är därför jag håller mig här, i skuggorna"
+                Dorian "Farväl"
+                Dorian.StopTalking()
+                DEFOCUS
+                STOP
+        }
+}
+
+Dorian "Berätta mer"
+CHOICE {
+    "Hon heter Pixie":
+        [PIXIE]
+        Dorian "Ah..."
+        Dorian "Jag vet vem hon är"
+        Dorian "Jag känner henns vän Petra mycket väl"
+        Dorian "Hon brukar komma hit ibland och läsa mina dikter"
+        CHOICE {
+            "Jaha":
+            "Ja, henne känner jag också!":
+        }
+        Dorian "Men vad är det som har hänt då?"
+        CHOICE {
+            "Äsch, jag vill inte berätta egentligen":
+            "Hon blev sur när jag letade upp hennes jobb":
+        }
+        Dorian "Ja, hon jobbar på 'skoaffären' va?"
+        CHOICE {
+            "Mm":
+            "Ja..? Jo exakt":
+            "Njae, typ":
+        }
+
+    "Det är en tjej som blivit arg på mig":
+        Sebastian "För att jag följde efter henne"
+        CHOICE {
+            "Hon heter Pixie":
+                GOTO PIXIE
+            "Och nu vet jag inte vad jag ska ta mig till":
+        }
+}
+
+Dorian "Kärlekens kraft är stark!"
+Dorian "Ditt hjärta har svaret, än är inte slaget förlorat"
+
+CHOICE {
+    "Va?":
+    "OK..?":
+    "Ja, precis så är det!":
+}
+
+Dorian "Du måste söka upp henne igen"
+Dorian "Du måste ta dig närmare hennes centrum, bli ett oundvikligt öde"
+Dorian "Liksom månen som sakta kraschar dras mot jorden"
+
+CHOICE {
+    "Gör den?":
+        Dorian "Ja, det är fruktansvärt"
+    "OK...":
+    "Ja!":
+        Dorian "Ja!!!"
+}
+
+Dorian "Du måste börja genast, var håller hon hus?"
+Dorian "Hon jobbar mycket, inte sant?"
+
+CHOICE {
+    "Ja, tror det":
+    "Kanske":
+    "Mm förmodligen":
+    "Ingen aning":
+}
+
+Dorian "Du måste imponera på henne"
+Dorian "Det är det enda som fungerar"
+Dorian "Seså, vad väntar du på?"
+Dorian "Du har vad som krävs - sätt igång!"
+
+Dorian.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Dorian
+Dorian "Vad gör du här?"
+Dorian "Du måste börja nu!"
+
+
+LISTEN Sebastian_talk_Dorian
+Dorian "Ursäkta, jag måste tänka på min dikt nu"
+Dorian "Lycka till min vän"

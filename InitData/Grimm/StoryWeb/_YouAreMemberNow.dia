@@ -1,0 +1,8 @@
+
+# När man blivit med i the Lodge
+
+UnlockDoor(DorisGardens_West_DoorToSchack)
+
+LISTEN FactoryMissionInitiated
+WAIT IsOverHour(15)
+Story("FactoryMission")

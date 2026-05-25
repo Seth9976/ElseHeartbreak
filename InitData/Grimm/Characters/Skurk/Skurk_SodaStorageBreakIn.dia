@@ -1,0 +1,37 @@
+Skurk.SetRunning(true)
+Skurk.SetTimetable(Skurk_BreakIn)
+
+WAIT Skurk.IsInRoom(SodaStorage)
+Skurk.SetRunning(false)
+
+LISTEN Sebastian_talk_Skurk
+
+Sebastian.SetKnowledge("SodaStorageBreakIn")
+
+FOCUS
+CHOICE {
+    "Eh, vad gör du här?":
+    "Ursäkta men jag tror inte att du får var här...":
+    "Hejsan":
+}
+
+Skurk "Hubbulububbbbbbbele...."
+
+CHOICE {
+    "Skulle du kunna gå ut härifrån?":
+    "Har du tagit av läsken?":
+}
+
+Skurk "Öhhh"
+Skurk "Aaahahahaha!!!"
+WAIT 3
+Skurk "Buhbhbbbll... gdfdfdfaafs"
+
+DEFOCUS
+
+
+WAIT Skurk.IsInRoom(SodaStorage) LISTEN Sebastian_talk_Skurk
+Skurk "Ah..."
+Skurk "Nej nej... hebulubbblulll!"
+
+Skurk.SetTimetable(Skurk)

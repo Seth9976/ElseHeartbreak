@@ -1,0 +1,18 @@
+
+WAIT 1
+
+
+
+
+
+
+#WAIT Sebastian.IsInRoom(Ministry_ChamberOfNumbers)
+#
+#Sebastian "???"
+#
+#FOCUS
+#CHOICE {
+#	"Hallå, är det någon här?":
+#	"Ho-hoo?!":
+#}
+#DEFOCUS

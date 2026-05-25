@@ -1,0 +1,15 @@
+
+Story("FirstDay")
+Story("TryFindLodge")
+Story("AfterPyjamas")
+
+SetClock(01, 18, 00, 0)
+
+Sebastian.Pos(Lodge_Entry_Point1)
+Felix.Pos(Lodge_Entry_FelixPoint)
+Pixie.Pos(Lodge_Room1_Point1)
+
+#WAIT 3
+#Story(HackerTrial1)
+
+START GetHackdev

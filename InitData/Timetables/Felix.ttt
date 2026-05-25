@@ -1,0 +1,48 @@
+07:00 - 07:30 Breakfast BeInRoom    Cafe_Exterior
+07:30 - 19:00 Guard 	BeAtTing 	Lodge_Entry_GuardChair
+19:00 - 03:00 Hanging 	Sit         FelixApartment_PoorChair FelixApartment_SofaSeat_3
+03:00 - 07:00 Sleep 	Sleep 		FelixApartment_Poor_Bed_Poor_Bed_1
+
+
+[Felix_BeforePyjamasParty]
+07:00 - 08:00 Breakfast BeInRoom    Cafe_Exterior
+08:00 - 16:00 Guard     BeAtTing    Lodge_Entry_GuardChair
+16:00 - 03:00 Hanging   Sit         FelixApartment_PoorChair FelixApartment_SofaSeat_3
+03:00 - 07:00 Sleep     Sleep       FelixApartment_Poor_Bed_Poor_Bed_1
+
+
+[FELIX_PARTY_MODE]
+05:30 - 06:00 Breakfast BeInRoom    Cafe_Exterior
+06:00 - 18:00 Guard 	BeAtTing 	Lodge_Entry_GuardChair
+18:00 - 03:00 Party 	BeAtTing 	BarYvonne_Point2
+03:00 - 05:30 Sleep 	Sleep 		FelixApartment_Poor_Bed_Poor_Bed_1
+
+[Felix_GuideToGunnar]
+00:00 - 24:00 Guide 	GuideTo 	HarborNorth_Point Sebastian
+
+[Felix_FindPixie]
+00:00 - 24:00 _ Interact Pixie
+
+[Felix_PyjamasParty]
+00:00 - 24:00 _ BeAtTing FelixApartment_KitchenPoint
+
+[Felix_CrazyParty]
+07:00 - 08:00 Breakfast BeInRoom    Cafe_Exterior
+08:00 - 17:15 Guard     BeAtTing    Lodge_Entry_GuardChair
+17:15 - 03:00 Party     Sit         PetrasApartment_SofaSeat_6 PetrasApartment_SofaSeat_3 PetrasApartment_SofaSeat_4
+03:00 - 07:00 Sleep     Sleep       FelixApartment_Poor_Bed_Poor_Bed_1
+
+[Felix_SmokeOnBalcony]
+00:00 - 24:00 _ Smoke DorisGardens_East_Trigger_1
+
+[WarnFrankAndSebbe]
+00:00 - 24:00 _ Interact Sebastian
+
+[WarnAraki]
+00:00 - 24:00 _ Interact Araki
+
+[Felix_BeInLodgeUnderwater]
+00:00 - 24:00 _ BeInRoom Lodge_Underwater
+
+[FelixCakeParty]
+00:00 - 24:00   Sad Sit PixiesApartment_SofaSeat_3 PixiesApartment_SofaSeat_1

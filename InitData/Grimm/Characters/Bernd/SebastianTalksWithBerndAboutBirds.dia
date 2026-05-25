@@ -1,0 +1,42 @@
+FOCUS
+
+CHOICE {
+	"Vad gör du?":
+		Bernd "Jag fotografierar fåglar"
+	"Vad tar du kort på?":
+		Bernd "Fåglar! Jag älskar fåglar"
+}
+CHOICE {
+	"Fiskmåsar?":
+		Bernd "Ja! Fiskmåsen är den finaste fågeln."
+		CHOICE {
+			"Ok, intressant åsikt":
+			"Det måste finnas någon som är finare?":
+				Bernd "Kanske..."
+				Bernd "Men i så fall känner jag inte till den!"
+		}
+	"Vad är det som är så kul med fåglar tycker du?":
+		Bernd "De är så vackra!"
+		Bernd "Och de kan flyga"
+		CHOICE {
+			"Ok":
+			"Mm... det är rätt coolt faktiskt":
+			"Ja, jag älskar också fåglar faktiskt!":
+				Bernd "Underbart"
+		}
+	"Vad använder du för kamera?":
+		Bernd "Det är en japansk..."
+		Bernd "Blackbird heter den"
+		Bernd "Perfekt för att ta bilder på fåglar med!"
+		CHOICE {
+			"Den är fin!":
+				Bernd "Tackar tackar"
+			"Den ser lite plastig ut":
+				Bernd "Ja den är gjord av plast!"
+				Bernd "Ger en fin känsla i bilderna"
+		}
+}
+
+Sebastian.SetKnowledge("BerndIsBirdLover")
+
+DEFOCUS

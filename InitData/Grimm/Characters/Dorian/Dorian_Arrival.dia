@@ -1,0 +1,113 @@
+
+LISTEN Sebastian_talk_Dorian
+INTERRUPT GetToKnowDorian
+
+
+
+# later
+WAIT 30
+
+
+[LATER]
+LISTEN Sebastian_talk_Dorian
+FOCUS
+Dorian.StartTalking()
+
+IF Dorian.HasKnowledge(Sebbe) {
+	Dorian "Hej Sebbe"
+} ELSE {
+	Dorian "Hej Sebastian"
+}
+
+IF Sebastian.HasKnowledge(Pixie) {
+	
+	[LOVE_POEMS]
+	CHOICE {
+		"Jag har funderat lite på det här med kärleksdikter":
+			Dorian "Ååå, ja?"
+			CHOICE {
+				"Hur skriver man en sån?":
+					Dorian "Vilken fråga!"
+					Dorian "Det är ju som att fråga en fisk hur man andas"
+					Dorian "Eller en pelikan hur man flyger"
+					CHOICE {
+						"Ja ok, förlåt":
+						"Är det?":
+					}
+
+				"Tror du att det kan vara en bra idé?":
+					Dorian "Hur menar du?"
+					Sebastian "Alltså..."
+			}
+			GOTO LOVE_POEMS
+
+		"Kan du mycket om kärlek?":
+			Sebastian "Du som skriver dikter och så..."
+			Dorian "Jag har smakat den olyckliga kärlekens alla bittra smaker"
+			Dorian "Min mörka själ är fylld av längtan efter kärlekens dofter"
+			Dorian "Svaret är ett skräckfyllt ja"
+			CHOICE {
+				"Hmm... ok":
+				"Oj":
+			}
+			GOTO LOVE_POEMS
+
+		"Hur ska jag göra om jag vill få en tjej intresserad av mig?":
+			Dorian "Ingen aning"
+			Dorian "Du har nog bara inte förtjänat det ännu"
+	}
+	CHOICE {
+		"Hur förtjänar man något sånt?":
+		"Nej ok":
+	}
+	Dorian "Du måste anstränga dig"
+	Dorian "Ingenting är gratis"
+	Dorian "Ingenting är enkelt"
+	Dorian "Livet är smärta, kom ihåg det!"
+	CHOICE {
+		"Ok, men vad måste jag göra?":
+		"Usch vad jobbigt":
+			Dorian "Ja"
+			Dorian "Ja, det är det"
+	}
+	Dorian "Parningsdans"
+	Dorian "Å, denna parningsdans"
+	Dorian "Den står mig upp i halsen"
+	CHOICE {
+		"Jag ska nog gå hem nu, känner mig trött":
+		"Va?":
+			Dorian "Gör något som imponerar på denna söta flicka"
+			Dorian "Träna på gym!"
+			Dorian "Sjung en sång!"
+			Dorian "Vad vet jag?"
+	}
+	Dorian "Farväl då min vän!"
+	Dorian "Jag tycker mig se hur ditt koger fylls av amors pilar"
+	Dorian "Lycka till, vi ses snart igen"
+	Dorian.StopTalking()
+	DEFOCUS
+
+	[REPEAT]
+	LISTEN Sebastian_talk_Dorian
+	Dorian "Inte nu, inte nu"
+	GOTO REPEAT
+
+} ELSE {
+
+	Dorian "Jag funderar på min nästa versrad"
+	CHOICE ETERNAL {
+		"Ja men då ska jag inte störa":
+			Dorian "Tack"
+			Dorian "Vi kan väl ses senare?"
+		"Jaha, men jag tänkte på en sak...":
+			Dorian "Nej, det får vänta!"
+			Dorian "Inget är viktigare än min konst"
+	}
+	WAIT 30
+	Dorian.StopTalking()
+	DEFOCUS
+	GOTO LATER
+}
+
+Dorian.StopTalking()
+DEFOCUS

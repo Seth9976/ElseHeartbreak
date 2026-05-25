@@ -1,0 +1,109 @@
+
+# tjej: Zarah
+
+
+LISTEN Sebastian_talk_Albert
+
+FOCUS
+
+CHOICE {
+	"Hej":
+
+	"Vem är du?":
+
+	"Var är jag?":
+
+}
+
+CHOICE {
+	"Hallå?!":
+
+	"Vem är du sa jag!":
+
+	"Var ÄR jag?!!?!":
+		
+}
+
+Albert.SetTimetable("")
+Albert.Interact(Sebastian)
+Albert "Kom"
+Albert.Interact(AlbertHouse_OuterRoom_DoorToInnerRoom)
+AlbertHouse_OuterRoom_DoorToInnerRoom.UnlockDoor()
+
+DEFOCUS
+
+LISTEN Albert_open_AlbertHouse_OuterRoom_DoorToInnerRoom
+WAIT Albert.IsIdle()
+Albert.Interact(AlbertHouse_InnerRoom_Point)
+
+WAIT Albert.IsIdle()
+
+LISTEN Sebastian_talk_Albert
+FOCUS
+
+Albert.StartTalking()
+Albert "Visst är det vackert?"
+
+CHOICE {
+    "Vad är det?":
+    "Vilket?":
+    "Ja...":
+}
+WAIT 3
+Albert "Förlåt, vad sa du?"
+
+CHOICE {
+    "Det är vackert":
+    "Vad är det vi ser härifrån?":
+}
+
+Albert "Visst är det fantastiskt"
+Albert "Allting är sammankopplat"
+Albert "Jag önskar att jag kunde ta in allt på samma gång"
+Albert "Men det är för stort"
+
+CHOICE {
+    "Vad gör ni här?":
+    "Vad är stort?!":
+    "Är det här internet?":
+}
+
+Albert "Jag vet inte jag..."
+Albert "Zarah lyckades släpa in en soffa åt oss"
+Albert "Det var tur, det finns så dåligt med sittplatser"
+
+Albert "Jag önskar att fler ville komma hit"
+Albert "Han den nye är mest jobbig"
+Albert "Han skriker"
+
+CHOICE {
+    "Vem då?":
+    "Är det någon som skriker?!":
+    "Oj, det låter jobbigt":
+     Albert "Oh, ja..."
+}
+
+Albert "Vi fick lov att släpa bort honom"
+Albert "Varken Zarah eller jag kunde ju sova"
+Albert.StopTalking()
+DEFOCUS
+
+Albert "Fast vi sover i och för sig aldrig här..."
+Albert "Har du en säng med dig?"
+
+Albert.SetTimetable("Albert")
+
+
+[MORE]
+LISTEN Sebastian_talk_Albert
+FOCUS
+Albert.StartTalking()
+
+Albert "Du måste gör något åt hennes dator"
+Albert "SNÄLLA, GÖR DET!"
+Albert "Vi klarar det inte"
+Albert "Och han skriker så mycket"
+
+Albert.StopTalking()
+DEFOCUS
+GOTO MORE

@@ -1,0 +1,61 @@
+
+LISTEN Sebastian_talk_Amanda
+FOCUS
+Amanda.StartTalking()
+
+Amanda "Ja?"
+
+[AGAIN]
+CHOICE {
+	"Vill du köpa en burk läsk?":
+		IF Amanda.HasKnowledge("Soda") {
+			Amanda "Nej har jag ju sagt"
+			CHOICE {
+				"Ah, just det":
+				"Ok ok":
+			}
+			GOTO AGAIN
+ 		} ELSE {
+ 			Amanda "Nej det är bra"
+ 			CHOICE {
+ 				"Ok":
+ 				"Synd...":
+ 			}
+ 			Amanda "Var det något mer?"
+ 		}
+ 		GOTO AGAIN
+ 
+ 	"Kanske konstig fråga men känner du en person vid namn Pixie?":
+ 		Amanda "Ja... är inte det hon tjejen som jobbar på skoaffären?"
+ 		Amanda "Min kompis Emma känner henne bättre"
+ 		Amanda "Men jag tror hon jobbar där i Burrows"
+ 		CHOICE {
+ 			"Ok, tack!":
+ 			"Jaha ja... ok":
+ 			"Jag tror du måste blanda ihop henne med någon annan":
+ 				Amanda "Ja, det är mycket möjligt"
+ 				Amanda "Du får fråga runt"
+ 				CHOICE {
+ 					"Ok":
+ 					"Ja, tack för hjälpen i alla fall":
+ 				}
+ 		}
+ 		Amanda "Hej då"
+
+ 	"Har vi träffats?":
+ 		Amanda "Jag vet inte"
+ 		Amanda "Hur så?"
+ 		GOTO AGAIN
+}
+
+Amanda.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Amanda
+Amanda "Gullet, jag har inte tid mer nu"
+
+
+LISTEN Sebastian_talk_Amanda
+Amanda "Sluta stör är du snäll"
+

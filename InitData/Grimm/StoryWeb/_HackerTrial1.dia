@@ -1,0 +1,14 @@
+
+STOP SebastianStartsComputers
+STOP SebastianInspectsFuseboxes
+
+LISTEN CompletedHackerTrial1 {
+    Story("HackerTrial2")
+}
+
+LISTEN SebastianWillDoExperiment {
+    Story("AlternativeExperiment")
+}
+
+LISTEN CompletedHackerTrial3
+STOP

@@ -1,0 +1,12 @@
+
+
+LISTEN Sebastian_talk_Bob
+
+FOCUS
+Bob.StartTalking()
+
+Sebastian "Jag känner mig så konstig inombords"
+Bob "Du kanske är kär?"
+
+Bob.StopTalking()
+DEFOCUS

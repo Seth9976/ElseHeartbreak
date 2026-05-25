@@ -1,0 +1,6 @@
+
+Will.StartLogging()
+Will.SetTimetable("")
+Will.Pos(Sebastian)
+#Will.SetFieldToFloat("speed", 5)
+Will.SetTimetable("WellspringRepresentant_GuideToStorage")

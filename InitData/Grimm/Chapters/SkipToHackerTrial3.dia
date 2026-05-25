@@ -1,0 +1,14 @@
+
+START Araki_HackerTrial1
+
+Pixie.Pos(Lodge_Underwater_Point1)
+Sebastian.Pos(Lodge_Underwater_Point2)
+
+SetHour(12)
+
+Story("HackerTrial3")
+
+START GetHackdev
+
+# START SkipToHackerTrial3
+FishGameStartButton.SetCode(BeatFishGame)

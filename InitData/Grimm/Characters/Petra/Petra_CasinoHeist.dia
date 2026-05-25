@@ -1,0 +1,24 @@
+
+WAIT 15
+
+WAIT Petra.NotTalking()
+Petra "Nu går jag och lägger mig!"
+Petra.SetTimetable(PetraSleepEarly)
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+
+CHOICE {
+    "Tack för senast":
+        Petra "Tack själv!"
+
+    "Läget?":
+        Petra "Det är bra"
+}
+
+Petra "Vi ses, ha det fint!"
+
+Petra.StopTalking()
+DEFOCUS
+

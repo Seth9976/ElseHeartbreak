@@ -1,0 +1,95 @@
+
+WAIT Sebastian.IsWithinDistance(TownHall_GuardPoint, 3) AND CityHallGuard.IsAtTing(TownHall_GuardPoint) AND CityHallGuard.IsAwake() {
+    [AGAIN]
+    Sebastian.CancelWalking()
+    Sebastian.Pos(TownHall_PushPoint)
+    CityHallGuard "Nej!"
+    WAIT Sebastian.IsWithinDistance(TownHall_GuardPoint, 3) AND CityHallGuard.IsAtTing(TownHall_GuardPoint) AND CityHallGuard.IsAwake()
+    GOTO AGAIN
+}
+
+
+WAIT Sebastian.IsWithinDistance(CityHallGuard, 6)
+FOCUS
+
+CityHallGuard "Stopp där, här får du inte gå förbi"
+
+[QUESTIONS]
+CHOICE {
+    "Vem bor här?":
+        CityHallGuard "Vet du inte det?"
+        CHOICE {
+            "Nej, jag är ny i stan":
+                CityHallGuard "Mhm?"
+            "Njae...":
+            "Ehh":
+        }
+        CityHallGuard "Det är borgmästarens residens"
+        CHOICE {
+            "Aha!":
+                CityHallGuard "Inga obehöriga äger tillträde hit in"
+                CityHallGuard "Och alla är obehöriga"
+
+            "Borgmästare?":
+                CityHallGuard "George Longson"
+                CityHallGuard "Honom känner ni väl ändå till?"
+                CHOICE {
+                    "Jo, alltså...":
+                    "Inte direkt, bor ju inte här egentligen då":
+                }
+                CityHallGuard "Hrm"
+        }
+
+    "Vad är det här för hus?":
+        CityHallGuard "Det här är kommunhuset"
+        CityHallGuard "Borgmästaren styr staden här ifrån"
+        CHOICE {
+            "Var är borgmästaren just nu?":
+                CityHallGuard "Herr Longson?"
+                CityHallGuard "Det har jag inte tillåtelse att säga"
+                CityHallGuard "Men ni kan vara lugn i förvissningen om att han utför mycket viktiga ärenden"
+                CHOICE {
+                    "OK, vad bra!":
+
+                    "Säkert?":
+                        CityHallGuard "Som kommer gagna både dig själv och alla andra här i staden"
+                }
+
+            "Jaha, OK":
+        }
+
+    "Ursäkta mig, jag ska gå med en gång":
+        DEFOCUS
+        LISTEN Sebastian_talk_CityHallGuard
+        GOTO QUESTIONS
+}
+
+DEFOCUS
+
+
+[MORE]
+LISTEN Sebastian_talk_CityHallGuard
+FOCUS
+CityHallGuard "Ja?"
+CHOICE ETERNAL {
+    "Var är borgmästaren?":
+        CityHallGuard "Varför så frågvis?"
+        CityHallGuard "Var god lämna trappan fri"
+        CityHallGuard "Adjö"
+
+    "Jag tyckte jag hörde något utanför...":
+        CityHallGuard "Jag har inte tillåtelse att lämna min post"
+
+    "Läget?":
+        CityHallGuard "Jag vaktar, det är mitt jobb"
+        CHOICE {
+            "Ja men hur mår du?":
+                CityHallGuard "Oroa dig inte för det"
+            "OK, OK":
+            "Mm":
+        }
+}
+DEFOCUS
+GOTO MORE
+
+

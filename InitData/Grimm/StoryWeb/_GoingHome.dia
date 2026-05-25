@@ -1,0 +1,14 @@
+
+# DEPRECATED????
+
+#LISTEN SebastianBustedByMinistry {
+#	Story("BustedByMinistry")
+#	STOP
+#}
+#
+#WAIT Sebastian.IsInRoom("FerryCorridour") {
+#	Story("GotOntoBoat")
+#	STOP
+#}
+
+LISTEN Forever

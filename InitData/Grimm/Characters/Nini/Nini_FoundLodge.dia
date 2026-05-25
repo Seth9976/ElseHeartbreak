@@ -1,0 +1,100 @@
+
+Nini.SetTimetable(Nini_GoSmoking)
+
+STOP NiniAutolockShoeStoreDoor
+UnlockDoor(Door_Burrows_ToTheLodge)
+
+Nini.Pos(ShoeStore_Point)
+
+WAIT Sebastian.IsInRoom(NiniApartment) AND Nini.IsInRoom(NiniApartment) AND Nini.IsAwake() AND Sebastian.IsAwake() {
+	START Nini_BreakIntoNinis
+}
+
+
+
+LISTEN Sebastian_talk_Nini
+FOCUS
+Nini.StartTalking()
+
+Nini "Tja"
+
+CHOICE {
+	"Hej":
+	"Tja":
+	"God dag":
+}
+
+Nini "Vill du köpa något?"
+IF Nini.IsNotInRoom(ShoeStore) {
+	Nini "Jag kan gå in i så fall"
+}
+
+CHOICE {
+	"Nej då, det är lugnt":
+		Nini "Ok"
+		Nini "Ses"
+	"Ja jag funderade på ett par skor faktiskt...":
+		IF Nini.IsNotInRoom(ShoeStore) {
+			Nini "Ok, jag kommer när jag rökt klart den här ciggen"
+			Nini.SetKnowledge("SellLater")
+		} ELSE {
+			Nini "Så vad hade du tänkt dig... mer exakt?"
+			GOTO WHAT_DO_YOU_WANT
+		}
+	"Den räckte länge den där ciggen va?":
+		Nini "Heh, jag hittade ett helt nytt paket faktiskt"
+		CHOICE {
+			"Jaha, sweet":
+			"OK... skoja ju bara":
+				Nini "Hehe det är lugnt"
+			"Det är farligt att röka!":
+				Nini "Jo tack, jag vet"
+		}
+}
+
+Nini.StopTalking()
+DEFOCUS
+
+
+# later
+WAIT Nini.IsInRoom(ShoeStore)
+
+
+
+LISTEN Sebastian_talk_Nini
+FOCUS
+Nini.StartTalking()
+
+IF Nini.HasKnowledge("SellLater") {
+	Nini "Så skulle du ha något eller?"
+}
+ELSE {
+	Nini "Vad får det lov att vara?"
+}
+
+[WHAT_DO_YOU_WANT]
+
+CHOICE {
+	"Ehm, jag vet inte":
+		Nini "Ok?"
+		Nini "Tänk lite mer på saken då kanske"
+	"Jag tror att jag har ändrat mig":
+		Nini "Jaha"
+	"Vad var det skorna kostade sa du?":
+		Nini "$799 för de gamla modellerna, $999 för de nya"
+		CHOICE {
+			"Jag måste nog tjäna lite mer pengar först":
+				Nini "Ok"
+			"Det är riktigt dyrt tycker jag":
+				Nini "Det är bra skor"
+				Nini "Men jag förstår..."
+				Nini "Tänk på saken"
+		}
+}
+
+Nini "Vi ses"
+
+Nini.StopTalking()
+DEFOCUS
+
+

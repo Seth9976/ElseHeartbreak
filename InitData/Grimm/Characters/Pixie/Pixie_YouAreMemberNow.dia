@@ -1,0 +1,164 @@
+
+#Pixie.SetTimetable(Pixie_WorkLate) # <- this is set after Pixie has talked to Yulian
+Pixie.SetFieldToFloat("sleepiness", 0)
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Så Sebastian, hur känns det?"
+
+CHOICE {
+	"Vad?":
+		Pixie "Du skojar va?"
+		Pixie "Att ha klarat intagningsproven så klart!"
+		CHOICE {
+			"Jaha, ja det känns väl bra":
+				Pixie "Jag var överlycklig när jag tagit mig in"
+				Pixie "Det var väldigt länge sen i och för sig..."
+
+			"Hehe, jo det känns väldigt bra!":
+				GOTO HAPPY
+		}
+	
+	"Det känns fantastiskt!":
+		[HAPPY]
+		Pixie "Å, vad roligt det är att du har blivit med här!"
+		# Pixie.Hug(Sebastian)
+		Pixie "Jag var inte helt säker på att du skulle klara det"
+		CHOICE {
+			"Jag är bättre än man tror!":
+			"Inte jag heller...":
+		}
+
+	"[MISSION_TONIGHT]":
+		GOTO MISSION_TONIGHT
+}
+
+Pixie "Vi ska faktiskt på ett uppdrag redan ikväll, du och jag"
+
+CHOICE {
+	"Coolt!":
+		Pixie "Ja, visst är det!"
+
+	"Oj, det var snabbt på":
+		Pixie "Vi kan vänta till imorgon om du hellre vill det?"
+		CHOICE {
+			"Nej nej, klart jag vill idag":
+				Pixie "Bra"
+
+			"Vad ska vi göra?":
+
+			"Ja..?":
+				Pixie "Fast det är fest imorgon kväll ju"
+				Pixie "Bättra att vi får det gjort"
+				Pixie "Så här ligger det till förstår du..."
+		}
+	"[CHEAT]":
+		GOTO CHEAT
+}
+
+Pixie "Yulian är väldigt intresserad av koden de använder inne på fabriken"
+Pixie "Han tror att de har utvecklat något... speciellt"
+
+[WHAT]
+CHOICE {
+	"OK, vadå?":
+		Pixie "Vi har ingen aning"
+		GOTO WHAT
+
+	"Så vad vill ni göra?":
+		Pixie "Vi måste försöka få tag i lite av deras filer så att vi kan analysera dem"
+		Pixie "Vår bästa idé just nu är ett inbrott"
+		Pixie "Så jag tänkte att du kanske kunde försöka dig på det?"
+		CHOICE {
+			"Ska jag ta mig in på fabriken och stjäla filer menar du??!":
+			"Vänta nu... jag är inte alls redo för det här!":
+		}
+}
+
+Pixie "Deras bevakning är faktiskt inte så bra som man kan tro"
+Pixie "Inga vakter alls"
+Pixie "Så vitt jag kunnat förstå i alla fall"
+CHOICE {
+	"OK...":
+	"Mm?":
+}
+Pixie "Däremot så har de en väldigt effektiv grind"
+Pixie "Den spärrar av spårvagnsstationen inne i fabriken"
+CHOICE {
+	"Ah, den har jag sett":
+	"Jaha?":
+		Pixie "Så att inte vem som helst kan gå in"
+}
+
+[BARRIERS]
+CHOICE {
+	"Men kan man inte bara hacka grinden?":
+		Pixie "Om det vore så enkelt..."
+		Pixie "Den som så mycket rör vid en hackdev där inne blir paralyserad"
+		Pixie "Det är fullkomligt livsfarligt men de bryr sig tydligen inte"
+		GOTO BARRIERS
+
+	"Hur tar man sig in då?":
+		Pixie "Jo! Jag har en idé som skulle kunna fungera..."
+		Pixie "Varje kväll kör de mineraler från gruvan till ett lager i fabriken"
+		Pixie "Vi är rätt säkra på att detta kan utnyttjas för att ta sig in bakvägen"
+		Pixie "Det enda problemet som kvarstår är att lyckas ta sig ut helskinnad"
+		Pixie "Larmsystemen fungerar förmodligen lika bra för att hålla någon fånge i byggnaden"
+		CHOICE {
+			"OK..?":
+				Pixie "Men förhoppningsvis går det att komma på något sätt att inaktivera säkerhetssystemen"
+				Pixie "Innifrån alltså"
+				CHOICE {
+					"Och om det inte går?":
+						Pixie "Då får du tänka ut en alternativ plan!"
+
+					"Ja, det är nog inte så svårt!":
+						Pixie "Bra inställning!"
+						GOTO MISSION_TONIGHT
+				}
+
+			"Det känns inte helt genomtänkt det här":	
+		}
+
+	"Är det många som försöker bryta sig in där eller?":
+		Pixie "Jag vet inte"
+		Pixie "Antar det, deras mineraler är värda mer än jag vågar tänka på"
+		GOTO BARRIERS
+}
+
+Pixie "Du är väl inte feg?"
+
+CHOICE {
+	"Nej, såklart inte":
+	"Kanske lite...":
+}
+
+[CHEAT]
+[MISSION_TONIGHT]
+
+IF IsOverHour(15) {
+	Pixie "Jag tror jag är redo att dra när som helst"
+	Pixie "Säg till när du vill sticka!"
+} ELSE {
+	IF Pixie.IsInRoom(Lodge_Room1) {
+		Pixie "Jag tänkte jobba lite nu så kan du förbereda dig"
+		Pixie "Vi börjar uppdraget vid 16-tiden tänkte jag"
+		Pixie "Stick inte iväg för långt, jag håller mig här på the lodge"
+	} ELSE {
+		Pixie "Vi ses på mitt kontor vid kl 16, OK?"
+		CHOICE {
+			"Japp":
+			"Låter bra!":
+			"Mm...":
+		}
+	}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+BROADCAST FactoryMissionInitiated

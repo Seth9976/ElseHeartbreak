@@ -1,0 +1,185 @@
+
+STOP NiniProtectsLodge
+
+Nini.Pos(ShoeStore_Point)
+Nini.SetTimetable(Nini)
+
+WAIT Sebastian.IsWithinDistance(Nini, 15) AND Nini.IsAtTask(Work)
+
+FOCUS
+Nini.SetTimetable("")
+Nini.Interact(Sebastian)
+WAIT Nini.HasConversationTarget(Sebastian)
+
+Nini "Hej, Yulian sa just till mig att du skulle få passera fritt här nu"
+
+CHOICE {
+	"Ja, vad bra...":
+	"Ok, toppen!":
+	"Yulian?":
+		Nini "Ja, chefen där nere du vet"
+		CHOICE {
+			"Jaha! Ja han är cool":
+			"Mm, just det...":
+		}
+}
+
+
+[SHOES]
+
+Nini "Du ska inte ha ett par skor nu eller?"
+CHOICE ETERNAL {
+	"Jag funderar på det, måste bara tjäna lite mer pengar först":
+		Nini "Ok, bara att säga till när du är redo"
+
+	"Nej det är bra. Men tack ändå!":
+		Nini "Ok, säg till om du ångrar dig"
+
+	"Jag gillar mina skor som jag har nu":
+		Nini "Jo men man kan ju ha fler"
+		Nini "Jaja, du gör som du vill"
+
+	"Ja! Vad kostar de?":
+		Nini "Du kan få ett par röda för 700 spänn"
+		Nini "Det är kompispris"
+		CHOICE ETERNAL {
+			"OK!":
+				Nini "Då behöver jag ditt kreditkort, tack"
+				[TRY_FIND_CARD_AGAIN]
+				Nini.PutAwayHandItem()
+				Nini.StartWaitForGift()
+
+				LISTEN Sebastian_give_Nini {
+					WAIT Nini.HasAnyHandItem()
+					IF Nini.HasHandItemOfType(CreditCard) {
+						GOTO GOT_THE_CARD
+					} ELSE {
+						Nini "Kreditkortet sa jag..."
+						Nini.Give()
+						WAIT Nini.HasNoHandItem()
+						GOTO TRY_FIND_CARD_AGAIN
+					}
+				}
+
+				IF Sebastian.HasItemOfType(CreditCard) {
+					Log("No need to present dialogue options about dropping the card")
+					LISTEN DONT_GO_PAST_HERE
+				}
+
+				Sebastian "Jag har inte något kreditkort"
+				Nini "Jaha... nä då blir det svårt att köpa något"
+				Nini.StopWaitForGift()
+				GOTO CYA
+
+				[GOT_THE_CARD]
+				IF Sebastian.CharacterHasLessMoneyThan(700) {
+					Nini "Verkar inte finnas tillräckligt mycket på kortet"
+					Nini "Sorry"
+					Nini.Give()
+					WAIT Nini.HasNoHandItem()
+					CHOICE {
+						"Skit också":
+						"Ooops":
+						"OK, återkommer!":
+					}
+				}
+				ELSE {
+					Nini "En sekund..."
+					WAIT Nini.IsIdle()
+					Nini.CharacterTakesMoneyFromCreditCard(-700)
+					WAIT Nini.IsIdle()
+					WAIT 3
+					Nini "Sådär" 
+					Nini.Give()
+					WAIT Nini.HasNoHandItem()
+					Nini "Och sen skorna..."
+					Nini.Interact(ShoeStore_NewComputerScreen_NewComputerScreen_1)
+					WAIT 5
+					DEFOCUS
+					WAIT 1
+					Sebastian.SetKnowledge("NewShoes")
+					FOCUS
+					Nini "Nu!"
+					Sebastian.StartAction(Shrug)
+					CHOICE {
+						"Va?":
+						"Oj vad hände?":
+						"Huh?":
+					}
+					Nini "Dina nya skor!"
+					CHOICE {
+						"Wow...":
+						"Coolt":
+						"De är grymma!":
+					}
+					Nini.GetUpAndInteract(Sebastian)
+					Nini "De passar perfekt"
+					ShoeStore_NewComputerScreen_NewComputerScreen_1.SetCodeAndRun(CashRegister)
+				}
+
+			"Det har jag inte tyvärr...":
+				Nini "Du får jobba hårdare, hihi"
+				CHOICE {
+					"Lätt för dig att säga...":
+					"Mm":
+					"Jag gillar inte att jobba":
+					"Ja, jag önskar att det fanns något lättare sätt":
+						Nini "Bankrån?"
+						Nini "Skoja bara"
+				}
+		}
+}
+
+[CYA]
+Nini "Vi ses"
+
+DEFOCUS
+Nini.SetTimetable("Nini")
+
+IF Sebastian.HasKnowledge("NewShoes") {
+	GOTO HOW_ARE_THE_NEW_SHOES
+} ELSE {
+	WAIT Nini.IsAtTask(Work) LISTEN Sebastian_talk_Nini
+	Nini.StartTalking()
+	FOCUS	
+	GOTO SHOES
+}
+
+
+[HOW_ARE_THE_NEW_SHOES]
+LISTEN Sebastian_talk_Nini
+Nini.StartTalking()
+FOCUS
+Nini "Hur känns skorna?"
+CHOICE {
+	"Lite obekväma":
+		Nini "Ah segt"
+		Nini "Men du vänjer dig nog!"
+
+	"Perfekta!":
+		Nini "Härligt"
+
+	"Ingen verkar märka att jag har nya skor":
+		Nini "Nej... folk bryr sig för lite om skor i den här stan"
+		Nini "*suck*"
+}
+DEFOCUS
+Nini.StopTalking()
+
+
+
+[SMALLTALK]
+LISTEN Sebastian_talk_Nini
+Nini.StartTalking()
+FOCUS
+CHOICE ETERNAL {
+	"Vackert väder idag":
+		Nini "Mm"
+	"Läget?":
+		Nini "Det är bra..."
+	"Fått in några nya skor":
+		Nini "Nej, dåligt med det"
+}
+DEFOCUS
+Nini.StopTalking()
+GOTO SMALLTALK

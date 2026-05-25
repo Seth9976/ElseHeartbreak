@@ -1,0 +1,7 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("Ghosts")
+
+Sebastian.Pos(Hotel_Room1_Point)

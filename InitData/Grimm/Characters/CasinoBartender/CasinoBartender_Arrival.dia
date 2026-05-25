@@ -1,0 +1,148 @@
+
+[AGAIN]
+
+LISTEN Sebastian_talk_CasinoBartender
+
+FOCUS
+CasinoBartender.StartTalking()
+
+CasinoBartender "Vad ska du ha?"
+[WHAT]
+CHOICE ETERNAL {
+	"Vad har ni?":
+		CasinoBartender "Det mesta"
+        CasinoBartender "Dry Martini, Bloody Mary..."
+        CasinoBartender "Long Island Ice Tea"
+        CasinoBartender "Ja, och så Margherita då"
+        CHOICE ETERNAL {
+            "Hmm":
+                GOTO WHAT
+            "Long Island låter gott":
+                CasinoBartender "Ja, det är en riktig rökare"
+                CasinoBartender "En sekund"
+                CasinoBartender.CreateDrinkInHand("LongIslandIceTea_LongIslandIceTea")
+                GOTO GIVE_DRINK
+
+            "Margherita... vilket vackert namn på en drink":
+                CasinoBartender "Ja, verkligen!"
+                CasinoBartender "Ska du ta en?"
+                CHOICE {
+                    "Ja!":
+                        CasinoBartender.CreateDrinkInHand("Margherita_Margherita")
+                        GOTO GIVE_DRINK
+
+                    "Njae...":
+                        CasinoBartender "OK, vad ska du ha då?"
+                        GOTO WHAT
+                }
+        }
+
+	"En dry martini tack":
+		CasinoBartender "Ska bli"
+        CasinoBartender.CreateDrinkInHand("DryMartini_DryMartini")
+        GOTO GIVE_DRINK
+
+    "Jag är lite sugen på en Bloody Mary":
+        CasinoBartender "Ett utsökt val"
+        CasinoBartender.CreateDrinkInHand("BloodyMary_BloodyMary")
+        GOTO GIVE_DRINK
+
+    "Jag är nog inte så sugen på en drink":
+        CasinoBartender "OK, OK"
+        CasinoBartender "Som ni vill"
+}
+
+CasinoBartender.StopTalking()
+DEFOCUS
+GOTO AGAIN
+
+
+
+[GIVE_DRINK]
+
+CasinoBartender.Give()
+WAIT CasinoBartender.HasNoHandItem()
+WAIT CasinoBartender.IsIdle()
+
+CasinoBartender "Det blir $10"
+
+CHOICE {
+    "Oj, det var dyrt":
+        CasinoBartender "Mm?"
+        CasinoBartender "Kreditkortet tack"
+
+    "Jepp, nu ska vi se var jag har mitt kort...":
+    "OK!":
+}
+
+CasinoBartender.StartWaitForGift()
+
+[TRY_FIND_CARD_AGAIN]
+
+LISTEN Sebastian_give_CasinoBartender [ACCEPTING_CARD] {
+    WAIT CasinoBartender.HasAnyHandItem()
+    CasinoBartender.StopWaitForGift()
+    IF CasinoBartender.HasHandItemOfType(CreditCard) {
+        RemoveDanglingDialogueOptions("CasinoBartender_Arrival")
+        CasinoBartender "Så..."
+        WAIT CasinoBartender.IsIdle()
+        CasinoBartender.CharacterTakesMoneyFromCreditCard(-10)
+        WAIT CasinoBartender.IsIdle()
+        WAIT 2
+        CasinoBartender.Give()
+        WAIT CasinoBartender.IsIdle()
+        CasinoBartender "Hoppas den smakar"
+        GOTO SALE_IS_OVER
+
+    } ELSE {
+        CasinoBartender "Kreditkortet sa jag..."
+        CasinoBartender.Give()
+        WAIT CasinoBartender.HasNoHandItem()
+        GOTO TRY_FIND_CARD_AGAIN
+    }
+}
+
+IF Sebastian.HasItemOfType(CreditCard) {
+    Log("No need to present dialogue options about dropping the card")
+    LISTEN DONT_GO_PAST_HERE
+}
+
+CHOICE ETERNAL {
+    "Hmm, jag tror att jag måste ha tappat det...":
+    "Det verkar tyvärr som att jag har blivit av med mitt kort":
+}
+CANCEL ACCEPTING_CARD
+
+CasinoBartender "Jaha?"
+CasinoBartender "Då får jag be er att lämna tillbaka drinken"
+
+CHOICE ETERNAL {
+    "Snälla, kan jag inte få köpa den på krita?":
+        CasinoBartender "Kommer inte på fråga"
+    "OK":
+}
+
+[GIVE_BACK]
+LISTEN Sebastian_give_CasinoBartender
+WAIT CasinoBartender.HasAnyHandItem()
+
+IF CasinoBartender.HasHandItemOfType(Drink) {
+    CasinoBartender "Hoppas du hittar ditt kort"
+    CasinoBartender.StopWaitForGift()
+    WAIT 1
+    CasinoBartender.PutAwayHandItem()
+    WAIT CasinoBartender.HasNoHandItem()
+} 
+ELSE {
+    CasinoBartender "Det här är ingen drink..."
+    CasinoBartender.Give()
+    WAIT CasinoBartender.HasNoHandItem()
+    GOTO GIVE_BACK
+}
+
+CasinoBartender.StopWaitForGift()
+[SALE_IS_OVER]
+
+CasinoBartender.StopTalking()
+DEFOCUS
+GOTO AGAIN

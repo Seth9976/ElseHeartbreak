@@ -1,0 +1,19 @@
+
+Hotel_Lobby_DoorToHotelExterior.SetDoorTarget(Hotel_Exterior_DoorToHotel)
+
+STOP _DetectFindingHotel
+STOP _FoundHotel
+STOP _CheckedIn
+STOP _GotIntoRoom
+STOP Sebastian_CheckedIn
+
+WAIT 1
+
+
+# strange floppy that Bower has dropped
+AIGP1205.Pos(Hotel_Corridor_Point)
+
+
+
+START HelpFindSodaMan
+

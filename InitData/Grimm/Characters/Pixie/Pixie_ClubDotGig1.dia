@@ -1,0 +1,365 @@
+Pixie.SetTimetable(PixieClubDotDay)
+
+WAIT Pixie.IsInRoom(BarYvonne) AND IsWithinDistance(Pixie, Sebastian, 10) AND Sebastian.NotTalkingButIgnore(Pixie) [WAITING_FOR_ME] {
+	CANCEL YOU_CAME
+	CANCEL ON_YOUR_WAY
+	FOCUS
+	Pixie "Sebastian!"
+	Pixie.SetTimetable("")
+	Pixie.GetUpAndInteract(Sebastian)
+	WAIT Pixie.IsWithinDistance(Sebastian, 5)
+	Pixie "Hej!"
+	[SHALL_WE_GO]
+	Pixie "Ska vi gå?"
+	CHOICE ETERNAL {
+		"Ja!":
+		"En sekund bara":
+			Pixie "OK"
+			DEFOCUS
+			LISTEN Sebastian_talk_Pixie
+			FOCUS
+			GOTO SHALL_WE_GO
+	}
+	GOTO GOING
+}
+
+WAIT IsOverHour(16) AND Pixie.IsInEitherRoom(Plaza, Hospital_Exterior, PoliceOffice_Exterior, BurrowsNorth) AND IsWithinDistance(Pixie, Sebastian, 15) AND Sebastian.NotTalkingButIgnore(Pixie) [ON_YOUR_WAY] {
+	CANCEL WAITING_FOR_ME
+	FOCUS
+	Pixie.SetTimetable("")
+	Pixie.GetUpAndInteract(Sebastian)
+	WAIT Pixie.HasConversationTarget(Sebastian)
+	Pixie "Sebastian!"
+	Pixie "Hej!"
+	CHOICE {
+		"Hej!":
+		"Tjenamors":
+		"Tja":
+	}
+	Pixie "Är du på väg till Club Dot eller?"
+	CHOICE {	
+		"Ja precis":
+			Pixie "Cool, du kan följa med mig nu om du vill"
+			CHOICE {
+				"Schysst!":
+					CANCEL YOU_CAME
+					GOTO GOING
+				"Jag måste fixa en sak först bara":
+					Pixie "OK... ses sen då!"
+			}
+		"Nej, har lite annat att fixa med idag":
+			Pixie "Fan va tråkigt"
+			Pixie "Jag drar dit nu, ses!"
+
+		"Jag kommer lite senare...":
+			Pixie "OK, ses!"
+	}
+	DEFOCUS
+	Pixie.SetTimetable(BeAtClubDot)
+}
+
+WAIT Pixie.IsInRoom(Mines_ClubDot) AND IsWithinDistance(Pixie, Sebastian, 10) AND Sebastian.NotTalking() AND Sebastian.NotTalkingButIgnore(Pixie) [YOU_CAME] {
+	CANCEL WAITING_FOR_ME
+	CANCEL ON_YOUR_WAY
+	Pixie.SetTimetable(TalkToSebastian)
+	Pixie.GetUpAndInteract(Sebastian)
+	FOCUS
+	WAIT Pixie.IsWithinDistance(Sebastian, 5)
+	Pixie "Du kom!"
+	Pixie "Ta en öl! Eller två!"
+	IF Mines_ClubDot_TurnTableMixer_TurnTableMixer_1.BoolIsTrue("isPlaying") {
+		Pixie "Spelningen har börjat!"
+	} ELSE {
+		Pixie "Spelningen börjar snart"
+	}
+
+	CHOICE {	
+	"Var finns ölen?":
+		Pixie "Den står på några bord där vid ingången"
+		Pixie "Det är bara att ta verkar det som"
+	"OK, nice":
+		Pixie "Ja visst är det!!!"
+		Pixie "Festerna här i gruvan är bäst!"
+	}
+	DEFOCUS
+
+	GOTO TALK_MORE_AT_CLUB_DOT
+}
+
+
+
+LISTEN DONT_GO_PAST_HERE
+
+[GOING]
+DEFOCUS
+Pixie.SetTimetable(ShowTheWayToClubDot)
+
+WAIT Pixie.IsIdle() AND Pixie.IsInRoom(Mines_ClubDot) {
+	Pixie "Framme!"
+	GOTO TALK_MORE_AT_CLUB_DOT
+}
+
+WAIT 1
+Pixie "Haka på"
+
+WAIT Sebastian.IsInRoom(Plaza)
+WAIT 5
+Pixie "Å, jag tror verkligen att du kommer att gilla Club Dot"
+Pixie "Det är liksom som en gammal övergiven gruva"
+Pixie "Och så har de gjort om det till en scen, fattar du va coolt!"
+WAIT Sebastian.IsWithinDistance(Pixie, 15)
+WAIT 5
+Pixie "Förra året så var det en band från Japan som spelade där"
+Pixie "Sångaren var så jävla snygg"
+Pixie "Och så var de tre som spelade gitarr"
+Pixie "Helt sjukt!"
+WAIT Sebastian.IsWithinDistance(Pixie, 15)
+WAIT 6
+Pixie "Är du med?"
+WAIT Sebastian.IsWithinDistance(Pixie, 15)
+WAIT 6
+Pixie "Å, jag gillar verkligen Dorisburg så här års!"
+Pixie "Öl, fest i gruvan, allting..."
+WAIT Sebastian.IsWithinDistance(Pixie, 15)
+WAIT 6
+Pixie "Fast allt är ju inte bra såklart"
+Pixie "De som bestämmer här i stan är helt jävla dumma i huvudet"
+Pixie "Men jag ska försöka att inte klaga för mycket ikväll"
+Pixie "Ikväll är det party!"
+
+LISTEN DONT_GO_PAST_HERE_EITHER
+
+
+
+
+
+[TALK_MORE_AT_CLUB_DOT]
+
+Pixie.SetTimetable(BeAtClubDot)
+Pixie.SetKnowledge("SebastianVisitedClubDotGig1")
+
+
+WAIT IsHour(01) {
+	START GottaGoHomeFromDot
+	STOP
+}
+
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+CHOICE {
+	"När kommer han där Ivan..?":
+		Pixie "Å, jag vet inte"
+		Pixie "Varken han eller jag är särskilt bra på att passa tider"
+		Pixie "Det är nog därför vi passar så bra ihop"
+		CHOICE {
+			"Jaha, vad bra...":
+			"Han verkar lite slarvig?":
+				Pixie "Nej då, han är mycket mindre slarvig än jag"
+		}
+
+	"Får man dricka av det som står framme?":
+		Pixie "Ja, självklart"
+		Pixie "Det är bara att ta"
+}
+
+Pixie "Men visst är det fint här?"
+
+CHOICE {
+	"Ja då":
+
+	"Det är lite stökigt":
+		Pixie "Haha, ja men det är ju det som är cooolt"
+
+	"Verkligen!":
+}
+Pixie "Vi har haft såna sjuka fester här"
+
+[ASK_MORE]
+DEFOCUS
+Pixie.StopTalking()
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+IF Frank.IsWithinDistance(Mines_ClubDot_TurnTableMixer_TurnTableMixer_1, 4) {
+	CHOICE {
+		"Han är bra!":
+			Pixie "Frank ja, han är grym"
+			Pixie "Jag tror han spelade i ett syntband förut"
+			Pixie "Men nu gör han bara musik på egen hand"
+			Pixie "Och remixar andras låtar och sånt"
+			CHOICE {
+				"Fräckt":
+				"Wow":
+				"OK":
+			}
+
+		"Vad händer sen då?":
+			Pixie "Jag vet inte..."
+			Pixie "Kanske efterfest?"
+			Pixie "Fast jag har inte hört något"
+			Pixie "De flesta ska väl jobba imorgon"
+			CHOICE {
+				"Ja... jag måste verkligen komma igång med mitt jobb":
+					Pixie "Mm?"
+				"Var är det du jobbar?":
+					WAIT 2
+					Pixie "Oj, hörde du den grejen han gjorde där i låten?"
+					CHOICE {
+						"Njae..?":
+						"Ja, coolt!":
+						"Kanske?!":
+					}
+			}
+			Pixie "Jag måste gå och snacka med en kompis, du kan väl mingla lite själv?"
+			CHOICE {
+				"OK":
+				"Japp!":
+				"Visst...":
+			}
+			Pixie.StopTalking()
+			DEFOCUS
+			Pixie.SetTimetable("")
+			Pixie.Walk(Mines_Entry_LurePoint)
+			WAIT 15
+			Pixie.SetTimetable(Pixie_DanceAtClubDot)
+	}	
+} ELSE {
+	CHOICE {
+		"När ska han börja spela?":
+			Pixie "DJ:en?"
+			Sebastian "Mm"
+			[DJ_COMING]
+			Pixie "Jag vet inte riktigt, borde vara rätt snart tror jag"
+			GOTO ASK_MORE
+		"Har han kommit än?":
+			Pixie "Vem?"
+			CHOICE {
+				"Ivan":
+					Pixie "Jag vet inte, jag hade hoppats att han skulle vänta på oss här"
+				"DJ:en":
+					Pixie "Ah, Frank menar du"
+					Pixie "Han borde vara här snart"
+			}
+		"Använder de inte gruvan här till någonting?":
+			Pixie "Nej, den här är stängd"
+			Pixie "Men de har öppnat en annan där borta där vi gick förut"
+			[ASK_ABOUT_MINE]
+			CHOICE {
+				"Varför är den stängd?":
+					Pixie "De tömde den väl på resurser, jag vet inte riktigt"
+					GOTO ASK_ABOUT_MINE
+				"Aha":
+				"Vad bryter de i gruvan?":
+					Pixie "Material till datorkomponenter"
+					Pixie "Olika mineraler och sånt"
+			}
+			GOTO ASK_MORE
+	}
+}
+Pixie.StopTalking()
+DEFOCUS
+
+[MORE_TALK]
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Sebastian!"
+Pixie "Det är så kul att du har flyttat hit till vår stad"
+
+CHOICE {
+	"Ja det känns bra":
+		Pixie "Grymt"
+
+	"Tycker du?":
+		Pixie "Ja, det är ju asgrymt!"
+}
+Pixie "Vi ska ha superkul tillsammans"
+
+CHOICE {
+	"Ja!":
+		Pixie "Jag undrar när Ivan kommer, så att du kan få träffa honom"
+		CHOICE {
+			"Ja...":
+			"Mm...":
+			"Ja?":
+		}
+		Pixie "Vi kanske ska dansa medan vi väntar på honom?"
+		CHOICE {
+			"Njae... alltså jag gillar inte att dansa så mycket":
+			"Näää":
+			"Eh, jag vet inte om jag vill":
+			"Ja!":
+				GOTO YES
+		}
+		Pixie "Jooo, kom igen!"
+		[YES]
+		Pixie.SetTimetable(Pixie_DanceAtClubDot)
+
+	"Ja verkligen! Men nu är jag trött, måste nog gå hem":
+		Pixie "Ok..."
+		Pixie "Jag stannar nog ett litet tag till"
+		Pixie "Men vi ses en annan dag!"
+		Pixie.StopTalking()
+		DEFOCUS
+		[SHOULDNT_YOU_GO]
+		LISTEN Sebastian_talk_Pixie
+		FOCUS
+		Pixie.StartTalking()
+		Pixie "Skulle inte du gå? Haha"
+		Pixie "Ha det bra Sebastian"
+		Pixie.StopTalking()
+		DEFOCUS
+		GOTO SHOULDNT_YOU_GO
+}
+
+DEFOCUS
+Pixie.StopTalking()
+
+
+[EXCLAMATE]
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+Pixie "Sebastian!!!"
+
+CHOICE {
+	"Jag ska gå och ta en öl":
+		Pixie "OK!"
+
+	"Känner du många här?":
+		Pixie "Ja, rätt så"
+		Pixie "Fast det är en del skumma personer också"
+		Pixie "Men det är det som är kul med festerna i gruvan, man vet aldrig vad som händer!"
+
+	"Öh... jag är jättetrött, måste nog gå hem och sova":
+		Pixie "OK, OK"
+		Pixie "Vi ses en annan dag hoppas jag!"
+
+	"Han är verkligen bra, DJ:en":
+		Pixie "Ja, Frank alltså..."
+		CHOICE {
+			"Känner du honom?!":
+				Pixie "Eh..."
+				Pixie "Ja, typ"
+				CHOICE {
+					"Wow":
+					"Coolt!":
+					"På vilket sätt?":
+						Pixie "Äsch, jag vet inte"
+				}
+			"Mm":
+			"Jag önskar att jag kunde vara lika grym":
+				Pixie "Hehe"
+		}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+GOTO EXCLAMATE
+

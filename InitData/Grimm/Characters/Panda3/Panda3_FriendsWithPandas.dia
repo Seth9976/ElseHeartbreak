@@ -1,0 +1,35 @@
+
+LISTEN Sebastian_talk_Panda3
+
+FOCUS
+Panda3.StartTalking()
+Panda3 "Hej! Läget?"
+
+CHOICE {
+    "Det är fint":
+        Panda3 "Härligt"
+
+    "Helt OK":
+
+    "Allt suger...":
+        Panda3 "Vad tråkigt"
+}
+
+IF Panda3.IsInRoom(BarYvonne) {
+    Panda3 "Ta en bärs!"
+} ELSE {
+    IF Panda3.IsAtTask(Party) {
+        Panda3 "Följ med till Bar Yvonne!"
+        CHOICE {
+            "OK!":
+            "Kanske...":
+            "Njae, har inte tid":
+                Panda3 "OK"
+        }
+    } ELSE {
+        Panda3 "Ta hand om dig, hej då!"
+    }
+}
+
+Panda3.StopTalking()
+DEFOCUS

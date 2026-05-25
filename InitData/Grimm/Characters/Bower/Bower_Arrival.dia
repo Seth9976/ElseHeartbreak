@@ -1,0 +1,51 @@
+[AGAIN]
+LISTEN Sebastian_talk_Bower
+
+FOCUS
+Bower.StartTalking()
+Bower "Mhm?"
+
+CHOICE {
+    "Hej!":
+    "God dag":
+    "God middag":
+}
+Bower "Ja?"
+
+IF Bower.IsInEitherRoom(Hotel_Corridor, Hotel_Diner, Hotel_Lobby) {
+    CHOICE {
+        "Är du också gäst här på hotellet?":
+            Bower "Mm"
+
+        "Vem är du?": 
+            Bower "Jag är affärsman"
+    }
+
+    CHOICE {
+        "Vad gör du här i staden?":
+            Bower "Affärer"
+
+        "Trivs du här?":
+            Bower "Kaffet är bra"
+    }
+
+    CHOICE {
+        "Ha en bra dag!":
+        "OK, hej då":
+    }
+
+    Bower "Adjö"
+}
+ELSE {
+    Bower "Jag har mycket bråttom"
+    Bower "Adjö"
+    Bower.StopTalking()
+    DEFOCUS
+    GOTO AGAIN
+}
+
+Bower.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Bower
+Bower "Jag hinner inte prata mer med dig"

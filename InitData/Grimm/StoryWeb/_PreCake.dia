@@ -1,0 +1,3 @@
+
+WAIT Sebastian.IsInEitherRoom(Hotel_Exterior, Hotel_Room1, Hotel_Lobby, BurrowsNorth, DorisGardens_East, HarborEast, HarborNorth, Hospital_Exterior, Plaza)
+Story("CakeParty")

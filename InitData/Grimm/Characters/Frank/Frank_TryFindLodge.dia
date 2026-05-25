@@ -1,0 +1,4 @@
+
+WAIT Sebastian.IsInRoom(Frank_Room) AND Frank.IsInRoom(Frank_Room)
+
+INTERRUPT IntrudingInFranksRoom

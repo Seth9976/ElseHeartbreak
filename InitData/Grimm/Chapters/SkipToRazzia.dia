@@ -1,0 +1,10 @@
+
+
+Dorian.SetKnowledge(Sebastian)
+
+INTERRUPT SkipToAfterFactoryMission
+
+Sebastian.Pos(Hotel_Lobby_Point2)
+
+BROADCAST TalkedToPixieAboutHowFactoryMissionWent
+

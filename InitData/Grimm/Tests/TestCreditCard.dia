@@ -1,0 +1,4 @@
+#SebastianCreditCard.StartLogging()
+#FinanceComputer.StartLogging()
+#Sebastian.PutIntoInventory(SebastianCreditCard)
+#RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 565)

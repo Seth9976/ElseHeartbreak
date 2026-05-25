@@ -1,0 +1,56 @@
+
+WAIT Receptionist.IsInRoom(Ministry_Lobby) LISTEN Sebastian_talk_Receptionist
+
+FOCUS
+Receptionist.StartTalking()
+
+Receptionist "Vem söker ni?"
+CHOICE {
+  "Den ansvarige!":
+  "Er chef":
+  "Vet inte":
+}
+
+Receptionist "Det är nog bäst att ni lämnar här snarast"
+
+CHOICE {
+  "Nej! Jag vill veta vem som dödade Ivan":
+    Receptionist "Dödade?"
+    Receptionist "Jag vet inte vad ni talar om"
+
+  "OK":
+
+  "Vem är chef här?":
+    Receptionist "Vi har många chefer"
+    Receptionist "Överchefer"
+    Receptionist "Och mellanchefer"
+    Receptionist "Delegater"
+    Receptionist "Och byråkrater"
+    Receptionist "Och så har vi Dr. Monad, såklart"
+    CHOICE {
+      "Var är han?":
+        Receptionist "HON, om jag får be"
+        Receptionist "Det kan jag inte säga"
+      "OK":
+    }
+    Receptionist "Var god lämna nu"
+    CHOICE {
+      "Men jag vill träffa henne":
+        Receptionist "Hon har inte tid för några möten"
+      "Men jag vill träffa honom":
+        Receptionist "HON har inte tid för några möten"
+      "God kväll då":
+    }
+}
+
+Receptionist.StopTalking()
+DEFOCUS
+
+
+
+WAIT Receptionist.IsInRoom(Ministry_Lobby) LISTEN Sebastian_talk_Receptionist
+FOCUS
+Receptionist.StartTalking()
+Receptionist "Jag tänker inte hjälpa er"
+Receptionist.StopTalking()
+DEFOCUS

@@ -1,0 +1,40 @@
+
+IF Panda5.IsNotInRoom(PandaApartment) {
+    STOP
+}
+
+IF Sebastian.IsNotInRoom(PandaApartment) {
+    STOP
+}
+
+Panda5.SetTimetable("")
+
+
+LISTEN Sebastian_talk_Panda5
+FOCUS
+Panda5.StartTalking()
+
+CHOICE {
+    "Hej":
+    "Tjenare":
+    "Hejsan!":
+    "God dag":
+}
+
+Panda5 "Tja..."
+Panda5 "Jag är bakis, sorry"
+Panda5 "Jag vet inte om jag orkar prata"
+
+CHOICE {
+    "Vad heter du?":
+        Panda5 "Uhhh... aj mitt huvud"
+        Panda5 "Jag heter Fia"
+        Panda5 "Nu måste jag vila"
+    "OK ursäkta, då ska jag inte störa":
+    "Jobbigt!!!":
+        Panda5 "Uh... mitt huvud"
+        Panda5 "Skrik inte är du snäll"
+}
+
+Panda5.StopTalking()
+DEFOCUS

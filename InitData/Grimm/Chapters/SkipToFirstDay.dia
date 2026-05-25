@@ -1,0 +1,20 @@
+
+Story("FirstDay")
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+SetClock(1, 06, 50, 0) # this activates Pixie and Nini
+
+WAIT 3
+SetHour(10)
+
+#Sebastian.Pos(Hotel_Room1_Point)
+#Sebastian.Pos(Hotel_Diner_Point)
+#Sebastian.Pos(Burrows_North_Point)
+Sebastian.Pos(Hotel_Lobby_Point)
+#Sebastian.Pos(Cafe_Exterior_Point)
+
+Sebastian.CreateCigarette(Bobs_Cigg4)
+
+START GetMap

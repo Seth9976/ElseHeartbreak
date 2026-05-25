@@ -1,0 +1,9 @@
+
+Panda1.SetTimetable(ServeDrinksAtYvonne)
+
+
+Panda2.SetTimetable(AlwaysParty)
+WAIT 5
+Panda3.SetTimetable(AlwaysParty)
+WAIT 5
+Panda4.SetTimetable(AlwaysParty)

@@ -1,0 +1,4 @@
+
+WAIT Sebastian.IsInRoom(Hotel_Lobby)
+
+Story("FoundHotel")

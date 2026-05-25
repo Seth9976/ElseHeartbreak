@@ -1,0 +1,3 @@
+Bouncer.Pos(Plaza_SeasidePoint)
+Bouncer.SetTimetable(Bouncer)
+SetHour(20)

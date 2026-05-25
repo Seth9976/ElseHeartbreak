@@ -1,0 +1,82 @@
+
+FOCUS 
+
+Fib "Tjohej"
+Fib.SetKnowledge("Sebastian")
+Fib.StartTalking()
+Fib.TakeOutItem(FibsHackdev)
+
+
+CHOICE {
+	"Hej på dig du":
+	"God dag":
+}
+
+# IF IsRaining()
+Fib "Vackert väder!"
+
+CHOICE {
+	"Tycker du?":
+		Fib "Ja det är perfekt för mina pelargonier i alla fall"
+		CHOICE {
+			"Jaha, vad bra":
+				Fib "Jajemän"
+			"Ok..?":
+				GOTO GARDENER
+		}
+	"Ja, verkligen":
+}
+
+[AGAIN]
+CHOICE {
+	"Vem är du?":
+		Fib "Jag kallas för Fib"
+		Sebastian.SetKnowledge("Fib")
+		Fib "Du?!"
+		CHOICE {
+			"Eh, Sebbe":
+			"Sebastian":
+		}
+		GOTO AGAIN
+
+	"Vad gör du?":
+		Fib "Menar du i allmänhet eller just nu?"
+		CHOICE {
+			"Jag tänkte nog just nu":
+				IF Fib.IsAtTask(Gardening) {
+					Fib "Jag försöker få mina plantor att växa"
+				}
+				ELSE {
+					Fib "Vet inte riktigt, jag funderar på hur jag ska sköta om mina växter"
+				}
+			"I allmänhet... tror jag":
+		}
+		[GARDENER]
+		Fib "Jag är trädgårdsmästare"
+		Fib "Jag sköter om de flesta växter i den här staden"
+		Fib "Ingen annan verkar bry sig om dem tyvärr..."
+		CHOICE {
+			"Jaha, vad häftigt":
+				Fib "Kul att du tycker det!"
+			"Ok...":
+		}
+
+	"Vad är det för konstig makapär du bär på?":
+		Fib "Det här?"
+		Fib "Det är min modifierare, jag använder den i arbetet"
+		[MODIFIER]
+		CHOICE {
+			"Vänta, hur då? Jag fattar inte":
+				Fib "Det är lite svårt att förklara"
+				Fib "Man kan fixa växterna med den..."
+				GOTO GARDENER
+			"Jaha, vad jobbar du med?":
+				GOTO GARDENER
+			"Vad är det för något":
+				Fib "En slags dator kan man väl säga"
+				GOTO MODIFIER
+		}
+}
+
+DEFOCUS
+STOP

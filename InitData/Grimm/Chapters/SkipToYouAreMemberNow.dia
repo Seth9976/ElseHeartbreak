@@ -1,0 +1,18 @@
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+Story("FirstDay")
+Story("TryFindLodge")
+Story("HackerTrial1")
+Story("YouAreMemberNow")
+
+START GetHackdev
+START GetMap
+
+Pixie.Pos(Lodge_Underwater_Point1)
+Sebastian.Pos(Lodge_Underwater_Point2)
+
+Yulian.SetTimetable(Yulian_WorkOvertime)
+
+BROADCAST PixieToldYulianAboutTrial

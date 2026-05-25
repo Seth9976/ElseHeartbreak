@@ -1,0 +1,4 @@
+
+Bower.Pos(Ministry_Lobby_Point1)
+Bower.SetTimetable(Bower)
+SetClock(1, 08, 04, 00)

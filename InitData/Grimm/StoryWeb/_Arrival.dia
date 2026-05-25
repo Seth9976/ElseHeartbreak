@@ -1,0 +1,21 @@
+
+Story("ListenForInternetAccess")
+Story("ListenForFoundHotelBasement")
+Story("DetectFindingHotel")
+Story("DetectFactoryBreakIn")
+Story("SequenceBreakHeart")
+
+LISTEN ClubDotMorningBegins {
+    Story("ClubDotMorning")
+}
+
+LISTEN ImprisonedSebastian {
+    Story("Prisoned")
+}
+
+WAIT Sebastian.IsInRoom(HarborEast) {
+    WAIT 3
+    Hint("You can run by double clicking!")
+}
+
+LISTEN Forever

@@ -1,0 +1,14 @@
+Will.Pos(Testing_Trigger_2)
+
+
+[AGAIN]
+Will.Interact(BedL_Poor_Devotchka_SebbeSuite_BedL)
+WAIT 20
+Will.WakeUp()
+WAIT 7
+Will.Walk(Testing_Trigger_2)
+WAIT Will.IsIdle()
+GOTO AGAIN
+
+#Will.Interact(Hotel_Lobby_ComputerCashier)
+#Will.Interact(BedL_Poor_Devotchka_SebbeSuite_BedL)

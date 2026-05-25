@@ -1,0 +1,8 @@
+
+Casino_Exterior_MainDoor.UnlockDoor()
+
+WAIT IsHour(01)
+WAIT Sebastian.NotTalking()
+Story("CasinoNightIsOver")
+
+Casino_Floor1_Fence_2.SetCodeAndRun(CasinoFence)

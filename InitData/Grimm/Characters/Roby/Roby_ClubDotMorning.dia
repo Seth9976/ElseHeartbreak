@@ -1,0 +1,143 @@
+
+WAIT Sebastian.IsInRoom(Hotel_Exterior)
+
+Roby.SetTimetable("Roby_FindSebastian")
+Roby.Pos(Hotel_Exterior_Point)
+Roby.SetRunning(true)
+
+WAIT Roby.IsWithinDistance(Sebastian, 7) AND Sebastian.NotTalking()
+
+FOCUS
+Roby.StartTalking()
+Roby "Ey"
+Roby.Interact(Sebastian)
+Roby "Ja, du!"
+Roby "Har du sett några kostymnissar här?"
+
+Sebastian.SetKnowledge(Roby)
+Roby.SetKnowledge(Sebastian)
+
+CHOICE {
+    "Va?":
+    "Eh... nej":
+    "Kanske det":
+    "[DEAL]":
+        Sebastian.Pos(RadioStation_Point)
+        GOTO DEAL
+    "[DEAL + bag]":
+        Sebastian.SetHandItem(RedCase)
+        GOTO DEAL
+}
+
+Roby "Jag tror att de är ute efter mig"
+Roby "Skit också, jag visste att det här skulle hända"
+
+[MORE]
+CHOICE {
+    "Var det du som letade efter mig inne på hotellet?":
+        Roby "Va? Nej jag känner inte dig!"
+        GOTO MORE
+
+    "Vänta nu, vem är du?":
+        Roby "Roby var namnet"
+        Sebastian.SetKnowledge(Roby)
+        Roby "Bor du här?"
+        CHOICE {
+            "Jag bor på hotellet":
+                Roby "OK?"
+            "Ja":
+            "Nej, bara på besök":
+                Roby "OK, fan"
+        }
+
+    "Vad har hänt egentligen?!":
+}
+
+Roby "Det var ett gäng byråkrater runt radiostationen"
+Roby "Så jag kunde inte gå in"
+
+CHOICE {
+    "Radiostation?":
+        Roby "Ja precis"
+        [EXPLAIN]
+        Roby "Vi sänder ut på fyra frekvenser samtidigt"
+        Roby "De bästa och senaste låtarna"
+        Roby "Det är jag som väljer"
+
+    "Jaha, var ligger den?":
+        Roby "Norr om hamnen, i ett torn"
+        GOTO EXPLAIN
+}
+
+Roby "Men jag ska dra nu"
+Roby "Måste hitta någon som kan hjälpa mig"
+
+CHOICE {
+    "OK, lycka till":
+        Roby "Cya"
+        Roby.StopTalking()
+        DEFOCUS
+        Roby.SetTimetable(Roby_VisitFelix)
+        LISTEN Roby_talk_Felix [ROBY_TALK_FELIX] {
+            Roby.SetTimetable(Roby)
+        }
+        LISTEN Sebastian_talk_Roby
+        FOCUS
+        Roby.StartTalking()
+        CHOICE {
+            "Jag kanske kan hjälpa dig förresten":
+                CANCEL ROBY_TALK_FELIX
+            "Ursäkta, det var inget":
+                Roby "OK"
+                Roby.StopTalking()
+                DEFOCUS
+                STOP
+        }
+    "Jag kanske kan göra något?":
+}
+
+Roby "Ja..?"
+Roby "Ja!"
+Roby "Det vore ju sjukt snällt"
+Roby "Hittar du dit?"
+
+CHOICE {
+    "Eh, njae...":
+        [DIRECTIONS]
+        Roby "Alltså, du går bara förbi färjan och svänger sedan höger runt huset"
+        Roby "Det är ett högt torn typ"
+        Roby "Du måste ta hissen för att komma upp till studion där vi sänder ifrån"
+    "Hittar var?":
+        Roby "Radiostationen"
+        GOTO DIRECTIONS
+    "Jodå, det ska nog inte vara något problem":
+}
+
+Roby "OK, så när du väl är inne i studion så måste du leta upp en röd väska"
+Roby "Få ut den ur huset innan någon byråkrat tar den"
+Roby "Förstår du?"
+
+CHOICE {
+    "Så jag ska hämta en väska?":
+        Roby "Ja, en röd"
+
+    "Ja, verkar superenkelt":
+        Roby "Bra"
+
+    "Hmm... vänta jag lyssnade inte riktigt":
+        Roby "Du går in på mitt kontor"
+        Roby "Och hämtar en röd väska"
+}
+
+
+
+
+Roby "Vi träffas här igen sen när du är klar"
+[DEAL]
+Roby "Jag måste springa nu!"
+Roby.SetTimetable(Roby_VisitFelix)
+Roby.StopTalking()
+DEFOCUS
+
+BROADCAST FindTheRedBag
+

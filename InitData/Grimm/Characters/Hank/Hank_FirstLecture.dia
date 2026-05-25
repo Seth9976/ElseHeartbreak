@@ -1,0 +1,722 @@
+
+Hank.StopTalking()
+
+Hank.SetTimetable("Hank_GuideToFirstLecture")
+
+WAIT Hank.IsInRoom(HanksApartment)
+Hank.SetTimetable("")
+Hank.GetUpAndInteract("HanksApartment_Point")
+
+WAIT Sebastian.IsInRoom(HanksApartment)
+
+Log("Time for lecture 1")
+WAIT Hank.IsIdle()
+Hank.Dir(RIGHT)
+
+IF Sebastian.IsWithinDistance(Hank, 5) {
+
+}
+ELSE {
+	Hank "Kom över hit är du snäll"
+	WAIT Sebastian.IsWithinDistance(Hank, 5)
+}
+
+FOCUS
+Hank.StartTalking()
+Hank "Ok, ska vi börja då?"
+
+CHOICE {
+	"Ja!":
+
+	"Ok, visst":
+
+	"Jag kom på att jag måste fixa en grej, det går jättesnabbt":
+		Hank "Ok..?"
+		Hank "Jag väntar här så länge då"
+		Hank.StopTalking()
+		DEFOCUS
+		LISTEN Sebastian_talk_Hank
+		FOCUS
+		Hank "Hallå där, då kör vi"
+
+	"[SKIP]":
+		GOTO TRAIN_ON_CUBE
+
+	"[CHEAT_2]":
+		Hank.SetHandItem(TrainingCube)
+		GOTO CHEAT_2
+}
+
+Hank "Har testat din modifierare någonting förut?"
+
+CHOICE {
+	"Ja, lite":
+		Hank "Ok, vad bra"
+		Hank "Har du förstått hur den fungerar?"
+		CHOICE {
+			"Jodå, det var inte så svårt":
+				GOTO I_UNDERSTAND_EVERYTHING
+			"Njae... inte exakt":
+				GOTO EXPLAIN_BASICS_OF_PROGRAMMING
+		}
+
+	"Jo jag har kopplat in den i lite olika saker":
+		Hank "Vad bra, har du förstått koden du har sett?"
+		CHOICE {
+			"Haha... nä inte ett dugg!":
+			"Litegrann kanske..?":
+				GOTO EXPLAIN_BASICS_OF_PROGRAMMING
+			"Ja, det var inte så svårt":
+				[I_UNDERSTAND_EVERYTHING]
+				Hank "Jaha, oj då!"
+				Hank "Då vet jag inte vad jag ska lära dig riktigt"
+				CHOICE {
+					"Nej, jag kanske inte behöver ta upp din tid då":
+						Sebastian "Men var kan jag lära mig mer om programmering?"
+						GOTO HOW_TO_LEARN_MORE
+
+					"Jo men gör det du tänkte!":
+						Hank "Ok?"
+						Hank "Så var ska vi börja..."
+						GOTO EXPLAIN_BASICS_OF_PROGRAMMING
+				}
+		}
+
+	"Nej, faktiskt inte":
+		GOTO EXPLAIN_BASICS_OF_CONNECTING
+}
+
+[EXPLAIN_BASICS_OF_CONNECTING]
+Hank "Ok, inga problem"
+Hank.GetUpAndInteract(HanksApartment_LookAtComputerPoint)
+Hank "Det är ganska enkelt"
+DEFOCUS
+WAIT Sebastian.IsWithinDistance(Hank, 10) {
+	# parallelism
+	Hank.Dir(LEFT)
+	Hank "Testa att koppla in dig i datorn här"
+}
+
+
+LISTEN Sebastian_talk_Hank [HUH] {
+	Sebastian "Vad var det jag skulle göra?"
+	Hank "Hacka den stora datorn här, den med ratten"
+}
+
+
+LISTEN Sebastian_hack_HanksSteeringComputer
+CANCEL HUH
+WAIT Sebastian.IsIdle()
+
+WAIT 1
+FOCUS
+Hank "Ja, exakt!"
+Hank "Såg du koden?"
+
+CHOICE {
+	"Eh, jag tror det..?":
+		Hank "Ok? Bra"
+	"Ja!":
+		Hank "Bra!"
+	"Mm":
+		Hank "Bra"
+}
+
+[EXPLAIN_BASICS_OF_PROGRAMMING]
+Hank "Grundprincipen är att du kopplar in din modifierare i ett föremål"
+Hank "Och sen får du se koden som det föremålet innehåller"
+
+CHOICE {
+	"Det är ju jättekonstigt!":
+		Hank "Hmm... jo det är det faktiskt"
+		CHOICE {
+			"Vem kom på att man kunde göra så?":
+			"Har man alltid kunnat göra sådant?":
+		}
+		Hank "Eh jag vet inte"
+		Hank "Du får nog tyvärr prata med någon annan om det där"
+		Hank "Jag är bara vaktmästare"
+		Hank "Jag försöker att få saker att fungera här på hotellet, det är allt"
+		CHOICE {
+			"Ja, ok":
+			"Hmm... mm":
+		}
+
+	"Innehåller alla föremål kod?":
+		Hank "Jag vet inte"
+		Hank "Oftast verkar de göra det, konstigt nog"
+		Hank "Men skulle inte förvåna mig om det finns saker i dem som man inte får se"
+
+	"Ja, så långt är jag med":
+		Hank "Fint"
+}
+
+Hank "Nästa steg är att förstå hur du kan skriva din egen kod inuti föremålen"
+Hank "Jag kommer bara gå in på grunderna idag, mer har vi nog inte tid med"
+
+CHOICE {
+	"Ok, vad synd":
+	"Jag förstår":
+	"Kör på!":
+}
+
+[TRAIN_ON_CUBE]
+
+Hank.GetUpAndInteract(Sebastian)
+WAIT Hank.HasConversationTarget(Sebastian)
+Log("Hank talked to Sebastian!")
+
+Hank "Här, du ska få något att träna på"
+Hank.TakeOutItem("TrainingCube")
+WAIT Hank.HasHandItemWithName(TrainingCube)
+Log("Hank has hand item TrainingCube!")
+
+Hank.Give()
+
+WAIT Sebastian.HasHandItemWithName(TrainingCube)
+Sebastian.StopWaitForGift()
+
+CHOICE {
+	"Vad är det här för något?":
+		Hank "Nåt skräp jag hittade i en container någonstans"
+		Hank "Den är ganska rolig"
+
+	"Ok... vad ska jag göra nu?":
+
+	"[FIX_IT_FOR_ME]":
+		GOTO FIX_IT_FOR_ME
+}
+
+Hank "Ditt första mål är att få den att lysa"
+
+CHOICE {
+	"Ok... men den ryker ju?":
+		Hank "Ja precis"
+		Hank "Det beror på att den är trasig"
+
+	"Jaha, coolt":
+}
+
+Hank "Om du öppnar upp koden i den kommer du se att det bara är massa skräp"
+Hank "Börja med att sudda ut allting och tryck sedan på 'COMPILE'"
+Hank "Eller tryck CONTROL + ENTER, det är snabbkommandot!"
+
+[MORE]
+CHOICE {
+	"Ok, låter ju inte så svårt!":
+		Hank "Nej det borde det inte vara"
+
+	"Ska jag ta bort all text..?":
+		Hank "Ja precis"
+		Hank "Det är bara strunt ändå"
+
+	"Snabbkommando?":
+		Hank "Ja, istället för att trycka på 'COMPILE'"
+		Hank "CONTROL + ENTER är det"
+		GOTO MORE
+}
+Hank "Testa nu"
+DEFOCUS
+
+LISTEN Sebastian_talk_Hank [HELP_1] {
+	Hank "Ja, är det klurigt?"
+	FOCUS
+	CHOICE {
+		"Jag fattar inte hur jag ska kunna koppla in modifieraren i kuben":
+			Hank "Det är bara att välja 'hack'"
+		"Vad var det jag skulle göra?":
+			Hank "Bara ta bort all kod i kuben"
+		"Nej då, inga problem":
+	}
+	DEFOCUS
+}
+
+WAIT TrainingCube.HasNoErrors() AND Sebastian.IsIdle()
+CANCEL HELP_1
+
+WAIT 1
+FOCUS
+Hank.GetUpAndInteract(Sebastian)
+Hank "Bravo!"
+Hank "Ser du hur den slutar ryka?"
+Hank "Det betyder att den inte har några fel i sig längre"
+
+CHOICE {
+	"Aha, häftigt!":
+		Hank "Ja visst är det?"
+	"Ok, men varför var det fel förut?":
+		Hank "Den kunde inte fatta koden som bara innehöll massa slumpmässiga bokstäver"
+		Hank "All kod måste skrivas noggrant och helt korrekt, annars kraschar den"
+		CHOICE {
+			"Vad jobbigt":
+			"Ok, jag fattar":
+		}
+	"Verkar rimligt":
+		Hank "Ja"
+}
+
+IF TrainingCube.IsCubeGlowing() {
+	Hank "Jag ser att du redan fått den att lysa också, du verkar ju ha koll på det här"
+	CHOICE {
+		"Tack!":
+
+		"Eh, ja jag fattar inte riktigt vad jag gjorde":
+			Hank "Haha, verkligen?"
+			Hank "Så är det ibland för mig också"
+	}
+}
+ELSE {
+	Hank "Ok, vi går vidare..."
+	Hank "Nästa steg är att faktiskt få kuben att börja lysa"
+	CHOICE {
+		"Oj, det låter ju sjukt svårt":
+			Hank "Nä men det klarar du"
+		"Ok, hur gör man det?!":
+		"Ja!!!":
+	}
+	Hank "För att lyckas med det måste du anropa en funktion i kuben"
+	CHOICE {
+		"Funktion..?":
+			Hank "Ja, det är liksom som en grej som gör något"
+		"Ok":
+	}
+	Hank "Man anropar funktionen genom att skriva dess namn"
+	Hank "Och sedan parenteser med de värden man vill skicka till funktionen"
+	CHOICE {
+		"Oj oj oj, nu gick det lite snabbt här":
+			Hank "Det är inte så konstigt när man ser det"
+		"Vad är parenteser för något?":
+			Hank "Det är såna här tecken: ( och )"
+		"Ok, låt mig försöka!":
+			Hank "Javisst"
+			GOTO LET_ME_TRY
+	}
+	Hank "För att få kuben att lysa måste man anropa funktionen SetColor"
+	Hank "Och skicka med tre värden"
+	Hank "Så här till exempel: SetColor(1, 1, 1)"
+	CHOICE {
+		"Va..?!":
+			Hank "Det är bara att skriva in i modifieraren"
+			Hank "Först SetColor"
+			Hank "Sedan värdena (1, 1, 1)"
+			Hank "Och sen kör du koden genom att trycka på kuben med handen"
+		"Vad gör de tre värdena?":
+			Hank "Du får testa!"
+	}
+	[LET_ME_TRY]
+	
+	[TRY_MORE]
+	DEFOCUS
+
+	LISTEN Sebastian_talk_Hank [HELP_2] {
+		FOCUS
+		Hank "Har du problem att få det att funka?"
+		CHOICE ETERNAL {
+			"Ja vad var det man skulle skriva?":
+				Hank "SetColor(1, 1, 1)"
+				Hank "Och kom ihåg att det spelar roll om du använder stora eller små bokstäver!"
+				GOTO TRY_MORE
+
+			"Det är jobbigt att skriva så mycket":
+				Hank "Ja men du"
+				Hank "Man kan trycka på Tab när man börjat skriva på en funktion"
+				Hank "Så skriver modifieraren klart namnet på funktionen åt en"
+				Hank "Det är riktigt smidigt"
+				CHOICE ETERNAL {
+					"Cool":
+					"Vad är Tab?":
+						Hank "Den tangenten som har en pil på sig"
+				}
+				GOTO TRY_MORE
+
+			"Jag har skrivit koden men jag ser ingenting":
+				Hank "Har du tryckt på 'COMPILE'?"
+				CHOICE ETERNAL {
+					"Jag testar med det":
+					"Ja, faktiskt":
+						Hank "Hmm, testa en gång till"
+				}
+				Hank "Och så måste du trycka på knappen också"
+				CHOICE {
+					"Knappen?":
+					"Vad menar du?":
+				}
+				Hank "Kuben har en knapp för att starta koden"
+				Hank "Om du inte trycker på den så kommer ingenting att hända"
+				Hank "Jag borde sagt det också, förlåt"
+				GOTO TRY_MORE
+
+			"Ja, det blir bara fel och börjar ryka ju":
+				Hank "Ska jag fixa koden åt dig?"
+				CHOICE {
+					"Ja det vore snällt":
+						[FIX_IT_FOR_ME]
+						Hank.Hack(TrainingCube)
+						LISTEN Hank_hack_TrainingCube
+						WAIT 2
+						TrainingCube.SetResettableCode("TrainingCube_TeachFunctions")
+						TrainingCube.SetCodeAndRun("TrainingCube_TeachFunctions")
+						WAIT 2
+						Hank "Nu borde den funka! Kolla på koden..."
+						DEFOCUS
+						WAIT Sebastian.IsHacking()
+						WAIT Sebastian.IsIdle()
+						WAIT 1
+						GOTO ONE_MORE_THING
+					"Nej jag försöker lite till":
+						Hank "Så ska det låta"
+					GOTO TRY_MORE
+				}
+
+			"Nej då":
+				GOTO TRY_MORE
+		}
+	}
+
+	WAIT TrainingCube.HasNoErrors() AND TrainingCube.IsCubeGlowing() AND Sebastian.IsIdle()
+	CANCEL HELP_2
+
+	Hank "Snyggt!"
+	Hank "Ser jättebra ut ju"
+
+	FOCUS
+	CHOICE {
+		"Det var ju enkelt":
+			Hank "Ja? Härligt, du kanske har talang för det här"
+		"Ha!":
+		"Tackar, tackar":
+		"Mitt huvud, jag blir alldeles snurrig av det här":
+			Hank "Du får gå och ta en kaffe sen när vi är klara"
+	}
+}
+
+[ONE_MORE_THING]
+FOCUS
+Hank "Jag tror bara vi hinner med en sak till just nu"
+Hank "Sen måste jag gå och se till några saker på hotellet"
+
+CHOICE {
+	"Ok jag kan försöka skynda mig lite":
+		Hank "Nä men det är nog lugnt"
+		Hank "Hur som helst..."
+	"Javisst":
+		Hank "Ok, så vad ska vi ta då..."
+	"Ok, jag vill göra något riktigt häftigt!":
+		Hank "Ja... hmm"
+}
+
+Hank "En väldigt praktisk sak att kunna är något som kallas variabler"
+Hank "Kan jag få låna kuben lite snabbt så ska jag visa"
+Sebastian.Interact(Hank)
+
+[GET_BACK_CUBE]
+DEFOCUS
+Hank.StartWaitForGift()
+LISTEN Sebastian_give_Hank
+FOCUS
+Hank.StopWaitForGift()
+WAIT Hank.HasAnyHandItem()
+
+IF Hank.HasHandItemWithName("TrainingCube") {
+	Hank "Tackar"
+}
+ELSE {
+	Hank "Det här är ju inte kuben hörru"
+	Hank.Give()
+	WAIT Hank.HasNoHandItem()
+	GOTO GET_BACK_CUBE
+}
+
+[CHEAT_2]
+
+Hank "Jag ska bara ändra lite på koden"
+Hank.DropHandItem()
+WAIT Hank.HasNoHandItem()
+WAIT Hank.IsIdle()
+Hank.TakeOutItem("HanksHackdev")
+WAIT Hank.HasHandItemWithName("HanksHackdev")
+Hank.Hack(TrainingCube)
+WAIT 2
+Hank "Hmm..."
+TrainingCube.SetResettableCode("TrainingCube_TeachVars")
+TrainingCube.SetCodeAndRun("TrainingCube_TeachVars")
+WAIT 3
+Hank "Så där"
+Hank.GetUpAndInteract(TrainingCube)
+WAIT Hank.HasHandItemWithName(TrainingCube)
+
+WAIT 0.5
+
+Hank.GetUpAndInteract(Sebastian)
+WAIT Hank.HasConversationTarget(Sebastian)
+Log("Hank interacted, should be able to give item now")
+
+WAIT 0.5
+
+Hank.Give()
+
+WAIT Hank.HasNoHandItem()
+WAIT 0.5
+
+Hank "Om du kollar i koden nu kan du se att jag har lagt till lite grejer"
+Hank "Tre stycken 'variabler' för att vara bestämd"
+Hank "Ta en titt"
+[LOOK_INTO_CUBE]
+DEFOCUS
+WAIT Sebastian.IsHacking()
+WAIT Sebastian.IsIdle()
+WAIT 1
+FOCUS
+Hank "Såg du det?"
+[DID_YOU_SEE]
+CHOICE {
+	"Ja, typ":
+		Hank "Titta en gång till"
+		GOTO LOOK_INTO_CUBE
+	"Var det de där grejerna om 'red' och 'blue' och så?":
+		Hank "Exakt"
+	"Njae...":
+		Hank "Kolla igen"
+		GOTO LOOK_INTO_CUBE
+	"Tog du bort det jag skrivit?!":
+		Hank "Ja förlåt"
+		Hank "Det är ingen vits att bli för fäst vid sin kod"
+		Hank "Man måste ändå alltid skriva om den för att lösa nya problem"
+		CHOICE {
+			"Ok, jag fattar...":
+			"Hrm... om du säger det så":
+		}
+		Hank "Men såg du variablerna?"
+		GOTO DID_YOU_SEE
+}
+
+Hank "En variabel kan spara ett värde åt en"
+Hank "Till exempel hur mycket rött som kuben ska lysa med"
+Hank "Då skriver man bara så här till exempel..."
+Hank "var red = 0.7"
+Hank "Testa att ändra siffrorna och se hur kuben ändrar färg"
+DEFOCUS
+
+LISTEN Sebastian_talk_Hank
+FOCUS
+
+Hank "En rolig sak man kan göra är att byta ut en siffra mot ett slumpmässigt tal"
+Hank "Till exempel så här:"
+Hank "var blue = Random()"
+Hank "Så du byter alltså ut siffran mot texten Random()"
+Hank "Varje gång koden körs så kommer färgen att bli annorlunda"
+
+[GOTTA_TRY_THAT]
+CHOICE {
+	"Det måste jag testa":
+		Hank "Ja gör det"
+		[LOOK_AGAIN]
+		WAIT Sebastian.IsHacking()
+		WAIT Sebastian.IsIdle()
+		WAIT 2
+		Hank "Fattar du?"
+		CHOICE ETERNAL {
+			"Typ":
+			"Ja, Random är sjukt ju!":
+				Hank "Det kommer ofta väl till pass"
+			"Nej, var skulle jag skriva Random() sa du?":
+				Hank "Där du skrev siffrorna innan"
+				Hank "Efter lika-med-tecknet"
+				Hank "Till exempel 'var red = Random()'"
+				Hank "Försök igen!"
+				GOTO LOOK_AGAIN
+		}
+
+	"Ok, jag kanske testar det lite senare":
+		Hank "Ja jag måste gå snart nu ändå"
+
+	"Vad är det största värdet man kan ge en färg?":
+		Hank "Varje färg kan max ha värdet 1.0"
+		Hank "Så om du har 1.0 på både rött, grönt och blått så blir ljuset vitt"
+		GOTO GOTTA_TRY_THAT
+}
+
+Hank "Något mer du funderar på?"
+
+[SKIP_ALL]
+CHOICE {
+#	"Finns det något ställe där man kan läsa om hur man programmerar?":
+#		Sebastian "Vilka ord man kan använda och så vidare?"
+
+	"Hur tycker du att jag ska gå vidare nu? För att bli bättre alltså.":
+		[HOW_TO_LEARN_MORE]
+		Hank "Du borde leta upp lite smågrejer som du kan testa att hacka"
+		Hank "Men håll dig gärna undan lite, kanske på ditt hotellrum..."
+		Hank "Om polisen kommer på dig med att hacka saker på stan så kan det bli jobbigt"
+		CHOICE {
+			"Jaha, oj då":
+				Hank "Mm, akta dig för det"
+				Sebastian "Ok"
+
+			"Vad då för grejer?":
+				Hank "Typ små saker som du har, jag vet inte riktigt"
+				Sebastian "Ok"
+		}
+		GOTO SKIP_ALL
+
+	"Vad ska jag egentligen ha all den här programmeringen till, jag fattar inte riktigt!":
+		Hank "Man måste ju lära sig grunderna innan man kan göra de häftiga sakerna"
+		CHOICE {
+			"Ja men hur kan det spela roll vilken färg som en liten kub har?":
+				Hank "Det är ju bara ett exempel för att du ska kunna lära dig"
+				Hank "Dessutom tycker jag den är fin när den lyser"
+				CHOICE {
+					"Jo det är den ju":
+					"Hmm, ja jag fattar":
+				}
+			"Ok, jag tror jag förstår... men det är så svårt bara":
+				Hank "Ja, du kanske måste sova på saken"
+				Hank "Eller ta en promenad"
+				Hank "Det brukar hjälpa mig när jag ska fatta krångliga saker"
+				CHOICE {
+					"Ok, jag ska testa det":
+					"Haha, verkligen?":
+						Hank "Ja, det är sant"
+				}
+		}
+		GOTO SKIP_ALL
+
+	"Vem är egentligen bäst i stan på att programmera?":
+		Hank "Vilken fråga... hur ska jag veta det?"
+		Hank "Det är inte jag i alla fall, hehe"
+		Hank "Kanske hon som leder forskningen på ministeriet?"
+		CHOICE {
+			"Ok":
+			"Vem är det?":
+				Hank "Jag vet inte så noga"
+				Hank "Men folk brukar säga att hon är sjukt smart"
+		}
+		GOTO SKIP_ALL
+
+	"Finns det någon mer som kan lära mig saker om programmering?":
+		Hank "Hmm... jag vet inte"
+		Hank "Kanske Fib?"
+		Hank "Han är trädgårdsmästare"
+		Hank "Men jag tror att han gillar att lära ut saker, han är en trevlig prick"
+		[GOTTA_GO]
+		Hank "Men du Sebbe, jag måste sticka nu!"
+		Hank "Har massa jobb jag lovade att göra"
+		Hank "Vi får ses snart igen"
+}
+
+CHOICE {
+	"Tack för hjälpen!":
+	"Ha det gött, vi ses":
+	"Ok, hej då!":
+}
+
+Hank "Fast vänta, du ska få en grej också"
+Hank.TakeOutItem(HanksApartment_Diskette_Diskette3_2)
+WAIT Hank.IsIdle()
+Hank "Här"
+Hank.Give()
+WAIT Hank.HasNoHandItem()
+Hank "Det är första delen av en bok om programmering"
+Hank "Jag har alla delar på diskett här i båten någonstans..."
+Hank "Den är jättebra när man vill kolla upp något"
+CHOICE {
+	"Wow, perfekt":
+	"OK, tack så mycket!":
+}
+
+Hank "Du får leta upp de andra delarna själv, det är bara att rota runt"
+
+CHOICE {
+	"Nice":
+	"Är den lättläst?":
+		Hank "Heh, njae..."
+		Hank "Den är sjukt torr"
+		Hank "Fast vem vet, du kanske gillar den!"
+		Hank "Jag gillar att läsa innan jag ska sova"
+}
+
+Hank "Men nu måste jag rusa"
+Hank "Kom tillbaka hit lite senare så kan jag lära dig mer"
+Hank "l8rs!"
+
+DEFOCUS
+
+
+# TODO: run down into basement instead
+Hank.StopTalking()
+Hank.SetTimetable("")
+Hank.Walk(Plaza_Point)
+WAIT Hank.IsIdle()
+Hank.SetTimetable("Hank")
+
+
+
+
+# later #
+
+
+
+LISTEN Sebastian_talk_Hank
+FOCUS
+Hank.StartTalking()
+
+Hank "Tja, hur har det gått med programmerandet?!"
+
+CHOICE {
+	"Det har gått rätt bra":
+		Hank "Vad roligt att höra!"
+
+	"Vet inte, kom av mig lite där efter vi sågs":
+		Hank "Jaha, vad synd"
+}
+
+Hank "Är du sugen på att lära dig lite mer, jag har en lucka nu tror jag"
+
+CHOICE {
+	"Ja, jättegärna!":
+		[LETS_GO]
+		IF Hank.IsInRoom(HanksApartment) {
+			Hank "Ok, gött"
+		} ELSE {
+			Hank "Ok, kom med"
+		}
+	"Kan vi ta det imorgon istället?":
+		Hank "Visst, det funkar"
+		Hank "L8rs"
+		Hank.StopTalking()
+		DEFOCUS
+
+		IF IsDay() {
+			WAIT IsNight()
+			WAIT IsDay()
+		}
+		ELSE {
+			WAIT IsDay()
+		}
+
+		[BOTHER_AGAIN]
+		LISTEN Sebastian_talk_Hank
+		Hank.StartTalking()
+		Hank "Ja?"
+		FOCUS
+		CHOICE ETERNAL {
+			"Har du tid med den där lektionen nu?":
+				Hank "Visst, visst"
+				GOTO LETS_GO
+			"Äh, det var inget viktigt":
+				Hank "Ok, l8rs"
+				Hank.StopTalking()
+				DEFOCUS
+				GOTO BOTHER_AGAIN
+		}
+}
+
+BROADCAST LetsGoToSecondLecture
+
+Hank.StopTalking()
+DEFOCUS
+
+
+
+#Hank "Du, vet du vad jag kom på?"
+#Hank "Du borde kolla med Elsa om hon kan ge dig lite lektioner"

@@ -1,0 +1,16 @@
+
+Typer4.SetTimetable(Typer4_Razzia)
+
+LISTEN Sebastian_talk_Typer4
+FOCUS
+Typer4.StartTalking()
+
+CHOICE {
+    "Hej?":
+    "Vad har ni gjort här egentligen?":
+}
+
+Typer4 "Rutinkontroll"
+
+Typer4.StopTalking()
+DEFOCUS

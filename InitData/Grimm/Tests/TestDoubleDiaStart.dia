@@ -1,0 +1,26 @@
+
+CreateCharacter("Bert", HarborEast_Point2)
+
+LISTEN Sebastian_talk_Bert {
+	Bert "Hejsan"
+	FOCUS
+	CHOICE {
+		"Hejsan!":
+		"Hej!":
+	}
+	DEFOCUS
+}
+
+LISTEN Sebastian_talk_Bert {
+	Bert "Svejsan"
+	FOCUS
+	CHOICE {
+		"Svejsan!":
+		"Svejsan!!!":
+	}
+	DEFOCUS
+}
+
+
+
+LISTEN DontStop

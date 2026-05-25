@@ -1,0 +1,180 @@
+
+Pixie.SetTimetable(Pixie_AfterExperiment)
+Pixie.StopTalking()
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+CHOICE {
+    "Hej...?":
+        Pixie "Hej Sebastian..."
+
+    "Hej! Mår du bra?!":
+        Pixie "Va?"
+        Pixie "VAFAN SEBASTIAN!"
+        Pixie "Det är klart jag inte mår... BRA!?!?!"
+        CHOICE {
+            "Förlåt...":
+            "OK":
+        }
+}
+
+CHOICE {
+    "Vad hände med Ivan egentligen?":
+        IF Sebastian.HasKnowledge(IvanKilledDuringExperiment) {
+            Pixie "Du såg väl själv?"
+        } ELSE {
+            Pixie "Det var sjukt"
+            Pixie "De avrättade honom"
+            CHOICE {
+                "Va?":
+                "Nej... det tror jag inte på!":
+                    Pixie "Jo det är sant"
+            }
+        }
+        [THEY_WILL_GET]
+        Pixie "De jävlarna på ministeriet ska få..!"
+        Pixie "Jag ska döda varenda en av dem"
+        Pixie "Mördare är vad de är!!!"
+        CHOICE {
+            "Oj... gör inte det":
+                Pixie "Varför inte? De är helt och hållet onda!"
+            "Kan du inte gå till polisen istället?":
+                Pixie "De är också korrupta"
+                Pixie "Jag litar inte på någon längre"
+                Pixie "Det här måste jag lösa själv"
+                CHOICE {
+                    "OK":
+                    "Hur då?":
+                        GOTO DO_NOW
+                }
+        }
+
+    "Vad har du gjort sen vi sågs?":
+        Pixie "Jag har mått jävligt dåligt"
+        Pixie "Men sen är jag så arg också, jag orkar nästan inte vara ledsen"
+        GOTO THEY_WILL_GET
+}
+
+[QUESTIONS]
+CHOICE {
+    "Sa de något om vad som hände under experimentet?":
+        Pixie "Inte ett ord, de släpade ut mig"
+        Pixie "Petra försvann också i tumultet"
+        Pixie "Men hon verkar må OK nu"
+        CHOICE {
+            "Ja, jag har pratat med henne":
+                Pixie "Vad bra"
+            "Vad bra":
+                Pixie "Hälsa gärna på henne om du har tid, hon är nog också skakad"
+                CHOICE {
+                    "Ja det ska jag göra":
+                    "Mm":
+                }
+        }
+        CHOICE {
+            "Har du någon plan för vad du ska göra nu?":
+                GOTO DO_NOW
+            "Kan jag hjälpa dig med något förresten?":
+                Pixie "Äsch, jag klarar mig"
+                GOTO HOPEFULLY
+            "Hmm...":
+                GOTO QUESTIONS
+        }
+
+    "Vad ska du göra nu då?":
+        [DO_NOW]
+        Pixie "Jag vet inte"
+        [HOPEFULLY]
+        Pixie "Förhoppningsvis kan jag komma på något sätt att ta mig in på ministeriet"
+        Pixie "Inte bara i deras korridorer alltså, utan där de jobbar"
+        Pixie "Väl inne borde det inte vara så svårt att ta kol på dem..."
+        Pixie "Eller vad tror du?"
+        CHOICE {
+            "Nä... antar det":
+            "Alltså, det verkar lite väl drastiskt kanske":
+                Pixie "Ååå, du fattar inte!"
+                Pixie "De har dödat min pojkvän Sebastian!"
+                CHOICE {
+                    "Ja, det är jättehemskt, jag vet!":
+                    "Mm, skrik inte på mig för det":
+                        Pixie "Nej, förlåt"
+                        Pixie "Jag är bara så frustrerad"
+                        Pixie "Ingen bryr sig!"
+                        CHOICE {
+                            "Jag bryr mig":
+                            "Nej, hmm...":
+                        }
+                }
+        }
+        [AGAIN]
+        CHOICE {
+            "Jag ska lösa det här, jag lovar":
+                [HOW]
+                Pixie "OK, hur då?"
+                CHOICE {
+                    "Jag vet inte... men jag ska!":
+                        Sebastian "Jag lovar"
+                    "Jag kan mer än du tror":
+                }
+
+            "Jag tror det går att göra något utan att skada alla...":
+                Pixie "Men jag vill skada dem!"
+                CHOICE {
+                    "Du kanske kan träffa en ny pojkvän..?":
+                        Pixie "Va?"
+                        Pixie "Men jag älskar honom ju!"
+                        CHOICE {
+                            "Jo...":
+                            "Mister du en så står dig tusen åter":
+                                Pixie "Käften"
+                        }
+
+                    "Ja, OK":
+                        GOTO AGAIN
+                }
+
+            "Jag måste gå hem och fundera på allting":
+                [BYE]
+                Pixie "OK"
+                Pixie "Vi ses senare då "
+        }
+
+    "Det är så hemskt allt det här, jag måste nog gå hem och vila":
+        GOTO BYE
+}
+
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+
+
+LISTEN Sebastian_talk_Pixie
+Pixie "Jag orkar inte mer nu, Sebastian"
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+Pixie "Mhmm?!?!"
+CHOICE {
+    "Eh förlåt":
+    "Vad kan jag göra för att hjälpa dig?":
+        Pixie "Jag vet inte"
+        Pixie "Det finns nog inget som någon kan göra..."
+    "Det var inget":
+}
+Pixie.StopTalking()
+DEFOCUS
+
+[MISS_HIM]
+LISTEN Sebastian_talk_Pixie
+Pixie "Jag saknar Ivan så mycket..."
+LISTEN Sebastian_talk_Pixie
+Pixie "Suck"
+LISTEN Sebastian_talk_Pixie
+Pixie "..."
+GOTO MISS_HIM

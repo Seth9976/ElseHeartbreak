@@ -1,0 +1,117 @@
+
+WAIT CasinoGuard1.IsNotAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1 {
+	[TTYL]
+	IF IsOverHour(14) {
+		CasinoGuard1 "Ursäkta, jag är på väg till jobbet"
+	}
+	ELSE {
+		CasinoGuard1 "Ursäkta, jag måste hem"
+		CasinoGuard1 "Är helt slut efter den här dagen!"
+	}
+	WAIT CasinoGuard1.IsNotAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1
+	GOTO TTYL
+}
+
+
+WAIT CasinoGuard1.IsAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1
+
+FOCUS
+CasinoGuard1.StartTalking()
+
+CasinoGuard1 "God kväll och välkommen till Killian Casino!"
+
+CHOICE {
+	"Vad kan jag göra här?":
+		CasinoGuard1 "Haha, skojar du med mig?"
+		CasinoGuard1 "Vad kan man inte göra här? Det är frågan du borde ställa dig!"
+		CasinoGuard1 "Vi har Roulette"
+		CasinoGuard1 "Vi har poker"
+		CasinoGuard1 "Vi har fler enarmade banditer än du orkar räkna"
+		CasinoGuard1 "Dessutom den bästa och största baren i hela Dorisburg"
+		CasinoGuard1 "Och då har jag inte ens nämnt utsikten från bryggan på toppen av båten"
+		CasinoGuard1 "Ja här kommer du inte ha en tråkig sekund, det vill jag lova!"
+		CHOICE {
+			"Ok, ja men tack för informationen då":
+			"Det var värst":
+			"Wow!":
+		}
+
+	"Kostar det något att gå in?":
+		CasinoGuard1 "Nej, det är gratis ikväll"
+		CHOICE {
+			"Nice":
+			"Ok, coolt":
+			"Va bra, jag har inte så mycket pengar":
+				CasinoGuard1 "Men då kanske du ska försöka vinna lite mer"
+				CHOICE {
+					"Ehm, ja...":
+					"Smart idé":
+				}
+		}
+}
+
+CasinoGuard1 "Ha nu en fantastisk kväll!"
+
+CasinoGuard1.StopTalking()
+DEFOCUS
+
+
+WAIT CasinoGuard1.IsAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1 {
+	[MORE]
+	FOCUS
+	CasinoGuard1.StartTalking()
+	CasinoGuard1 "God kväll och välkommen till Killian Casino!"
+	CasinoGuard1 "Eller vänta, du var ju här förut"
+	CasinoGuard1 "Vad gäller saken?"
+	CHOICE ETERNAL {
+		"Jag tänkte gå hem":
+			CasinoGuard1 "Jaha, så tråkigt"
+			CasinoGuard1 "Välkommen tillbaka en annan dag"
+		"Var ligger toaletterna?":
+			CasinoGuard1 "Vi har inga toaletter"
+		"Det är inte så många gäster här ikväll eller?":
+			CasinoGuard1 "Nej, det är ju vardag"
+			CasinoGuard1 "På helgen är det betydligt mer folk"
+	}
+	CasinoGuard1.StopTalking()
+	DEFOCUS
+
+	WAIT CasinoGuard1.IsAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1
+	GOTO MORE
+}
+
+
+
+[NEXT_DAY]
+WAIT IsHour(6) # next day
+
+
+
+WAIT CasinoGuard1.IsAtTask(Cachier) LISTEN Sebastian_talk_CasinoGuard1
+
+FOCUS
+CasinoGuard1.StartTalking()
+CasinoGuard1 "God kväll och välkommen till Killian Casino!"
+
+CHOICE ETERNAL {
+	"Är det något drag ikväll?":
+		CasinoGuard1 "Ja ja, visst!"
+		CasinoGuard1 "Det är bara att stiga upp på nästa våning"
+
+	"God kväll":
+		CasinoGuard1 "Hoppas ni får en trevlig kväll"
+		CHOICE {
+			"Tack!":
+			"Jag tänkte just gå":
+				CasinoGuard1 "Jaha, ja men så synd"
+				CasinoGuard1 "Välkommen åter!"
+		}
+}
+
+CasinoGuard1.StopTalking()
+DEFOCUS
+
+GOTO NEXT_DAY
+
+
+

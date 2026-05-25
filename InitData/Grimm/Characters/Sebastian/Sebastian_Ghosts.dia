@@ -1,0 +1,16 @@
+
+WAIT 1
+
+#Ivan.Pos(Hotel_Room1_Point)
+#Sebastian.WakeUp()
+#LISTEN Sebastian_talk_Ivan
+
+#FOCUS
+#CHOICE {
+#	"Vem där?":
+#}
+#DEFOCUS
+
+#Ivan.Interact(Hotel_Room1_Door1)
+#WAIT Ivan.IsInRoom(Hotel_Corridor)
+#Ivan.Pos(Ministry_MeetingRoom_Point)

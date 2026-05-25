@@ -1,0 +1,82 @@
+
+LISTEN Sebastian_talk_Bob 
+
+FOCUS
+Bob.StartTalking()
+
+Bob "Aha?"
+
+CHOICE {
+	"Var ligger caféet?":
+		[WHERE_IS_THAT]
+		IF Bob.IsInRoom(Cafe_Room1) {
+			Bob "Skojar du med mig?"
+		}
+		ELIF Bob.IsInRoom(Cafe_Exterior) {
+			Bob "Där borta"
+			GOTO OVER_THERE
+		}
+		ELSE {
+			Bob "Borta vid Plaza"
+			[OVER_THERE]
+			IF IsBeforeHour(16) {
+				Bob "Jag ska dit nu, du kan ju haka på"
+				CHOICE {
+					"OK, tack!":
+					"Vilken tur, det gör jag gärna":
+					"Nej... strunt samma":
+				}
+			} ELSE {
+				Bob "Var där nyss, det är mitt favoritställe att hänga på under dagen"
+				CHOICE {
+					"Jobbar du inte?":
+						Bob "Nej, jag kan inte hitta något jobb..."
+						GOTO NO_JOB
+					"OK, det låter ju lovande!":
+						Bob "Lycka till"
+				}
+			}
+		}
+
+	"Vad gör du?":
+		IF IsBeforeHour(16) {
+			IF Bob.IsNotInRoom(Cafe_Room1) {
+				Bob "Tänkte gå och fika på Café Ponty"
+				CHOICE {
+					"Jaha?! Var ligger det?":
+						GOTO WHERE_IS_THAT
+					"Trevligt, ha det gött!":
+						Bob "Tack detsamma"
+				}
+			} ELSE {
+				Bob "Fikar..."
+				GOTO NO_WORK
+			}
+		} ELSE {
+			Bob "Hänger runt mest"
+			[NO_WORK]
+			CHOICE {
+				"Låter skönt...":
+					Bob "Ja det är det"
+				"Jobbar du inte?!":
+					Bob "Nej, jag kan inte hitta något jobb..."
+					[NO_JOB]
+					CHOICE {
+						"Vad jobbigt!":
+							Bob "Äsch, jag gillar inte att jobba ändå"
+							GOTO OKIDOKI
+
+						"OK, jag förstår":
+							Bob "Men det är lugnt, jag gillar inte att jobba ändå"
+							[OKIDOKI]
+							CHOICE {
+								"Hehe OK":
+								"Nä, inte jag heller... tror jag":
+							}
+					}
+			}
+		}
+}
+
+Bob.StopTalking()
+DEFOCUS

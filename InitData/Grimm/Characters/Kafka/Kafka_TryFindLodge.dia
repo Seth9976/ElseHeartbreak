@@ -1,0 +1,129 @@
+
+WAIT Kafka.IsAtTask(Working) LISTEN Sebastian_talk_Kafka
+FOCUS
+Kafka.StartTalking()
+
+CHOICE {
+    "God dag":
+    "Hejsan":
+    "Hej igen":
+}
+
+Kafka "Hej hej!"
+Kafka "Välkommen till Café Ponty, vad får det lov att vara?"
+
+[ANYTHING_ELSE]
+CHOICE {
+    "En kaffe tack":
+        Kafka "Javisst!"
+        Kafka "Jag gillar dig grabben, du får en på huset"
+        CHOICE {
+            "Oj, det var snällt":
+            "Nej men jag kan betala":
+                Kafka "Kommer inte på fråga"
+        }
+        Kafka "Se det som en välkomstgåva till Dorisburg"
+        Kafka "Du är ny här va?"
+        CHOICE {
+            "Ja precis":
+            "Jo... rätt så":
+            "Mm!":   
+        }
+        WAIT Kafka.IsIdle()
+        Kafka.CreateCoffeeInHand()
+        Kafka.Give()
+        Kafka "Varsågod, hoppas det smakar!"
+        WAIT Kafka.HasNoHandItem()
+
+    "En bulle":
+        Kafka "Bullarna är slut!"
+        Kafka "Något annat?"
+        GOTO ANYTHING_ELSE
+
+    "Det är bra tack":
+}
+
+Kafka "Ha en bra dag!"
+Kafka.StopTalking()
+DEFOCUS
+
+
+
+
+WAIT Kafka.IsAtTask(Working) LISTEN Sebastian_talk_Kafka
+FOCUS
+Kafka.StartTalking()
+
+Kafka "Hur smakade kaffet?"
+
+CHOICE {
+    "Gott":
+        Kafka "Härligt att höra"
+
+    "Inte hunnit testa än":
+        Kafka "OK, gör det innan det kallnar!"
+}
+
+CHOICE {
+    "Förresten...":
+        GOTO YES
+
+    "Ha det fint!":
+        Kafka "Du med!"
+}
+
+Kafka.StopTalking()
+DEFOCUS
+
+
+
+[MORE]
+LISTEN Sebastian_talk_Kafka
+FOCUS
+Kafka.StartTalking()
+
+[YES]
+Kafka "Ja?"
+
+CHOICE {
+    "Vad vet du om det här 'ministeriet' här i stan?":
+        Kafka "Inte mycket"
+        Kafka "Vem orkar bry sig?"
+        Kafka "Min morsa jobbar där... det verkar astråkigt"
+
+    "Vad är klockan?":
+        Kafka "Ingen aning, har du inte en egen?"
+
+    "Känner du en tjej som heter Pixie?":
+        Kafka "Är det hon som brukar sitta här och fika om dagarna?"
+        Kafka "Som DJ:ar på Yvonne?"
+        CHOICE {
+            "Nej, jag tror det är hennes kompis":
+            "Kanske?":
+            "Vet inte":
+        }
+        Kafka "Alla hänger väl på klubben om kvällarna i alla fall"
+        Kafka "Du kan säkert hitta henne där!"
+        CHOICE {
+            "Smart tänkt":
+            "Ja... sant!":
+        }
+        Kafka "Ha det fint!"
+
+    "Vem har lärt dig så mycket om kaffe?":
+        Kafka "Jag har läst massor av böcker om det!"
+        Kafka "Och så gick jag en kvällskurs"
+        CHOICE {
+            "Wow":
+            "OK, ballt":
+            "Funkar sånt?":
+                Kafka "Ja för tusan"
+        }
+
+    "Det var inget":
+}
+
+Kafka.StopTalking()
+DEFOCUS
+
+GOTO MORE

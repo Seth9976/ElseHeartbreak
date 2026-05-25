@@ -1,0 +1,10 @@
+
+WAIT IsHour(19)
+
+# back to normal
+
+Panda3.SetTimetable(Panda3)
+Panda4.SetTimetable(Panda4)
+Panda5.SetTimetable(Panda5)
+
+Story(FriendsWithPandas)

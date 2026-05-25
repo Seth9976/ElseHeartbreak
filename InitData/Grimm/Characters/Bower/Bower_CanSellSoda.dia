@@ -1,0 +1,59 @@
+
+WAIT Sebastian.NotTalking() AND IsWithinDistance(Sebastian, Bower, 10)
+
+FOCUS
+
+WAIT 2
+Bower.SetTimetable("")
+Bower.Interact(Sebastian)
+Bower "Ursäkta mig – har du eld?"
+
+Bower.StartTalking()
+
+CHOICE {
+	"Ursäkta, vad sa du?":
+		Bower "Har du tändare? Eller tändstickor."
+		CHOICE {
+			"Nej tyvärr":
+			"Ska kolla...":
+				WAIT 2
+				Sebastian "Nej, verkar inte så"
+		}
+	"Va?! Eh nä... tror inte det":
+}
+
+IF IsNight() {
+	Bower "Fan också. God kväll."
+}
+ELSE {
+	Bower "Fan också. God middag."
+}
+
+CHOICE {
+	"Men du, du kanske är intresserad av att köpa en burk läsk?":
+		Bower "Heh. Är det Wellspring eller?"
+		Sebastian "Mm"
+		Bower "Haha, nej det är bra tack."
+		CHOICE {
+			"OK, synd":
+				Sebastian "Hej då"
+			"Vad är det som är så roligt?":
+				Bower "Ingenting. Adjö."
+				Sebastian "Hej då"
+		}
+	"God kväll":
+}
+
+Bower.StopTalking()
+DEFOCUS
+
+Bower.SetTimetable("Bower")
+
+
+LISTEN Sebastian_talk_Bower
+Bower "Inte nu"
+LISTEN Sebastian_talk_Bower
+Bower "Nej, stör mig inte"
+LISTEN Sebastian_talk_Bower
+Bower "Nej!"
+

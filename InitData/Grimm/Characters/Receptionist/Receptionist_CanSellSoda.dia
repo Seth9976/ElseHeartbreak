@@ -1,0 +1,42 @@
+
+WAIT Receptionist.IsAtTask(Work) LISTEN Sebastian_talk_Receptionist
+
+FOCUS
+Receptionist.StartTalking()
+
+Receptionist "Vem söker ni?"
+
+[EHH]
+CHOICE {
+	"Eh...":
+		Receptionist "Ja?"
+		GOTO EHH
+
+	"Jag söker dig!":
+		Receptionist "Va?"
+		CHOICE {
+			"Jag säljer läsk och undrar om du vill köpa en burk?":
+				Receptionist "Nej"
+			"Jag kommer från Wellspring Soda, är du sugen på en svalkande läsk?":
+				Receptionist "Wellspring säger du ja?"
+				Receptionist "Hehe"
+		}
+		Receptionist "Vi har ett förbud mot försäljare här i våra lokaler"
+		Receptionist "Jag måste be er att lämna byggnaden snarast"
+
+	"Ingen särskild":
+		Receptionist "Då är det nog bäst att ni lämnar byggnaden snarast"
+}
+
+Receptionist.StopTalking()
+DEFOCUS
+
+
+[AGAIN]
+WAIT Receptionist.IsAtTask(Work) LISTEN Sebastian_talk_Receptionist
+Receptionist "Inga försäljare här sa jag ju"
+WAIT Receptionist.IsAtTask(Work) LISTEN Sebastian_talk_Receptionist
+Receptionist "Gå innan jag tillkallar vakter"
+WAIT Receptionist.IsAtTask(Work) LISTEN Sebastian_talk_Receptionist
+Receptionist "Ni går mig på nerverna herrn"
+GOTO AGAIN

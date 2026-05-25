@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":273,"values":["\"Room\"","\"HarbSouthSchack\"","[]","false","{\"x\":0,\"y\":0}","\"11111111111111111111111111111111111111110010000000\"","{\"x\":10,\"y\":5}","{\"x\":-35,\"y\":-33}"]}

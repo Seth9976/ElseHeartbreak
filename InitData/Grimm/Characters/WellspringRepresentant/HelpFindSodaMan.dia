@@ -1,0 +1,17 @@
+
+# First "mission":
+WAIT Sebastian.IsInRoom(Cafe_Room1)
+
+IF IsBetweenHours(9, 13) {
+    # help the player a bit to find the soda guy if they come early to the cafe
+    Log("Help sebastian find WellspringRepresentant")
+    WellspringRepresentant.SetTimetable(WellspringRepresentant_LookingForSebastian_OutsideCafe)
+    WAIT Sebastian.IsInEitherRoom(Plaza, BurrowsNorth, PoliceOffice_Exterior)
+    WellspringRepresentant.SetTimetable(WellspringRepresentant_LookingForSebastian)
+}
+ELSE {
+    # dangerous to side track them with the soda salesman
+    WellspringRepresentant.SetTimetable(WellspringRepresentant_LookingForSebastian_InHotel)
+    WAIT Sebastian.IsInEitherRoom(Plaza, BurrowsNorth, PoliceOffice_Exterior)
+    WellspringRepresentant.SetTimetable(WellspringRepresentant_LookingForSebastian)   
+}

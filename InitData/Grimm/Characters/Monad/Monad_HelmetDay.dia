@@ -1,0 +1,13 @@
+
+Monad.Pos(MonadsApartment_BedL_Right_1)
+Monad.SetTimetable(Monad_SleepAtHome)
+
+# LISTEN IvanIsDead {
+    # STOP
+# }
+# 
+# LISTEN SebastianMissedHelmetDay {
+    # STOP
+# }
+# 
+# LISTEN FOREVER

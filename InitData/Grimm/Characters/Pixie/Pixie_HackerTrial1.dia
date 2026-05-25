@@ -1,0 +1,428 @@
+
+WAIT Sebastian.IsWithinDistance(Pixie, 8)
+
+Felix.StopTalking() # from before, if triggering early trial
+
+Yulian.SetTimetable("")
+Pixie.SetTimetable("")
+Pixie.PutAwayHandItem()
+Pixie.SetFieldToFloat("sleepiness", 0)
+Pixie.SetFieldToFloat("drunkenness", 0)
+
+FOCUS
+
+WAIT 1
+
+Pixie.SetNeverGetsTired(true)
+Frank.SetNeverGetsTired(true)
+Yulian.SetNeverGetsTired(true)
+
+Pixie "Va?"
+Pixie "Sebastian"
+
+Pixie.GetUpAndInteract(Sebastian)
+Pixie "Vad gör du här?"
+
+IF Pixie.HasKnowledge(SebastianWantsToBeHacker) {
+	CHOICE {
+		"Tänkte mest säga hej":
+			GOTO ASKED
+		"Tja... jag vet inte riktigt":
+			[ASKED]
+			Yulian "Han har bett att få göra intagningsprovet"
+		"Jag ska göra testet!":
+			Pixie "OK..?!"
+	}
+	Pixie "Wow"
+	GOTO WORK_HERE
+}
+
+Pixie "Jag sa ju att du inte ska följa efter mig!"
+
+Yulian "Lugn å fin nu, Pixie"
+Yulian "Han har bett om att få göra intagningsprovet"
+
+Pixie "Jaha... ok?"
+Pixie "Vänta nu"
+Pixie "Jag fattar typ ingenting"
+[WORK_HERE]
+Pixie "Så du vill börja jobba här med oss Sebastian?"
+
+CHOICE {
+	"Eh, jo typ":
+	"Ja!":
+	"Det verkade så roligt":
+	"[CHEAT]":
+		GOTO CHEAT
+}
+
+Pixie "Men Yulian, han kom just till stan"
+Pixie "Han är försäljare, inte programmerare"
+
+Yulian "Lugn Pixie, vi behöver alla vi kan komma över"
+Yulian "Och han verkar ha tränat en del på egen hand, eller hur Sebastian?"
+
+CHOICE {
+	"Ja exakt":
+	"Mm... jag har en sån här modifierare också":
+	"Typ":
+}
+
+Pixie "Ok, coolt... antar jag"
+Yulian "Ja det blir riktigt bra det här"
+Yulian "Jag är lite busy nu så jag tänkte att du kunde hålla i provet, Pixie?"
+Yulian "Så är du jättegullig"
+Pixie "Eh"
+Pixie "Jo det går väl bra"
+Pixie "Jag är bara lite förvånad över allting"
+Pixie "Alltså det är ashäftigt att du vill vara med och hjälpa till här Sebbe"
+Pixie "Det är inte det"
+Yulian.SetTimetable(Yulian_WorkOvertime)
+Pixie "Jag gillar dig ju liksom"
+Yulian "Ja men vad väntar ni på ungdomar, kör igång testet bara"
+Pixie "Jepp, ska bli..."
+[CHEAT]
+Pixie "Så Sebbe, du har med dig en modifierare alltså?"
+
+
+[DO_YOU_HAVE_IT]
+CHOICE ETERNAL {
+	"Ja":
+	"Mhm!":
+	"Eh... jag tror att jag glömde den någonstans":
+		Pixie "Jaha?"
+		Pixie "Ska du gå och hämta den och komma tillbaka här sen?"
+		CHOICE ETERNAL {
+			"Mm, låter som en bra idé":
+				[GO_GET_IT]
+				Pixie "Jag väntar här så länge"
+				Pixie.StopTalking()
+				DEFOCUS
+				Pixie.SetTimetable(WorkAtLodgeRoom1)
+
+				LISTEN Sebastian_talk_Pixie
+				FOCUS
+				Pixie.StartTalking()
+				Pixie "Har du den nu?"
+				GOTO DO_YOU_HAVE_IT
+
+			"Ni har ingen jag kan få låna?":
+				IF OldHackdev.IsInRoom(Lodge_Room1) {
+					Pixie.SetTimetable("")
+					Pixie "Ska kolla..."
+					Pixie.Interact(OldHackdev)
+					WAIT Pixie.HasHandItemWithName(OldHackdev)
+					WAIT 2
+					Pixie.SetTimetable(TalkToSebastian)
+					WAIT Pixie.HasConversationTarget(Sebastian)
+					Pixie.SetHandItem(OldHackdev)
+					WAIT 0.2
+					Pixie.StopAction()
+					WAIT 0.2
+					Pixie.Give()
+					Pixie "Här!"
+					WAIT Pixie.HasNoHandItem()
+					WAIT 1
+				} ELSE {
+					Pixie "Jag tror inte det tyvärr"
+					Pixie "Du får gå och leta rätt på den"
+					GOTO GO_GET_IT
+				}
+		}
+}
+
+[LET_ME_DO_TEST]
+
+Pixie "Bra"
+Pixie "OK, så såhär ligger det till"
+Pixie "Vi har ett test som vi alltid kör på nya personer"
+Pixie "Uppgiften är helt enkelt att du ska ta dig vidare till nästa rum här på The Lodge"
+
+CHOICE {
+	"Du menar där Felix står och vaktar?":
+		Pixie "Nej nej"
+		Pixie "Det här är ett annat rum"
+
+	"OK, jag förstår. Låt mig testa nu med en gång!":
+		Pixie "OK, som du vill"
+		GOTO GOOD_LUCK
+
+	"The Lodge??":
+		Pixie "Ja, vi kallar den här platsen för det"
+		Pixie "Det är Yulian som fått namnet från någon TV-serie som bara han har sett"
+		Pixie "Jag vet inte riktigt"
+
+	"Finns det fler rum?":
+		Pixie "Ja, men de är väl dolda"
+		Pixie "Vi som jobbar här har olika metoder för att ta oss mellan dem och för att hålla dem hemliga"
+}
+
+CHOICE {
+	"Så det finns någon slags hemlig väg härifrån?":
+		Pixie "Ja, typ"
+
+	"Jag ska alltså lista ut det här själv?":
+		Pixie "Ja, det är det som är själva testet"
+}
+
+Pixie "Du måste undersöka objekten här inne noggrannt med din modifierare"
+Pixie "Oroa dig inte för att ändra på dem, vi är vana vid att städa upp här inne"
+
+CHOICE {
+	"Haha":
+	"Ok":
+	"Jag förstår":
+}
+
+Pixie "Ett tips är att fokusera på de stora gröna datorerna längs med väggarna"
+Pixie "Vi har våra arbetsstationer här mitt i rummet, dem behöver du inte bry dig om"
+
+CHOICE {
+	"OK, men det är ändå supermånga ju?!":
+		Pixie "Ja, men börja med att kolla igenom alla lite snabbt"
+		Pixie "Om det är något du inte förstår så är det bara att gå vidare till nästa"
+
+	"Jaha... tur":
+}
+
+[GOOD_LUCK]
+Pixie "Jag märker när du kommit till nästa rum"
+Pixie "Då ska du få uppgift nr 2"
+Pixie "Jag måste bara tänka ut vad den ska vara först..."
+
+CHOICE {
+	"Hehe, ok!":
+
+	"Kan jag be om hjälp?":
+		Pixie "Jadå"
+		Pixie "Det kanske är mer imponerande om du klarar det helt själv"
+		[ASK_ME]
+		Pixie "Men om det är något som är oklart kan du alltid fråga mig"
+		Pixie "Det viktiga är att du visar på ambition och en vilja att lära dig"
+		CHOICE {
+			"Jo men det har jag!":
+				Pixie "Härligt"
+			"OK...":
+			"Jaha":
+		}
+
+	"Är det ok om jag tar en paus?":
+		Pixie "Ja det går bra"
+		Pixie "Så länge du inte fuskar"
+		GOTO ASK_ME
+}
+
+Pixie "Då kör vi tycker jag. Lycka till!"
+Pixie.StopTalking()
+DEFOCUS
+
+LockDoor(Lodge_Room1_DoorToRoom2) # just in case
+
+WAIT Sebastian.IsInRoom(Lodge_Room2) {
+	BROADCAST CompletedHackerTrial1
+}
+
+Pixie.SetTimetable("WorkAtLodgeRoom1")
+
+[AGAIN]
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Hur går det?"
+
+CHOICE ETERNAL {
+	"Snart klar!":
+		Pixie "Härligt"
+
+	"Vet inte... jag måste nog få lite mer hjälp":
+		Pixie "Hur långt har du kommit?"
+		CHOICE {
+			"Jag ska använda datorerna mitt i rummet, väl?":
+				Pixie "Har du kollat vad de har på sig?"
+				CHOICE {
+					"Njae...":
+						GOTO WORKSTATIONS
+					"Ja, jag fattar ingenting":
+						[WORKSTATIONS]
+						Pixie "De flesta datorer i mitten är arbetsstationer"
+						Pixie "Fokusera på datorerna längs med väggarna"
+				}
+
+			"Inte långt...":
+				Pixie "Du får testa att koppla in din modifierare i alla olika datorer"
+				Pixie "Och köra deras program"
+				CHOICE ETERNAL {
+					"Men de är så många!":
+						Pixie "Ja, det är lite av utmaningen"
+
+					"OK, testar med det":
+				}
+				Pixie "Gå bara igenom dem systematiskt och leta efter ledtrådar"
+
+			"Det verkar vara något med den stora datorn i hörnet?":
+				Pixie "Mm?"
+				CHOICE ETERNAL {
+					"Men den går inte att hacka, verkar det som":
+						Pixie "Nej just det, din modifierare har en spärr"
+						Pixie "Men du kan klara det ändå!"
+						CHOICE ETERNAL {
+							"OK...":
+							"Jaha..?":
+							"Måste jag koppla ihop datorerna på något konstigt sätt?":
+								Pixie "Nej då"
+								Pixie "Det här är första övningen, försök att inte krångla till det!"
+						}
+					"Är det så eller?":
+						Pixie "Du är nog inne på rätt spår, ja"
+				}
+
+			"Kan datorerna kommunicera med varandra?":
+				Pixie "Ja, om de är uppkopplade mot nätet"
+				Pixie "Vilket de flesta är"
+				Pixie "Det är väldigt användbart, som du säkert kan tänka dig"
+				Pixie "Men du behvöver inte använda dig av det nu"
+				Pixie "Det där kan du lära dig mer om senare"
+				CHOICE ETERNAL {
+					"Jaha, vad skönt":
+					"OK, så inget Connect() eller så?":
+						Pixie "Nope"
+				}
+
+			"Finns det någon funktion för att låsa upp dörrar?":
+				Pixie "Ja, vissa datorer har ett API som kan låsa och låsa upp dörrar"
+				[DOOR_API]
+				CHOICE ETERNAL {
+					"API..?":
+						Pixie "Det är vilka funktioner som du har tillgång till i ett objekt"
+						CHOICE ETERNAL {
+							"Aha...":
+							"OK!":
+							"Vad står det för?":
+								Pixie "Abstract..."
+								Pixie "Hmm..."
+								Pixie "programming interface!"
+								Pixie "Abstract Programming Interface"
+								CHOICE ETERNAL {
+									"Konstigt ord":
+										Pixie "Jo"
+									"Jaha, coolt":
+								}
+						}
+						GOTO DOOR_API
+
+					"Praktiskt":
+						Pixie "Javisst"
+
+					"Vad heter funktionerna?":
+						Pixie "Du kan nog hitta det i någon av datorerna längs med väggen faktiskt"
+						GOTO DOOR_API
+				}
+
+		}
+
+	"Vad gör jag om en dator börjat ryka?":
+		Pixie "Det är bara att koppla in modifieraren och välja 'reset'"
+		Pixie "Du ska ha en knapp på sidan för att göra det"
+		CHOICE ETERNAL {
+			"OK... tack!":
+			"Jaha, jag förstår":
+		}
+		Pixie "Och kom ihåg att skilja på stora och små bokstäver"
+		Pixie "Många som blandar ihop det när de är nya på programmering!"
+		CHOICE ETERNAL {
+			"Ahhh!":
+			"OK, bra tips":
+			"Jag förstår":
+		}	
+
+	"Jag fattar ingenting!":
+		Pixie "OK, du kanske måste förbereda dig lite mer innan du kan göra provet?"
+		CHOICE ETERNAL {
+			"Nej, jag testar igen":
+				Pixie "OK"
+
+			"Nej nej nej! Jag vill klara det nu!":
+				Pixie "OK, sorry"
+
+			"Ja, jag tror nästan det...":
+				Pixie "OK, men gör så här då"
+				Pixie "Har du någon som kan lära dig grunderna?"
+				CHOICE ETERNAL {
+					"Ja, typ":
+						Pixie "OK, du kanske kan få lite mer träning av den personen då?"
+						Pixie "Så kan du komma tillbaka hit sen"
+						Pixie "Och så fortsätter vi med provet då"
+						CHOICE {
+							"OK!":
+							"Jepp":
+							"Mm...":
+						}
+					"Nej, inte direkt":
+						Pixie "Känner du Fib, trädgårdsmästaren?"
+						CHOICE ETERNAL {
+							"Ja, lite":
+								Pixie "Har han lärt dig något redan?"
+								CHOICE {
+									"Mm":
+										Pixie "Jaha OK"
+										GOTO HANK
+									"Nej...":
+										GOTO PARK
+								}
+							"Nej":
+								[PARK]
+								Pixie "OK, han håller till i parken oftast"
+								Pixie "Han är jättesnäll och kan säkert lära dig både det ena och det andra"
+								
+						}
+						Pixie "Testa att prata med honom"
+						[HANK]
+						Pixie "Annars kanske Hank på hotellet har tid?"
+						CHOICE ETERNAL {
+							"Ja, han har visat mig en del":
+								Pixie "Jaha... vad bra!"
+								Pixie "Men han kanske har tid att träna ännu mer med dig?"
+							"Tror du?":
+								Pixie "Ja, han är ganska duktig faktiskt"
+								Pixie "Även om han alltid verkar väldigt stressad över allt jobb"
+						}
+						Pixie "Du kan ju testa att prata med honom i alla fall"
+						CHOICE ETERNAL {
+							"Ja men det ska jag göra":
+							"Bra idé!":
+						}
+						Pixie "Kom tillbaka hit när du vill köra vidare på testet"
+						Pixie "Jag har ändå massa jobb att greja med så jag är nog kvar här ett bra tag"
+				}
+		}
+
+	"Jag fattar inte hur den här modifieraren funkar riktigt":
+		Pixie "Har du kollat i manualen?"
+		Pixie "Vi har den på diskett här någonstans"
+		CHOICE ETERNAL {
+			"Ja... den är lite svår att förstå bara!":
+				Pixie "Mm jo"
+				Pixie "Den har lite torrt språk minst sagt"
+				Pixie "Är någon tråkig jävel på ministeriet som skrivit den, haha!"
+
+			"Nej, hur gör man det?":
+				Pixie "Du kan kolla på disketternas innehåll med din modifierare"
+				CHOICE ETERNAL {
+					"Jaha, självklart!":
+					"OK, OK":
+					"Ja, men var är disketterna?":
+						Pixie "Vi brukar ha dem här i rummet"
+						Pixie "Du får leta runt lite, jag är inte så bra på att hålla ordning här"
+				}
+		}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+GOTO AGAIN
+
+
+
+
+

@@ -1,0 +1,19 @@
+
+Felix.SetTimetable(Felix)
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "Helvete vad trött du ser ut"
+Felix "Inte så konstigt i och för sig..."
+Felix "Med all skit som har hänt"
+Felix.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "Fan vilken jävla röra allting har blivit"
+Felix "Jag måste ta något lugnande, vi får prata sen"
+Felix.StopTalking()
+DEFOCUS

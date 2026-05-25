@@ -1,0 +1,223 @@
+
+START KafkaAutolockCafe
+
+
+[AGAIN]
+
+WAIT Kafka.IsAtTask(Working) LISTEN Sebastian_talk_Kafka
+FOCUS
+Kafka.StartTalking()
+
+
+IF IsBeforeHour(3) {
+	GOTO EVENING
+} 
+ELIF IsBeforeHour(7) {
+	Kafka "Hej, vi har inte öppnat än"
+	Kafka "Men kom gärna tillbaka lite senare!"
+	Kafka.StopTalking()
+	DEFOCUS
+	GOTO AGAIN
+}
+ELIF IsOverHour(18) {
+	[EVENING]
+	Kafka "Hej, vad roligt med gäster!"
+	Kafka "Vi har tyvärr stängt nu..."
+	CHOICE {
+		"Jaha, oj då!":
+		"Men dörren stod ju öppen":
+			Kafka "Ja, jag ska stänga den snart"
+	}
+	Kafka "Men kom gärna tillbaka imorgon!"
+	Kafka "Du får gå till Bar Yvonne så länge"
+	CHOICE {
+		"Jaha, vad är det?":
+			Kafka "En klubb"
+			GOTO WHERE
+		"Var ligger det?":
+			[WHERE]
+			Kafka "Den ligger vid Plaza, bara ett stenkast härifrån"
+			Kafka "När du kommer ut ur huset så tar du höger"
+			Kafka "Klubben ligger i källaren på ett hus, du borde kunna följa musiken"
+		"Mm":
+	}
+	Kafka "Ha det så bra!"
+	Kafka.StopTalking()
+	DEFOCUS
+	GOTO AGAIN
+}
+ELSE {
+	Kafka "Tja!"
+	CHOICE {
+		"Hej!":
+		"God dag":
+		"Hejsan":
+		"Var är jag?":
+			Kafka "Cafe Ponty, ska du ha en kaffe?"
+			GOTO COFFEE
+	}
+	Kafka "Ska du ha en kopp kaffe?"
+	[COFFEE]
+	CHOICE {
+		"Javisst gärna":
+			[ILL_HAVE_ONE]
+			Kafka.ClearHandItem()
+			WAIT Kafka.HasNoHandItem()
+			Kafka "Får jag be att låna ditt kort, tack?"
+			IF Sebastian.HasItemOfType(CreditCard) {
+				Kafka.StartWaitForGift()
+
+				[BUY]
+				WAIT Kafka.HasAnyHandItem()
+				IF Kafka.HasHandItemOfType(CreditCard) {
+					WAIT Kafka.IsIdle()
+					Kafka.CharacterTakesMoneyFromCreditCard(-2)
+					WAIT Kafka.IsIdle()
+					WAIT 3
+					Kafka.Give()
+					Kafka "Här har du kortet tillbaka"
+					CHOICE {
+						"Tack":
+						"Kaffet då?":
+							Kafka "Lugn"
+					}
+					WAIT Kafka.HasNoHandItem()
+					Kafka.CreateCoffeeInHand()
+					Kafka.Give()
+					Kafka "Varsågod, hoppas det smakar!"
+					WAIT Kafka.HasNoHandItem()
+					CHOICE {
+						"Thanks!":
+						"Tack!":
+					}
+					Kafka "Något mer?"
+					GOTO ANYTHING_ELSE
+				} ELSE {
+					Kafka "Huh?"
+					Kafka.Give()
+					WAIT Kafka.HasNoHandItem()
+					GOTO BUY
+				}
+
+				Kafka.StopWaitForGift()
+			} ELSE {
+				Sebastian "Oj, verkar ha glömt det"
+			}
+
+			Kafka "Jaha, synd. Du får komma tillbaka en annan gång."
+			Kafka "Eller var det något annat?"
+			GOTO ANYTHING_ELSE
+
+		"Vad kostar det?":
+			Kafka "$2"
+			Kafka "Och det är det bästa kaffet i stan"
+			Kafka "Jag har tränat länge!"
+			CHOICE {
+				"Nej, jag är inte så sugen just nu":
+					GOTO NO_PROBLEMS
+				"Ok då, jag tar en":
+					GOTO ILL_HAVE_ONE
+			}
+		"Nej tack det är bra":
+			[NO_PROBLEMS]
+			Kafka "Ok! Inga problem. Var det något annat?"
+			GOTO ANYTHING_ELSE
+	}
+
+}
+
+Kafka "Får det lov att vara något mer?"
+
+[ANYTHING_ELSE]
+CHOICE {
+	"Nej tack, ha en bra dag":
+
+	"Faktum är att jag letar efter en person som kanske är här inne...":
+		Kafka "Jaså? Vem då?"
+		CHOICE {
+			"Eh, jag vet inte":
+			"Oklart!":
+			"Hmm... jag tror det är min kontakt från Wellspring":
+				Kafka "Jaha, vad heter han då?"
+				Kafka "Eller hon?"
+				CHOICE {
+					"Det är det ingen som har sagt":
+					"Ingen som helst aning!":
+					"Nåt på A..?":
+						Kafka "OK?"
+						Sebastian "Eller jag vet inte"
+				}
+		}
+		Kafka "Då blir det svårt"
+		Kafka "Men du får väl fråga dig runt"
+		CHOICE {
+			"Mm... suck":
+			"Japp!":
+		}
+		Kafka "Jag skulle kolla på Bar Yvonne"
+		[BARYVONNE]
+		CHOICE {
+			"Jaså?":
+				Kafka "Ja, det är ett riktigt inneställe"
+				Kafka "Men det var länge sen jag var där"
+				GOTO BARYVONNE
+			"Mm...":
+			"Jaha, var ligger det?":
+				Kafka "I en källare på Plaza"
+				Kafka "Alla ungdomar går dit"
+				GOTO BARYVONNE
+			"OK, får kolla in det!":
+		}
+		Kafka "Lycka till"
+
+	"Kan man få en bulle också?":
+		Kafka "De är gamla"
+
+#	"Jag tyckte jag hörde något utanför...":
+#		Kafka "Jaha, vad då?"
+#		CHOICE {
+#			"Vet inte, var nog ingenting":
+#			"Lät som ett bråk":
+#		}
+#		Kafka "Kanske bäst att jag kollar vad det är..?"
+#		CHOICE {
+#			"Mm":
+#			"Ja det är nog säkrast":
+#		}
+#		Kafka "Jag är snart tillbaka"
+#		Kafka.StopTalking()
+#		Kafka.SetTimetable("Kafka_LookForSound")
+#		Sebastian.SetTimetable("PretendToBeBarista")
+#		Typer1.StartWaitForGift()
+#		Petra.StartWaitForGift()
+#		Gunnar.StartWaitForGift()
+#		Ivan.StartWaitForGift()
+#		DEFOCUS
+#		WAIT 2
+#		Kafka "Rör ingenting"
+#		WAIT Kafka.IsInRoom(Cafe_Exterior)
+#		WAIT 200
+#		Kafka.SetTimetable("Kafka_InteractWithSebastian")
+#		WAIT Sebastian.IsWithinDistance(Kafka, 5)
+#		Sebastian.SetTimetable("")
+#		Kafka.SetTimetable("Kafka")
+#		Kafka "Det verkar inte ha varit någonting"
+#		Sebastian "OK"
+#		Typer1.StopWaitForGift()
+#		Petra.StopWaitForGift()
+#		Gunnar.StopWaitForGift()
+#		Ivan.StopWaitForGift()
+}
+
+[BYE]
+Kafka "Hej då!"
+
+Kafka.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Kafka
+FOCUS
+Kafka.StartTalking()
+Kafka "Ville du nåt?"
+GOTO ANYTHING_ELSE
+

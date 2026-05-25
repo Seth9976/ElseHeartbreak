@@ -1,0 +1,91 @@
+WAIT Ivan.IsInRoom(FelixApartment)
+
+LISTEN Sebastian_talk_Ivan
+FOCUS
+Ivan.StartTalking()
+
+Ivan "Ja?"
+
+CHOICE {
+	"Hej, vad heter du?":
+		Ivan "Ivan"
+		CHOICE {
+			"Jaha, det är ju du!":
+				Ivan "Va?"
+				CHOICE {
+					"Nä det var inget":
+					"Jag visste inte hur du såg ut bara":
+						Ivan "Aha"
+				}
+				Ivan "Jag ska ta en till öl nu men... vi ses väl"
+
+			"Tänkte väl det":
+				CHOICE {
+					"Trevligt att träffas":
+						Ivan "Mm"
+					"Ska gå och ta en öl men vi ses":
+						Ivan "Mm"
+				}
+		}
+
+	"Hejsan":
+		Ivan "Hej på dig du"
+
+	"Tjena":
+		Ivan "Hej"
+}
+
+Ivan.StopTalking()
+DEFOCUS
+
+
+# later #
+
+
+WAIT Ivan.IsInRoom(FelixApartment) LISTEN Sebastian_talk_Ivan
+FOCUS
+Ivan.StartTalking()
+
+Ivan "Du stöter inte på min tjej va?"
+
+CHOICE {
+	"Va, nej nej nej!":
+		Ivan "Bra"
+	"Pixie?!":
+		Ivan "Mm"
+		CHOICE {
+			"Nej var har du fått det ifrån?":
+				Ivan "Du glor på henne"
+
+			"Hon är ju en förtjusande dam, det måste jag säga":
+				Ivan "Vad i helvete"
+		}
+}
+
+IF Pixie.IsWithinDistance(Ivan, 5) {
+	Pixie "Lugna ner dig Ivan"
+	Pixie "Han kan vara lite tjurig ibland Sebastian, inget att bry sig om"
+}
+
+Sebastian "Ehhh"
+
+CHOICE {
+	"Jag ska gå ut och på balkongen tror jag":
+		Felix "Å, jag följer med Sebbe!"
+		Felix "Men kan vi inte gå ner till parken istället?"
+		Felix "Det är soft där och jag måste röka"
+		Felix "Ska bara hitta ciggen först, du kan gå ner så kommer jag snart"
+		DEFOCUS
+		Ivan.StopTalking()
+		WAIT 7
+		Felix.SetTimetable(Felix_SmokeOnBalcony)
+
+	"Jag ska gå och ta en öl tror jag":
+
+	"Heh":
+}
+
+Ivan.StopTalking()
+DEFOCUS
+
+

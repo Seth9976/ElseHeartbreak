@@ -1,0 +1,44 @@
+
+Log("Will begin corruption...")
+
+Sebastian.SetCorruption(30)
+WAIT 6
+Log("corruption stage 40")
+Sebastian.SetCorruption(40)
+WAIT 4
+
+FOCUS
+
+CHOICE {
+    "Hmm...":
+    "Hallå?!":
+    "HJÄLP!!!":
+    "[CHEAT]":
+        DEFOCUS
+        WAIT 3
+        GOTO ENDING
+}
+
+DEFOCUS
+
+Sebastian.SetCorruption(50)
+WAIT 7
+Sebastian.SetCorruption(60)
+WAIT 6
+Sebastian.SetCorruption(70)
+WAIT 5
+Sebastian "Ehhh..."
+Sebastian.SetCorruption(80)
+WAIT 6
+Sebastian.SetCorruption(90)
+WAIT 9
+Sebastian "Aj"
+Sebastian.SetCorruption(100)
+WAIT 6
+
+[ENDING]
+
+IF Sebastian.IsInRoom(Internet) {
+    Beat()
+    BROADCAST InternetEndingSequence
+}

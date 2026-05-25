@@ -1,0 +1,131 @@
+
+Felix.SetTimetable(Felix)
+
+WAIT Sebastian.IsWithinDistance(Felix, 8) AND Sebastian.NotTalking() AND Felix.IsAtTask(Guard)
+FOCUS
+Felix.StartTalking()
+WAIT 2
+Felix "Dude!"
+Felix "Hur är läget?"
+
+CHOICE {
+    "Jag har rätt bråttom":
+        Felix "Ey, du måste chilla lite"
+        Felix "Men OK, vi ses"
+
+    "Det är bra":
+        GOTO HOW_ARE_STUFF
+
+    "Det är jobbigt, mycket att göra":
+        Felix "Hehe, OK OK"
+        [HOW_ARE_STUFF]
+        Felix "Hur går det med hackandet då?"
+        GOTO HOW_IS_HACKING
+}
+
+Felix.StopTalking()
+DEFOCUS
+
+
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+
+Sebastian "Hej, nu har jag tid att prata"
+Felix "Soft"
+Felix "Så... dude, hur går det med hackandet?"
+
+[HOW_IS_HACKING]
+CHOICE {
+    "Går väl bra...":
+        GOTO SWEET
+
+    "Jag är fortfarande rätt kass, tyvärr":
+        Felix "Nä, kom igen"
+        Felix "Du är bättre än mig i alla fall"
+
+    "Jag äger!":
+        [SWEET]
+        Felix "Fan vad sweet, hoppas Yulian är nöjd då"
+}
+
+Felix "Mycket uppdrag och så?"
+CHOICE {
+    "Njae...":
+    "En del":
+    "Jo, typ":
+}
+Felix "Asså, det är så segt att sitta här och mögla"
+Felix "Verkar mycket roligare att få vara ute i fält"
+CHOICE {
+    "Ja, det är jättekul!":
+    "Det är OK":
+    "Men jag tycker du verkar ha det mysigt här nere..?":
+        Felix "Ja, det funkar"
+        Felix "Lite ensamt bara"
+}
+Felix "Förresten, känner du Elsa?"
+
+CHOICE {
+    "Vem är det?":
+    "Kanske...?":
+}
+
+Felix "Hon programmerar"
+Felix "Men inte hos oss"
+Felix "Hon är independent"
+Felix "Sitter i ett hus i de fattiga kvarteren, norr om hamnen"
+
+[HAVE_YOU_MET_HER]
+CHOICE {
+    "Jag tror att jag träffat henne":
+        [COOL]
+        Felix "Cool"
+        Felix "Hälsa henne om ni ses igen"
+        Sebastian.SetKnowledge("FelixSaysHiToElsa")
+        Story("SayHiToHer")
+        CHOICE {
+            "OK, visst":
+            "Ska jag säga något särskillt?":
+                Felix "Säg att jag..."
+                Felix "Nej, strunt samma"
+                Felix "Säg hej från Felix bara"
+        }
+
+    "Jaha, hur kommer man dit?":
+        Felix "Man går över spårvagnsspåren, det är en bro"
+        [POOR]
+        Felix "Ligger massa fallfärdiga kåkar där"
+        Felix "Elsas hus är det högsta tror jag"
+        GOTO HAVE_YOU_MET_HER
+
+    "På så vis":
+        Felix "Men du känner henne inte då?"
+        CHOICE {
+            "Jo, vi har setts":
+                GOTO COOL
+            "Nej":
+                Felix "OK"
+            "Var sa du att hon bodde?":
+                Felix "Norr om hamnen, på andra sidan spårvagnsspåren"
+                GOTO POOR
+        }
+
+    "Nej, henne känner jag inte":
+        Felix "OK, synd"
+}
+
+Felix.StopTalking()
+DEFOCUS
+
+# later
+
+[AGAIN]
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "'sup?"
+Felix "Jag måste jobba nu"
+Felix.StopTalking()
+DEFOCUS
+GOTO AGAIN

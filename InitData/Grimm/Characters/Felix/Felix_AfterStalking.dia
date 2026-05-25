@@ -1,0 +1,213 @@
+
+#WAIT Sebastian.IsInRoom(Lodge_Entry)
+#WAIT Pixie.IsNotInRoom(Lodge_Entry)
+
+IF Sebastian.IsWithinDistance(Felix, 25) {
+	# proceed
+} ELSE {
+	LISTEN Sebastian_talk_Felix
+	FOCUS
+	Felix.StartTalking()
+	Felix "Tja dude!"
+	GOTO INVITATION
+}
+
+FOCUS
+
+WAIT 2
+
+IF Sebastian.NotInSameRoom(Felix) {
+	Felix.GetUpAndInteract(Sebastian)
+	LISTEN Felix_talk_Sebastian
+}
+
+Felix.StartTalking()
+WAIT 2
+Felix "Ouch"
+
+CHOICE {
+	"Vadå?":
+		Felix "Jag säger bara... Ouch"
+	"Mm... skit också":
+
+	"[CHEAT]":
+		GOTO CHEAT
+}
+
+Felix "Men det ordnar sig dude"
+
+CHOICE {
+	"Ja, jag antar det...":
+	"Fan varför skulle jag gå hit":
+}
+
+Felix "Det är bara att ta nya tag"
+
+CHOICE {
+	"Mm":
+	"Jo":
+	"Heh, ja precis":
+}
+
+WAIT 1
+Sebastian "Hmm..."
+
+Felix "Ja?"
+CHOICE {
+	"Alltså, Pixie jobbar ju inte med skor":
+	"Det är inte ett lager till en skoaffär här nere!":
+}
+Felix "Så det säger du?"
+
+CHOICE {
+	"Så vad är det hon jobbar med?":
+		Felix "Vem? Pixie?"
+		Sebastian "Mm"
+
+	"Vad är det för slags ställe det här?":
+}
+
+
+Felix "Jag får absolut inte berätta vad som händer här inne"
+Felix "Du kan ju vara från Ministeriet dude!"
+Felix "Även fast jag ser att du inte är det, haha"
+
+CHOICE {
+	"Ministeriet?":
+		Felix "Ja, vilka jävlar"
+		CHOICE {
+			"Ok..?":
+			"Är dom?":
+		}
+		Felix "Du kanske har sett deras byggnader i stan"
+		CHOICE {
+			"Ja, kanske":
+				Felix "De är stora och svarta"
+				Felix "Förstör hela stadsbilden säger min morsa"
+				Felix "Hon är arkitekt..."
+			"Mm":
+				Felix "Helt sjukt ju"
+			"Nej, faktiskt inte":
+				Felix "OK, du borde kolla in dem så fattar du vad jag menar"
+				Felix "Stora och svarta är de"
+		}
+	"Vadå då?":
+		Felix "De är jävligt propert klädda alla som jobbar där, riktigt dyra kostymer"
+		Felix "Och så pratar de lite som robotar typ"
+		Felix "Visst du är lite stel och så men de snubbarna är fan helt otroliga"
+}
+
+CHOICE {
+	"Så ni gömmer er här nere för ministeriet?":
+		Felix "Alltså, vi gömmer oss ju inte!"
+		Felix "Vi är ju inga fegisar"
+		CHOICE {
+			"Men ni har ändå en superhemlig klubb här nere i källaren?":
+				Felix "Ja men vafan"
+			"Lite fega verkar ni":
+				Felix "Fan dude!"
+		}
+		Felix "Vår organisation kämpar ju emot ministeriet och allt dåligt de gör"
+		CHOICE {
+			"Pixie också?":
+				Felix "Mm"
+			"Jaha, coolt":
+			"OK":
+		}
+		Felix "Så kom inte och snacka, vi bara håller oss undan"
+		CHOICE {
+			"Sorry":
+			"Mm OK":
+		}
+
+	"Vad är det som Ministeriet sysslar med egentligen?":
+		Felix "Jag har inte perfekt koll men de är jävligt dryga"
+		Felix "Alltihop började när de började bryta malm i gruvan"
+		Felix "De håller på med massa datorer och skit"
+		Felix "Övervakar folk, utnyttjar invånarna, you name it!"
+		CHOICE {
+			"Usch vad hemskt":
+				Felix "Ja fy fan"
+			"Oj, det hade jag ingen aning om":
+				Felix "Nej, det är lite av grejen"
+		}
+		CHOICE {
+			"Men någon måste ju försöka stoppa dem?":
+				Felix "Ja alltså..."
+			"Så kan de ju inte få hålla på!":
+				Felix "Nä, exakt"
+		}
+		Felix "Det är ju lite det som vår organisation här grejar med liksom"
+		CHOICE {
+			"Jaha! Tufft!":
+			"Oj":
+			"OK, intressant":
+			"Pixie också?":
+				Felix "Jepp"
+		}
+}
+
+Felix "Men nu måste jag börja jobba igen"
+Felix "Innan chefen blir sur du vet"
+Felix "Det var kul att ses Sebbe"
+
+CHOICE {
+	"Ja... ja det var det!":
+	"Mm, förrutom det här med Pixie då":
+		Felix "Sånt som händer"
+	"Verkligen, hoppas vi ses igen snart":
+}
+
+[INVITATION]
+Felix "Du borde glida förbi hemma hos mig någon kväll, jag har fest typ jämt"
+Felix "Jag bor på baksidan av kommunhuset, bredvid parken"
+Felix "Det ligger nära caféet"
+
+CHOICE {
+	"Trevligt, det ska jag göra":
+		Felix "Fett"
+
+	"OK... jag tror inte jag kommer hitta det":
+		Felix "Jag har en uteplats uppe på huset"
+		Felix "Min lilla lounge area"
+		Felix "Jag är jävligt nöjd med den"
+		CHOICE {
+			"Ok, ska försöka hitta den":
+			"Ja men den har jag nog sett":
+		}
+		Felix "Mellan parken och caféet kan man säga att det ligger"
+
+	"Caféet?":
+		Felix "Du måste ju ha varit på café Ponty! Det är sjukt populärt"
+		CHOICE {
+			"Jo men jag har nog varit där...":
+				Felix "Tänkte väl"
+
+			"Ja, självklart har jag varit där":
+				Felix "Ja, tänkte väl"
+
+			"Hmm, måste ha missat det":
+				Felix "Ok, du borde kolla in det"
+				Felix "Mycket snygga tjejer som sitter där och fikar hela dagarna"
+				CHOICE {
+					"Hehe, OK det ska jag komma ihåg":
+					"Jaha...":
+				}
+		}
+}
+
+Felix "Vi hörs sen då!"
+CHOICE {
+	"Ja det gör vi, ha det bra":
+	"Må så gott":
+	"Hej då!":
+}
+[CHEAT]
+Felix "Peace"
+
+Felix.StopTalking()
+DEFOCUS
+
+Felix.SetTimetable(Felix)
+
+BROADCAST PyjamasPartyIsOn

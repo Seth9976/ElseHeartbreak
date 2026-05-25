@@ -1,0 +1,141 @@
+
+LISTEN Sebastian_talk_Panda3
+FOCUS
+Panda3.StartTalking()
+
+Panda3 "Hej!"
+IF Panda3.IsInRoom(BarYvonne) {
+    Panda3 "Dansa!"
+    CHOICE {
+        "Njae...":
+            GOTO JO
+        "Nää":
+            [JO]
+            Panda3 "Jo, det är kul"
+        "OK, hur då?":
+            Panda3 "Det är bara att göra!"
+    }
+}
+ELSE {
+    Panda3 "Ska du på Bar Yvonne?"
+    CHOICE {
+        "Kanske":
+        "Jo, tror det...":
+        "Eh - vet inte?!":
+    }
+    Panda3 "Jo du måste!"
+    Panda3 "Det kommer att bli grymt"
+    Panda3 "Du vet var det ligger väl?"
+    CHOICE {
+        "Njae":
+        "Jo...":
+    }
+    Panda3 "Det är på Plaza, i en källare"
+    Panda3 "Bästa stället i stan om du frågar mig!"
+    GOTO WHO_ARE_YOU
+}
+
+CHOICE {
+    "Läget då?":
+        Panda3 "Det är toppen"
+
+    "Hej!":
+    "God dag":
+    "Härlig stämning här":
+        Panda3 "Ja!"
+}
+
+[WHO_ARE_YOU]
+Panda3 "Men... vem är du?"
+CHOICE {
+    "Sebbe":
+    "Jag heter Sebastian":
+}
+Panda3 "OK, trevligt att träffas"
+CHOICE {
+    "Det samma":
+    "Ja, verkligen!":
+    "Mm":
+}
+
+
+IF Panda3.IsNotInRoom(BarYvonne) {
+    Panda3 "Vi ses!"
+    Panda3.StopTalking()
+    DEFOCUS
+    WAIT Panda3.IsInRoom(BarYvonne) AND Sebastian.IsInRoom(BarYvonne)
+    LISTEN Sebastian_talk_Panda3
+    FOCUS
+    Panda3.StartTalking()
+    Panda3 "Hej..."
+}
+
+
+Panda3 "Du borde komma över på efterfest!"
+CHOICE {
+    "Jaha, när då..?":
+        Panda3 "Jag vet inte, senare"
+        [WHERE]
+        IF Panda3.IsInEitherRoom(Hospital_Exterior, TowerApartmentsLobby) {
+            Panda3 "Vi bor här i tornet"
+        }
+        ELSE {
+            Panda3 "Vi bor i ett torn här i närheten"
+            Panda3 "Bredvid sjukhuset, har du varit där?"
+            CHOICE {
+                "Nej, jag är ny stan":
+                "Hmm... kanske?":
+            }
+            Panda3 "Det ligger bredvid Plaza"
+            Panda3 "Man går över en bro mot gruvorna"
+            Panda3 "Det är några såna här... öh..."
+            Panda3 "... fiskebodar där!"
+            CHOICE {
+                "Jaha":
+                "Fiskebodar?":
+                    Panda3 "Ja, de är röda"
+                    Panda3 "Fast vi bor i tornet bredvid"
+            }
+        }            
+        Panda3 "Kom gärna förbi någon gång i alla fall!"
+        Panda3 "Vi gillar gäster"
+        CHOICE {
+            "OK, ska tänka på saken":
+            "Tack för inbjudan!":
+            "Jajemänsan":
+        }
+
+    "Njae... jag är lite trött":
+        Panda3 "Kom igen, det blir kul!"
+        CHOICE {
+            "Nej sa jag ju":
+                Panda3 "OK, OK"
+            "Ja OK då":
+                Panda3 "Härligt!"
+                GOTO WHERE
+            "Kanske en annan dag":
+                Panda3 "Ja!"
+                Panda3 "Vi har fest nästan jämt"
+                GOTO WHERE
+        }
+}
+
+Panda3.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Jag älskar att dansa"
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Livet är en fest"
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Weehoo!"
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Vi har det så kul!"
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Du är söt"
+Panda3 "Men nu får du lämna mig i fred ett tag"

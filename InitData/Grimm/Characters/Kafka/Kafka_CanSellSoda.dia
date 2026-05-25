@@ -1,0 +1,129 @@
+
+WAIT Kafka.IsAtTask(Working) LISTEN Sebastian_talk_Kafka
+FOCUS
+Kafka.StartTalking()
+
+Sebastian "Hej!"
+Kafka "Tjenare"
+
+[HELLO]
+CHOICE {
+    "Är det OK om jag säljer läsk här inne?":
+        Kafka "Alltså..."
+        Kafka "Helst inte"
+        CHOICE {
+            "Men det går jättedåligt för mig med försäljandet!":
+                Kafka "Ledsen att höra det"
+                Kafka "Men jag har mina kunder att tänka på"
+                Kafka "Jag vill att de ska vara törstiga"
+                CHOICE {
+                    "Jo, det förstår jag ju":
+                    "Mm...":
+                    "Ja, men du säljer ju kaffe!":
+                        Kafka "Spelar ingen roll"
+                }
+
+            "OK, tänkte det var bäst att fråga först":
+                Kafka "Ja, det var snällt av dig"
+        } 
+        CHOICE {
+            "Ha det fint!":
+            "Skulle man kunna få en kaffe?":
+                Kafka "Självklart!"
+                GOTO ILL_HAVE_ONE
+        }
+
+    "Sugen på en läsk?":
+        Kafka "Nej tack"
+        GOTO HELLO
+
+    "Mycket gäster?":
+        Kafka "Sådär"
+}
+
+Kafka.StopTalking()
+DEFOCUS
+
+
+# later
+
+
+WAIT Kafka.IsAtTask(Working) LISTEN Sebastian_talk_Kafka
+FOCUS
+Kafka.StartTalking()
+
+Kafka "Vill du ha en kaffe?"
+[COFFEE]
+CHOICE {
+    "Ja tack!":
+        [ILL_HAVE_ONE]
+        Kafka.ClearHandItem()
+        WAIT Kafka.HasNoHandItem()
+        Kafka "Kortet, tack"
+        IF Sebastian.HasItemOfType(CreditCard) {
+            Kafka.StartWaitForGift()
+
+            WAIT Kafka.HasAnyHandItem()
+            IF Kafka.HasHandItemOfType(CreditCard) {
+                WAIT Kafka.IsIdle()
+                Kafka.CharacterTakesMoneyFromCreditCard(-2)
+                WAIT Kafka.IsIdle()
+                WAIT 2
+                Kafka.Give()
+                Kafka "Här har du kortet"
+                WAIT Kafka.HasNoHandItem()
+                Kafka.CreateCoffeeInHand()
+                Kafka.Give()
+                Kafka "Varsågod, hoppas det smakar!"
+                WAIT Kafka.HasNoHandItem()
+                CHOICE {
+                    "Det tror jag säkert!":
+                    "Mm... vi får se":
+                    "Tack!":
+                }
+                Kafka "Något mer?"
+                GOTO ANYTHING_ELSE
+            } ELSE {
+                Kafka "Huh?"
+                Kafka.Give()
+                WAIT Kafka.HasNoHandItem()
+                GOTO BUY
+            }
+
+            Kafka.StopWaitForGift()
+        } ELSE {
+            Sebastian "Oj, verkar ha glömt det"
+        }
+
+        Kafka "Jaha, synd. Du får komma tillbaka en annan gång."
+        Kafka "Eller var det något annat?"
+        GOTO ANYTHING_ELSE
+
+    "Kanske... vad kostar en kopp?":
+        Kafka "$2"
+        CHOICE {
+            "Tar gärna den lite senare...":
+                GOTO NO_PROBLEMS
+            "Jag tar en":
+                GOTO ILL_HAVE_ONE
+        }
+    "Nej tack det är bra":
+        [NO_PROBLEMS]
+        Kafka "Ok! Inga problem. Var det något annat?"
+        GOTO ANYTHING_ELSE
+}
+
+Kafka "Något mer?"
+[ANYTHING_ELSE]
+
+CHOICE {
+    "Nej tack, ha en bra dag!":
+    "Du ska inte ha en läsk ändå?":
+        Kafka "Nej tack!"
+        Kafka "Och sälj nu inte här inne är du snäll"
+}
+
+Kafka.StopTalking()
+DEFOCUS
+
+

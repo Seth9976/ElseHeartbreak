@@ -1,0 +1,197 @@
+
+LISTEN Sebastian_talk_Elsa
+
+FOCUS
+Elsa.StartTalking()
+
+Elsa.SetKnowledge(Sebastian)
+
+Elsa "En sekund!"
+Elsa "Fan"
+Elsa "Vad var det jag skulle skriva..?"
+WAIT 3
+Elsa "Ja, vad gäller saken?"
+
+[AGAIN]
+CHOICE {
+	"Du är programmerare va?":
+		Elsa "Mm, jo men det måste man väl säga att jag är"
+		GOTO AGAIN
+
+	"Vad jobbar du på?":
+		Elsa "Det här är ett konstigt program"
+		Elsa "Jag vet inte riktigt vad det ska vara till för"
+		CHOICE {
+			"Coolt!":
+				GOTO DO_YOU_CODE
+
+			"Ok... hur kan man ens göra det?":
+				Elsa "Jag utforskar några idéer som jag haft länge"
+				[DO_YOU_CODE]
+				Elsa "Kan du programmera?"
+				CHOICE {
+					"Nej, inte ett dugg":
+						Elsa "Ok"
+					"Jag håller på och lär mig":
+						GOTO META
+					"Ja, jag är ganska bra faktiskt":
+						[META]
+						Elsa "Ok, jag försöker bygga en metacirculär evaluator"
+						Elsa "Med så få primitiver som möjligt, jag är nere på tre just nu!"
+						Elsa "Inget speciellt egentligen, mest en rolig övning"
+						CHOICE {
+							"Jag förstår, spännande":
+							"Ok, heh...":
+							"Eh, vad sa du att du gjorde sa du?":
+						}
+				}
+		}
+		GOTO AGAIN
+
+	"Du råkar inte ha några kontakter med Datorministeriet?":
+		Elsa "Nej, för tusan"
+		Elsa "Dem gillar jag inte, de är otäcka"
+		Elsa "Fast deras jobb med modifieraren är imponerande såklart..."
+		CHOICE {
+			"Jaha, vad gjorde dom?":
+				Elsa "De uppfann den"
+				CHOICE {
+					"Vad exakt är det för slags grej?":
+						GOTO WHAT_IS_IT
+					"Oj, jaha":
+						GOTO GUNNAR
+				}
+
+			"Jaha? Strunt samma":
+				Elsa "Ok, var det något annat?"
+				GOTO AGAIN
+
+			"Vad är en modifierare?":
+				[WHAT_IS_IT]
+				Elsa "Eh... jag har inte min här just nu tror jag"
+				Elsa "Var tusan kan jag ha lagt den då?"
+				Elsa "Men det är en slags apparat som de forskade fram i alla fall"
+				Elsa "Det måste väl ha varit ungefär 10 år sen..? Eller..."
+				Elsa "Jo men det stämmer typ"
+				CHOICE {
+					"OK?":
+						[GUNNAR]
+						Elsa "Jag tror att det var en man som heter Gunnar som ledde projektet"
+						Elsa "Eller om det var hon där vad hon nu heter..."
+						Elsa "Jag och namn alltså!"
+						Elsa "Jag minns inte så noga, brydde mig inte om nyheter och politik på den tiden"
+
+
+					"Vad kan man göra med den?":
+						Elsa "Man modifierar ting"
+						CHOICE {
+							"Vad för slags ting?":
+								Elsa "I princip vad som helst"
+								Elsa "Mindre komplicerade saker är ju ofta lättare"
+							"Ting?":
+								Elsa "Saker, vad som helst egentligen"
+						}
+						CHOICE {
+							"Vad som helst???":
+								Elsa "Ja det är rätt sjukt"
+							"Det låter ju helt orimligt det här":
+								Elsa "Jo... det är konstigt"
+						}
+						Elsa "Jag antar att jag hunnit vänja mig lite"
+						Elsa "Jag började greja med de här grejerna rätt tidigt"
+				}
+		}
+		CHOICE { 
+			"Varför var det ingen som berättade det här innan jag flyttade hit?":
+				Elsa "Det är väl ingen hemlighet direkt"
+				Elsa "Men Dorisburg är ju lite av en håla"
+				CHOICE {
+					"Hehe":
+					"Tycker du?":
+						Elsa "Ja men det måste man väl ändå säga"
+				}
+				Elsa "Det är mycket byråkrater från andra ställen på besök här i alla fall"
+				Elsa "Många länder som vill köpa egna modifierare såklart"
+				CHOICE {
+					"Ok":
+					"Jaha, ja det låter rimligt":
+						Elsa "Mm"
+				}
+
+			"Vad tycker du om hela grejen då?":
+				Elsa "Vad menar du?"
+				CHOICE {
+					"Ja men modifieraren och så, är det bra att de uppfann den?":
+						Elsa "Det var nog oundvikligt"
+						Elsa "Som det ser ut nu så vet jag inte om man kan kalla det bra..."
+						Elsa "Men jag gillar att greja med tekniken, den är intressant"
+
+					"Ministeriet och vad de håller på med":
+						Elsa "De borde vara öppnare med vad de gör"
+						Elsa "Ingen vet riktigt vad som händer där inne"
+						Elsa "Man hoppas ju att det är människor med någon slags moralisk kompass"
+						Elsa "De har gett sig själva mycket makt, det är ett som är säkert"
+				}
+				CHOICE {
+					"Ok, mm":
+					"Jag förstår":
+				}
+
+			"Hmm":
+		}
+		CHOICE {
+			"Jag får tacka så mycket för all den här informationen!":
+				Elsa "Ja?"
+				Elsa "Jag ska jobba vidare nu"
+				Sebastian "Ok"
+				[BYE]
+				CHOICE {
+					"Ha det":
+					"Hej då!":
+				}
+
+			"Det var mycket intressant det här men nu måste jag gå":
+
+			"En sak till":
+				Elsa "Ok?"
+				GOTO AGAIN
+		}
+
+	"Vilken våning är vi på nu?":
+		Elsa "4"
+		Sebastian "Ok..."
+		GOTO AGAIN
+
+	"Känner du Pixie?":
+		WAIT 3
+		Elsa "..va?"
+		Elsa "Eh, nej det namnet har jag aldrig hört förut"
+		GOTO AGAIN
+
+	"Ska dra vidare, ha det!":
+}
+
+Elsa.StopTalking()
+DEFOCUS
+
+WAIT 3
+Elsa "Hej då"
+
+
+# later #
+
+
+LISTEN Sebastian_talk_Elsa
+Elsa "Ursäkta, jag måste lösa en bugg här nu"
+
+LISTEN Sebastian_talk_Elsa
+Elsa "En sekund..."
+
+LISTEN Sebastian_talk_Elsa
+Elsa "Mmm vänta"
+
+LISTEN Sebastian_talk_Elsa
+Elsa "Har inte tid just nu..."
+
+LISTEN Sebastian_talk_Elsa
+Elsa "Eh?"

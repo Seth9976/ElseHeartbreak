@@ -1,0 +1,95 @@
+Ivan.SetTimetable(Ivan_HangAroundExposed)
+
+LISTEN Sebastian_talk_Ivan
+
+FOCUS
+Ivan.StartTalking()
+
+IF Pixie.HasKnowledge("ClubDotCatastrophy") {
+    Ivan "Va?"
+    Ivan "Haha, det är ju du!"
+
+    CHOICE {
+        "Hej, jag kommer från Wellspring Soda":
+        "Va?":
+        "God dag":
+    }
+
+    Ivan "Hahaha"
+    Ivan "Så jävla kul"
+    Ivan "Full som ett ägg var du!"
+    Ivan "Och riktigt tung dessutom"
+    Ivan.StopTalking()
+    Ivan.SetTimetable(Ivan)
+    Ivan "Du borde dra ner på sockret Sebastian"
+    Ivan "Hahaha!"
+}
+ELSE {
+    Ivan "Va?"
+    [AGAIN]
+    CHOICE {
+        "Hej, jag kommer från Wellspring Soda":
+            Ivan "Jag dricker inte läsk, man blir tjock"
+        "God dag":
+            Ivan "Var det något speciellt?"
+            GOTO AGAIN
+        "Äsch, strunt samma":
+    }
+    WAIT 1
+    Ivan "Du ser sliten ut"
+    CHOICE {
+        "Va? Nej. Hej då":
+            GOTO BYE
+        "Gör jag?":
+        "Ja, jag har sovit dåligt":
+    }
+    CHOICE {
+        "Kan inte sluta tänka på en tjej":
+            Ivan "Haha, verkligen?"
+            Ivan "Brudar alltså..."
+            Ivan "Min tjej är så jävla fräsch!"
+            [MORE_QUESTIONS]
+            CHOICE {
+                "Jaha... hur ser hon ut?":
+                    Ivan "Eh, jag vet inte"
+                    Ivan "Riktigt snygg bara"
+                    Ivan "Och så har hon typ gulliga klänningar"
+                    GOTO MORE_QUESTIONS
+                "Är hon smart också?":
+                    Ivan "Antar det... vem bryr sig, hahaha!"
+                    Ivan "Hon jobbar på skoaffären"
+                    CHOICE {
+                        "I kassan?":
+                            Ivan "Nej, typ med logistiken i lagret"
+                            Ivan "Jag vet inte riktigt"
+                        "Jaha":
+                    }
+                    GOTO MORE_QUESTIONS
+                "Å, jag önskar att jag också hade en tjej...":
+                    Ivan "Du får skaffa dig en bättre frisyr först tror jag"
+                    Ivan "Hahaha!"
+            }
+
+        "Går så dåligt med mitt jobb":
+            Ivan "Ja, det är jävligt tråkigt att jobba"
+            Ivan "Gör som jag och skit i det"
+            CHOICE {
+                "Kan man det?":
+                    Ivan "Ja, om man har rika föräldrar!"
+                    Ivan "Haha"
+                "Ja...":
+            }
+    }
+}
+
+[BYE]
+Ivan.StopTalking()
+DEFOCUS
+
+
+[NO_TIME_TO_TALK]
+LISTEN Sebastian_talk_Ivan
+Ivan.StartTalking()
+Ivan "Du, jag orkar inte snacka mer med dig nu"
+Ivan.StopTalking()
+GOTO NO_TIME_TO_TALK

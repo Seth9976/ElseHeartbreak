@@ -1,0 +1,19 @@
+
+LISTEN Sebastian_open_Hotel_Corridor_Door1
+
+WAIT 5
+Sebastian "???"
+Sebastian "Vad tusan?!"
+Sebastian "Är det här mitt rum?!"
+
+LISTEN Sebastian_open_Hotel_Corridor_Door1
+
+WAIT 5
+Sebastian "Jag fattar ingenting..."
+Sebastian "Ska jag bo här inne?"
+
+LISTEN Sebastian_open_Hotel_Corridor_Door1
+
+WAIT 5
+Sebastian "Nej nu jävlar..!"
+Sebastian "Jag måste ta ett snack med de ansvariga"

@@ -1,0 +1,90 @@
+
+START SayGoodMorning
+
+LISTEN PixieToldYulianAboutTrial
+
+LISTEN Sebastian_talk_Yulian
+FOCUS
+Yulian.StartTalking()
+
+Yulian "Jaså, här har vi motståndkampens senaste tillskott förstår jag"
+
+CHOICE {
+    "Jajemän!":
+    "Antar det":
+    "Öh, förlåt vad sa du?":
+}
+
+Yulian "Hur kändes testet?"
+
+CHOICE {
+    "Det var riktigt klurigt":
+        Yulian "Jaha?"
+        Yulian "Jag har inte plats för några veklingar här nere"
+    "Inga problem för mig":
+        Yulian "Så ska det låta"
+}
+Yulian "Hur som helst, du ska få din nyckel hit till The Lodge"
+Yulian.TakeOutItem(ExtraKeyLodge)
+WAIT Yulian.HasHandItemWithName(ExtraKeyLodge)
+WAIT 0.5
+Yulian.Interact(Sebastian)
+WAIT 0.5
+Yulian.Give()
+WAIT Yulian.HasNoHandItem()
+Yulian "Tappa inte bort den där nu"
+Yulian "Det vore en stor fara för oss alla här inne"
+Yulian "Man kommer in genom alla ingångar, även trädet i parken"
+
+CHOICE {
+    "Aj aj kapten!":
+    "Nej, jag ska vara mycket försiktig":
+    "Jag förstår":
+    "Oj, det har jag inte sett?":
+        Yulian "Kolla in det, det är en bra genväg"
+        CHOICE {
+            "OK!":
+            "Cool":
+        }
+}
+
+Yulian "Bra så"
+Yulian "Vi får talas vid mer senare"
+
+CHOICE {
+    "Ok, ses":
+    "Tack för den här chansen!":
+}
+
+Yulian.StopTalking()
+DEFOCUS
+
+
+WAIT 20
+Yulian.SetTimetable(Yulian) # back to normal!
+
+
+[BUNCH_OF_QUESTIONS]
+
+
+LISTEN Sebastian_talk_Yulian
+FOCUS
+Yulian.StartTalking()
+
+CHOICE {
+	"Är det ok om man lämnar saker här nere i The Lodge under natten?":
+		Yulian "Ja det går utmärkt"
+
+	"Vad jobbar du med?":
+		Yulian "Jag håller på med ett program som ska kunna sprida information"
+		Yulian "Så att medborgarna i staden får reda på vad som händer på ministeriet"
+
+    "Hur många jobba på The Lodge egentligen":
+        Yulian "Det varierar, vi är väl fem personer nu"
+        Yulian "Kan vi prata mer senare? Jag är lite upptagen just nu"
+}
+
+Yulian.StopTalking()
+DEFOCUS
+
+GOTO BUNCH_OF_QUESTIONS

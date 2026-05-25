@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":262,"values":["\"Room\"","\"PixieCloset\"","[]","false","{\"x\":0,\"y\":0}","\"0000000000001001111111110111011111111101110110111111111111100111111110111001111111101111000000011011111000000110\"","{\"x\":14,\"y\":8}","{\"x\":10,\"y\":5}"]}

@@ -1,0 +1,21 @@
+
+Pixie.StopTalking()
+Petra.StopTalking()
+Felix.StopTalking()
+
+Petra.SetTimetable("Petra_CrazyParty")
+Pixie.SetTimetable("Pixie_CrazyParty")
+Felix.SetTimetable("Felix_CrazyParty")
+
+Petra.SetFieldToFloat("sleepiness", 0)
+Pixie.SetFieldToFloat("sleepiness", 0)
+Felix.SetFieldToFloat("sleepiness", 0)
+
+WAIT IsOverHour(18) # party starts
+Log("Crazy party started")
+
+WAIT IsHour(01) AND Sebastian.NotTalking()
+BROADCAST PartyIsOver
+Log("Crazy party ended")
+
+Story("CasinoHeist")

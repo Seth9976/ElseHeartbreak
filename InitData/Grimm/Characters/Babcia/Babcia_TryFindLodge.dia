@@ -1,0 +1,40 @@
+[MORE]
+LISTEN Sebastian_talk_Babcia
+
+FOCUS
+Babcia.StartTalking()
+Babcia "Mhm?"
+
+CHOICE ETERNAL {
+    "Ni råkar inte ha någon diskettläsare här på hotellet?":
+        INTERRUPT AskAboutFloppyReader
+        WAIT 2
+        FOCUS
+
+    "Det var inget":
+
+    "Hej...":
+        Babcia "Ja?"
+        CHOICE {
+            "Vet du något om en tjej som heter Pixie?":
+                Babcia "Va?! Nej"
+                Babcia "Aldrig hört namnet"
+
+            "Du och Hank...":
+                Babcia "Vad nu?"
+                CHOICE {
+                    "Ni verkar ha en speciell relation?":  
+                        GOTO MIND_YOUR_OWN
+                    "Är ni tillsammans eller nåt?":
+                        [MIND_YOUR_OWN]
+                        Babcia "Sköt du ditt så sköter jag mitt"
+                    "Äsch det var inget":
+                        Babcia "Tänkte väl det"
+                }
+        }
+}
+
+Babcia.StopTalking()
+DEFOCUS
+
+GOTO MORE

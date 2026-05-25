@@ -1,0 +1,46 @@
+LISTEN Sebastian_talk_Araki
+FOCUS
+Araki.StartTalking()
+
+IF Araki.HasKnowledge(Sebastian) {
+
+} ELSE {
+    INTERRUPT IntroduceAraki
+    FOCUS
+}
+
+[MORE]
+CHOICE {
+    "Hur går det med programmerandet?":
+        Araki "Det går bra"
+        Araki "Många svåra buggar idag"
+        Araki "Någon jävel som skrivit ett system helt utan funktioner"
+        Araki "Ren spaghettikod, fattar inte hur vissa personer kan kalla sig programmerare"
+        CHOICE {
+            "Nej, det är hemskt":
+            "Oj då... låter jobbigt!":
+            "Spaghetti?":
+        }
+        GOTO MORE
+
+    "Har du några tips till mig nu när jag ska jobba här?":
+        Araki "Öva"
+        Araki "Du måste träna dig om du ska klara svåra situationer ute i fält"
+        CHOICE {
+            "OK, det ska jag komma ihåg":
+                Araki "Ministeriet visar ingen nåd"
+                GOTO HOW
+            "Hur ska jag öva?":
+                [HOW]
+                Araki "Lös varje problem som du träffar på"
+                Araki "Försök att förbättra din omgivning"
+                Araki "Ta varje chans att undersöka hur saker egentligen fungerar"
+        }
+        GOTO MORE
+
+    "Vi ses sen, ha det fint!":
+        Araki "Du med"
+}
+
+Araki.StopTalking()
+DEFOCUS

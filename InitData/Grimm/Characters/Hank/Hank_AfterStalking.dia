@@ -1,0 +1,406 @@
+
+Hank.Pos(BurrowsNorth_DevotchkaArmChair_1)
+Hank.SetHandItem(HanksHackdev)
+Hank.SetTimetable("")
+
+WAIT Sebastian.IsInEitherRoom(Hotel_Exterior, Plaza, Cafe_Exterior, Ministry_Exterior) [GET_BACK_TO_WORK] {
+	Hank.SetTimetable(Hank)
+}
+
+
+WAIT Sebastian.IsWithinDistance(Hank, 10)
+Hank "Hm?"
+
+
+[BEGINNING_OF_CONVERSATION]
+
+LISTEN Sebastian_talk_Hank
+CANCEL GET_BACK_TO_WORK
+
+FOCUS
+Hank.StartTalking()
+
+IF Hank.HasKnowledge("Sebastian") {
+	Hank "Tjena! Vad är det Sebastian?"
+}
+ELSE {
+	Hank "Vad är det min herre?"
+}
+
+[ANYTHING_MORE]
+CHOICE {
+#	"[TEACH_ME]":
+#		GOTO LETS_GO
+
+	"Det är vackert väder idag!":
+		Hank "Är det?"
+		Hank "Jag har jobbat så mycket så jag har inte hunnit bry mig om vädret"
+		Hank "Men ja, det är väl helt ok"
+		Hank "Var det något mer du ville?"
+		CHOICE {
+			"Jo...":
+				GOTO ANYTHING_MORE
+			"Nej, ska gå och knoppa nu tror jag":
+				Hank "Ok, l8rs!"
+				Hank.StopTalking()
+				DEFOCUS
+				GOTO BEGINNING_OF_CONVERSATION
+		}
+
+	"Hur är det att jobba på hotellet?":
+		Hank "Jo men det är trevligt"
+		Hank "Lite av ett drömjobb om man gillar att greja och fixa"
+		GOTO ANYTHING_MORE
+
+	"Känner du till något om ministeriet här i stan?":
+		Sebastian "Datorministeriet alltså"
+		Hank "Ehm... kanske"
+		Hank "Eller inte direkt tror jag"
+		Hank "Vad tänker du på mer exakt?"
+		CHOICE {
+			"Jag vet inte riktigt tyvärr. Vad de gör och så...":
+				Hank "Mm, de styr ju mycket av vad vi får göra på hotellet och så"
+
+			"Det verkar som att vissa personer inte gillar vad de håller på med?":
+				Hank "Nä precis, så är det"
+		}
+		Hank "Men samtidigt har de ju lett till mycket bra också, deras forskning och så"
+		Hank "Och alla uppfinningar!"
+
+		CHOICE {
+			"Jaha...":
+				Hank "Du verkar skeptisk"
+				CHOICE {
+					"Nej då, inte alls":
+					"Jag förstår bara inte riktigt vad det är för grejer de uppfinner":
+					GOTO COMPUTERS
+				}
+			"Vadå för uppfinningar?":
+				[COMPUTERS]
+				Hank "Ja men datorer och nätverk och sånt"
+			"Vad forskar de om?":
+				Hank "Vet inte riktigt..."
+				Hank "Datorer och nätverk typ"
+		}		
+		Hank "Allt som gör vardagen så praktisk!"
+		Hank "Och så den här apparaten såklart"
+
+		IF Hank.HasHandItemWithName(HanksHackdev) {
+			# do nothing
+		}
+		ELSE {
+			Hank.PutIntoInventory(HanksHackdev)
+			Hank.TakeOutItem(HanksHackdev)
+		}
+
+		IF Sebastian.HasItemOfType(Hackdev) {
+			CHOICE {
+				"Aha, en sån där har jag också!":
+				"En modifi.. nånting?":
+				"Ja vad är det där för sak egentligen..?":
+					Hank "En modifierare"
+					CHOICE {
+						"OK, jag har en sån också":
+						"Aha...":
+					}
+			}
+			CHOICE {
+				"Jag vill förstå hur man använder den bättre":
+				"Hur lärde du dig hur den funkar?":
+					Hank "Jag och en polare grejade massor med dem när vi var yngre"
+					Hank "Är ju bästa sättet att lära sig på tycker jag"
+			}
+			Hank "Jag skulle kunna visa dig grunderna om du du vill"
+			CHOICE {
+				"Verkligen??!":
+				"Ja, jättegärna!":
+				"Å, det vore supersnällt":
+				"Kanske... jag tror inte att jag kan lära mig":
+					Hank "Äsch, det är inte så svårt som alla säger"
+			}
+			GOTO LEARN_MORE_ABOUT_IT
+		}
+		ELSE {
+			CHOICE {
+				"Och vad är det?":
+				"Den grejen du har i handen?":
+					Hank "Ja, precis"
+					Sebastian "Och vad är det?"
+				"Den där har jag sett förut":
+					Hank "Ja, det förvånar mig inte i den här staden"
+			}
+		}
+
+		Hank "Just den här modellen heter Anvil"
+		[ITS_A_MODIFIER]
+		Hank "Det är en modifierare, säkerhetsnivå 2"
+
+		[MODIFIER]
+		CHOICE {
+			"Modi- vadå?":
+				Hank "Modifierare"
+				GOTO MODIFIER
+
+			"Vad är det för slags grej?":
+				Sebastian "Alltså, vad kan man modifiera med den?"
+				Hank "En hel del"
+				Hank "De med högre nivå är mer kraftfulla dock, mindre begränsningar och så"
+				Hank "Men de är ju inte tillåtna för allmänheten"
+
+			"Det låter farligt":
+				Hank "Jo den är lite farlig... "
+				Hank "Det är därför den här är säkerhetsnivå 2"
+				Hank "Så man kan bara modifiera vissa saker med den"
+		}
+
+		[STILL_CONFUSED]
+		CHOICE {
+			"Ok, jag blir riktigt förvirrad av det här":
+				Hank "Alltså, det är ju flummiga grejer antar jag"
+				Hank "Speciellt om man inte sett det förut"
+				GOTO STILL_CONFUSED
+
+			"Men vad exakt är det man kan modifiera?!":
+				Hank "Tja... på hotellet är det väl mest lampor och dörrar och sånt"
+				Hank "Och datorern såklart, de är ju lättast att programmera om"
+				GOTO STILL_CONFUSED
+
+			"OK...":
+				Hank "Ja, det är riktigt kraftfullt"
+				Hank "Men ett jävla skitjobb att hålla på med också"
+				Hank "Så mycket buggar på hotellet, jag blir galen"
+		}
+
+		CHOICE {
+			"Om man vill lära sig mer om sådana grejer, vad kan man göra då?":
+				Hank "Jag skulle kunna visa dig lite hur det funkar, har du en modifierare?"
+				IF Sebastian.HasItemOfType(Hackdev) {
+					CHOICE {
+						"Nej, tyvärr":
+							GOTO AINT_GOT_ONE
+
+						"Ja, faktiskt!":
+							Hank "Jaha, ja men i så fall"
+							[LEARN_MORE_ABOUT_IT]
+							Hank "Har du tid nu?"
+							CHOICE {
+								"Javisst!":
+									Hank "Cool"
+									GOTO LETS_GO
+								"Vet inte, jag kanske kan haffa dig lite senare?":
+									Hank "Visst"
+							}
+					}
+					Hank.SetKnowledge("TeachSebastian")
+				} ELSE {
+					Sebastian "Nää..."
+					GOTO AINT_GOT_ONE
+				}
+
+			"Jag tror att jag måste vila, allt det här ger mig ont i huvudet":
+				Hank "Haha ok"
+		}
+}
+
+Hank "Ska dra och fixa med lite grejer nu, l8rs"
+Hank.StopTalking()
+DEFOCUS
+Hank.SetTimetable(Hank)
+
+
+
+[BOTHER]
+LISTEN Sebastian_talk_Hank
+FOCUS
+Hank.StartTalking()
+
+IF Hank.HasKnowledge("TeachSebastian") {
+	Sebastian "Kan du lära mig hur man använder modifieraren nu?"
+	Hank "Javisst"
+	GOTO LETS_GO
+}
+ELSE {
+	CHOICE {
+		"Sorry, det var inget":
+			GOTO BOTHER
+
+		"Du jag tänkte på det här med modifierare":
+			Hank "Ja?"
+			CHOICE {
+				"Hur kan man lära sig mer om såna grejer?":
+
+				"Är det svårt att använda dom?":
+					Hank "Ja, helt enkelt är det inte"
+					Hank "Man måste kunna programmera"
+			}
+			Hank "Jag kan visa dig hur det funkar om du vill"
+			CHOICE {
+				"Ja, jättegärna!":
+				"Ok...":
+			}
+			Hank "Har du en egen?"
+
+			IF Sebastian.HasItemOfType(Hackdev) {
+				# allow answer
+			}
+			ELIF Sebastian.HasHandItemOfType(Hackdev) {
+				# allow answer
+			}
+			ELSE {
+				Sebastian "Nej, tyvärr"
+				GOTO AINT_GOT_ONE
+			}
+
+			[OWN_MODIFIER]
+			CHOICE {
+				"Japp!":
+					GOTO LECTURE
+
+				"Nej, tyvärr":
+					[AINT_GOT_ONE]
+					Hank "Ok, du borde fixa en"
+					Hank "Det är svårt att lära sig om man inte kan öva själv på egen hand"
+					CHOICE {
+						"Ok, var får man tag på en sådan då?":
+							[LOST]
+							Hank "Vi ska ha en extra någonstans på hotellet"
+							Hank "Men vet inte riktigt var"
+							CHOICE {
+								"Är de dyra?":
+									Hank "Beror på"
+									[BUY_ONE]
+									Hank "Du kan nog inte hitta dem i en vanlig affär"
+									Hank "Ministeriet har strikta regleringar på sånt där"
+									CHOICE {
+										"Ok... jag får kanske fråga mig runt då":
+											Hank "Ja det är nog den bästa lösningen"
+
+										"Det kanske finns några på själva ministeriet?":
+											Hank "Ja men där kommer du inte komma långt"
+											Hank "De gillar inte nyfikna turister så vitt jag förstår"
+											Hank "Men skadar väl inte att kolla runt"
+									}
+									Hank "Det kan ju hända att Gunnar har några över också"
+									CHOICE {
+										"Jaha, vem är det?":
+										"Gunnar?":
+									}
+									Hank "Det var han som jag köpte min av"
+									Hank "Han bor ute i hamnen i ett litet rosa hus med guldtak"
+									Hank "Ligger rätt nära radiostationen om du vet var den är?"
+									CHOICE {
+										"Nej, inte alls":
+											Hank "OK"
+											Hank "Du går dit där färjan lägger till, och så tar du höger sen"
+											CHOICE {
+												"Hmm...":
+												"Jaha":
+											}
+											Hank "Sen är det bara rakt fram mot en bro som går över spåren"
+										"Ja typ":
+										"Mm... är det nära en bro?":
+											Hank "Ja exakt, precis bredvid bron över till fattigmanskvarteren"
+										"Ja, vid färjan där?":
+											Hank "Ja exakt"
+									}
+									Hank "Det brukar komma konstiga ljud ut ur huset också, om det är till någon hjälp..."
+									Hank "Gunnar är lite knepig men du kan ju se om han har någonting att sälja"
+									CHOICE {
+										"Ja vilken bra idé":
+										"Tack för tipset!":
+										"Mm, får se om jag orkar dra dit":
+									}
+									Hank "Lycka till i alla fall, vi ses!"
+									BROADCAST ShouldGetModifier
+
+								"Mhm... synd":
+									Hank "Ja men kolla runt lite"
+									Hank "Du kanske känner någon som har en?"
+									Hank "De är inte direkt ovanliga i Dorisburg"
+									CHOICE {
+										"Nä men ok, jag testar med det":
+										"Hmm... ska försöka då":
+										"Går det att köpa en någonstans?":
+											GOTO BUY_ONE
+									}
+							}
+							GOTO FIND_MODIFIER
+
+						"Jag kan inte låna din?":
+							Hank "Nä jag behöver den ofta när jag jobbar"
+							Hank "Du vet med dörrar och sånt, suck"
+							GOTO LOST
+					}
+
+				"Vadå?":
+					Hank "Modifierare, en sån här mackapär"
+					GOTO OWN_MODIFIER
+			}
+	}
+}
+
+Hank.StopTalking()
+DEFOCUS
+GOTO BOTHER
+
+[FIND_MODIFIER]
+Hank "Säg till när du har fått tag på en!"
+Sebastian "Mm"
+Hank.StopTalking()
+Hank.SetTimetable(Hank)
+DEFOCUS
+BROADCAST ShouldGetModifier
+
+
+
+
+# later
+
+
+
+[DID_YOU_FOUND_ONE]
+LISTEN Sebastian_talk_Hank
+FOCUS
+Hank.StartTalking()
+Hank "Hej Sebastian! Har du hittat en modifierare?"
+CHOICE ETERNAL {
+	"Ja!":
+		Hank "Vill du fortfarande ha en lektion i programmeringens ädla konst?"
+		CHOICE {
+			"Visst":
+				GOTO LECTURE
+			"Nej, det är bra tack":
+				Hank "OK, OK"
+				Hank "Vi ses senare då!"
+				CHOICE {
+					"Ha det fint":
+					"Hej på ett tag!":
+				}
+				Hank.StopTalking()
+				DEFOCUS
+				LISTEN Sebastian_talk_Hank
+				Hank "Tjena tjena"
+				STOP
+		}
+	"Nej...":
+		Hank "Ok, säg till när du fått tag på en"
+		Hank.StopTalking()
+		DEFOCUS
+		GOTO DID_YOU_FOUND_ONE
+}
+
+[LECTURE]
+Hank "Härligt"
+
+[LETS_GO]
+Hank.StopTalking()
+DEFOCUS
+
+Hank.SetTimetable("Hank_GuideToFirstLecture")
+
+IF Hank.IsNotInRoom(HanksApartment) {
+	Hank "Haka på mig så ska vi gå till ett ställe där vi får vara i fred"
+}
+
+BROADCAST LetsGoToFirstLecture
+

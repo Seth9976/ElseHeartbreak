@@ -1,0 +1,335 @@
+
+LISTEN Sebastian_talk_Yulian [INTERJECTION] {
+	FOCUS
+	Yulian.StartTalking()
+
+	Yulian "Har du redan någon information?"
+	Sebastian "Nej, självklart inte"
+
+	Yulian.StopTalking()
+	DEFOCUS
+}
+
+
+WAIT Sebastian.IsNotInRoom(Lodge_Room2)
+CANCEL INTERJECTION
+
+LISTEN Sebastian_talk_Yulian
+
+FOCUS
+Yulian.StartTalking()
+
+Yulian "God dag Sebastian"
+Yulian "Har du fått tag på någon information om Mr Longson?"
+
+[GOT_INFORMATION]
+CHOICE ETERNAL {
+	"Nej, tyvärr":
+		Yulian "Ok, så?"
+		[ABOUT_LONGSON]
+		CHOICE ETERNAL {
+			"Jag hittar inte hans hus":
+				Yulian "Det ligger ju vid Plaza!"
+				Yulian "Hur kan du missa det?!"
+				CHOICE ETERNAL {
+					"Jag vet inte...":
+					"Förlåt":
+				}
+				Yulian "Gå dit så kommer du hitta det"
+				Yulian "Seså!"
+
+			"Jag kommer inte in i lägenheten":
+				Yulian "Det måste finnas något sätt"
+				Yulian "Har du sökt igenom hans kontor?"
+				CHOICE ETERNAL {
+					"Mm":
+						Yulian "OK, jag hade hoppats att det fanns några ledtrådar där"
+						CHOICE {
+							"Det kanske det gör, jag får kolla igen":
+							"Det är bara massa strunt verkar det som":
+							"Nej, inte vad jag har hittat!":
+						}
+
+					"Nej, var ligger det?":
+						Yulian "Bottenplan på kommunhuset"
+						Yulian "Koden brukade vara 13 förut, jag vet inte om de har bytt"
+						[MODIFY_KEY]
+						Yulian "Har du testat att modifiera en nyckel och se om du kan lirka dig in?"
+						CHOICE ETERNAL {
+							"Varför sa du inte det förut?!":
+								Yulian "Äsch, lite ska du väl få jobba själv grabben"
+							"Koden är 13?!":
+								Yulian "Ja, tror det"
+						}
+						Yulian "Dessutom trodde jag att du bruteforcade alla dörrar vid det här laget?"
+						CHOICE ETERNAL {
+							"Jo... jo men det är klart att jag gör":
+								Yulian "Tänkte väl"
+							"Bruteforcade?":
+								[EHHH]
+								Yulian "Ja, testar alla kombinationer alltså"
+								Yulian "Med hjälp av en loop i nyckeln"
+								Yulian "1,2,3,4... osv"
+								Yulian "Äldsta tricket i boken"
+								Yulian "Kan ta en jävla tid men det funkar ju ofta"
+								CHOICE ETERNAL {
+									"OK, ska testa det!":
+										Yulian "Bra!"
+									"Jag har försökt med det men det funkar inte":
+										Yulian "Du har väl lärt dig loopar?"
+										CHOICE {
+											"Jo...":
+											"Inte direkt":
+												Yulian "Snacka med Frank, han borde kunna visa dig ett och annat"
+										}
+										Yulian "Eller kolla om du kan hitta ett objekt som har en loop i sig"
+										Yulian "Så ser du hur de gjort där"
+										Yulian "Det är bästa sättet att lära sig på"
+										CHOICE {
+											"OK, OK":
+											"Visst...":
+											"Jo, men det är fan assvårt":
+												Yulian "Du kanske ska kolla in Franks datorer i hans rum?"
+												Yulian "Han har mycket grejer för sånt där"
+												CHOICE {
+													"Jaha?!":
+													"Ja det ska jag göra!":
+													"Bra tips":
+												}
+										}
+										Yulian "Vi hörs senare"
+								}
+							"Öhh...":
+								GOTO EHHH
+						}
+						CHOICE ETERNAL {
+							"OK, jag går tillbaka och ser om jag kan lista ut något mer":
+							"Måste dra, hej då!":
+							"Wow...":
+								Yulian "Hoppas det hjälper!"
+						}
+				}
+
+			"Hur ser han ut egentligen?":
+				Yulian "Han har en orange jacka"
+				Yulian "Gammal man"
+				Yulian "Han försöker se yngre ut än han är, helt klart"
+
+			"Jag är nog inte så bra på att skugga folk":
+				Yulian "Har han upptäckt dig?"
+				CHOICE ETERNAL {
+					"Vet inte, kanske":
+						Yulian "Ok, då måste du vidta största möjliga försiktighet"
+					"Tror inte det":
+						Yulian "Ok, vad är problemet då?"
+						Sebastian "Jag får inte fram någon information"
+						Yulian "Försök mer, det finns säkert ett sätt"
+				}
+		}
+
+	"Ja":
+		Yulian "Låt höra"
+		IF Sebastian.HasKnowledge("MetWithLongsonsWife") {
+			GOTO I_HAVE_INFO
+		}
+		IF Sebastian.HasKnowledge(PlaystationReceipt) {
+			[SOMETHING]
+			CHOICE ETERNAL {
+				"Nej, det var inget":
+					Yulian "OK"
+
+				"Jag hittade ett kvitto på hans kontor":
+					Sebastian "Det låg på en diskett"
+					Yulian "OK, intressant"
+					Yulian "Berätta mer"
+					CHOICE ETERNAL {
+						"Det var för en 'Playstation'":
+							Yulian "OK, hmm"
+							Yulian "Jag har ingen aning vad det är..."
+							CHOICE ETERNAL {
+								"Konstigt":
+								"Nähä?":
+							}
+							[HAVE_YOU_BEEN]
+							Yulian "Men det bekräftar mina misstankar mot honom"
+							Yulian "Jag gissar att han har förskingrat mer pengar än vad någon här i staden är OK med"
+							Yulian "Vi kommer kunna sätta dit honom så hårt"
+							Yulian "Hoppas jag i alla fall"
+							Yulian "Har du varit i hans lägenhet?"
+							CHOICE {
+								"Nej, inte än":
+								"Nope":
+								"Ja...":
+									Yulian "Och inget där heller?!"
+									CHOICE {
+										"Inte direkt":
+										"Det var rätt öde tyvärr":
+										"Jag hittade inte ett skit!":
+									}
+									Yulian "Crap"
+									Yulian "Du skulle kanske kunna gå dit igen och se om du missat något..."
+									CHOICE {
+										"Jag tror inte det, men visst":
+											Yulian "Bra, vi ses!"
+										"OK":
+											Yulian "Vi ses"
+										"Nej det orkar jag inte":
+											Yulian "Vad är det för inställning?!"
+											Yulian "Låt mig inte ångra att jag tagit med dig här"
+											Yulian "Måste jobba vidare nu"
+									}
+								"Jag lyckas inte ta mig in":
+									Yulian "Inte ens från baksidan?"
+									CHOICE {
+										"Baksidan?":
+											Yulian "Ja, det borde finnas någon dörr från andra sidan av huset"
+											CHOICE {
+												"Jaha...":
+													Yulian "Testa det!"
+												"Borde det?":
+													Yulian "Ja, testa det!"
+												"Varför sa du inget om det förut?!":
+													Yulian "Sorry, trodde du visste"
+													Yulian "Men, testa det!"
+											}											
+										"Nej... det är låst överallt":
+											GOTO MODIFY_KEY										
+									}
+							}
+
+						"Äsch, det var bara för någon gammal bok typ":
+							Yulian "OK..?"
+							Yulian "Ja men säg till om du hittar något annat"
+							GOTO HAVE_YOU_BEEN
+					}
+
+				"Jag vet inte om det är något...":
+					Yulian "Jo, vad har du sett?"
+					GOTO SOMETHING
+			}
+		}
+		ELIF Sebastian.HasKnowledge("GotIntoLongsonApt") {
+			[I_GOT_IN]
+			CHOICE {
+				"Jag kom in i lägenheten":
+					Yulian "Ja?"
+					GOTO I_GOT_IN
+
+				"Han verkar inte så skum":
+
+				"Jag hittade inget hos honom direkt":
+			}
+			Yulian "Inte?"
+			Yulian "Du måste gå tillbaka"
+			CHOICE {
+				"Nej, det orkar jag inte":
+				"OK?":
+			}
+			Yulian "Han måste ha någonting av värde i sin lägenhet"
+			Yulian "Prata inte med mig förrän du hittat något"
+			Yulian "Jag orkar inte med mer trams! Förstått?"
+			CHOICE {
+				"Ja, OK":
+				"Mm... förlåt":
+				"Sluta vara så sur!":
+			}
+		} 
+		ELSE {
+			CHOICE ETERNAL {
+				"Eller njae, inte direkt":
+					Yulian "OK"
+				"Han hänger mycket på den där klubben vid sjukhuset":
+					Yulian "Ja..?"
+					Yulian "Gör av med våra skattepengar, förmodar jag"
+					Yulian "Har du sett om han gör något misstänkt där då?"
+					CHOICE {
+						"Nej, inte direkt":
+							Yulian "OK"
+						"Han pratade med någon snubbe en gång":
+							Yulian "OK?"
+							CHOICE {
+								"Jag vet inte riktigt vad de sa":
+								"Business, antar jag":
+									Yulian "Mm, hmmm..."
+							}
+					}
+					Yulian "Jag tror att du måste försöka ta dig hem till honom"
+					Yulian "Han måste dölja något!"
+			}
+		}
+}
+
+Yulian.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Yulian
+FOCUS
+Yulian.StartTalking()
+Yulian "Ja? Kommit på något?"
+Yulian "Om Longson alltså?"
+GOTO GOT_INFORMATION
+
+#######################
+
+[I_HAVE_INFO]
+CHOICE {
+	"Han är ett freak!":
+	"Han har något sjukt TV-spel hos sig":
+	"Det var lite underligt...":
+}
+Yulian "Jaha?"
+
+CHOICE {
+	"Jag fattade inte något":
+		Yulian "Det är lugnt"
+		GOTO I_WILL_INVESTIGATE
+
+	"Du får gå dit själv, jag sätter inte min fot där igen":
+		Yulian "OK?!"
+		[I_WILL_INVESTIGATE]
+		Yulian "Jag ska undersöka saken själv"
+
+	"Hans fru är någon slags robot..?":
+		CHOICE {
+			"Eller hon gick att styra med datorn i alla fall":
+			"Hon var i alla fall inte en människa":
+			"Det var riktigt skumt":
+		}
+		Yulian "Shit, verkligen?!"
+		CHOICE {
+			"Japp":
+			"Det är sanningen":
+				Yulian "Wow"
+		}
+		Yulian "Haha"
+		CHOICE {
+			"Hoppas du kan använda informationen för att sätta dit honom":
+				Yulian "Ja för tusan"
+				GOTO SOON
+			"Varför skrattar du?":
+				Yulian "Det här är grym information!"
+				GOTO SOON
+		}
+}
+
+Yulian "Men det var väldigt bra att du hittade det här"
+[SOON]
+Yulian "Snart har vi den jäveln"
+Yulian "Tack för hjälpen"
+
+CHOICE {
+	"Jag är glad att jag kunde vara till nytta":
+		Yulian "Ja det var du verkligen"
+
+	"Jag ska inte göra något mer med honom..?!":
+		Yulian "Alltså, om du kan hitta mer skit på honom så är det awesome"
+		Yulian "Men annars klarar jag det här nu"
+		Yulian "Jag ska förbereda nådastöten för hans politiska karriär!"
+}
+
+Yulian "Jag säger till om jag behöver mer hjälp"
+
+Yulian.StopTalking()
+DEFOCUS
+
+BROADCAST GaveInfoAboutGeorgeToYulian

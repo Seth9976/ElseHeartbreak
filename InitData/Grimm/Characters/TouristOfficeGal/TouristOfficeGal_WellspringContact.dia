@@ -1,0 +1,99 @@
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+
+FOCUS
+TouristOfficeGal.StartTalking()
+
+IF TouristOfficeGal.HasKnowledge(Sebastian) {
+	TouristOfficeGal "Hallå där, vad behöver du hjälp med nu då?"	
+}
+ELSE {
+	TouristOfficeGal "Hej... behöver du hjälp med något?"
+}
+
+CHOICE {
+	"Jag letar efter caféet":
+		[LOOK_FOR_CAFE]
+		TouristOfficeGal "OK, ja det är inte så svårt att hitta"
+		TouristOfficeGal "Du måste bara gå en bit"
+		CHOICE {
+			"OK..?":
+			"Kan jag inte ta spårvagnen?":
+				TouristOfficeGal "Jo... men det tar nog längre tid"
+				TouristOfficeGal "Hur som helst"
+		}
+		TouristOfficeGal "Caféet ligger rätt nära plaza, fast på andra sidan parken"
+		TouristOfficeGal "Eller hur ska man säga..."
+		TouristOfficeGal "Alltså du går över bron till Burrows och sen går du mot ministeriet"
+		TouristOfficeGal "...du vet var ministeriet ligger eller?"
+		CHOICE {
+			"Njae...":
+				TouristOfficeGal "OK, du borde kolla på deras byggnad, den är helt bisarr"
+			"Jo, typ":
+				TouristOfficeGal "Mm, ok"
+			"Ja!":
+				TouristOfficeGal "OK, bra"
+		}
+		TouristOfficeGal "Ja så du går mot Ministeriet i alla fall"
+		TouristOfficeGal "Och sen svänger du vänster över en bro där"
+		TouristOfficeGal "Och så kommer du fram till en liten röd stuga där, jag tror det är en kiosk"
+		TouristOfficeGal "Då ska du svänga vänster igen i alla fall"
+		TouristOfficeGal "Och sen går man över en bro till, den har konstiga ljus på sig"
+		TouristOfficeGal "Ljusen snurrar typ, fast det syns väl mest när det är natt antar jag"
+
+		CHOICE {
+			"Ok..?":
+				TouristOfficeGal "Du verkar inte hänga med riktigt?"
+				CHOICE {
+					"Jodå, kör på":
+					"Nej, inte direkt":
+						TouristOfficeGal "Mm... du får försöka"
+						TouristOfficeGal "Jag tror inte att jag kan förklara mer detaljerat"
+						TouristOfficeGal "Börja med att gå mot ministeriet och sväng vänster sen"
+				}
+			"Hmm":
+
+			"Jag förstår precis!":
+				TouristOfficeGal "Vad bra!"
+		}
+
+		TouristOfficeGal "Och sen är man typ framme."
+		TouristOfficeGal "De har en uteservering som du inte kan missa."
+		CHOICE {
+			"Ok, tack för hjälpen!":
+				TouristOfficeGal "Inga problem"
+				TouristOfficeGal "Det är mitt jobb"
+
+			"Jag fattar typ inte alls men jag ska försöka":
+				TouristOfficeGal "Ja det är inte så svårt som det verkar"
+		}
+		TouristOfficeGal "Ta det lugnt"
+
+	"Nej, tänkte bara kolla hur du hade det här":
+		TouristOfficeGal "Eh... okeeeej"
+		TouristOfficeGal "Du är lite mysko måste jag säga"
+		TouristOfficeGal "Men jag har det bra... trött som fan"
+		CHOICE {
+			"OK":
+				TouristOfficeGal "... som vanligt!"
+				TouristOfficeGal "Jag måste fan få åka på semester snart"
+			"Ja, jag ser det":
+				TouristOfficeGal "Tack för den"
+			"Du ser inte så trött ut!":
+				TouristOfficeGal "Du ljuger dåligt"
+		}
+		Sebastian "Mm..."
+		TouristOfficeGal "Var det något annat eller?"
+		CHOICE {
+			"Nej, ska dra vidare nu":
+				TouristOfficeGal "OK, hej då"
+
+			"Hmm... ja jag letar faktiskt efter caféet":
+				TouristOfficeGal "OK?"
+				GOTO LOOK_FOR_CAFE
+		}
+}
+
+TouristOfficeGal.StopTalking()
+DEFOCUS
+
+TouristOfficeGal.SetKnowledge(Sebastian)

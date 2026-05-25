@@ -1,0 +1,18 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("CasinoHeist")
+
+SetClock(5, 15, 15, 0)
+
+Pixie.Pos(Lodge_Room1_Point1)
+Sebastian.Pos(Lodge_Room1_Point2)
+
+
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette10_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette10_2)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette9_1)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette9_2)
+Sebastian.PutIntoInventory(Factory_Office_Diskette_Diskette4_1)
+Sebastian.SetHandItem(Factory_Office_Diskette_Diskette4_1)

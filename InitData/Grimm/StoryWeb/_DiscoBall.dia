@@ -1,0 +1,26 @@
+
+# the second phase of PyjamasParty (the part when Pixie and Ivan comes to the party)
+
+Log("Time for Pixie and Ivan to go to Felix party!")
+
+Felix.SetTimetable("Felix_PyjamasParty")
+Pixie.SetTimetable("Pixie_PyjamasParty")
+Ivan.SetTimetable("Ivan_PyjamasParty")
+
+Pixie.PutAwayHandItem()
+
+Felix.SetFieldToFloat("sleepiness", 0)
+Pixie.SetFieldToFloat("sleepiness", 0)
+Ivan.SetFieldToFloat("sleepiness", 0)
+
+Felix.Pos(Cafe_Room1_Point)
+WAIT 2
+Pixie.Pos(Cafe_Room1_Point)
+WAIT 4
+Ivan.Pos(Cafe_Room1_Point)
+
+WAIT IsHour(04)
+WAIT Sebastian.NotTalking()
+
+# party is over
+Story("AfterPyjamas")

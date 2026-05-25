@@ -1,0 +1,26 @@
+
+Sebastian.Pos(Cafe_Room1_Point)
+
+Kafka.Pos(Cafe_Room1_ClerkPoint)
+Kafka.SetTimetable(Kafka)
+
+SetHour(13)
+
+StartLogging(Emma)
+#StartLogging(Gunnar)
+#StartLogging(Petra)
+
+WAIT 3
+
+Emma.SetTimetable(Emma)
+Emma.Pos(Cafe_Room1_Point)
+
+WAIT 3
+
+Gunnar.SetTimetable(Gunnar)
+Gunnar.Pos(Cafe_Room1_Point)
+
+WAIT 3
+
+Petra.SetTimetable(Petra)
+Petra.Pos(Cafe_Room1_Point)

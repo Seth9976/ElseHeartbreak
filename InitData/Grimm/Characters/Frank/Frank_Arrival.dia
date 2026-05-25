@@ -1,0 +1,43 @@
+
+# Det här händer efter att Pixie har skällt ut en?
+
+
+
+WAIT Sebastian.IsInRoom(Frank_Room) AND Frank.IsInRoom(Frank_Room) {
+    INTERRUPT IntrudingInFranksRoom
+}
+
+
+LISTEN Sebastian_talk_Frank
+FOCUS
+Frank.StartTalking()
+Frank "Känner jag dig?"
+CHOICE {
+	"Eh, nä det tror jag inte":
+	"Nej":
+	"Tyvärr inte":
+}
+Frank "Ok"
+Frank "Ha en bra dag"
+Frank.StopTalking()
+DEFOCUS
+
+WAIT 10
+
+LISTEN Sebastian_talk_Frank
+FOCUS
+Frank.StartTalking()
+Frank "Jag känner inte dig va?"
+CHOICE {
+	"Eh, nä det tror jag inte":
+	"Nej":
+	"Tyvärr inte":
+}
+Frank "Ok"
+Frank.StopTalking()
+DEFOCUS
+
+WAIT 10
+
+LISTEN Sebastian_talk_Frank
+Frank "Ursäkta men kan du sluta störa mig är du snäll"

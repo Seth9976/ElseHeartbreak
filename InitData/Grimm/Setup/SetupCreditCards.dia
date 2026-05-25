@@ -1,0 +1,69 @@
+WAIT 10 # wait a while to let sebastians credit card run its function first
+
+George.PutIntoInventory(George_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("George_CreditCard", 34000)
+WAIT 1
+
+Monad.PutIntoInventory(Monad_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Monad_CreditCard", 997200)
+WAIT 1
+
+Babcia.PutIntoInventory(Babcia_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Babcia_CreditCard", 2501)
+WAIT 1
+
+Dave.PutIntoInventory(Dave_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Dave_CreditCard", 70500)
+WAIT 1
+
+Pixie.PutIntoInventory(Pixie_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Pixie_CreditCard", 1345)
+WAIT 1
+
+Petra.PutIntoInventory(Petra_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Petra_CreditCard", 950)
+WAIT 1
+
+Dorian.PutIntoInventory(Dorian_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Dorian_CreditCard", 45)
+WAIT 1
+
+Chuck.PutIntoInventory(Chuck_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Chuck_CreditCard", 666)
+WAIT 1
+
+Zarah.PutIntoInventory(Zarah_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Zarah_CreditCard", -200)
+WAIT 1
+
+Mats.PutIntoInventory(Mats_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Mats_CreditCard", 1340)
+WAIT 1
+
+Jorgen.PutIntoInventory(Jorgen_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Jorgen_CreditCard", 1050)
+WAIT 1
+
+Fib.PutIntoInventory(Fib_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Fib_CreditCard", 752)
+WAIT 1
+
+Elsa.PutIntoInventory(Elsa_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Elsa_CreditCard", 4992)
+WAIT 1
+
+Hank.PutIntoInventory(Hank_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Hank_CreditCard", 560)
+WAIT 1
+
+Kafka.PutIntoInventory(Kafka_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Kafka_CreditCard", 7332)
+WAIT 1
+
+Nini.PutIntoInventory(Nini_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Nini_CreditCard", 2448)
+WAIT 1
+
+Glenn.PutIntoInventory(Glenn_CreditCard)
+RunMakeTransactionFunctionOnCreditCard("Glenn_CreditCard", 4722)
+WAIT 1

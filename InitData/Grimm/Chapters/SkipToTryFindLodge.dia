@@ -1,0 +1,37 @@
+
+# När man hittat The Lodge och Felix efter att ha vaknat upp hemma hos Pixie
+
+Story("FirstDay")
+WAIT 1
+Story("TryFindLodge")
+
+Pixie.Pos(Lodge_Room1_Point1)
+Pixie.SetKnowledge("Sebastian")
+
+Felix.Pos(Lodge_Entry_FelixPoint)
+Lars.Pos(Cafe_Exterior_Point)
+Typer1.Pos(Plaza_Point)
+
+SetHour(6) # trigger nini
+WAIT 1
+SetHour(12)
+
+
+Sebastian.SetKnowledge(SellSoda)
+
+Sebastian.Pos(Lodge_Entry_Point1)
+#Sebastian.Pos(Lodge_FirstCorridor_Point)
+#Sebastian.Pos(Plaza_Point)
+#Sebastian.Pos(ShoeStore_Point)
+
+#WAIT 3
+#Sebastian.Sleep(2)
+#Sebastian.Pos(Plaza_SeasidePoint)
+
+
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+UnlockDoor(Lodge_Room1_DoorToRoom2)
+
+Sebastian.CreateCigarette(Cigicigi)

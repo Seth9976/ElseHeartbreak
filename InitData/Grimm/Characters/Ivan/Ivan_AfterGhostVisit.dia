@@ -1,0 +1,205 @@
+
+# the hideout is the place where ivan is "living" on the internet
+
+Ivan.Pos("Ivan_Ghost_Point")
+Ivan.SetFieldToFloat("corruption", 100)
+
+Heart.SetCode("TheHeart_EvilTowardsIvan")
+Heart.RunMasterProgram()
+
+
+WAIT Ivan.IsFieldLessThan("corruption", 10) {
+	[CHECK_FOR_FREEDOM]
+
+	WAIT 5
+	IF Ivan.IsFieldGreaterThan("corruption", 10) {
+		GOTO CHECK_FOR_FREEDOM
+	}
+	Log("One step closer to freedom")
+
+	WAIT 5
+	IF Ivan.IsFieldGreaterThan("corruption", 10) {
+		GOTO CHECK_FOR_FREEDOM
+	}
+	Log("Yet one step closer to freedom")
+
+	WAIT 5
+	IF Ivan.IsFieldGreaterThan("corruption", 10) {
+		GOTO CHECK_FOR_FREEDOM
+	}
+
+	DEFOCUS
+	BROADCAST IvanIsFree
+	Log("Ivan is free!!!")
+}
+
+
+
+LISTEN Sebastian_talk_Ivan
+FOCUS
+Ivan.StartTalking()
+
+Ivan "Hjälp mig, hjälp mig"
+
+CHOICE {
+	"Hur?":
+		[SUFFERING]
+		Ivan "Jag lider..."
+		Ivan "Corruption"
+		Ivan "COR RUP  TION!"
+
+	"Va?":
+		GOTO SUFFERING
+}
+
+CHOICE {
+	"Vänta här så ska jag hjälpa dig om ett tag":
+
+	"Hmm, jag tror att jag har något som kan hjälpa dig... en sekund":
+}
+
+Ivan.StopTalking()
+DEFOCUS
+
+
+# later
+
+
+[CAN_GIVE_DRINK]
+LISTEN Sebastian_talk_Ivan
+FOCUS
+Ivan.StartTalking()
+
+CHOICE ETERNAL {
+	"Jag har något du borde testa att dricka":
+		Ivan "?"
+		Ivan.StartWaitForGift()
+		LISTEN Sebastian_give_Ivan
+		WAIT Ivan.HasAnyHandItem()
+		WAIT Ivan.IsIdle()
+		IF Ivan.HasHandItemOfType(Drink) {
+			Ivan.UseHandItem()
+			WAIT Ivan.IsIdle()
+			WAIT 1
+			IF Ivan.IsFieldLessThan("corruption", 10) {
+				Ivan "sdgskjd;j;sdffffff"
+				Ivan.StopTalking()
+				GOTO GAVE_WORKING_DRINK
+			} ELSE {
+				Ivan "Jag känner ingenting"
+				WAIT Ivan.IsIdle()
+				[IVAN_GIVE_BACK_AGAIN]
+				Ivan.Interact(Sebastian)
+				WAIT 1
+				Ivan.Give()
+				WAIT 3
+				IF Ivan.HasNoHandItem() {
+					# go on
+				} ELSE {
+					# try again
+					GOTO IVAN_GIVE_BACK_AGAIN
+				}
+			}
+		}
+		ELSE {
+			Ivan "Det här kan man..."
+			Ivan "väl inte dricka....?"
+			Ivan "Vällll....??!!!"
+			[IVAN_GIVE_BACK_AGAIN_2]
+			Ivan.Interact(Sebastian)
+			WAIT 1
+			Ivan.Give()
+			WAIT 3
+			IF Ivan.HasNoHandItem() {
+				# go on
+			} ELSE {
+				# try again
+				GOTO IVAN_GIVE_BACK_AGAIN_2
+			}
+		}
+		Ivan.StopWaitForGift()
+
+	"Hur mår du?":
+		Ivan "Inte...."
+		Ivan "Så bra"
+
+	"Varför är du här?":
+		Ivan "Jag..."
+		Ivan "AJ!!!"
+		Ivan "Vet inte"
+		Ivan "HEART"
+		Ivan "Monad?!?!"
+		Ivan "Snälla..."
+		Ivan "Ahhhh"
+}
+
+Ivan.StopTalking()
+DEFOCUS
+
+GOTO CAN_GIVE_DRINK
+
+
+[GAVE_WORKING_DRINK]
+
+Ivan.StopWaitForGift()
+Ivan "Jag känner mig som en människa igen!"
+WAIT 5
+#Ivan "Det är fantastiskt"
+
+IF Ivan.IsFieldGreaterThan("corruption", 10) {
+	Ivan "<3 <3 <3"
+	Ivan "AHHHHH"
+	Ivan "Haaaaaaaaaaaa"
+	Ivan "RTTTTT"
+	WAIT 2
+	Ivan.Interact(Sebastian)
+	WAIT Ivan.IsIdle()
+	Ivan "Det är ingen idé"
+	[IVAN_GIVE_BACK_AGAIN_3]
+	Ivan.Interact(Sebastian)
+	WAIT 1
+	Ivan.Give()
+	WAIT 3
+	IF Ivan.HasNoHandItem() {
+		# go on
+	} ELSE {
+		# try again
+		GOTO IVAN_GIVE_BACK_AGAIN_3
+	}
+	Ivan "Den är för stark"
+
+	CHOICE {
+		"Va?!":
+		"Vad hände??":
+		"Huh?":
+	}
+
+	Ivan "Aj det gör ont..."
+	Ivan "Jag vill ut"
+	Ivan "PIXIE VAR ÄR DU!"
+	Ivan "Heart"
+	Ivan "PIXIE"
+	Ivan "Det håller mig fast!!!"
+	Ivan "VAR ÄR DU?????!"
+}
+
+DEFOCUS
+GOTO CAN_GIVE_DRINK
+
+
+# unreachable?
+
+
+LISTEN Sebastian_talk_Ivan {
+	[MORE]
+	Ivan "Pixie..."
+	LISTEN Sebastian_talk_Ivan
+	Ivan "Var är hon?"
+	LISTEN Sebastian_talk_Ivan
+	Ivan "Aj det gör ont!"
+	LISTEN Sebastian_talk_Ivan
+	GOTO MORE
+}
+
+
+LISTEN DONT_STOP

@@ -1,0 +1,24 @@
+
+Amanda.SetTimetable("AmandaClubDot")
+
+WAIT Amanda.IsInRoom(Mines_ClubDot)
+
+WAIT IsHour(3) {
+	Amanda.SetTimetable("Amanda")
+	STOP
+}
+
+LISTEN Sebastian_talk_Amanda
+FOCUS
+Amanda "Har du sett Emma?"
+CHOICE {
+	"Eh nej":
+	"Vem e det?":
+		Amanda "Strunt samma"
+}
+DEFOCUS
+
+[AGAIN]
+LISTEN Sebastian_talk_Amanda
+Amanda "Ursäkta mig"
+GOTO AGAIN

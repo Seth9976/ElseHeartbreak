@@ -1,0 +1,63 @@
+
+Typer1.SetHandItem(Typer1Modifier)
+Typer1.SetTimetable(Typer1_Detour)
+#Typer1.Pos(Plaza_Point) # this makes it VERY (too) easy to find him
+
+WAIT Typer1.IsWithinDistance(Plaza_CurcuitLocker_4, 3) LISTEN Sebastian_talk_Typer1
+FOCUS
+Typer1.StartTalking()
+
+CHOICE {
+    "God dag":
+    "Hejsan":
+}
+
+CHOICE {
+    "Vem är du?":
+    "Vad håller du på med?":
+}
+
+Typer1 "Var god lämna området omgående"
+
+Typer1.PutAwayHandItem()
+WAIT Typer1.HasNoHandItem()
+
+CHOICE {
+    "OK, men vem är du?":
+    "OK, men vad håller du på med?":
+    "Ok, då ska jag inte störa":
+        GOTO WILL_LEAVE
+}
+
+Typer1 "Ingen sådan information kan lämnas ut"
+Typer1 "Var god kontakta kansli 4 på ministeriet om du vill starta ett ärende"
+
+IF Sebastian.HasKnowledge(SellSoda) {
+    CHOICE {
+        "Du vill inte köpa en läsk förresten?":
+            Typer1 "Nej, sånt håller jag inte på med"
+
+        "OK, jag ska väl ta och gå då...":
+    }
+}
+ELSE {
+    Sebastian "OK, jag ska väl ta och gå då..."
+}
+
+[WILL_LEAVE]
+Typer1 "Adjö"
+
+DEFOCUS
+Typer1.StopTalking()
+Typer1.SetTimetable("")
+Typer1.Interact(Plaza_CurcuitLocker_4)
+
+WAIT 4
+
+Plaza_CurcuitLocker_4.Explode()
+Plaza_CurcuitLocker_4.SetCode("FuseBoxHackerTrap")
+Typer1.SetTimetable("")
+Typer1.Sleep(2)
+SecretFloppy.Pos(Plaza_CurcuitLocker_4)
+
+BROADCAST Typer1WasHitByExplosion

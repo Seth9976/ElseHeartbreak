@@ -1,0 +1,7 @@
+
+Typer5.SetTimetable(Typer5)
+Typer5.Pos(HarborNorth_Point)
+
+IF RedCase.IsInRoom(RadioStation) {
+    RedCase.Pos(Ministry_Offices2_Trigger_1)
+}

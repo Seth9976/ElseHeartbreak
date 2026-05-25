@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint"]
+{"row":145,"values":["\"Room\"","\"InsideLocker\"","[]","true","{\"x\":30000,\"y\":0}"]}

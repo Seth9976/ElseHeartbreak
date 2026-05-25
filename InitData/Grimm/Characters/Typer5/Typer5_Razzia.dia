@@ -1,0 +1,23 @@
+
+Typer5.SetTimetable(Typer5_Razzia)
+
+LISTEN Sebastian_talk_Typer5
+FOCUS
+Typer5.StartTalking()
+
+[AGAIN]
+CHOICE {
+    "Vad gör ni?":
+        Typer5 "Vi utför en enkel rutinkontroll"
+
+    "Hejsan, jag heter Sebastian":
+        Typer5 "Mm"
+        GOTO AGAIN
+
+    "Är det lugnt att passera här eller?":
+        Typer5 "Javisst"
+}
+
+Typer5.StopTalking()
+DEFOCUS
+

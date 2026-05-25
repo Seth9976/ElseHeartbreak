@@ -1,0 +1,4 @@
+
+WAIT Monad.IsInRoom(Ministry_MonadsOffice) AND Sebastian.IsInRoom(Ministry_MonadsOffice)
+
+Story(FoundBackdoor)

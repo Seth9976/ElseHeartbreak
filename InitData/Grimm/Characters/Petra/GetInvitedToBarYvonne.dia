@@ -1,0 +1,91 @@
+FOCUS
+Petra.StartTalking()
+
+Petra "Hur gillar du det än då?"
+
+CHOICE {
+	"Det är OK, har inte riktigt lärt känna någon än eller så":
+	"Vet inte... jag kom ju precis":
+	"Det är en fin stad!":
+		Petra "Tycker du?"
+		Petra "Eller jo men den den är väl OK"
+		Petra "Har du lärt känna några som bor här då?"
+		CHOICE {
+			"Njae, inte direkt":
+			"Jo lite folk på hotellet typ":
+				Petra "Mm ok.."
+				Petra "De räknas väl i och för sig inte riktigt"
+				CHOICE {
+					"Nä, kanske inte":
+					"Jo de är trevliga":
+				}
+			"Vet inte...":
+		}
+}
+
+Petra "Men då måste du komma ut och träffa lite folk!"
+Petra "Så du inte sitter hemma själv på kvällarna"
+
+CHOICE {
+	"OK..?":
+		Petra "Se inte så skeptisk ut!"
+	"Ja det vore trevligt":
+		Petra "Ja!"
+	"Jag vet inte, måste ju jobba och så också":
+		Petra "Du kanske är lite blyg..?"
+		Petra "I så fall måste du försöka övervinna din rädsla!"
+		CHOICE {
+			"Nä alltså jag har bara en riktigt jobbig chef typ":
+			"Mm...":
+			"Hur gör man det?":
+				Petra "Man utmanar sig själv!"
+		}
+}
+
+Petra "Men du"
+Petra "Jag ska DJ:a ikväll på bar Yvonne"
+Petra "Du borde komma dit och hänga"
+Petra "De har riktigt billig öl dessutom"
+
+CHOICE {
+	"Bar Yvonne?":
+	"OK, låter ju rätt intressant":
+	"Jaha...":
+}
+
+Petra "Det ligger vid Plaza"
+
+CHOICE {
+	"OK, var är Plaza?":
+		Petra "Ja men det är jättenära här, du bara tar höger när du kommit ut från caféet"
+		Petra "Det är liksom som ett torg med en fontän i mitten"
+		Petra "Själva klubben ligger i källaren på ett hus"
+		CHOICE {
+			"OK":
+			"Jaha...":
+				Petra "De har en skylt med ett skelett på, du kan inte missa det"
+		}
+
+	"Jaha, jo men då tror jag att jag har varit där faktiskt!":
+		Petra "Men toppen, du borde gå dit så ofta du kan"
+		Petra "Jag spelar där hela tiden"
+		CHOICE {
+			"OK, det ska jag göra":
+			"Coolt!":
+		}
+}
+
+CHOICE {
+	"Ska dra nu... men tack för tipset":
+		Petra "Ingen orsak, ta det lugnt"
+	"Nej nu ska jag inte störa mer":
+		Sebastian "Hej då och ha en bra dag"
+		Petra "Du med!"
+}
+
+Petra "Och glöm inte att komma ikväll!"
+Petra.SetKnowledge("HasInvitedSebastianToBarYvonne")
+Petra.SetKnowledge(Sebastian)
+
+Petra.StopTalking()
+DEFOCUS

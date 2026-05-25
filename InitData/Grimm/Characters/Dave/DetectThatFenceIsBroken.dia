@@ -1,0 +1,18 @@
+
+[AGAIN]
+LISTEN Fence_grill_Dave
+
+Dave "Vad i helvete?!!"
+
+Dave.SetTimetable(Dave_DayOff)
+Jorgen.SetTimetable(Jorgen_DayOff)
+Glenn.SetTimetable(Glenn_DayOff)
+
+WAIT Dave.IsSleeping()
+FactoryAccessComputer.SetCodeAndRun(FactoryAccessComputer)
+
+Dave.SetTimetable(Dave)
+Jorgen.SetTimetable(Jorgen)
+Glenn.SetTimetable(Glenn)
+
+GOTO AGAIN

@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint"]
+{"row":116,"values":["\"Room\"","\"SebastiansApartment\"","[{\"x\":-2,\"y\":-2},{\"x\":-2,\"y\":-1},{\"x\":-2,\"y\":0},{\"x\":-2,\"y\":1},{\"x\":-1,\"y\":-2},{\"x\":-1,\"y\":-1},{\"x\":-1,\"y\":0},{\"x\":-1,\"y\":1},{\"x\":0,\"y\":-2},{\"x\":0,\"y\":-1},{\"x\":0,\"y\":0},{\"x\":0,\"y\":1},{\"x\":1,\"y\":-2},{\"x\":1,\"y\":-1},{\"x\":1,\"y\":0},{\"x\":1,\"y\":1}]","true","{\"x\":21000,\"y\":0}"]}

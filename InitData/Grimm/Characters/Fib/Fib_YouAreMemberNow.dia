@@ -1,0 +1,101 @@
+
+DorisGardens_West_DoorToSchack.UnlockDoor()
+
+
+LISTEN Sebastian_talk_Fib
+FOCUS
+Fib.StartTalking()
+
+
+IF Fib.HasKnowledge("Sebastian") {
+    
+    Fib "Hej Sebastian!"
+    Fib "Hur går det?"
+    CHOICE {
+        "Jag har börjat jobba med programmering också nu!":
+            Fib "Wow, coolt!"
+            Fib "Var då?"
+            CHOICE {
+                "Eh, kan inte berätta":
+                "På The Lodge":
+                    [LODGE]
+                    Fib "The Lodge?"
+                    Fib "THE Lodge?!"
+                    Fib "Det är ju sjukt"
+                    CHOICE {
+                        "Är det?":
+                        "Va?":
+                        "Nej, det är väl inte så konstigt?":
+                    }
+                    Fib "Alla undrar vad The Lodge är..."
+                    Fib "Det här är creepy"
+                    Fib "Vi får prata mer sen, jag känner mig helt skum"
+            }
+
+        "Jag vet inte, har kanske tagit mig vatten över huvudet":
+            Fib "Jaha?"
+            CHOICE {
+                "Jag kan inte berätta så mycket mer":
+                    Fib "Nähä..?"
+                "Jag har börjat jobba på the lodge":
+                    GOTO LODGE
+            }
+
+        "Helt OK, hur går det för dig?":
+            Fib "Det växer bra"
+            CHOICE {
+                "Skönt":
+                "Härligt!":
+            }
+    }
+
+} ELSE {
+    INTERRUPT GetToKnowFib
+    FOCUS
+}
+
+
+CHOICE {
+    "Hej då":
+    "Ta hand om dig":
+        Fib "Du med"
+}
+
+Fib.StopTalking()
+DEFOCUS
+
+
+# later
+
+
+LISTEN Sebastian_talk_Fib
+FOCUS
+Fib.StartTalking()
+Fib "Hej igen Sebastian"
+CHOICE {
+    "Tjena":
+    "God dag":
+    "Hej Fib!":
+}
+CHOICE {
+    "Vackert väder":
+        Fib "Ja, det är riktigt skönt"
+        Fib "Jag tror att blommorna gillar det också"
+        CHOICE {
+            "Härligt":
+            "OK, vad bra":
+            "Mhm?":
+        }
+
+    "Hur går det med modifieraren?":
+        Fib "Det går bra..."
+        Fib "Inte så mycket att göra så här års"
+}
+CHOICE {
+    "Hej då!":
+    "Lycka till med trädgårn":
+        Fib "Tack!"
+}
+Fib "Ta det lugnt"
+Fib.StopTalking()
+DEFOCUS

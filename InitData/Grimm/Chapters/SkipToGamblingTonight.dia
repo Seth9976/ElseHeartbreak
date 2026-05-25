@@ -1,0 +1,21 @@
+
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("GamblingTonight")
+
+SetClock(5, 20, 0, 0)
+
+Monad.SetKnowledge(SebastianExperiment)
+Sebastian.SetKnowledge(AlternativeExperiment)
+
+Sebastian.Pos(Casino_Exterior_PointOnGround)
+#Sebastian.Pos(Casino_Floor2_Point)
+
+WAIT 3
+#Pixie.Pos(Casino_Exterior_PointOnGround)
+
+
+# Sebastian.Hack(Casino_Floor1_Fence_1)
+

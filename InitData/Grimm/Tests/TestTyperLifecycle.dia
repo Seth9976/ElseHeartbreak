@@ -1,0 +1,21 @@
+
+
+SetClock(0, 06, 00, 0)
+
+Sebastian.Pos(BureucratApartment1_Trigger_1)
+
+#Typer1.Pos(BureucratApartment1_FerryCabinSofaBed_FerryCabinSofaBed_1)
+
+#Typer1.Pos(Ministry_Lobby_Point1)
+#Typer2.Pos(Ministry_Lobby_Point2)
+
+Typer1.SetTimetable(Typer1)
+Typer2.SetTimetable(Typer2)
+Typer3.SetTimetable(Typer3)
+Typer4.SetTimetable(Typer4)
+Typer5.SetTimetable(Typer5)
+
+#StartLogging(Typer1)
+#StartLogging(Typer2)
+
+#StartLogging(Ministry_Elevator2_Computer)

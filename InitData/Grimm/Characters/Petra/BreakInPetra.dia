@@ -1,0 +1,26 @@
+
+FOCUS
+
+IF Petra.HasKnowledge(Sebastian) {
+    Petra "Eh, vad gör du här?"
+} ELSE {
+    Petra "Vem är du, vad gör du här?!"
+}
+
+CHOICE {
+    "Ursäkta, jag går bara runt och kollar":
+        Petra "Kan du vara snäll och inte göra det i min lägenhet?"
+    "Jag letar efter en person":
+        Petra "OK, hen är inte här"
+        Petra "Var snäll och lämna mig i fred nu, jag bor faktiskt här"
+    "Känner du inte igen mig?":
+        IF Petra.HasKnowledge(Sebastian) {
+            Petra "Jo Sebastian"
+            Petra "Du verkar jättetrevlig men måste du klampa in i min lägenhet utan att fråga?"
+        } ELSE {
+            Petra "Va, eh nä?"
+            Petra "Var snäll och gå nu"
+        }        
+}
+
+DEFOCUS

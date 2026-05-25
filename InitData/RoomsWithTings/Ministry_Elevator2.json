@@ -1,0 +1,5 @@
+Rooms
+1
+["csharp-class","name","tiles","exterior","worldPosition","optiGrid","optiGridSize","optiGridOffset"]
+["System.String","System.String","GameTypes.IntPoint[]","System.Boolean","GameTypes.IntPoint","System.String","GameTypes.IntPoint","GameTypes.IntPoint"]
+{"row":101,"values":["\"Room\"","\"Ministry_Elevator2\"","[]","false","{\"x\":80,\"y\":-202}","\"0011111111110000001111111111111100111111111111110011111111111111001111111111111110111111111111110011111111111111001111111111111100111111111111110001111111110000\"","{\"x\":16,\"y\":10}","{\"x\":-14,\"y\":-5}"]}

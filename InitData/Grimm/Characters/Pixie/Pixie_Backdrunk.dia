@@ -1,0 +1,37 @@
+WAIT 10
+
+Pixie.SetTimetable("")
+Pixie.Pos(PixiesApartment_Point)
+Pixie.SetKnowledge("ClubDotCatastrophy")
+
+
+WAIT IsHour(9) # the same hour that Sebastian is put into pixies bed
+
+Pixie.SetFieldToFloat("sleepiness", 0)
+Petra.SetFieldToFloat("sleepiness", 0)
+Petra.SetTimetable("")
+Petra.Pos(Pixie)
+Petra.Interact(Pixie)
+
+WAIT 5
+WAIT Sebastian.IsStanding()
+Log("START OF PETRA AND PIXIE RANT")
+
+Pixie.StartTalking()
+#Petra "Oj, haha"
+#Pixie "Mm"
+Petra "Så han däckade??!"
+FOCUS
+Pixie "Ja han ligger och sover nu"
+Petra "Vadå är han här?"
+#Pixie "Ja"
+#Petra "Du skojar?!"
+#Pixie "Nej nej"
+#Petra "Ok, haha"
+Pixie "Ja, men jag ska väcka honom snart, jag måste dra till jobbet nu"
+Pixie "Är massa strul med en dator"
+Petra "Tur att man inte har ditt jobb. Vi ses!"
+Pixie "Hej då!"
+Pixie.StopTalking()
+Petra.SetTimetable(Petra) 
+DEFOCUS

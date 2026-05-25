@@ -1,0 +1,11 @@
+Monad.SetTimetable("")
+Monad.Interact(Ministry_Lobby_MinistryElevatorDoor_2)
+
+WAIT Monad.IsInRoom(Ministry_Elevator2)
+Monad.Interact(Ministry_Elevator2_Computer)
+
+WAIT 2
+Monad "Monad"
+
+WAIT 2
+Monad.SetTimetable("Monad")

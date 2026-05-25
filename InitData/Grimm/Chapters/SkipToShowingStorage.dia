@@ -1,0 +1,6 @@
+Sebastian.Pos(HarborWest_Point)
+
+WellspringRepresentant.Pos(HarborWest_Point)
+WellspringRepresentant.Interact(HarborWest_SodaStorageComputer)
+
+START ShowingTheStorage

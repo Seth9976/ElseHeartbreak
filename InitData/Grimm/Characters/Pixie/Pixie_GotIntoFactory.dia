@@ -1,0 +1,9 @@
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+Pixie "Sebastian, hej?!!?"
+Pixie "Jag är så trött, kan vi prata om hur det gick sen på kontoret istället?"
+Pixie.StopTalking()
+DEFOCUS

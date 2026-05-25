@@ -1,0 +1,127 @@
+Gunnar.SetTimetable(Gunnar)
+
+
+LISTEN Sebastian_talk_Gunnar
+
+FOCUS
+Gunnar.StartTalking()
+Gunnar "Nå?"
+
+CHOICE {
+	"Jo det är så att jag säljer läsk":
+		Gunnar "På så vis"
+		CHOICE {
+			"Är du inte sugen?":
+			"Den är jättegod":
+		}
+		Gunnar "Jag dricker bara kaffe"
+
+	"Är du törstig?":
+		Gunnar "Ja"
+		Sebastian "Så bra, då har jag den perfekta lösningen"
+		Gunnar "Det är därför jag dricker kaffe"
+		CHOICE {
+			"Heh, jaha..":
+			"Du vill inte ha lite variation då?":
+				Gunnar "Nej det är bra"
+		}
+}
+
+Gunnar "Men du"
+Gunnar "Vad är det för sorts läsk du säljer?"
+
+CHOICE {
+	"Wellspring":
+	"Wellspring Soda - det goda valet":
+	"Eh, den heter 'Wellspring'":
+}
+
+Gunnar "På så vis"
+Gunnar "Har du några alldeles nytillverkade burkar?"
+
+CHOICE {
+	"Javisst, flera stycken":
+	"Ehm... jag vet inte så noga":
+		Sebastian "Jag tror de flesta är det"
+}
+
+Gunnar "OK, jag tar en"
+Gunnar "Du får 5 för den"
+Sebastian "OK!"
+
+
+[TRY_GIVE_AGAIN]
+Gunnar.PutAwayHandItem()
+WAIT Gunnar.HasNoHandItem()
+Gunnar.StartWaitForGift()
+LISTEN Sebastian_give_Gunnar {
+	RemoveDanglingDialogueOptions("Gunnar_CanSellSoda")
+	WAIT Gunnar.HasAnyHandItem()
+	Gunnar.StopWaitForGift()
+	IF Gunnar.HasHandItemOfDrinkType("soda") {
+		RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 5)
+		Gunnar "Tack, tack"
+		Gunnar.PutAwayHandItem()
+		WAIT Gunnar.HasNoHandItem()
+		Sebastian.SetKnowledge("HasSoldSodaToGunnar")
+	} ELSE {
+		Gunnar "Det här är ingen läsk"
+		Gunnar.Give()
+		WAIT Sebastian.HasAnyHandItem()
+		GOTO TRY_GIVE_AGAIN
+	}	
+	Gunnar.StopWaitForGift()
+	GOTO DONE_SELLING
+}
+IF Sebastian.HasDrinkOfType("soda") {
+	LISTEN Forever
+} ELSE {
+	CHOICE {
+		"Hmm, jag verkar ha glömt att ta med några burkar att sälja...":
+		"Oj, det här var väldigt pinsamt":
+			Gunnar "Vadå?"
+			Sebastian "Jag har inte några burkar med mig"
+	}
+	Gunnar "På så vis"
+	Gunnar "Adjö"
+	GOTO DONE_SELLING
+}
+
+[DONE_SELLING]
+
+Gunnar.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Gunnar
+Gunnar.StartTalking()
+IF Sebastian.HasKnowledge(HasSoldSodaToGunnar) {
+	Sebastian "Glad för burken?"
+	Gunnar "Jodå"	
+} ELSE {
+	FOCUS
+	Gunnar.StartTalking()
+	Gunnar "Har du en burk att sälja nu?"
+	CHOICE {
+		"Ja!":
+			GOTO TRY_GIVE_AGAIN
+		"Nej...":
+			GOTO DONE_SELLING
+	}
+}
+Gunnar.StopTalking()
+
+
+LISTEN Sebastian_talk_Gunnar
+Gunnar.StartTalking()
+Sebastian "Vad ska du göra med burken?"
+Gunnar "Har lite experiment jag tänkt göra länge"
+Gunnar.StopTalking()
+
+
+[HMPH]
+LISTEN Sebastian_talk_Gunnar
+Gunnar.StartTalking()
+Gunnar "Hmph, kan man inte få en lugn stund?"
+Gunnar.StopTalking()
+GOTO HMPH

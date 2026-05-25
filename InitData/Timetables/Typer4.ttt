@@ -1,0 +1,15 @@
+
+08:15 - 12:30 Work 		Interact 	 	Wellspringer
+12:30 - 14:00 Eat       BeInRoom        Ministry_GuardKitchen
+14:00 - 20:30 Work      BeInRoom        Ministry_Offices2
+20:30 - 08:15 Sleep		Sleep			BureucratApartment4_FerryCabinSofaBed_FerryCabinSofaBed_1
+
+
+[Typer4_Razzia]
+00:00 - 24:00 _ BeInRoom Hotel_Lobby
+
+[Typer4_LodgeBreak]
+00:00 - 24:00 LodgeBreak BeInRoom Lodge_Entry
+
+[Typer4_Hunt]
+00:00 - 24:00 Hunt Interact Sebastian

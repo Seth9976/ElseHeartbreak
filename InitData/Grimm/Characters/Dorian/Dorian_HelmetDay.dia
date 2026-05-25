@@ -1,0 +1,15 @@
+
+Dorian.SetTimetable(Dorian)
+
+LISTEN Sebastian_talk_Dorian
+FOCUS
+Dorian.StartTalking()
+
+IF Dorian.HasKnowledge(Sebbe) {
+    Dorian "Hej Sebbe"
+} ELSE {
+    Dorian "Hej Sebastian"
+}
+
+Dorian.StopTalking()
+DEFOCUS

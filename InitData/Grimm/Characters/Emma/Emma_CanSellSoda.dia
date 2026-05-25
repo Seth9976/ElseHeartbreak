@@ -1,0 +1,82 @@
+#WAIT Emma.IsAtTask(LeisureTime)
+LISTEN Sebastian_talk_Emma
+
+Emma.StartTalking()
+Emma "Vem är du?"
+FOCUS
+
+CHOICE {
+	"Hej mitt namn är Sebastian, är du intresserad av att köpa en burk Wellspring?":
+		Emma "Det är någon slags läsk, eller hur?"
+		CHOICE {
+			"Ja och inte vilken läsk som helst! Den är fantastiskt god.":
+				Emma "Det säger du bara"
+			"Mm":
+		}
+		Emma "Kan jag få en burk att provsmaka?"
+		CHOICE {
+			"Jag delar tyvärr inte ut varuprov":
+				Emma "Ser man på"
+				Emma "Då kan du vara snäll och lämna mig i fred kanske"
+			"Ja, självklart":
+				Emma "Tack"
+				Emma "Du kan gå nu"
+		}
+	"Jag heter Sebastian, vad heter du?":
+		Emma "Va? Vad vill du?"
+		CHOICE {
+			"Jag är ny i stan":
+				[BUY_ME_DRINK]				
+				IF Emma.IsInRoom(BarYvonne) {
+					Sebastian "Så jag gick hit till den här baren för att se om det var något drag"
+					Emma "Var det det då?"
+					CHOICE {
+						"Vet inte...":
+						"Du var ju här iaf":
+					}
+					Emma "Du, kan inte du köpa en drink till mig?"
+					CHOICE {
+						"Jag vet inte om jag har råd":
+							Emma "OK, då tycker jag att du kan pysa"
+						"Ja, jättegärna! Stanna kvar här då?":
+							Emma "Mm"
+							DEFOCUS
+							WAIT 15
+							Emma.StopTalking()
+							Emma.Walk(Cafe_Room1_Point)
+					}
+				} ELSE {
+					Emma "Aha"
+					Emma "Men du, jag måste gå nu"
+					Emma "Hej då"
+				}
+				
+			"Eh... det var inget":
+
+			"Tänkte bara kolla läget":
+				Emma "Jaha du"
+				GOTO BUY_ME_DRINK
+		}
+
+	"Jag är mannen från dina drömmar":
+		Emma "Vad i helvete"
+		Emma "Gå och trakasera någon annan är du snäll gullet"
+}
+
+Emma.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Emma [GO_AWAY] {	
+	Emma "Gå nu är du snäll"
+}
+
+WAIT IsHour(3)
+CANCEL GO_AWAY
+
+LISTEN Sebastian_talk_Emma
+
+Sebastian "Hej igen, är du på bättre humör idag?"
+Emma "Nej"
+
+
+LISTEN DontStopThis

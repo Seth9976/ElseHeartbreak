@@ -1,0 +1,34 @@
+FOCUS
+Gunnar.StartTalking()
+
+Gunnar "Vem där? Jag ska inte ha något"
+
+CHOICE {
+	"Jag heter Sebastian":
+		Gunnar "Vad vill du?"
+		CHOICE {
+			"Ehhh...":
+				Gunnar "Stick härifrån är du snäll"
+			"Jag tänkte bara se vem som bor här inne":
+				Gunnar "Ja det är det jag som gör. Stick härifrån nu!"
+				Gunnar "Jävla stil att bara klampa in hos folk sådär"
+		}			
+	"Hej!":
+		Gunnar "Vem är du? Vad gör du i mitt hus?!"
+		CHOICE {
+			"Eh jag heter Sebastian":
+				Gunnar "Varför skulle jag bry mig om det, stick iväg!"
+			"Jag tänkte bara se vem som bor här inne":
+				Gunnar "Ja det är det jag som gör. Stick härifrån nu!"
+		}
+}
+
+Gunnar.StopTalking()
+DEFOCUS
+
+WAIT 5
+WAIT Sebastian.IsInRoom(Hut)
+
+FOCUS
+Gunnar "Men gå för i helvete!"
+DEFOCUS

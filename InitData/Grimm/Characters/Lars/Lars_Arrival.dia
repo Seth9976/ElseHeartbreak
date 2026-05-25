@@ -1,0 +1,215 @@
+
+Lars.SetTimetable("LarsVisitCafe")
+
+LISTEN Sebastian_talk_Lars [TALK_BEFORE_CHATEAU] {
+	FOCUS
+	Lars.StartTalking()
+
+    Sebastian "Hejsan"
+    Lars "Hallöja"
+
+	CHOICE {
+		"Vem är du?":
+			Lars "Jag heter Lars"
+            Sebastian.SetKnowledge(Lars)
+            CHOICE {
+                "OK, mitt namn är Sebastian":
+                "Jag heter Sebbe":
+            }
+            Lars.SetKnowledge(Sebastian)
+            Lars "Hej på dig du"
+            CHOICE {
+                "Vad gör du?":
+                    GOTO NOT_MUCH
+
+                "Har du sett någon som letar efter mig?":
+                    Lars "Det var en klurig fråga"
+                    Lars "Eftersom att jag inte vet vem det är som letar efter dig, menar jag"
+                    CHOICE {
+                        "Ja just det":
+                        "Mm":
+                        "Men du kanske har sett någon misstänkt typ?":
+                            Lars "Njae..."
+                    }
+                    Sebastian "Hmm..."
+                    GOTO HOW_LOOK
+            }            
+
+        "Vad händer här då?":
+            [NOT_MUCH]
+            Lars "Inte mycket"
+            Lars "Livet leker"
+	}
+
+    CHOICE {
+        "Tack för pratstunden, nu ska jag gå vidare":
+
+        "Jag letar efter en person som letar efter mig":
+            Lars "Jaha..?"
+            [HOW_LOOK]
+            Lars.SetKnowledge(SebastianLookingForPerson)
+            Lars "Hur ser den här personen ut då?"
+            CHOICE {
+                "Jag har inte sett honom":
+                    [IS_IT_A_MAN]
+                    Lars "Men det är en man?"
+                    CHOICE {
+                        "Ja, det ska det vara":
+                        "Tror det":
+                    }
+                    Lars "Det är en massa folk som springer fram och tillbaka här"
+                    Lars "Har du kollat inne på caféet?"
+                    CHOICE {
+                        "Jupp, det var ingen som visste något där":
+                        "Nej, det kanske jag borde":
+                            Lars "Ja, gör det"
+                    }
+                    Lars "Annars är det ju mycket folk kring Plaza"
+                    CHOICE {
+                        "Jag tyckte det såg tomt ut?":
+                            Lars "Du kanske är van vid storstan?"
+                            CHOICE {
+                                "Jag vet inte...":
+                                "Jo, typ":
+                            }
+                            Lars "Eller så var du där vid fel tid på dygnet"
+                            Lars "Många jobbar ju mitt på dagen"
+                            Lars "Kanske värt att gå dit på eftermiddagen eller kvällen?"
+                            CHOICE {
+                                "Ja jag testar det":
+                                    Sebastian "Hej då!"
+                                "OK, bra idé. Vi ses":
+                            }
+
+                        "Var ligger det då?":
+                            Lars "Jo men det är nära"
+                            IF Lars.IsInRoom(Cafe_Exterior) {
+                                Lars "Precis bredvid här faktiskt, bakom kommunhuset där borta"
+                                Lars "Det gröna huset bredvid parken"
+                            }
+                            Lars "Du får följa gatuskyltarna, eller leta rätt på en karta"
+                            CHOICE {
+                                "OK, tack för hjälpen!":
+                                "Var finns det kartor?":
+                                    Lars "Vette tusan... har de inte sånt på kommunhuset?"
+                                    CHOICE {
+                                        "Jo kanske":
+                                            CHOICE {
+                                                "Tack och hej då!":
+                                                "Vi ses":
+                                            }
+                                        "Var är det då?":
+                                            Lars "Jo men det ligger på Plaza"
+                                            CHOICE {
+                                                "OK, det var ju dit jag inte hittade":
+                                                    Lars "Just det..."
+                                                    Sebastian "Men jag får väl leta runt"
+                                                    Lars "Gör så, lycka till"
+                                                    CHOICE {
+                                                        "OK, hej då":
+                                                        "Tack för hjälpen!":
+                                                    }
+                                                "Ah, tack!":
+                                            }
+                                    }                                    
+                            }
+                    }
+
+                "Inte den blekaste":
+                    GOTO IS_IT_A_MAN
+
+                "Det är det som jag inte vet!":
+                    Lars "Vad irriterande då... hmm"
+                    GOTO IS_IT_A_MAN
+            }
+    }
+
+    Lars "Ta det lugnt, monsieur"
+	Lars.StopTalking()
+	DEFOCUS
+
+    LISTEN Sebastian_talk_Lars
+    FOCUS
+    Lars.StartTalking()
+    Lars "Vilken härlig luft det är idag!"
+    CHOICE {
+        "Ja, verkligen!":
+        "Är det?":
+            Lars "Ja!"
+        "Jag hittar inte Plaza":
+            Lars "Jo, det är ju jättelätt att hitta!"
+            Lars "Det står en fontän i mitten"
+            Lars "Du måste ha sett det?!"
+            CHOICE {
+                "Nä...":
+                "Jaha, är det det som är Plaza?":
+                    Lars "Jupp jupp"
+            }
+    }
+    Lars "Ha det fint!"
+    Lars.StopTalking()
+    DEFOCUS
+
+    LISTEN Sebastian_talk_Lars
+    FOCUS
+    Lars.StartTalking()
+    Lars "Hej igen Sebastian!"
+    [ASK_MORE]
+    CHOICE {
+        "Hej igen Lars!":
+            GOTO ASK_MORE
+        "Allt väl?":
+            Lars "Jajaja, allt är toppen"
+        "Vad händer?":
+            Lars "Inte mycket"
+    }
+    Lars.StopTalking()
+    DEFOCUS
+}
+
+WAIT Sebastian.IsSleepingOnGround() AND Sebastian.IsInEitherRoom(Plaza, PlazaBackstreet, BurrowsNorth, Hospital_Exterior, PoliceOffice_Exterior, HarborEast, HarborSouth, HarborWest, HarborNorth, PoorDesolateBuilding1_Exterior, DorisGardens_East, DorisGardens_West, Ministry_Exterior) LISTEN Sebastian_fellAsleep
+CANCEL TALK_BEFORE_CHATEAU
+
+INTERRUPT MovedToLars
+
+WAIT 15
+# later
+
+
+LISTEN Sebastian_talk_Lars
+FOCUS
+Lars.StartTalking()
+
+Lars "Hallöja!"
+
+CHOICE {
+    "Hej Lars!":
+    "God dag":
+    "Hejsan. Är det ok om jag kallar dig för Lasse?":
+        Lars "Ja ja ja, det gör alla"
+}
+
+Lars "Vad händer idag då grabben?"
+
+CHOICE {
+    "Vet inte":
+    "Inte mycket...":
+}
+
+
+Lars.StopTalking()
+DEFOCUS
+
+
+
+[AGAIN]
+WAIT 60
+
+
+LISTEN Sebastian_talk_Lars
+Lars "Hallå hallå!"
+
+LISTEN Sebastian_talk_Lars
+Lars "Tjenamors"
+
+GOTO AGAIN

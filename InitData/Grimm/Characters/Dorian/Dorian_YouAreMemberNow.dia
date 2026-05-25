@@ -1,0 +1,92 @@
+
+
+LISTEN Sebastian_talk_Dorian
+FOCUS
+Dorian.StartTalking()
+
+CHOICE {
+    "Hej":  
+    "God dag":
+    "Ursäkta mig":
+}
+
+Dorian "Har du tänkt på hur datorprograms skönhet liknar hur vi ser på människor?"
+
+CHOICE {
+    "Va?!!":
+    "Eh... nej":
+    "Inte alls, hur då?":
+    "Ja..?":
+}
+
+Dorian "En människa har både yttre och inre skönhet"
+Dorian "Som en väldigt vacker person... men som är väldigt elak"
+Dorian "Han eller hon kan uppfattas som fulare..."
+
+CHOICE {
+    "Mm... jo":
+    "Ah, ja exakt!":
+    "OK?":
+}
+
+Dorian "Än en person som har lite skavanker"
+Dorian "Men som har ett gott hjärta..."
+Dorian "De människorna upplevs oftast som vackrast, inte sant?"
+WAIT 1
+Dorian "Det är samma sak med datorprogram!"
+Dorian "Ett program kan verka helt perfekt på utsidan, när man använder det"
+Dorian "Men inuti kanske det är en enda röra..."
+
+CHOICE {
+    "Heh, ja det känner jag till":
+    "Fan vad sant!":
+        Dorian "Ja, vad skönt att du förstår"
+    "OK, och?":
+        Dorian "Var inte så dissig!"
+        Dorian "Strunt samma då"
+        CHOICE {
+            "Heh":
+            "Förlåt, det var inte meningen":
+                Sebastian "Berätta mer, snälla"
+        }
+}
+
+Dorian "Det måste såklart finnas en balans"
+Dorian "Både inre och yttre skönhet"
+Dorian "För lite av någon del... det är inte bra"
+Dorian "Vad har du för dig en dag som denna, min vän?"
+
+CHOICE {
+    "Eh... det är hemligt":
+        Dorian "Å, jag älskar hemlisar"
+
+    "Vet inte, driver väl mest runt":
+        Dorian "Sätt dig ner och tänk istället"
+        Dorian "Skriv något"
+        CHOICE {
+            "Jag gillar inte att skriva":
+            "Ja, det kanske jag borde göra":
+        }
+
+    "Jag letar efter något":
+        Dorian "Meningen med livet?"
+        CHOICE {
+            "Typ":
+            "Njae":
+            "Ja, exakt":
+        }
+}
+
+Dorian.StopTalking()
+DEFOCUS
+
+
+
+
+
+
+
+
+
+
+

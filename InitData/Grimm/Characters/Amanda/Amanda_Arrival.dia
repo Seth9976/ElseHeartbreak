@@ -1,0 +1,56 @@
+
+LISTEN Sebastian_talk_Amanda
+FOCUS
+Amanda.StartTalking()
+
+Amanda "Tja"
+
+CHOICE {
+    "Tja":
+    "Hejsan":
+    "God kväll":
+    "God dag":
+}
+
+Amanda "Ny i stan?"
+
+CHOICE {
+    "Mm...":
+    "Ja, faktiskt!":
+    "Typ":
+}
+
+Amanda "Vilken skitstad det är"
+
+CHOICE {
+    "Va?":
+    "Nej, vad är så dåligt med den?":
+    "Jag gillar den!":
+}
+
+Amanda "Skitväder också"
+Amanda "Regnar ju jämt"
+Amanda "Yulian säger att det är deras fel"
+
+CHOICE {
+    "Eh... ok?":
+    "Vilkas?":
+}
+
+Amanda "Varför kan det inte bara bli som förr?"
+Amanda "Allt är skit"
+Amanda.StopTalking()
+DEFOCUS
+
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Amanda
+
+Amanda "Sorry, jag orkar inte prata mer"
+
+LISTEN Sebastian_talk_Amanda
+
+Amanda "Du jag är riktigt stressad just nu, har inte riktigt lust att prata"
+
+GOTO AGAIN

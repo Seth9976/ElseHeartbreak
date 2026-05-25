@@ -1,0 +1,55 @@
+
+LISTEN Sebastian_talk_Bouncer
+Bouncer.StartTalking()
+FOCUS
+
+CHOICE {
+    "Hej, hur är läget?":
+        Bouncer "Sådär"
+
+    "Tja!":
+        Bouncer "Hejsan svejsan"
+}
+
+WAIT 1
+Bouncer "Hur är det med dig?"
+
+CHOICE {
+    "Jag har fått ett nytt jobb!":
+        Bouncer "Kul för dig"
+        Bouncer "Vad då för något då?"
+        CHOICE {
+            "Kan inte säga tyvärr":
+                Bouncer "Nähäpp"
+            "Programmerare":
+                Bouncer "Jaha, vad roligt för dig!"
+                Bouncer "Hoppas du kommer att trivas"
+                CHOICE {
+                    "Det tror jag":
+                    "Tack!":
+                    "Ja... det är svårt":
+                        Bouncer "Kan tänka mig det"
+                }
+        }
+
+    "Det är rätt bra faktiskt":
+        Bouncer "Trevligt att höra"
+
+    "Vet inte, jag har en konstig krypande känsla i kroppen":
+        Bouncer "Jag vet hur det känns"
+        Bouncer "Som att något ska gå fel"
+        Bouncer "Eller att man glömt bort en viktig sak man skulle göra"
+        CHOICE {
+            "Ja exakt!":
+            "Mm precis...":
+            "Typ så ja":
+        }
+}
+
+DEFOCUS
+Bouncer.StopTalking()
+
+
+
+LISTEN Sebastian_talk_Bouncer
+Bouncer "Hej!"

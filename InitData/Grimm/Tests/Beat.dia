@@ -1,0 +1,50 @@
+#StartLogging(Sebastian)
+
+Sebastian.Interact(TouristOfficeGal)
+LISTEN Defocused_TouristOfficeGal_Arrival
+
+Sebastian.Interact(Babcia)
+LISTEN Defocused_Babcia_Arrival
+
+Sebastian.Interact(Hotel_Corridor_Door1)
+WAIT Sebastian.IsIdle()
+Sebastian.Interact(Babcia)
+LISTEN BabciaWaitsForCreditCard
+Sebastian.TakeOutItem(SebastianCreditCard)
+WAIT Sebastian.HasHandItemOfType(CreditCard)
+Sebastian.Give()
+WAIT Sebastian.HasHandItemWithName(KeyRoom1)
+Sebastian.Interact(Hotel_Corridor_Door1) # walk up to the door
+WAIT 100
+Sebastian.TakeOutItem(KeyRoom1)
+WAIT Sebastian.HasHandItemWithName(KeyRoom1)
+Sebastian.InteractUsingHandItem(Hotel_Corridor_Door1) # unlock
+WAIT 10
+Sebastian.Interact(Hotel_Corridor_Door1) # walk through door
+WAIT Sebastian.IsInRoom(Hotel_Bathroom)
+Sebastian.Interact(Babcia)
+WAIT Hank.IsInRoom(Hotel_Corridor)
+Sebastian.Interact(Hotel_Room1_Bed)
+WAIT Sebastian.IsInRoom(Hotel_Room1)
+
+Log("Got through arrival!!!!!")
+
+# "First day"
+Sebastian.Walk(Hotel_Lobby_Point)
+
+Sebastian.Walk(Cafe_Room1_Point)
+
+Sebastian.Walk(HarborWest_Point)
+
+Sebastian.Walk(WellspringRepresentant)
+
+Sebastian.Interact(TouristOfficeGal)
+
+Sebastian.Interact(Bob)
+
+Sebastian.Interact(Babcia)
+
+Sebastian.Interact(Hotel_Room1_Bed)
+
+
+Log("Reached the end of beat script!")

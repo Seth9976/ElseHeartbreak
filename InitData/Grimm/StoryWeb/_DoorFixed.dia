@@ -1,0 +1,4 @@
+
+Hotel_Lobby_DoorToHotelExterior.SetDoorTarget(Hotel_Exterior_DoorToHotel)
+
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)

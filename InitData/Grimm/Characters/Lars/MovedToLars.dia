@@ -1,0 +1,107 @@
+WAIT 10
+
+Sebastian.CarefulLayInBed("PoliceOffice_Exterior_Poor_Bed_Poor_Madrass_1")
+
+Lars.SetTimetable("")
+Lars.Pos("PoliceOffice_Exterior_SofaSeat_5")
+
+WAIT Sebastian.IsStanding()
+
+Lars.StartTalking()
+FOCUS
+Sebastian.CancelWalking()
+Lars "Dags att vakna nu?"
+
+CHOICE {
+    "Shit, var är jag?":
+        Lars "Det här min vän"
+        Lars "Är Lars chateauåå"
+
+    "Vem är du?":
+        Lars "Ta det lugnt grabben"
+        Lars "Lars var namnet"
+}
+
+Sebastian.SetKnowledge(Lars)
+Sebastian.SetKnowledge(HasWokenUpAtLarsPlace)
+
+CHOICE {
+    "Vänta nu... hur hamnade jag här?":
+        [NOT_COMFORTABLE]
+        Lars "Du såg inte ut att ligga så bekvämt på gatan"
+        Lars "Så jag tog mig friheten att flytta dig hit"
+        CHOICE {
+            "Jaha, tack så mycket":
+                Lars "Inga problem grabben"
+            "Ok..?":
+                Lars "Jaså, det föll inte herrn på läppen"
+                GOTO NOT_HAPPEN_AGAIN
+            "Vänta usch, har du burit mig hit?":
+                Lars "Hallå? Här visar man minsan ingen tacksamhet alls"
+                [NOT_HAPPEN_AGAIN]
+                Lars "Ska inte hända igen, jag lovar"
+                CHOICE {
+                    "Eh, förlåt det var inte så jag menade":
+                    "Bra":
+                }
+                GOTO BYE
+        }
+
+    "Bor du här?":
+        Lars "Ja ja ja, exactemånn"
+        CHOICE {
+            "Men varför låg jag på den här madrassen?":
+                GOTO NOT_COMFORTABLE
+
+            "...mysigt!":
+                Lars "Tackar tackar, ja jag har ju sjöutsikt och allting"
+                Lars "Man klagar inte"
+                CHOICE {
+                    "Bra!":
+                    "Ok, vilken tur":
+                }
+        }
+}
+
+[TIME_TO_GO]
+CHOICE {
+    "Hur hittar jag hem härifrån?":
+        Lars "Hem? Var är hem?"
+        CHOICE {
+            "Jag bor på hotellet":
+                Lars "Jaha ja, så du är turist?"
+                CHOICE {
+                    "Typ":
+                    "Nej, jag jobbar här":
+                }
+                Lars "Ajaja"
+
+            "Jag vet inte... jag är inte från stan":
+        }
+        Lars "Centrum ligger rätt över bron där borta"
+        Lars "Sen har du gruvorna uppe bakom polisstationen"
+        Lars "Och så sjukhuset rakt fram"
+        CHOICE {
+            "OK, tack så mycket":
+            "Men var är hotellet?":
+                Lars "Det ligger väl inåt stan, änna?"
+                Lars "Gå över ån här så borde du hitta på't"
+                CHOICE {
+                    "OK, tack!":
+                    "Mhm...":
+                }
+        }
+
+    "Adjö så länge!":
+        GOTO BYE
+    "Nej jag ska nog ta och gå":
+        GOTO BYE
+}
+
+[BYE]
+Lars "Ha det gött"
+Lars.StopTalking()
+DEFOCUS
+
+Lars.SetTimetable("Lars")
+

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BA3CDB16-787D-43EA-8412-A96FEE0DBC58}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GrimmLib</RootNamespace>
+    <AssemblyName>Grimm</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GameTypes">
+      <HintPath>..\..\..\GameTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Relay">
+      <HintPath>..\..\..\Relay.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>..\..\..\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>..\..\..\System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssertDialogueNode.cs" />
+    <Compile Include="BranchingDialogueNode.cs" />
+    <Compile Include="BreakDialogueNode.cs" />
+    <Compile Include="BroadcastDialogueNode.cs" />
+    <Compile Include="CallFunctionDialogueNode.cs" />
+    <Compile Include="CancelDialogueNode.cs" />
+    <Compile Include="ConversationEndDialogueNode.cs" />
+    <Compile Include="ConversationStartDialogueNode.cs" />
+    <Compile Include="DefocusDialogueNode.cs" />
+    <Compile Include="DialogueNode.cs" />
+    <Compile Include="DialogueRunner.cs" />
+    <Compile Include="DialogueScriptLoader.cs" />
+    <Compile Include="DialogueScriptPrinter.cs" />
+    <Compile Include="ExpressionDialogueNode.cs" />
+    <Compile Include="FocusDialogueNode.cs" />
+    <Compile Include="GotoDialogueNode.cs" />
+    <Compile Include="GrimmAssertException.cs" />
+    <Compile Include="GrimmException.cs" />
+    <Compile Include="IfDialogueNode.cs" />
+    <Compile Include="ImmediateNode.cs" />
+    <Compile Include="InterruptDialogueNode.cs" />
+    <Compile Include="IRegisteredDialogueNode.cs" />
+    <Compile Include="ListeningDialogueNode.cs" />
+    <Compile Include="LoopDialogueNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SilentDialogueNode.cs" />
+    <Compile Include="Speech.cs" />
+    <Compile Include="StartCommandoDialogueNode.cs" />
+    <Compile Include="StopDialogueNode.cs" />
+    <Compile Include="TimedDialogueNode.cs" />
+    <Compile Include="TimedWaitDialogueNode.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="Tokenizer.cs" />
+    <Compile Include="UnifiedEndNodeForScope.cs" />
+    <Compile Include="WaitDialogueNode.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,10 @@
+
+LISTEN Sebastian_talk_Frank
+
+FOCUS
+Frank.StartTalking()
+Frank "Tjena Sebastian"
+Frank "Kan vi ta det om ett tag?"
+Frank "Är lite busy"
+Frank.StopTalking()
+DEFOCUS

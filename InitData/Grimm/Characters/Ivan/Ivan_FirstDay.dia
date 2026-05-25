@@ -1,0 +1,65 @@
+
+LISTEN Sebastian_talk_Ivan 
+
+FOCUS
+Ivan.StartTalking()
+Ivan "Ja???"
+
+CHOICE {
+	"Ursäkta jag heter Sebastian, är det du som letar efter mig?":
+
+	"Ursäkta, är det här caféet?":
+		Ivan "Haha, är du vilse?"
+		CHOICE {
+			"Eh":
+			"Nä men...":
+		}
+		Ivan "Ja, det är det!"
+		Ivan "Bästa fiket i stan"
+		Sebastian "OK, det råkar inte vara du som letar efter mig..?"
+}
+
+Ivan "Haha, va?"
+Ivan "Varför skulle jag leta efter dig?"
+
+CHOICE {
+	"Det var någon som kom till hotellet där jag bor":
+		Ivan "Devotchka antar jag?"
+		CHOICE {
+			"Ja precis":
+			"Vadårå?":
+				Ivan "Haha, det är sånt man ser"
+		}
+
+	"En man sökte mig tidigare idag":
+		Ivan "OK"
+}
+
+CHOICE {
+	"Men det var inte du då eller?":
+	"Nå? Var det du som letade efter mig eller inte?!":
+		Ivan "Chilla lite mannen"
+}
+
+Ivan "Nä, det var inte jag"
+
+CHOICE {
+	"OK, tack för hjälpen":
+	"Nähä... hej då":
+	"Synd":
+}
+
+Sebastian.SetKnowledge("Ivan")
+Ivan.SetKnowledge("Sebastian")
+
+Ivan.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Ivan 
+FOCUS
+Ivan.StartTalking()
+Ivan "Ja???!!"
+Ivan "Jag orkar inte snacka mer med dig grabben"
+Ivan.StopTalking()
+DEFOCUS

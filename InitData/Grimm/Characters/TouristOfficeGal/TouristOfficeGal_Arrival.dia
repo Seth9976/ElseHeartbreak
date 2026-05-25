@@ -1,0 +1,196 @@
+
+START TryToStealTouristOfficeRadio
+
+WAIT Sebastian.IsInRoom(TouristOffice)
+
+TouristOfficeGal.SetFieldToFloat("sleepiness", 80)
+
+WAIT 3
+
+LISTEN HI_THREAD {
+	TouristOfficeGal "Välkommen"
+}
+BROADCAST HI_THREAD
+
+
+[TRY_AGAIN]
+
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+FOCUS
+
+CHOICE {
+	"God kväll!":
+		TouristOfficeGal "Hallå"
+		TouristOfficeGal "Vad kan jag hjälpa dig med?"	
+		
+	"Hej, mitt namn är Sebastian":
+		TouristOfficeGal "OK, kan jag hjälpa dig med något?"
+		
+	"Hej, har jag kommit till Dorisburg?":
+		TouristOfficeGal "Jepp, det verkar inte bättre"
+		TouristOfficeGal "Kan jag hjälpa dig med något?"
+
+	"Äh, det var inget":
+		DEFOCUS
+		WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+		FOCUS
+		CHOICE {
+			"Förresten...":
+			"Hrm, ursäkta mig?":
+		}
+		TouristOfficeGal "Ja?"
+
+	"[TRY_AGAIN]":
+		GOTO TRY_AGAIN
+}
+
+CHOICE {
+	"Jag letar efter mitt hotell":
+		TouristOfficeGal.SetKnowledge("SebastianLookingForHotel")
+		TouristOfficeGal "OK, ja det finns inte så många att välja på här i stan"
+		[WHICH_ONE_IS_IT]
+		TouristOfficeGal "Är det Hotel Devotchka eller Grand Chrystal Star?"
+		CHOICE {
+			"Devotchka låter bekant, var ligger det?":
+				TouristOfficeGal "Du följer bara vattnet här utanför tills du kommer till en bro"
+				TouristOfficeGal "Gå inte över bron, utan sväng vänster istället"
+				GOTO I_UNDERSTAND
+				
+			"Jag tror att det var Grand Chrystal...":
+				TouristOfficeGal "Du följer bara vattnet här utanför tills du kommer till en bro"
+				TouristOfficeGal "Gå över bron, och fortsätt rakt framåt"
+				CHOICE {
+					"Tack så mycket!":
+						TouristOfficeGal "Inga problem, lycka till!"
+					"OK, jag ska inte svänga någonstans?":
+						TouristOfficeGal "Nä inte direkt, bara över bron och så fortsätt i den riktningen"
+						TouristOfficeGal "Lycka till!"
+				}
+				Sebastian.SetKnowledge("GrandChrystalStar")
+				GOTO ENDING
+		}
+		
+	"Jag är sjukt trött":
+		TouristOfficeGal "Jag med..."
+		CHOICE {
+			"Jag måste försöka hitta mitt hotell innan jag somnar":
+				Sebastian "Jag tror att någon bokat ett åt mig"
+				Sebastian "Men jag minns inte riktigt vad det hette"
+				TouristOfficeGal "Hmm OK... du ser ut som en person som bor på Hotel Devotchka"
+				CHOICE {
+					"Var ligger det?":
+						TouristOfficeGal "Du följer bara vattnet här utanför tills du kommer till en bro"
+						TouristOfficeGal "Gå inte över bron, utan sväng vänster istället"
+						GOTO I_UNDERSTAND
+				
+					"Vadå, hur ser jag ut?":
+						TouristOfficeGal "Äh, strunt i det. Jag menar bara att du inte har någon kostym på dig."
+						TouristOfficeGal "För att komma till Hotel Devotchka så följer du bara vattnet här utanför tills du kommer till en bro"
+						TouristOfficeGal "Gå inte över bron, utan sväng vänster istället"
+						GOTO I_UNDERSTAND
+				}
+			
+			"Är det OK om jag sover här på soffan?":
+				TouristOfficeGal "Nej, det får man tyvärr inte"
+				TouristOfficeGal "Dessutom stänger vi rätt snart"
+				CHOICE {
+					"OK, typiskt. Hej då då!":
+						TouristOfficeGal "Ha det"
+						GOTO ENDING
+					"Snälla? Jag vet inte var jag ska sova ikväll!":
+						TouristOfficeGal "Verkligen?"
+						Sebastian "Alltså, jag har ett hotell bokat åt mig"
+						Sebastian "Men jag vet inte var det ligger"
+						GOTO WHICH_ONE_IS_IT
+				}
+		}
+}
+
+CHOICE {
+	"Det låter lite svårt men jag ska försöka":
+		TouristOfficeGal "Annars kan du alltid komma tillbaka, vi har öppet ett litet tag till"
+		CHOICE {
+			"Toppen":
+			"OK, hej då!":
+		}
+		TouristOfficeGal "Ha det!"
+	
+	"Tack för hjälpen!":
+		TouristOfficeGal "Ha det"
+}
+
+GOTO ENDING
+
+[I_UNDERSTAND]
+CHOICE {
+	"OK, jag fattar":
+		TouristOfficeGal "Så bra, det är rätt vanligt att folk går vilse i den här staden"
+	"Följ vattnet, sedan vänster...":
+		TouristOfficeGal "Ja, typ"
+		TouristOfficeGal "Sen går du bara rakt framåt så kommer du till hotellet"
+	"Följ vattnet, sedan höger...":
+		TouristOfficeGal "Eh ja, fast vänster"
+		Sebastian "OK"
+}
+TouristOfficeGal "Lycka till!"
+
+
+[ENDING]
+TouristOfficeGal.SetKnowledge(Sebastian)
+TouristOfficeGal.StopTalking()
+DEFOCUS
+
+IF Sebastian.HasItemOfType(Map) {
+	
+} ELSE {
+	WAIT 1
+	TouristOfficeGal "Ta en stadskarta förresten"
+	TouristOfficeGal "De ligger där på bänken, vi har massor"
+}
+
+# later #
+
+
+[BOTHER]
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+FOCUS
+TouristOfficeGal.StartTalking()
+TouristOfficeGal "Mm?"
+CHOICE {
+	"Jag hittar inte mitt hotell":
+		IF Sebastian.HasKnowledge("GrandChrystalStar") {
+			TouristOfficeGal "är du säker att det var Grand Chrystal Star?"
+			CHOICE {
+				"Hmm...":
+				"Njae...":
+			}
+			TouristOfficeGal "Kanske var Devotchka ändå..?"
+			TouristOfficeGal "I sa fall följer du bara vattnet här utanför tills du kommer till en bro"
+			TouristOfficeGal "Gå inte över bron, utan sväng vänster istället"
+			CHOICE {
+				"Ok, testar det...":
+				"Mm visst":
+			}
+			TouristOfficeGal "God natt"
+		} ELSE {
+			TouristOfficeGal "Men hur svårt ska det vara"
+			TouristOfficeGal "Gå till vänster när du kommit ut ur huset här"
+			TouristOfficeGal "Följ vattnet tills du kommer till en bro"
+			TouristOfficeGal "Sväng vänster och gå typ 50 meter"
+			TouristOfficeGal "Du kan inte missa det!"
+		}
+
+	"Det är mycket läskiga typer som stryker omkring där ute":
+		TouristOfficeGal "Verkligen?"
+		TouristOfficeGal "Dorisburg är känt för att vara en mycket säker stad"
+		TouristOfficeGal "Det säger de från ministeriet i alla fall"
+
+	"Oops, sorry det var inget":
+		TouristOfficeGal "Ta det försiktigt"
+
+	"Vad heter du?":
+		TouristOfficeGal "Victoria"
+}
+TouristOfficeGal.StopTalking()
+DEFOCUS
+GOTO BOTHER

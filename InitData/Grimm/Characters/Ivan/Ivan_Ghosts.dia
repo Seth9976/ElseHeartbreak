@@ -1,0 +1,145 @@
+
+Ivan.SetTimetable("")
+
+WAIT Sebastian.IsNotInRoom(Hotel_Room1) AND Sebastian.IsSleeping() AND IsHour(01) [NOT_IN_ROOM_1] {
+	Log("Sebastian is not in room 1...")
+	Sebastian.Pos(Hotel_Room1_Bed)
+	Sebastian.SetKnowledge(GotTeleportedToGhost)
+	CANCEL IN_ROOM_1
+	GOTO GHOST_HOUR
+}
+
+WAIT Sebastian.IsInRoom(Hotel_Room1) AND Sebastian.IsSleeping() AND IsHour(01) [IN_ROOM_1] {
+	Log("Sebastian is in room 1!")
+	CANCEL NOT_IN_ROOM_1
+	GOTO GHOST_HOUR
+}
+
+LISTEN FOREVER
+
+
+
+[GHOST_HOUR]
+Log("Ghost hour!")
+
+Ivan.SetCorruption(100)
+#Ivan.Pos(Hotel_Room1_Point2)
+Ivan.Pos(Hotel_Room1_Chair_1)
+Sebastian.WakeUp()
+
+FOCUS
+
+WAIT 3
+
+IF Sebastian.HasKnowledge(GotTeleportedToGhost) {
+	CHOICE {
+		"Var är jag?!":
+		"AHHH, vad händer?!!":
+		"Öööö.....":
+		"Hur hamnade jag här?":
+	}
+}
+
+CHOICE {
+	"Är det någon där?":
+		
+	"Hallå..?":
+
+	"[CHEAT]":
+		GOTO CHEAT		
+}
+BROADCAST GhostHour
+
+Ivan.SetCorruption(90)
+Ivan "Ja..?"
+
+CHOICE {
+	"Vem är du?":
+		Ivan "Jag hör dig inte"
+	"Vad händer?!":
+		Ivan "Jag ser dina läppar röra sig men inget ljud kommer ur dem"
+}
+
+Ivan.SetCorruption(70)
+Ivan "AaaahhHHHhhhh"
+Ivan.SetCorruption(100)
+Ivan "Jag står inte ut"
+Ivan.SetCorruption(80)
+
+CHOICE {
+	"Stick härifrån!":
+		CHOICE {
+			"Vad gör du i mitt rum?! Ut härifrån!":
+			"Vik hädan, demon!":
+		}
+	
+	"Var är du någonstans?":
+		CHOICE {
+			"Jag kan inte se dig!":
+			"Är det någon där?":
+		}
+		Ivan "Pixie..?!"
+}
+
+Ivan.SetCorruption(70)
+Ivan "Var är jag?"
+
+CHOICE {
+	"Du är i mitt rum":
+	"I Dorisburg":		
+}
+
+Ivan.SetCorruption(50)
+Ivan "Var är du????????"
+
+CHOICE {
+	"Jag är ju här":
+		CHOICE {
+			"Ser du mig inte?":
+			
+			"Jag försöker faktiskt sova":
+		}
+		
+	"Letar du efter någon?":
+		
+} 
+
+Ivan.SetCorruption(60)
+Ivan "Pixie?"
+Ivan "PIXIE"
+Ivan.SetCorruption(40)
+Ivan "Jag känner doften av dig"
+Ivan.SetCorruption(90)
+
+# Ivan materialiseras på golvet framför sebbe och går fram till honom
+# Han försöker krama Sebbe
+
+# (spöken ska kunna gå från nästan verkliga uppenbarelser med bara lite transparens till helt immateriella som bara kastar skuggbilder på väggarna runt sig)
+
+[CHEAT]
+CHOICE {
+	"Jag är inte Pixie":
+	"Men jag är Sebastian":
+	"Är det du, Ivan?":
+}
+
+# Ivan.Mood("Angry")
+Sebastian.SetKnowledge("IvanIsGhost")
+
+Sebastian.Sleep(5)
+WAIT 1
+Ivan.Interact(Hotel_Room1_FuseBox)
+
+WAIT 10
+
+#Ivan.Interact(Hotel_Room1_Door1)
+#WAIT Ivan.IsInRoom(Hotel_Corridor)
+Ivan.Pos(Ivan_Ghost_Point)
+Ivan.SetTimetable("Ivan_Ghost")
+
+Hotel_Room1_FuseBox.SetCode("GhostBox")
+Hotel_Room1_FuseBox.SetResettableCode("GhostBox")
+
+DEFOCUS
+
+BROADCAST HasMetIvanAsGhost

@@ -1,0 +1,22 @@
+00:00 - 07:00	Sleeping	Sleep	 	Frank_Room_FerryCabinSofaBed_FerryCabinSofaBed_1
+07:00 - 24:00	Working	 	Interact    Lodge_Room1_ComputerCashier
+
+[FrankDjAtClubDot]
+05:00 - 16:00	Preparing	BeAtTing 	Frank_Room_FerryCabinSofaBed_FerryCabinSofaBed_1
+16:00 - 05:00	DJing	 	Interact 	Mines_ClubDot_TurnTableMixer_TurnTableMixer_1
+
+[FrankSleepHoleDay]
+00:00 - 24:00   Sleeping    Sleep       Frank_Room_FerryCabinSofaBed_FerryCabinSofaBed_1
+
+[FrankLongFika]
+00:00 - 07:00	Sleeping	Sleep	 	Frank_Room_FerryCabinSofaBed_FerryCabinSofaBed_1
+07:00 - 24:00	Fikaing	 	Sit         Lodge_Room2_SofaSeat_1 Lodge_Room2_SofaSeat_2
+
+[Frank_TalkToPixie]
+00:00 - 24:00 _ Interact Pixie
+
+[Frank_TalkYulian]
+00:00 - 24:00 _ Interact Yulian
+
+[Frank_Overtime]
+00:00 - 24:00   Working     Interact    Lodge_Room1_ComputerCashier

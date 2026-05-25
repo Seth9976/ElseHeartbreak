@@ -1,0 +1,60 @@
+
+Frank.SetTimetable(FrankDjAtClubDot)
+
+WAIT Frank.IsInRoom(Mines_ClubDot)
+
+
+WAIT Frank.IsWithinDistance(Mines_ClubDot_TurnTableMixer_TurnTableMixer_1, 20)
+
+IF Mines_ClubDot_TurnTableMixer_TurnTableMixer_1.BoolIsTrue("isPlaying") {
+	Frank "Vafan!!!"
+	Frank "Vem har satt igång mitt DJ-set?!?"
+	Frank "Ahhh"
+	Frank "Någon har pillat på mina grejer, fy fan va dåligt"
+	WAIT Frank.IsWithinDistance(Mines_ClubDot_TurnTableMixer_TurnTableMixer_1, 3)
+	Frank "Då blir det fan ingen spelning!!!"
+	Frank "Jävla idioter"
+	Mines_ClubDot_TurnTableMixer_TurnTableMixer_1.StopMusic()
+	Frank.SetTimetable(Frank)
+	Frank "%&8&%GHGHH"
+	WAIT 1
+	Frank "%78€&H"
+	WAIT 1
+	Frank "!!!%&8!&%BFRGGH"
+	WAIT 1
+	Frank "Jävla skit"
+}
+
+
+WAIT Frank.IsAtTask(DJing) LISTEN Sebastian_talk_Frank {
+	FOCUS
+	Frank.StartTalking()
+	Frank "Ja?"
+	CHOICE {
+		"Grym musik!":
+			Frank "Tack"
+
+		"Ni har inget lite lugnare?":
+			Frank "Va?"
+			Frank "Nej, nu är det jag som bestämmer vad som ska spelas"
+
+		"Trevlig kväll!":
+			Frank "Ja..?"
+	}
+	Frank.StopTalking()
+	DEFOCUS
+
+	WAIT Frank.IsAtTask(DJing) LISTEN Sebastian_talk_Frank
+	Frank "Sorry, jag tar inga önskningar"
+
+	WAIT Frank.IsAtTask(DJing) LISTEN Sebastian_talk_Frank
+	Frank "Du hörde mig"
+}
+
+
+
+
+WAIT IsHour(08)
+
+Frank.SetTimetable(Frank)
+Mines_ClubDot_TurnTableMixer_TurnTableMixer_1.StopMusic()

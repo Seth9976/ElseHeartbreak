@@ -1,0 +1,378 @@
+# Pixie picks up all the floppys
+IF Factory_Office_Diskette_Diskette10_1.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette10_1)
+}
+IF Factory_Office_Diskette_Diskette10_2.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette10_2)
+	Pixie.SetKnowledge("GotEncryptedFloppy")
+}
+IF Factory_Office_Diskette_Diskette9_1.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette9_1)
+}
+IF Factory_Office_Diskette_Diskette9_2.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette9_2)
+}
+IF Factory_Office_Diskette_Diskette4_1.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette4_1)
+}
+IF Factory_Office_Diskette_Diskette8_1.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette8_1)
+}
+IF Factory_Office_Diskette_Diskette7_2.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette7_2)
+}
+IF Factory_Office_Diskette_Diskette6_1.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette6_1)
+}
+IF Factory_Office_Diskette_Diskette5_1.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette5_1)
+}
+IF Factory_Office_Diskette_Diskette5_2.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette5_2)
+}
+IF Factory_Office_Diskette_Diskette9_4.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette9_4)
+}
+IF Factory_Office_Diskette_Diskette4_2.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette4_2)
+}
+IF Factory_Office_Diskette_Diskette9_5.IsInRoom(Lodge_Room1) {
+	Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette9_5)	
+}
+
+Pixie.SetTimetable("Pixie")
+Pixie.StopTalking()
+
+WAIT Pixie.IsAtTask(Work) LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+Pixie.SetFieldToFloat("sleepiness", 0)
+
+Pixie "Hallå Sebbe, läget?"
+
+CHOICE {
+	"Bara bra, själv?":
+		Pixie "Jobb, jobb, jobb"
+
+	"Det är fint":
+		Pixie "Najs!"
+
+	"Jag har lite problem, min modifierare fungerar inte på alla objekt":
+		Pixie "Inte?"
+		Pixie "Den har nog en spärr inlagd då"
+		Pixie "Det är ministeriet som ordnar med det där"
+		Pixie "De försöker reglera vad man får modifera"
+		CHOICE {
+			"Jaha":
+			"OK, ska jag låta det vara så då?":
+				Pixie "Njae..."
+		}
+		Pixie "Fråga Frank om han kan hjälpa dig"
+		Pixie "Han är bra på att cracka saker"
+		CHOICE {
+			"OK, tack!":
+			"Jag förstår":
+		}
+
+	"[MEETING_IS_PLANNED]":
+		GOTO MEETING_IS_PLANNED
+	"[NOPE]":
+		GOTO NOPE
+}
+
+CHOICE {
+	"Finns det något jag kan göra här idag?":
+		Pixie "Jag vet inte, du kanske skulle kunna hjälpa mig att analysera några filer"
+		CHOICE {
+			"Visst, gärna!":
+				Pixie "Vad bra, här har du en diskett med all data"
+				[GIVE_FLOPPY]
+				Pixie.GetUpAndInteract(Sebastian)
+				WAIT Pixie.HasConversationTarget(Sebastian)
+				Pixie.TakeOutItem(Floppy_100)
+				WAIT Pixie.HasHandItemWithName(Floppy_100)
+				Pixie.Give()
+				Pixie "Säg till om du kommer på något"
+				CHOICE {
+					"Jepp":
+					"Det ska jag göra":
+					"OK...":
+				}
+				
+			"Jag vet inte om jag har tid":
+				Pixie "OK"
+		}
+		Pixie "Vi hittade den i närheten av ministeriet, måste vara någon som har tappat den"
+		IF Sebastian.HasKnowledge("GaveFilesToPixie") {
+			CHOICE {
+				"Hur gick det med de filerna jag gav dig förut förresten?":
+					Pixie "Ja just det"
+					IF Pixie.HasKnowledge("GotEncryptedFloppy") {
+						Pixie "Jag har inte hunnit kolla ordentligt på dem heller"
+						Pixie "Sjukt mycket att göra"
+						CHOICE {
+							"Jag förstår":
+							"OK?":
+						}
+						Pixie.GetUpAndInteract(Sebastian)
+						Pixie.PutIntoInventory(Factory_Office_Diskette_Diskette10_2)
+						Pixie.TakeOutItem(Factory_Office_Diskette_Diskette10_2)
+						WAIT Pixie.HasHandItemWithName(Factory_Office_Diskette_Diskette10_2)
+						WAIT 0.5
+						Pixie.Give()
+						Pixie "Det är en av dem som är krypterad, du kanske såg den?"
+						WAIT Pixie.HasNoHandItem()
+						CHOICE {
+							"Aha":
+							"Jo just det":
+						}
+						Pixie "Du kanske kan försöka få fram klartexten på den?"
+						CHOICE {
+							"OK, visst":
+								Pixie "Tack, du är en stjärna!"
+							"Mm... men hur kan jag göra det?":
+								Pixie "Ja det är inte det lättaste"
+								Pixie "Men Araki har rätt bra program för sånt där"
+								Pixie "Du kan ju försöka använda den"
+								CHOICE {
+									"Mm":
+									"OK, det ska jag göra!":
+									"Vet inte om jag vågar... hon kanske blir arg?":
+										Pixie "Nej det tror jag inte"
+								}
+						}
+					}
+					ELSE {
+						Pixie "Det går sådär, jag har inte hunnit kolla ordentligt på dem än"
+						CHOICE {
+							"OK":
+							"Nähä...":
+						}
+					}
+				"Aha":
+			}
+		}
+
+	"Vad grejar du med idag?":
+		Pixie "Jag försöker analysera några filer vi hittade"
+		Pixie "Men det går inte så jävla bra"
+		CHOICE {
+			"OK, jag kanske kan få kolla på dem?":
+				Pixie "Jo... det går väl bra"
+				Pixie "De ligger på den här disketten"
+				GOTO GIVE_FLOPPY
+			"Jobbigt":
+				Pixie "Mm, som fan"
+				GOTO MISSION
+		}
+
+	"Vad händer i kväll då? Någon fest?":
+		Pixie "Nej, inget sånt faktiskt"
+		Pixie "Men vi planerar en grej här på the Lodge som du kanske kan hjälpa till med"
+		CHOICE {
+			"Ja, gärna!":
+			"Jo men det ska jag nog kunna göra":
+			"Å vad synd, jag har absolut inte tid ikväll":
+				GOTO NOPE
+		}
+		GOTO YES_I_WANT_TO_DO_THE_HEIST
+}
+
+[MISSION]
+Pixie "Just det, vi ska ut på ett uppdrag ikväll också"
+Pixie "Det vore väldigt bra om du kunde hjälpa till med det"
+CHOICE {
+	"Jo men det ska nog gå...":
+	"Ja, jag är lätt på!":
+	"Hmm, jag tror att jag har bokat in något annat då tyvärr":
+		GOTO NOPE
+}
+
+[YES_I_WANT_TO_DO_THE_HEIST]
+
+Sebastian "Vad är det vi ska göra?"
+Pixie "Jo, så här är det"
+Pixie "Som du förhoppningsvis vet letar vi efter fler sätt att ta oss in på ministeriet"
+Pixie "Vi har tillgång till vissa delar av deras organisation"
+Pixie "Men det mesta är för väl skyddat"
+
+CHOICE {
+	"OK":
+	"Jo, ni pratade om något sånt tidigare ja...":
+}
+
+Pixie "Vi har länge misstänkt att forskningsledaren på Ministeriet har en central roll i deras säkerhet"
+Pixie "Hon heter Elizabeth Monad och har två doktorsexamen, en i datorvetenskap och en i biologi"
+
+CHOICE {
+	"OK..?!":
+	"Biologi, det var konstigt":
+		Sebastian "Eller?"
+		Pixie "Ja det är lite konstigt"
+}
+
+Pixie "Hon rör sig inte mycket ute på stan men ibland går hon ner till kasinot"
+
+CHOICE {
+	"Finns det ett kasino i Dorisburg?":
+		Pixie "Ja, det är nästan lite skrattretande"
+		Pixie "En stor jävla båt med massa neonljus"
+		Pixie "De har inte sparat en krona när de byggde skiten"
+
+	"Ah, det som ser ut som en båt va?":
+		Pixie "Ja precis, det är en båt faktiskt"
+		CHOICE {
+			"Jag har varit där inne!":
+				Pixie "Oj, verkligen? Jag trodde faktiskt inte att det var din grej"
+			"OK":
+		}
+}
+
+Pixie "Hur som helst verkar det som att hon ska gå dit ikväll"
+Pixie "Och vi ska vara där"
+
+CHOICE {
+	"Ska vi skugga henne?":
+		Pixie "Njae..."
+		Pixie "Eller jo typ, antar jag"
+		Pixie "Mest kolla läget och se vilka hon pratar med och så"
+
+	"OK, jag fattar":
+		Pixie "Bra"
+}
+
+Pixie "Hon har brunt hår och rätt så snoffsiga kläder"
+Pixie "Det brukar mest vara byråkrater där annars"
+Pixie "Jag tror inte att du kan missa henne"
+
+CHOICE {
+	"OK...":
+	"Nej, det låter lätt":
+		Pixie "Bra"
+}
+
+Pixie "Det viktigaste är att du inte drar för mycket uppmärksamhet till dig"
+Pixie "Om du pratar med henne får du inte säga något som kan göra henne misstänksam"
+
+CHOICE {
+	"Det låter svårt...":
+		Pixie "Äsch, du är perfekt för det här uppdraget"
+		CHOICE {
+			"Är jag?":
+				Pixie "Ja, verkligen"
+			"Varför det?":
+				Pixie "Heh"
+				Pixie "Äsch strunt samma"
+			"Jaha...":
+		}
+	"OK, inga problem! Jag är ju lite av en människokännare":
+	"Mhm, jag förstår":
+}
+
+Pixie "Jag tänkte att vi drar dit vid 19-tiden, Araki följer nog med också"
+
+CHOICE {
+	"OK, toppen!":
+
+	"Araki? Jag trodde inte att hon gick utanför sitt kontor":
+		Pixie "Haha, jo hon är faktiskt bra på sådana här saker"
+		Pixie "Tyst och elegant"
+
+	"19:00?":
+		Pixie "Typ"
+}
+
+Pixie "Vi kan väl träffas utanför Casinot, på kajen?"
+CHOICE {
+	"OK, det blir bra":
+	"Var är det?":
+		Pixie "Å, det är nära"
+		Pixie "Du går bara mot Ministeriet"
+		Pixie "Och sen höger, ner åt havet"
+		CHOICE {
+			"Jaha":
+			"OK, är det skyltat?":
+				Pixie "Jo det tror jag att det är"
+				Pixie "Borgmästaren är som sagt väldigt stolt över hela bygget"
+				Pixie "Ja herregud..."
+		}
+	"Ja... OK?":
+		Pixie "Det är lättare"
+		Pixie "Jag måste greja med lite saker innan"
+		Pixie "Så behöver du inte leta upp mig här nere"
+		CHOICE {
+			"OK":
+			"Jag förstår":
+		}
+}
+
+Pixie "Det finns en jätteviktig sak att tänka på förresten"
+Pixie "Du får inte ta in din modifierare på kasinot"
+Pixie "De scannar alla som ska in"
+CHOICE {
+	"Ja, det har jag varit med om redan":
+		Pixie "OK bra"
+	"Vad otrevligt":
+		Pixie "Ja, de försöker stoppa fusk"
+		Pixie "Eller hindra folk från att se hur de riggat spelmaskinerna"
+		Pixie "Du kommer inte in där om du bär runt på några såna grunkor i alla fall"
+}
+Pixie "Så kom ihåg att lämna din modifierare här på kontoret"
+Pixie "Eller någon annanstans säkert"
+
+CHOICE {
+	"OK, det ska jag komma ihåg":
+	"Jag kan inte försöka smuggla in den på nåt vis?":
+		Pixie "Om du kommer på ett sätt så visst, det skulle vi alla här vara intresserade av"
+		Pixie "Men så vitt jag kan se är det omöjligt att få in våra verktyg där"
+}
+
+Pixie "Vi ses sen då"
+
+CHOICE {
+	"Jepp, ha det bra så länge!":
+		Pixie "Du med"
+	"Vilken tid sa du?":
+		[MEETING_IS_PLANNED]
+		Pixie "Jag går härifrån ungefär klockan sju tänkte jag"
+		Pixie "Hej på ett tag!"
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+Pixie.SetTimetable("TalkToAraki")
+WAIT Pixie.IsWithinDistance(Araki, 5)
+Pixie "Är du redo för ikväll?"
+Araki "Ja"
+Pixie.SetTimetable("Pixie")
+BROADCAST LetsDoTheHeist
+
+
+
+
+
+
+STOP
+
+
+
+
+
+
+[NOPE]
+Pixie "OK, då får vi försöka klara oss själva då"
+Pixie "Jag ska jobba vidare nu, lycka till med vad du nu ska göra"
+CHOICE {
+	"Tackar, ses!":
+	"Jepp, hej då":
+}
+BROADCAST LetsNotDoTheHeist
+
+
+[ENDING]
+Pixie.StopTalking()
+DEFOCUS
+

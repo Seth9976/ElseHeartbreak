@@ -1,0 +1,153 @@
+
+Yulian.SetTimetable(Yulian)
+
+
+WAIT Yulian.IsAtTask("Relaxing") LISTEN Sebastian_talk_Yulian
+
+Sebastian.SetKnowledge("HasTalkedToYulian")
+
+FOCUS
+Yulian.StartTalking()
+
+CHOICE {
+	"Hej!":
+		Yulian "Hej"
+
+	"God dag":
+		Yulian "God dag"
+
+	"Hej, vi har setts förrut va?":
+		Yulian "Ja..?"
+		Yulian "Du ser vagt bekant ut"
+}
+
+CHOICE {
+	"Vad heter du?":
+		Yulian "Varför undrar du?"
+		CHOICE {
+			"Vet inte, du verkade schysst":
+			"Jag försöker bara lära känna folk, flyttade just hit":
+		}
+		Yulian "Jag avslöjar ogärna mitt namn för främlingar"
+		Yulian "Man kan inte vara nog paranoid i den här stan nu förtiden"
+		CHOICE {
+			"OK, jag förstår":
+				Yulian "Vad heter du?"
+				CHOICE {
+					"Om du inte berättar så berättar inte jag":
+						Yulian "Det är rimligt, Sebastian"
+						CHOICE {
+							"Va? Hur kan du veta vad jag heter?!":
+								Yulian "Som sagt, man måste vara mer än paranoid om man vill behålla sina hemligheter"
+							"Bra gissat":
+								Yulian "Tack"
+						}
+					"Sebastian":
+						Yulian "OK"
+
+					"Sebbe":
+						Yulian "Aha"
+				}
+
+			"Själv heter jag Sebastian":
+				Yulian "OK"
+		}
+		Yulian.SetKnowledge("Sebastian")
+		Yulian "Så Sebastian, vad är din grej här i livet?"
+		CHOICE {
+			"Eh, jag vet inte... har inte kommit på det än tror jag":
+				Yulian "Nej, det kan ta lång tid"
+				Yulian "Mmm"
+
+			"Jag säljer läsk":
+				Yulian "Aha, och det passar dig?"
+				CHOICE {
+					"Jadå, det är kul! Vill du ha en?":
+						GOTO WANT_ONE
+					"Det är inte så kul men det funkar. Du vill inte ha en?":
+						GOTO WANT_ONE
+				}
+
+			"Jag säljer läsk men jag har börjat intressera mig lite för politik nu på sistone":
+				Yulian "Jaså?"
+				CHOICE {
+					"Ja, det verkar vara någon slags rörelse här i staden mot det här ministeriet":
+						Yulian "Haha, så det säger du?"
+						Yulian "Visst fan finns det en rörelse mot dem"
+						Yulian "De jävla asen"
+
+					"Ja, jag tycker att vi ska montera ner välfärdsstaten":
+						Sebastian "Varför ska jag betala för när någon annan blir sjuk?!"
+						Yulian "..."
+				}
+
+			"Skit i det du":
+				Yulian "Haha, har jag sårat dig?"
+				CHOICE {
+					"Nä, skoja bara":
+					"Du var bara så jäkla hemlighetsfull":
+				}
+				Sebastian "Jag säljer läsk"
+				Yulian "Jaha, mm just det"
+		}
+		CHOICE {
+			"Nej, nu måste jag tyvärr gå. Ska träffa en person snart tror jag":
+			"Du då, vad sysslar du med?":
+				Yulian "Jag jobbar med skor"
+				[SHOES]
+				CHOICE {
+					"Aha! Känner du Pixie?":
+						WAIT 1
+						Yulian "Kanske det"
+					"OK, försäljare som jag?":
+						Yulian "Mm"
+						CHOICE {
+							"Du ska inte ha en läsk förresten?":
+								GOTO WANT_ONE
+							"Segt jobb":
+								Yulian "Mm..."
+						}
+				}
+				Yulian "Men du, jag måste gå nu"
+		}
+
+	"Vad jobbar du med?":
+		Yulian "Skor"
+		GOTO SHOES
+
+	"Sugen på en läsk?":
+		IF Yulian.HasKnowledge("SebastianIsSalesman") {
+			Yulian "Nej, inte idag heller"
+		}
+		ELSE {
+			Yulian "Nej, tack"
+		}
+		[WANT_ONE]
+		Yulian "Jag dricker inte såna där saker"
+		CHOICE {
+			"Ok":
+				GOTO DONT_CARE
+			"Varför inte det?":
+				Yulian "Ministeriet är kända för att mixtra med dem"
+				Yulian "Ändra deras kod, etc, etc"
+			"Vadå, är de inte tillräckligt nyttiga eller?":
+				Yulian "Nej då, sånt bryr jag mig inte om"
+				Yulian "Men ministeriet kan ha mixtrat med dem"
+		}
+		Yulian "Eller så har läskföretaget ingått ett avtal och sköter den där biten själva"
+}
+
+[DONT_CARE]
+Yulian "Ha det fint!"
+
+Yulian.StopTalking()
+DEFOCUS
+
+
+
+Yulian.SetTimetable("")
+Yulian.Walk(YulianApartment_Point)
+WAIT Yulian.IsIdle()
+Yulian.SetTimetable("Yulian")
+
+

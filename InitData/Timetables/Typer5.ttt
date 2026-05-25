@@ -1,0 +1,15 @@
+
+09:00 - 12:00 Work 		BeInRoom        Ministry_Offices3
+12:00 - 13:00 Eat       BeInRoom        Ministry_GuardKitchen
+13:00 - 20:00 Work      BeAtTing        Ministry_ChamberOfNumbers_SofaSeat_12
+20:00 - 09:00 Sleep		Sleep			BureucratApartment5_FerryCabinSofaBed_FerryCabinSofaBed_1
+
+
+[Typer_InvestigateRadiostation]
+00:00 - 24:00 _ BeInRoom RadioStation
+
+[Typer5_Razzia]
+00:00 - 24:00 _ BeInRoom Hotel_Lobby
+
+[Typer5_Hunt]
+00:00 - 24:00 Hunt Interact Sebastian

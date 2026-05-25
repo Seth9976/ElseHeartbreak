@@ -1,0 +1,7 @@
+
+Story("FirstDay")
+Story("MoreInstructions")
+
+SetHour(11)
+WellspringRepresentant.Pos(Plaza_Testing2_ParkBenchSeat1_1_3)
+Sebastian.Pos(Plaza_Point)

@@ -1,0 +1,197 @@
+
+START SetupCharacters
+
+SetHour(18)
+
+#GOTO MINISTRY
+
+
+[FERRY]
+Sebastian.Pos(FerryCorridour_DoorToHarbour)
+Sebastian.Walk(HarborEast_Point)
+WAIT Sebastian.IsInRoom(HarborEast)
+Sebastian.CancelWalking()
+
+WAIT 2
+SetCameraTarget("TrailerCameraA", "TrailerCameraB")
+WAIT 2
+Sebastian.Interact(Gunnar)
+
+WAIT 7
+SetCameraTarget("","")
+Sebastian.CancelWalking()
+
+
+[TOURIST_OFFICE]
+TouristOfficeGal.Pos(TouristOffice_Point)
+Sebastian.Pos(TouristOffice_GuestPoint)
+WAIT 7
+Sebastian.Interact(TouristOfficeGal)
+TouristOffice_MediumComputer1_1.RunMasterProgram()
+LISTEN Sebastian_talk_TouristOfficeGal
+Sebastian "Hello, have I arrived in Dorisburg?"
+TouristOfficeGal "I'm afraid so..."
+WAIT 5
+
+[HOTEL_LOBBY]
+Sebastian.Pos(Hotel_Lobby_P4)
+Babcia.Pos(Hotel_Lobby_P4)
+Babcia.SetTimetable("")
+WAIT 1
+SetCameraTarget("TrailerCameraA", "TrailerCameraB")
+Hank.Pos(Hotel_Lobby_DevotchkaArmChair_2)
+Hank.SetTimetable(Hank_FixLamp)
+Babcia.TakeOutItem(KeyRoom1)
+Babcia.Walk(Hotel_Jukebox)
+WAIT 5
+Babcia "Oh dear"
+WAIT 7
+SetCameraTarget("","")
+
+[MINISTRY]
+SetHour(6)
+Sebastian.Pos(Ministry_Exterior_PortalToBurrows)
+#Sebastian.Interact(Ministry_Lobby_Point1)
+WAIT 1
+SetCameraTarget("TrailerCameraA", "TrailerCameraB")
+WAIT 1
+Sebastian.Pos(Ministry_Exterior_Trigger_2)
+
+Typer1.SetTimetable("")
+Typer2.SetTimetable("")
+Typer3.SetTimetable("")
+
+Typer1.Pos(Ministry_Lobby_Point1)
+Typer1.Interact(Sebastian)
+Typer2.Pos(Ministry_Lobby_Point1)
+Typer3.Pos(Ministry_Lobby_Point1)
+WAIT 2
+Typer2.Interact(Sebastian)
+WAIT 3
+Typer3.Interact(Sebastian)
+
+WAIT 15
+SetCameraTarget("","")
+
+[CAFE]
+SetHour(15)
+Sebastian.Pos(Cafe_Room1_Point)
+Kafka.Pos(Cafe_Room1_ClerkPoint)
+Kafka.SetTimetable("")
+Bower.SetTimetable("")
+Gunnar.SetTimetable("Gunnar")
+Bower.Pos(Cafe_Room1_Chair_SimpleCarver_Chair_SimpleCarver_8)
+Gunnar.Pos(Cafe_Room1_Chair_SimpleCarver_Chair_SimpleCarver_9)
+Typer4.SetTimetable("")
+Typer4.Pos(Cafe_Room1_Chair_SimpleCarver_Chair_SimpleCarver_15)
+
+WAIT 5
+Sebastian.Interact(Kafka)
+LISTEN Sebastian_talk_Kafka
+Kafka "Hi there, do you want a coffee?"
+
+WAIT 5
+
+
+
+[PARTY]
+SetHour(22)
+Petra.SetTimetable("Petra_CrazyParty")
+Pixie.SetTimetable("Pixie_CrazyParty")
+Felix.SetTimetable("Felix_CrazyParty")
+Petra.Pos(PetrasApartment_SofaSeat_5)
+Pixie.Pos(PetrasApartment_SofaSeat_4)
+Felix.Pos(PetrasApartment_SofaSeat_6)
+Sebastian.Pos(PetrasApartment_SofaSeat_3)
+SetCameraAutoRotateSpeed(-10)
+WAIT 7
+Sebastian "You can have one of my beers if you want to"
+Pixie "Thanks Sebastian! You're such a nice guy"
+Pixie "We should find him a girlfriend, shouldn't we?!"
+Petra "Definitely"
+Petra "What kind of girls do you like Sebastian?"
+WAIT 5
+SetCameraAutoRotateSpeed(0)
+
+
+
+[LARS]
+SetHour(03)
+Sebastian.Pos("PoliceOffice_Exterior_Poor_Bed_Poor_Madrass_1")
+Lars.SetTimetable("")
+Lars.Pos("PoliceOffice_Exterior_SofaSeat_5")
+WAIT 3
+Sebastian.Interact(Lars)
+WAIT Sebastian.IsStanding()
+Lars "Time to wake up now?"
+Sebastian "Shit, where am I?!"
+Lars "This my friend..."
+Lars "Is Lars' Château"
+WAIT 5
+
+
+
+[BATHROOM]
+SetHour(17)
+Sebastian.Pos(Hotel_Bathroom_Point1)
+WAIT 6
+Sebastian.Interact(Poor_WaterTap_Poor_WaterTap)
+WAIT 1
+Sebastian "Is this my room?!"
+WAIT 4
+
+
+
+[PARK]
+SetHour(00)
+Fib.SetTimetable("")
+Fib.Pos(DorisGardens_West_Trigger_1)
+Fib.SetHandItem(FibsHackdev)
+Sebastian.Pos(DorisGardens_West_Trigger_1)
+WAIT 1
+Sebastian.Interact(Fib)
+WAIT 6
+Fib "I'm the gardener"
+Fib "I take care of all the trees and plants here in Dorisburg"
+WAIT 3
+
+
+[DANCING]
+SetHour(0)
+Sebastian.Pos(BarYvonne_Point1)
+Pixie.Pos(BarYvonne_PixiePoint)
+Pixie.SetTimetable("")
+Sebastian.Interact(Pixie)
+SetCameraAutoRotateSpeed(-10)
+
+Petra.Pos(Pixie)
+Petra.SetTimetable(Petra)
+
+Panda3.Pos(HarborEast_Point)
+Panda4.Pos(HarborEast_Point)
+Panda5.Pos(HarborEast_Point)
+
+WAIT 10
+Sebastian "Hello!"
+Sebastian "I'm Sebastian"
+Sebastian "Who are you?"
+WAIT 5
+
+
+
+[INTERNET]
+SetCameraAutoRotateSpeed(0)
+Sebastian.Pos(Internet_Trigger_1)
+WAIT 3
+Sebastian.Interact(Internet_Heart_Analyzer)
+WAIT 30
+
+
+
+[PROBE]
+START SkipToInExperimentHall
+
+
+
+
+LISTEN DONT_STOP

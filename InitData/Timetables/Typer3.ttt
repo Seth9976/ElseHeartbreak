@@ -1,0 +1,16 @@
+
+08:50 - 12:00 Work 		BeAtTing	 	Ministry_ChamberOfNumbers_SofaSeat_13
+12:00 - 13:00 Eat       BeInRoom        Ministry_GuardKitchen
+13:00 - 20:00 Work      BeInRoom        Ministry_Offices3
+20:00 - 08:50 Sleep		Sleep			BureucratApartment3_FerryCabinSofaBed_FerryCabinSofaBed_1
+
+
+[Typer3_Razzia]
+00:00 - 24:00 _ BeInRoom Hotel_Lobby
+
+[Typer3_SearchForLodgeAtBlaKnuten]
+07:00 - 23:00 Work      BeInRoom        BlaKnutenRoom1
+20:00 - 08:50 Sleep     Sleep           BureucratApartment3_FerryCabinSofaBed_FerryCabinSofaBed_1
+
+[Typer3_Hunt]
+00:00 - 24:00 Hunt Interact Sebastian

@@ -1,0 +1,85 @@
+
+WAIT Pixie.IsWithinDistance(5) AND Sebastian.IsIdle()
+
+Pixie.CancelWalking()
+Pixie.StartTalking()
+Pixie "Sebastian"
+
+FOCUS
+
+CHOICE {
+	"Hej Pixie":
+		Pixie ""
+
+	"Pixie! Hur är det?":
+		Pixie "Ivan är i säkerhet nu"
+		CHOICE {
+			"Bra":
+			"Ok, vad bra":
+		}
+}
+
+# Pixie.Hug(Sebastian) # !!!
+
+
+Pixie "Har du funderat på hur du ska göra..?"
+
+CHOICE {
+	"...med vadå..?":
+		Pixie "Sebastian sluta, du vet vad jag pratar om"
+		Pixie "Om du ska åka hem eller stanna här längre?"
+		#Sebastian.PlayAnimation("NervousScratching")
+		Sebastian ""
+		Pixie "För i helvete, du måste säga vad du ska göra"
+	
+	"[...]":
+		Pixie "Sebastian, sluta!"
+		Pixie "Du måste för i helvete prata med mig om det här"
+}
+
+CHOICE {
+	"Jag vet inte":
+		Pixie "Jag tror dig inte"
+		
+	"Jag tror att jag har bestämt mig":
+		Pixie "OK"
+		#Sebastian.PlayAnimation("NervousScratching")
+		Sebastian ""
+		Pixie "Ja?!"
+}
+
+CHOICE {
+	"Alltså, jag tror att jag måste åka tillbaka...":	
+		Pixie "Ja, OK..."
+		Pixie "Fan"
+		
+	"Jag stannar kvar":
+		Pixie "Va?"
+		Pixie "Men!"
+		Pixie "Men..."
+		CHOICE {
+			"Jag klarar inte av att lämna alla här":
+			"Jag vill inte åka hem":
+		}
+		Pixie "Men vad händer med ditt jobb och din familj och allting?"
+		CHOICE {
+			"Jag vet inte":
+			"Det ordnar sig väl på något sätt":
+		}
+		Pixie "Du vet väl att det aldrig kan bli du och jag?"
+		CHOICE {
+			"Jo du sa det...":
+			"Mm":
+		}
+}
+
+CHOICE {
+	"Ministeriet kommer förmodligen att försöka hitta mig":
+
+	"Jag är orolig för om jag lämnade några spår efter mig":
+}
+
+#Pixie "Hur gjorde du det egentligen?"
+
+Pixie.StopTalking()
+DEFOCUS

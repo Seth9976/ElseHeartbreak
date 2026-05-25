@@ -1,0 +1,8 @@
+
+WAIT 2
+
+Hint("Click on the ground to move around.")
+
+WAIT 9
+
+Hint("You can interact with things by clicking at them.")

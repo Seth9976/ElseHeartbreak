@@ -1,0 +1,87 @@
+
+
+
+WAIT Felix.IsInRoom(FelixApartment) AND Sebastian.IsWithinDistance(Felix, 10) {
+	FOCUS
+	Felix.StartTalking()
+	Felix "Tja"
+	Felix "Det är ingen fest idag"
+	Felix "Sorry..."
+	Felix "Jag är helt förstörd efter igår"
+	CHOICE {
+		"Öh...":
+		"OK, synd":
+		"Hej, vem är du?":
+			Felix "Felix... jag är så jävla trött alltså"
+			Sebastian.SetKnowledge(Felix)
+	}
+	Felix "Sorry dude, måste sova"
+	Felix.SetTimetable("")
+	Felix.GetUpAndInteract(FelixApartment_Poor_Bed_Poor_Bed_1)
+	Felix.StopTalking()
+	DEFOCUS
+	# restore
+	WAIT 100
+	Felix.SetTimetable("Felix")
+}
+
+
+LISTEN Sebastian_yank_Lodge_Entry_DoorToRoom1 {
+	Felix "Ey, vad gör du?!"
+	LISTEN Sebastian_yank_Lodge_Entry_DoorToRoom1
+	Felix "Det är låst där hörru!"
+	LISTEN Sebastian_yank_Lodge_Entry_DoorToRoom1
+	Felix "Vafan, sluta dude..."
+}
+
+
+# 1
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+CHOICE {
+	"Hejsan, var är jag någonstans?":
+		Felix "Det här är skoaffärens lager"
+		Felix "Hur kom du ens ner hit?"
+
+	"Ursäkta, är det här också del av skoaffären?":
+		Felix "Ja, precis"
+		Felix "Vad gör du här?"
+		Felix "Ska du träffa någon?"
+		CHOICE {
+			"Ja! Herr... jag minns inte vad han hette":
+				Felix "Hmm?"
+			"Nej inte direkt":
+		}
+}
+Felix "Dude, mitt tips är att du drar härifrån innan någon mer upptäcker dig"
+Felix.SetKnowledge("Sebastian")
+Felix.StopTalking()
+DEFOCUS
+
+
+# 2
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+CHOICE {
+	"Men snälla, kan jag inte få gå genom den dörren där?":
+		Felix "Jag har stränga order om att inte släppa igenom någon genom den dörren"
+	"Hur är läget?":
+		Felix "Jodå, det är rätt soft"
+}
+Felix "Men nu måste du fan dra, vi kan inte ha folk här nere"
+Felix.StopTalking()
+DEFOCUS
+
+
+# 3
+[DUDE_GO_AWAY]
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "Dude, hörde du inte vad jag sa?"
+Felix "Gå härifrån innan jag tillkallar min chef!"
+Felix.StopTalking()
+DEFOCUS
+GOTO DUDE_GO_AWAY

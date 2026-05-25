@@ -1,0 +1,165 @@
+WAIT Petra.IsInRoom(PetrasApartment) AND Sebastian.IsWithinDistance(Petra, 10) AND Petra.IsAwake() {
+	INTERRUPT BreakInPetra
+}
+
+
+
+WAIT Petra.IsNotInRoom(PetrasApartment) LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+
+IF Petra.HasKnowledge(Sebastian) {
+	Petra "Hej, det är ju du ju!"
+} ELSE {
+	Petra "Hejsan"
+}
+
+IF Sebastian.HasKnowledge(GotDrunkAtClubDot) {
+	Petra "Vänta nu, var det du som däckade och fick sova över hos Pixie?"
+	CHOICE {
+		"Ja, typ":
+			[YES]
+			Petra "Haha, så jävla roligt!"
+			CHOICE {
+				"Å, jag skäms ihjäl":
+					Petra "Äsch!"
+				"Vet inte om jag håller med...":
+					Petra "Äsch!"
+				"Mmm":
+					Petra "Se inte så deppig ut"
+			}
+			Petra "Sånt där har alla gjort någon gång"	
+
+		"Kanske...":
+			Petra "Ja?"
+			GOTO YES
+
+		"Nej, du måste misstagit mig för någon annan":
+			Petra "Verkligen..?"
+			Petra "Haha, du vet det är inget att skämmas för"
+			CHOICE {
+				"Men det var inte jag!":
+					Petra "Ok, sorry då"
+				"Ok...":
+					GOTO YES
+			}
+	}
+} ELSE {
+	Petra "Vänta, är det du som är han som Pixie pratade om?"
+	Petra "Hon hade träffat någon med orange mössa sa hon"
+	CHOICE {
+		"Ja precis!":
+		"Ja det är nog jag":
+	}
+}
+
+IF Sebastian.HasKnowledge("PetraKnowsPixie") {
+	[MORE_INFO]
+	CHOICE {
+		"Du var kompis med Pixie va?":
+			[BEST_FRIENDS]
+			Petra "Ja precis, vi är bästisar!"
+
+		"Ska du DJ:a på Bar Yvonne ikväll?":
+			Petra "Jepp, gör det nästan varje kväll typ"
+			[DJ_TONIGHT]
+			CHOICE {
+				"Låter kul":
+					Petra "Ja, jag älskar det"
+				"Ok cool":
+			}
+			GOTO MORE_INFO
+
+		"Vad händer annars då?":
+			Petra "Inte så mycket"
+			GOTO MORE_INFO
+	}
+} ELSE {
+	[MORE_INFO_2]
+	CHOICE {
+		"Så du känner Pixie?":
+			GOTO BEST_FRIENDS
+
+		"Vad händer ikväll då?":
+			Petra "Ska DJ:a på Bar Yvonne, gör det typ varje kväll"
+			GOTO MORE_INFO_2
+
+		"Vad heter du?":
+			Petra "Petra"
+			GOTO MORE_INFO_2
+	}
+}
+
+[TALK_ABOUT_PIXIE]
+CHOICE {
+	"Vad är det hon jobbar med?":
+		[WHERE_DOES_SHE_WORK]
+		Petra "Hon har inte sagt det eller?"
+		CHOICE {
+			"Inte direkt":
+			"Nej tyvärr":
+		}		
+		Petra "Ok, då ska nog inte jag säga något heller"
+		Petra "Jag skulle inte fråga om jag var du"
+		CHOICE {
+			"Varför då?":
+				Petra "Det är känsligt"
+				Petra "Antagligen är det säkrast om du försöker att inte rota i det"
+			"Ok":
+		}
+		Petra "Jag måste dra nu, ha det gött"
+
+	"Vad är hennes grej egentligen, hon är så mystisk":
+		Petra "Haha, tycker du?"
+		Petra "Jag antar att det är det hon vill"
+		Petra "Hon är en speciell person helt klart"
+		GOTO TALK_ABOUT_PIXIE
+
+	"Var är hon nu tror du?":
+		Petra "Är väl och jobbar antar jag"
+		CHOICE {
+			"Ok":
+			"Mm... var är det?":
+				GOTO WHERE_DOES_SHE_WORK
+		}
+}
+
+
+Petra.StopTalking()
+DEFOCUS
+
+
+# later
+
+
+[AGAIN]
+WAIT Petra.IsNotInRoom(PetrasApartment) LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+Petra "Ja?"
+CHOICE {
+	"Den där Ivan, vem är han?":
+		Petra "Pixies kille"
+		Petra "Han är lite jobbig tycker jag"
+		Petra "Men säg inte att jag sagt det!"
+
+	"Har du pojkvän också?":
+		Petra "Haha nä..."
+		Petra "Orka med killar"
+		Petra "Jag gillar tjejer bättre"
+
+	"Vad vet du om ministeriet?":
+		Petra "Jag vet inte riktigt"
+		Petra "Alla mina vänner avskyr dem"
+		Petra "Men jag är inte så insatt"
+}
+Petra.StopTalking()
+DEFOCUS
+GOTO AGAIN
+
+
+#Petra.SetTimetable("Petra_GoHome")
+#WAIT Petra.IsInRoom(PetrasApartment)
+#WAIT IsHour(03)
+#Petra.SetTimetable(Petra)
+

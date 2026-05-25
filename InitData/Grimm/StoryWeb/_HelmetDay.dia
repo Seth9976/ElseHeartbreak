@@ -1,0 +1,33 @@
+
+Ivan.SetFieldToFloat("sleepiness", 0)
+Pixie.SetFieldToFloat("sleepiness", 0)
+Bower.SetFieldToFloat("sleepiness", 0)
+Petra.SetFieldToFloat("sleepiness", 0)
+Petra.SetRunning(false)
+
+Pixie.WakeUp()
+Petra.WakeUp()
+Bower.WakeUp()
+Ivan.WakeUp()
+
+Typer1.SetTimetable(Typer1)
+Typer2.SetTimetable(Typer2)
+Typer3.SetTimetable(Typer3)
+Typer4.SetTimetable(Typer4)
+Typer5.SetTimetable(Typer5)
+
+WAIT IsHour(18) [MissedHelmetDayListener] {
+	Log("Missed helmet day!")
+    BROADCAST SebastianMissedHelmetDay
+	Story("MissedHelmetDay")
+	STOP
+}
+
+LISTEN IvanIsDead {
+	# turn off the listener or it will trigger when sebastian falls asleep
+	CANCEL MissedHelmetDayListener
+}
+
+WAIT Sebastian.IsInRoom(Ministry_ExperimentHall)
+Log("Sebastian arrived in the experiment hall!")
+Story("InExperimentHall")

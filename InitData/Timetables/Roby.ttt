@@ -1,0 +1,13 @@
+00:00 - 24:00 Work BeInRoom RadioStation
+
+[Roby_FindSebastian]
+00:00 - 24:00 _ Interact Sebastian
+
+[Roby_ShowRadioStation]
+00:00 - 24:00 _ GuideTo RadioStation_Point Sebastian
+
+[Roby_VisitFelix]
+00:00 - 24:00 VisitingFelix Interact Felix
+
+[Roby_WaitOutsideHotel]
+00:00 - 24:00 _ Sit Hotel_Exterior_Testing2_ParkBenchSeat1_3_4

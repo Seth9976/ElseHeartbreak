@@ -1,0 +1,50 @@
+
+LISTEN Sebastian_talk_Amanda
+
+FOCUS
+Amanda.StartTalking()
+
+Amanda "Du?!"
+
+CHOICE {
+	"Ja, Sebastian heter jag faktiskt":
+		Amanda "Ah just det"
+
+	"Ja, minns du mig från festen?":
+		Amanda "Jo precis"
+}
+
+[COLD_TALK]
+CHOICE {
+	"Läget då?":
+		Amanda "Det är bra"
+		GOTO COLD_TALK
+
+	"Bra fest här som vanligt":
+		Amanda "Tycker du?"
+		CHOICE {
+			"Jo men det är det väl...":
+				GOTO RAVE
+
+			"Nej det kanske är lite segt":
+				Amanda "Mm"
+		}
+
+	"Går du hit ofta?":
+		Amanda "Rätt så"
+		[RAVE]
+		Amanda "Jag gillar bättre när de har rejv här"
+		CHOICE {
+			"Tufft":
+				Amanda "Ja"
+
+			"Rejv, vad är det?":
+				Amanda "*suck*"
+				Amanda "Var är du ifrån?"
+		}
+}
+
+Amanda "Äh... nu måste jag röka"
+
+Amanda.StopTalking()
+DEFOCUS

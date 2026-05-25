@@ -1,0 +1,44 @@
+
+LISTEN Sebastian_talk_Panda5
+
+FOCUS
+Panda5.StartTalking()
+
+[AGAIN]
+CHOICE {
+    "Vad gör du?":
+        IF Panda5.IsInRoom(BarYvonne) {
+            Panda5 "Festar..."
+            Panda5 "Som vanligt, haha!"
+        } ELSE {
+            IF Panda5.IsAtTask(Party) {
+                Panda5 "På väg till Bar Yvonne"
+                Panda5 "Som vanligt, haha!"
+            } ELSE {
+                Panda5 "Inte mycket"
+            }
+        }
+        GOTO AGAIN
+
+    "Läget?":
+        Panda5 "Så jäkla trött, annars är det bra"
+        Panda5 "Du?"
+        CHOICE {
+            "Jag mår bra":
+            "Också trött...":
+            "Sådär":
+                Panda5 "Hänt nåt?"
+                CHOICE {
+                    "Nej":
+                    "Asså... njae":
+                    "Typ, vill inte prata om det":
+                }
+        }
+        GOTO AGAIN
+
+    "Hej då!":
+        Panda5 "Hej, hej"
+}
+
+Panda5.StopTalking()
+DEFOCUS

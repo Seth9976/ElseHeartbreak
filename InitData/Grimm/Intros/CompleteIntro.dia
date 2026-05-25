@@ -1,0 +1,18 @@
+LISTEN CHAPTER_CHEAT {
+    STOP
+}
+
+
+Story("OnThePhone")
+
+LISTEN GOING_TO_DORISBURG # starts the title sequence
+BROADCAST TitleSequence
+LISTEN ARRIVED_IN_DORISBURG
+
+MuteNotifications(false)
+Sebastian.ClearHandItem()
+
+#Sebastian.Pos(FerryCabinBed)
+Sebastian.Pos(FerryCabin_DesignedChair_TheLodge_ComputerTerminal_DesignedChair_1)
+
+START PlayHorn

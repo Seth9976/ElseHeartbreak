@@ -1,0 +1,13 @@
+
+WAIT IsHour(04) {
+    WAIT Sebastian.NotTalking()
+	Story("EndOfDotGig1")
+	STOP
+}
+
+LISTEN SebastianDrunkAtClubDot {
+	Story("Backdrunk")
+	STOP
+}
+
+LISTEN DontStop

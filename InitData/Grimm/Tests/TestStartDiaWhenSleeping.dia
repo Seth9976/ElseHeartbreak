@@ -1,0 +1,19 @@
+
+WAIT 3
+
+Sebastian.Sleep(10)
+
+WAIT 5
+
+Bob.SetTimetable("")
+Bob.Interact(Sebastian)
+
+LISTEN Bob_talk_Sebastian
+
+FOCUS
+Bob "Hej?"
+CHOICE {
+	"Huh?":
+	"Oj jag sov visst":
+}
+DEFOCUS

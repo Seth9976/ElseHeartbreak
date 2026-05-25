@@ -1,0 +1,5 @@
+
+STOP _DetectFindingHotel
+STOP _FoundHotel
+
+Sebastian.SetKnowledge(SellSoda)

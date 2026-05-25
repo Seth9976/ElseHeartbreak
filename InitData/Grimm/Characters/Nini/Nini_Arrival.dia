@@ -1,0 +1,251 @@
+
+LockDoor(Door_Burrows_ToTheLodge) # door is locked from the start
+START NiniAutolockShoeStoreDoor
+START NiniProtectsLodge
+
+
+WAIT IsHour(6) # first morning
+Nini.Pos(ShoeStore_Point)
+Nini.SetTimetable(Nini)
+
+
+
+LISTEN GivingHerACigarette {
+	Story("GiveCigarette")
+	STOP
+}
+
+
+WAIT Sebastian.IsInRoom(NiniApartment) AND Nini.IsInRoom(NiniApartment) AND Nini.IsAwake() AND Sebastian.IsAwake() {
+	START Nini_BreakIntoNinis
+}
+
+
+WAIT Sebastian.IsInRoom(ShoeStore) AND Nini.IsInRoom(ShoeStore)
+
+WAIT 3
+LISTEN HI_THREAD {
+	Nini "Hej och välkommen!"
+}
+BROADCAST HI_THREAD
+
+LISTEN Sebastian_talk_Nini
+FOCUS
+Nini.StartTalking()
+
+IF Felix.IsAtTask(Guard) {
+	IF Roby.IsNotAtTask(VisitingFelix) {
+		Felix.Pos(Burrows_North_Point)
+	}
+}
+
+Sebastian "Hej!"
+[HI]
+CHOICE {
+	"Vad är det här för slags ställe?":
+		
+	"Vad jobbar du med?":
+		Nini "Jag säljer skor"
+	"Jag såg en tjej gå in här, var tog hon vägen?":
+		Nini "Ehm..."
+		Nini "Jag vet inte du"
+		Nini "Du måste sett fel!"
+		CHOICE {
+			"OK, ja kanske":
+			"Nej men jag är säker på att jag såg henne":
+				Nini "Och jag är säker på att du inte såg henne"
+				Nini "Det är ju ingen annan här inne, inte sant?"
+			"Hon kanske gick genom dörren där?":
+				Nini "Nej ingen får gå igenom den"
+				Nini "Jag tror bara hon gick ut igen, du måste missat henne"
+		}
+		Nini "Var det något annat?"
+		GOTO HI
+}
+
+Nini "Det här är Dorisburgs finaste skoaffär"
+
+CHOICE {
+	"Aha, coolt! Vad tar ni för ett par skor?":
+		Nini "De vanliga modellerna kostar $799"
+		Nini "Och lyx kostar $999"
+		CHOICE {
+			"Aha, ja det var ju inte sa farligt...":
+			"Oj, det var dyrt!":
+		}
+		Nini "Mmm"
+	"OK, jag har redan ett par fina skor så...":
+		Nini "Man kan aldrig ha för många par!"
+		CHOICE {
+			"Nej det är klart":
+			"Det räcker bra för mig":
+				Nini "OK..."
+			"Hmm, nej kanske inte...":
+				Nini "Jag lovar!"
+		}
+}
+
+[AGAIN]
+CHOICE {
+	"Nä men jag ska väl gå vidare, ha en bra dag!":
+		Nini "Du med!"
+		Nini "Välkommen åter"
+	"Jag ska kolla runt lite själv här och se om jag hittar några fina":
+		Nini "Säg till om du behöver hjälp"
+	"Hur många skor har du?":
+		Nini "Å, vad roligt att du frågar!"
+		Nini "Hmm...."
+		Nini "259 par tror jag!"
+		Nini "Eller vänta, 264 nu efter min resa till New York förra veckan"
+		Nini "Och så de jag har på mig nu också ja"
+		Nini "Så det borde bli 265 stycken!"
+		CHOICE {
+			"Oj det var värst!":
+				Nini "Äsch, det finns de som är värre, jag lovar"
+			"FÅR man ha så många skor?!":
+				Nini "Haha, du är rolig"
+			"Det var ganska många":
+				Nini "Ja, jag antar det..."
+		}
+		GOTO AGAIN
+}
+
+Nini.StopTalking()
+DEFOCUS
+
+WAIT 1
+FOCUS
+Nini.StartTalking()
+Nini "Du förresten!"
+Nini "Du har inte en cigg?"
+Nini "Jag är grymt röksugen"
+CHOICE {
+	"Jo, faktiskt":
+		Nini "Å! Kan man få en?"
+		Nini "Jag kan ge dig pengar för den"
+
+	"Nej tyvärr":
+		Nini "Jag ger dig pengar för den"
+		CHOICE {
+			"Jag har ingen, jag lovar":
+				GOTO TOO_BAD
+			"Men kan du inte köpa egna cigaretter då?":
+				Nini "Jo men jag får inte gå till affären under arbetstid"
+				Nini "Schyrra, jag maste röka alltså!"
+				Nini "Du får 20 spänn"
+		}		
+}
+
+IF Sebastian.HasItemOfType(Cigarette) {
+	CHOICE {
+		"Äsch det är lugnt, du kan få en":
+			BROADCAST GivingHerACigarette
+			STOP
+
+		"Nej, jag ska röka den själv":
+			Nini "Ok, ok, jag fattar"
+	}
+} ELSE {
+	CHOICE {
+		"Sorry men jag röker inte":
+			Nini "Nej ok, synd"
+
+		"Ok, vänta ska kolla om jag har en...":
+			WAIT 1
+			Sebastian "Nej, inte en enda. Jag är ledsen!"
+			[TOO_BAD]
+			Nini "Ok jaja, synd..."
+
+		"Jag har ingen men jag kanske kan komma tillbaka om jag hittar en":
+			Nini "Å, det vore supersnällt!"
+	}
+	Nini "Jag får gå och fråga Filippa om en snus istället"
+	Nini "Är ju inte samma sak men men..."
+}
+Nini.StopTalking()
+DEFOCUS
+
+
+# later #
+
+
+[BOTHER_NINI_AGAIN]
+LISTEN Sebastian_talk_Nini 
+FOCUS
+Nini.StartTalking()
+Nini "Ja?"
+
+CHOICE {
+	"Jag har tänkt lite på saken och jag skulle vilja köpa ett par skor":
+		Nini "Men å så roligt!"
+		Nini "Vilka har du tänkt dig?"
+		CHOICE {
+			"De gröna":
+			"De blå":
+			"De röda":
+		}
+		Nini "OK, ja de är ju så fina!"
+		Nini "Mina personliga favoriter faktiskt"
+		Nini "Det blir $999 tack"
+		CHOICE {
+			"Oj så mycket pengar har jag inte":
+				Nini "Nähä, vad synd..."
+				
+			"Jag trodde de kostade 799?":
+				Nini "Ja fast just den modellen är lite dyrare"
+				CHOICE {
+					"OK, jag har inte så mycket tror jag tyvärr":
+						Nini "OK, jobbigt"
+					"Det var lite för dyrt för mig":
+						Nini "Jaha... trist"
+				}
+		}
+		CHOICE {
+			"Mm":
+			"Ja":
+			"Jag får väl spara lite mer då!":
+		}
+		Nini "Javisst"
+		Nini.StopTalking()
+		DEFOCUS
+		GOTO BOTHER_NINI_AGAIN
+
+	"Vad är det ni har där bakom dörren i hörnet egentligen?":
+		Nini "Vilken dörr?"
+		CHOICE {
+			"Äsch, det var inget":
+			"Den i hörnet där vid kassan":
+				Nini "Ursäkta men jag måste ta ett telefonsamtal snart"
+				Nini "Vi kan väl prata mer senare?"
+		}
+		Nini.StopTalking()
+		DEFOCUS
+		GOTO BOTHER_NINI_AGAIN
+
+	"Vill du fortfarande ha en cigarett?":
+		[DO_YOU_WANT_CIGG]
+		Nini "Ja, hemskt gärna!"
+		IF Sebastian.HasItemOfType(Cigarette) {
+			BROADCAST GivingHerACigarette
+			STOP
+		} ELSE {
+			Sebastian "Eller vänta, jag har ingen på mig"
+			Sebastian "Jag kommer tillbaka"
+			Nini "Ok"
+			Nini.StopTalking()
+			DEFOCUS
+			
+			LISTEN Sebastian_talk_Nini 
+			FOCUS
+			Nini.StartTalking()
+			Sebastian "Sugen på cigg?"
+			GOTO DO_YOU_WANT_CIGG
+		}
+}
+
+Nini.StopTalking()
+DEFOCUS
+
+
+LISTEN DONT_STOP
+

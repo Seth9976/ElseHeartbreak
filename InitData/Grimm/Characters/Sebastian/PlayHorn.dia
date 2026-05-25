@@ -1,0 +1,9 @@
+# WAIT Sebastian.IsStanding() {
+#     BROADCAST SoundHorn    
+# }
+
+WAIT 6
+BROADCAST SoundHorn
+
+WAIT 10
+BROADCAST SoundHorn

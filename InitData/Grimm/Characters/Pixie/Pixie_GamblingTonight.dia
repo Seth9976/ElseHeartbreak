@@ -1,0 +1,385 @@
+
+Pixie.SetTimetable(PixieGambling)
+PixiesModifier.Pos(PixiesApartment_UpstairsPoint)
+
+Pixie.PutAwayHandItem()
+WAIT Pixie.HasNoHandItem()
+
+IF OldHackdev.IsInRoom(Pixie_inventory) {
+	OldHackdev.Pos(Testing_Trigger_1) # just get rid of it
+}
+
+
+LISTEN Sebastian_talk_Pixie [PRE_TALK] {
+	[MORE_PRETALK]
+	FOCUS
+	Pixie.StartTalking()
+
+	IF Pixie.IsInEitherRoom(Lodge_Room1, Lodge_Room2, Lodge_Underwater) {
+		CHOICE {
+			"Ska vi gå snart?":
+				Pixie "Ja, vid sju sa vi väl?"
+				Pixie "Jag måste bara jobba lite mer först"
+				Pixie "Hittar du till båten själv?"
+				CHOICE {
+					"Typ":
+						Pixie "OK, vi kan ju ses där då"
+					"Nej":
+						Pixie "Den ligger nära här"
+						Pixie "Du går mot Ministeriet och sen svänger man av åt höger"
+						Pixie "Vi ses där då?"
+				}
+				CHOICE {
+					"Jupp":
+					"OK":
+					"Mhm":
+				}
+
+			"Vad ska jag göra tills vi drar till Casinot?":
+				Pixie "Jag vet inte"
+				Pixie "Öva dig på att hacka något kanske?"
+				Pixie "Eller ta något att dricka"
+				Pixie "Jag har snus om du vill ha"
+				CHOICE {
+					"OK...":
+						Pixie "Ska ligga vid min arbetsplats"
+						Pixie "Det är bara att ta"
+					"Nä tack, det är bra":
+				}
+			"Fin du är idag":
+				Pixie "Tack Sebbe!"
+		}
+	}
+	ELSE {
+		CHOICE {
+			"Är du på väg till Casinot nu?":
+				Pixie "Ja precis, haka på!"
+
+			"Var skulle vi ses sa du?":
+				Pixie "Vid Casinobåten"
+				Pixie "Jag går dit nu, kommer du också?"
+				CHOICE {
+					"Japp, jag kan haka på":
+					"Mm, ska bara lämna av min modifierare":
+					"Snart":
+				}
+		}
+	}
+
+	Pixie.StopTalking()
+	DEFOCUS
+
+	LISTEN Sebastian_talk_Pixie
+	GOTO MORE_PRETALK
+}
+
+
+
+WAIT Pixie.IsInRoom(Casino_Floor1) [DETECT_PIXIE_WENT_IN] {
+	CANCEL PRE_TALK
+	GOTO GOT_IN
+}
+
+
+
+
+WAIT Pixie.IsAtTask("WaitingOutside") AND Sebastian.IsWithinDistance(Pixie, 20)
+CANCEL PRE_TALK
+CANCEL DETECT_PIXIE_WENT_IN
+
+Pixie "Sebastian!"
+Pixie "Här är jag!"
+Pixie.SetTimetable("TalkToSebastian")
+
+WAIT Pixie.IsWithinDistance(Sebastian, 5)
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Nervös?"
+CHOICE {
+	"Lite":
+	"Inte alls":
+	"Jag har redan varit där inne":
+		Pixie "Jaha?!"
+		Pixie "Ska du gå hem då?"
+		CHOICE {
+			"Nej, vi kan väl gå in igen":
+				Pixie "OK"
+			"Ja, kanske lika bra":
+				Pixie "OK, jag går in i alla fall. Ses imorgon!"
+		}
+		GOTO LETS_GO_INSIDE
+}
+
+IF Sebastian.HasHandItemOfType(HackDev) {
+	Pixie "Men vänta..."
+	Pixie "Varför har du med dig en modifierare??!"
+	Pixie "Jag sa ju att du skulle lämna den hemma"
+	GOTO HIDE_MODIFIER
+} ELSE {
+	Pixie "De kommer göra värsta säkerhetskontrollen på oss"
+	Pixie "Du lämnade din modifierare hemma va?"
+}
+
+CHOICE {
+	"Ja":
+		Pixie "Bra"
+	"Oj tusan, jag råkade nog få med den":
+		[BUT_SEBASTIAN]
+		Pixie "Men va fan Sebbe"
+		[HIDE_MODIFIER]
+		Pixie "Du får gömma den någonstans här i närheten"
+		CHOICE {
+			"Ok... ge mig några minuter":
+			"Eh var då?":
+				Pixie "Jag vet inte, kanske bakom en container typ"
+				CHOICE {
+					"OK":
+					"Är det så säkert då?":
+						Pixie "Inte vet jag!"
+						Pixie "Men vi måste gå in snart"
+				}
+		}
+		Pixie "Jag väntar här så länge"
+		DEFOCUS
+		LISTEN Sebastian_talk_Pixie
+		FOCUS
+	"Eh va, nej...":
+		GOTO BUT_SEBASTIAN
+}
+
+Pixie "Är du beredd att gå in?"
+CHOICE {
+	"Jag vet inte...":
+		Pixie "Du ser lite rädd ut?"
+		CHOICE {
+			"Alltså det är något creepy med det här stället":
+
+			"Va? Nej nej. Nu går vi.":
+				GOTO LETS_GO_INSIDE
+		}
+
+	"Jag måste bara fixa en grej först":
+		[DO_SOMETHING_FIRST]
+		Pixie "Ok, jag går in så länge"
+		Pixie "Du kommer sen då?"
+		CHOICE {
+			"Japp":
+			"Kanske":
+		}
+
+	"Jepp!":
+		[LETS_GO_INSIDE]
+		Pixie "Ok, nice"
+		Pixie.SetTimetable("PixieInfiltrateCasino")
+		Pixie.StopTalking()
+		Pixie "Araki är redan där inne tror jag"
+		Pixie "Nu kör vi!"
+}
+Pixie.StopTalking()
+DEFOCUS
+
+Pixie.SetTimetable("PixieGamblingEarlier")
+Pixie.SetKnowledge("SebastianCameToCasino")
+
+
+
+# later #
+
+
+
+#LISTEN GotThroughSecurity
+
+[GOT_IN]
+
+WAIT Pixie.IsInEitherRoom(Casino_Floor1, Casino_Floor2) LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+CHOICE {
+	"Vi kom in!":
+		Pixie "Ja, jävligt bra jobbat!"
+
+	"Sjukt ställe det här":
+		Pixie "Mmm!"
+
+	"Vilket ljus det är här inne, jag blir alldeles yr":
+		Pixie "Jag gillar det"
+}
+
+Pixie "Så..."
+Pixie "Jag väntar här nere, du kan gå upp så länge"
+
+Pixie.StopTalking()
+DEFOCUS
+
+WAIT 10
+# later #
+
+WAIT Pixie.IsInEitherRoom(Casino_Floor1, Casino_Floor2) LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Har du varit på övervåningen än?"
+
+CHOICE {
+	"Japp!":
+		Pixie "Så, hur går det? Fick du syn på Monad?"
+		GOTO HOW_DID_IT_GO
+
+	"Nej inte än":
+		Pixie "OK"
+
+	"Finns det en övervåning?":
+		Pixie "Haha, ja det är där alla är"
+		Pixie "Gå upp du medan jag väntar här nere"
+		CHOICE {
+			"OK!":
+			"Aj aj, kapten":
+			"OK...":
+		}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+WAIT 10
+# later #
+
+
+WAIT Pixie.IsInEitherRoom(Casino_Floor1, Casino_Floor2) LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Sebastian! Hur går det??!"
+
+CHOICE {
+	"Det går bra":
+	"Det är en spännande natt":
+	"Jodå":
+}
+
+Pixie "Fick du syn på Monad?"
+[HOW_DID_IT_GO]
+
+CHOICE {
+	"Ja, tror det":
+		Pixie "Ok, du vet inte?"
+		CHOICE {
+			"Jo men det var hon":
+				GOTO YES
+			"Det var lite svårt att veta":
+				Pixie "Ok"
+		}
+
+	"Jajemän":
+		[YES]
+		Pixie "Grymt"
+		Pixie "Vad gör hon?"
+		CHOICE {
+			"Jag vet inte, dricker väl mest dyra drinkar":
+			"Pratade med någon snubbe":
+			"Hon spelar poker på översta däck":
+			"Hon verkar smått besatt av hasardspel":
+		}
+		Pixie "Ok, mer?"
+
+	"Nej tyvärr":
+		Pixie "Ok?"
+		Pixie "Fick du tag på någon annan information då?"
+}
+
+CHOICE {
+	"Jag talade med en man som kallade sig Longson":
+		Pixie "Verkligen?!"
+		CHOICE {
+			"Han kändes lite uppblåst":
+			"Ja, han var rätt trevlig":
+			"Han pratade bara om hur rik han var":
+		}
+		Pixie "Det var Dorisburgs borgmästare, knäppis!"
+		Pixie "Han är ett riktigt skämt"
+		CHOICE {
+			"Oj, jaha":
+			"Vadå då?":
+		}
+
+	"Nej, inte direkt":
+		Pixie "Ok"
+
+	"Det är några skumma typer från Ministeriet här":
+		Pixie "Ja, så är det ofta tror jag"
+		Pixie "Ett av deras få nöjen här i livet så vitt jag kan se"
+}
+
+CHOICE {
+	"Jag kollar runt lite mer":
+		Pixie "OK, gör så"
+
+	"Ska vi gå snart?":
+		Pixie "Jag stannar nog till kl ett ungefär"
+		CHOICE {
+			"OK":
+			"Jaha, ja men då kollar jag runt lite mer":
+		}
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+
+
+
+
+WAIT Pixie.IsInEitherRoom(Casino_Floor1, Casino_Floor2) LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Sett något mer?"
+CHOICE {
+	"Njae, inte direkt":
+		Pixie "OK"
+
+	"Monad är lite knepig":
+		Pixie "Ja?"
+		CHOICE {
+			"Men hon är rätt trevlig också":
+				Pixie "Ja hon är en bra person på att prata"
+				[BAD_FEELING]
+				Pixie "Usch, jag gillar inte känslan här"
+				Pixie "Men vi måste försöka få tag på något till Frank"
+				CHOICE {
+					"Jepp":
+					"Just det!":
+					"OK...":
+				}
+			"Jag ska försöka prata med henne igen":
+				Pixie "OK, bra"
+
+			"Hon pratar mest om att spela dock":
+				Pixie "Mhm..."
+				GOTO BAD_FEELING
+		}
+
+	"Jag hittar inte Monad":
+		Pixie "Konstigt..."
+}
+
+Pixie "Jag väntar här till kl 01, sen kan vi gå"
+CHOICE {
+	"OK":
+	"Låter bra":
+	"Jepp, jag går upp ett tag så länge då":
+		Pixie "Gör så"
+}
+
+Pixie.StopTalking()
+DEFOCUS
+
+WAIT 5
+
+WAIT Pixie.IsInEitherRoom(Casino_Floor1, Casino_Floor2) LISTEN Sebastian_talk_Pixie
+Pixie "Snart ska jag gå"
+WAIT Pixie.IsInEitherRoom(Casino_Floor1, Casino_Floor2) LISTEN Sebastian_talk_Pixie
+Pixie "Snart..."

@@ -1,0 +1,8 @@
+
+WAIT 2
+
+Hint("Use the arrow keys or WASD to rotate the camera.")
+
+WAIT 9
+
+Hint("You can also hold the right mouse button and drag.")

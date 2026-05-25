@@ -1,0 +1,293 @@
+
+Pixie.StopTalking()
+Pixie.SetNeverGetsTired(true)
+Pixie.SetFieldToFloat("sleepiness", 0)
+Pixie.WakeUp()
+Pixie.Pos(PixiesApartment_Point)
+Pixie.SetTimetable("Pixie_CurseIsOver")
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Sebastian!"
+Pixie "Ivan är tillbaka!!!!!"
+
+Petra.StopTalking()
+Petra.SetNeverGetsTired(true)
+Petra.SetFieldToFloat("sleepiness", 0)
+Petra.WakeUp()
+
+Petra.Pos(PlazaBacktreet_Point1)
+Petra.SetTimetable(PetraFindSebastian)
+
+CHOICE {
+	"Ja jag vet":
+		Pixie "Jaha..."
+		WAIT 2
+	"Hur känns det?":
+	"Vad bra":
+	"[LETS_RUN]":
+		GOTO LETS_RUN
+	"[HARBOR]":
+		DEFOCUS
+		Pixie.StopTalking()
+		Sebastian.Pos(HarborEast_Point)
+		Pixie.Pos(HarborEast_Point2)
+		GOTO HARBOR
+}
+
+Pixie "Jag är så lycklig"
+Pixie "Han är väldigt tyst bara..."
+
+WAIT Petra.IsInRoom(PixiesApartment)
+
+WAIT 3
+Petra "Sebastian!!!"
+Petra.SetTimetable("")
+Petra.CancelWalking()
+Petra "Du är i fara, ministeriet var på cafeet och letade efter dig"
+
+Petra "De såg jävligt bistra ut"
+Petra "Jag sprang iväg medan de förhörde Kafka"
+
+CHOICE {
+	"Vem är Kafka?":
+		Petra "Eh, han som har stället"
+		Petra "Kaféet alltså"
+		Petra "Skit samma!"
+
+	"Oj, bravo":
+		Petra "Tack"
+
+	"Aj då...":
+
+	"Så de såg arga ut..?":
+		Petra "Ja, minst sagt"
+
+	"[NOT_SAFE]":
+		GOTO NOT_SAFE
+}
+
+Petra "Jag tror att du är i stor fara..."
+WAIT 2
+Pixie "Är du säker på att de letade efter Sebbe?"
+Petra "Ja för FAAAN"
+Pixie "OK, lugn lugn"
+
+Pixie "Herregud Sebastian"
+Pixie "Vad är det du gjort egentligen?!"
+
+[YES]
+CHOICE {
+	"Va?! Jag..?":
+		Pixie "JA???"
+		GOTO YES
+
+	"Eh... jag var på internet":
+		Pixie "Och?"
+		CHOICE {
+			"Jag förstörde ministeriets stora dator":
+				Sebastian "Det var totalt kaos"
+				GOTO SHIT
+
+			"Jag fattade ingenting...":
+				Pixie "OK..."
+
+			"Ivan var där":
+				Pixie "OK..."
+		}
+
+	"Jag förstörde lite grejer":
+		Pixie "Jaha.. vadå?"
+		CHOICE {
+			"Ministeriets 'hjärta'":
+			"Jag tror att det var Monads dator...":
+		}
+		GOTO SHIT
+		
+	"Jag pajade Monads dator":
+		Sebastian "Den stora, på internet..."
+		[SHIT]
+		Pixie "SHIIIIIITT"
+		Pixie "FAN VA COOLT SEBBE!"
+}
+
+Pixie "Men helvete vad illa ute du är nu"
+Pixie "De kommer att förgöra dig"
+WAIT 2
+Pixie "HELVETE VAD SKA VI TA OSS TILL?!?!?!"
+WAIT 2
+Petra "Vi kanske kan gömma honom här?"
+Pixie "De kommer hitta honom"
+Pixie "Tids nog"
+Petra "Sant..."
+
+[NOT_SAFE]
+Pixie "Du är inte säker i Dorisburg"
+
+CHOICE {
+	"Va, varför det?":
+	"Jo..?!":
+	"Inte?":
+		Pixie "Inte en chans"
+}
+
+Pixie.GetUpAndInteract(Sebastian)
+
+Pixie "Jag tror du måste sticka till båten!"
+Pixie "Kom med en gång"
+
+CHOICE {
+	"Jag vill inte":
+		Pixie "Nej..."
+		WAIT 2
+		GOTO AMAZING
+
+	"Jag kan klara mig mot de där töntarna":
+		Pixie "Tror du verkligen det?"
+		Pixie "Vet du var Monad är?"
+		CHOICE {
+			"Njae...":
+			"Eh, jag kanske kan ta reda på det":
+			"Typ":
+		}
+		Pixie "Jag vågar inte tänka på vad hon kommer göra med dig"
+		Pixie "Fan Sebbe, snälla... "
+		Pixie "Försök fly innan det är för sent"
+
+	"Jag vill inte sticka!":
+		[AMAZING]
+		Pixie "Alltså, du verkar ha gjort något alldeles amazing"
+		Pixie "Men du kommer ju bli dödad!"
+}
+
+[LETS_RUN]
+Ivan.SetTimetable(Ivan_Weirdo)
+DEFOCUS
+
+Pixie "Ivan, du måste stanna här"
+Pixie "Lova att inte gå någonstans"
+
+Petra.SetTimetable("Petra_GuideToHarborEast") # not guiding anymore, just running there
+
+WAIT 3
+Pixie.SetTimetable("Pixie_GuideToHackedFusebox")
+
+
+Pixie.StopTalking()
+Petra.StopTalking()
+
+Pixie "Följ mig"
+
+BROADCAST ManHuntBegins
+
+WAIT 8
+Pixie "AAAHHH, vad ska vi göra?"
+Pixie.SetRunning(true)
+Petra.SetRunning(true)
+
+Pixie "Vågar vi kolla in Plaza..?"
+
+WAIT Pixie.IsWithinDistance(Plaza_CurcuitLocker_4, 10)
+Pixie.CancelWalking()
+Pixie.SetTimetable("")
+
+Pixie.PutIntoInventory(HanksHackdev)
+Pixie.TakeOutItem(HanksHackdev)
+WAIT Pixie.HasHandItemWithName(HanksHackdev)
+
+WAIT Sebastian.IsWithinDistance(Pixie, 10)
+
+Pixie "Vi hinner inte springa hela vägen, de kommer att hinna ifatt oss"
+Pixie.Hack(Plaza_CurcuitLocker_4)
+Pixie "Jag hackar den här så kan vi ta oss till båten snabbare"
+
+WAIT 7
+Plaza_CurcuitLocker_4.SetCodeAndRun(PixieFuseboxHack)
+Plaza_CurcuitLocker_4.SetResettableCode(PixieFuseboxHack)
+
+Pixie "Kom efter mig!"
+Pixie.PutAwayHandItem()
+WAIT Pixie.HasNoHandItem()
+Pixie.Interact(Plaza_CurcuitLocker_4)
+WAIT 2
+Pixie.Pos(HarborEast_Point2)
+
+
+
+WAIT Sebastian.IsInRoom(HarborEast)
+#### after slurp
+
+Pixie.SetTimetable("")
+Pixie.Walk(HarborEast_Point)
+
+
+LISTEN Sebastian_talk_Petra {
+	Petra "Det här är verkligen sorgligt"
+	LISTEN Sebastian_talk_Petra
+	Petra "Jag kommer att sakna dig!"
+	LISTEN Sebastian_talk_Petra
+	Petra "Lova att skriva ett kort när du kommit hem"
+	LISTEN Sebastian_talk_Petra
+	Petra "Jag hoppas att ministeriet inte hittar dig..."
+}
+
+[HARBOR]
+
+WAIT Pixie.IsWithinDistance(Sebastian, 7)
+
+FOCUS
+
+Pixie.SetTimetable("")
+Pixie.CancelWalking()
+Pixie "Båten ligger inne"
+Pixie "Du måste åka med den Sebastian!"
+
+CHOICE {
+	"Men jag vill inte":
+	"Men jag har inte hunnit säga hej då till någon":
+}
+
+Pixie "Ministeriet är efter dig, vem vet vad som händer om de fångar dig?!"
+
+DEFOCUS
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+
+CHOICE {
+	"Hej då Pixie":
+		Pixie "Hej då Sebastian"
+
+	"Jag går på båten nu då...":
+		Pixie "Ja..."
+}
+
+BROADCAST SoundHorn
+
+CHOICE {
+	"Men det är så mycket vi inte hunnit göra":
+	"Vad händer nu?":
+}
+
+CHOICE {
+	"Vi behöver mer tid":
+	"Pixie...":
+}
+
+BROADCAST SoundHorn
+
+Pixie "Tack för allt du har gjort"
+Pixie "Farväl"
+
+
+DEFOCUS
+Pixie.SetTimetable("")
+# vinka
+
+
+
+BROADCAST SoundHorn
+WAIT 3
+BROADCAST SoundHorn

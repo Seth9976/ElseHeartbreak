@@ -1,0 +1,16 @@
+
+Hotel_Corridor_Door1.LockDoor()
+Hotel_Corridor_Door2.LockDoor()
+Hotel_Corridor_Door3.LockDoor()
+Hotel_Corridor_Door4.LockDoor()
+Hotel_Corridor_Door5.LockDoor()
+
+Hotel_Lobby_DoorToOffice.LockDoor()
+
+DorisGardens_East_DoorToLodge.LockDoor()
+
+HarborNorth_DoorToRadioStation.LockDoor()
+
+Casino_Exterior_MainDoor.LockDoor()
+
+TownHall_DoorToLongsonOffice.LockDoor()

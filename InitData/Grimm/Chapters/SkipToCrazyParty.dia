@@ -1,0 +1,17 @@
+
+
+START GetAllLodgeStuff
+
+Story("CrazyParty")
+
+SetHour(18)
+
+Felix.Pos(PetrasApartmentPoint1)
+WAIT 1
+Petra.Pos(PetrasApartmentPoint1)
+WAIT 1
+#Pixie.Pos(PetrasApartmentPoint1)
+Pixie.Pos(Burrows_North_Point)
+WAIT 1
+Sebastian.Pos(PetrasApartmentPoint1)
+#Sebastian.Pos(BurrowsApartments_Corridor2a_Trigger_1)

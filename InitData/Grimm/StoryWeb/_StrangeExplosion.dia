@@ -1,0 +1,5 @@
+
+WAIT 240
+
+Typer1.SetTimetable(Typer1)
+Typer2.SetTimetable(Typer2)

@@ -1,0 +1,317 @@
+# At Lodge:
+
+Felix.SetTimetable(Felix)
+Felix.SetFieldToFloat("sleepiness", 0)
+
+# NEW ADDITION AFTER BUG WHERE FELIX HAD 'IsTalking' SET TO TRUE AFTER THE PARTY, RENDERING HIM STUCK BEHIND THE BAR IN HIS APARTMENT
+Felix.StopTalking()
+
+WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix {
+
+	FOCUS
+	Felix.StartTalking()
+
+	CHOICE {
+		"Hallå":
+		"Hej!":
+		"God dag":
+		"[FETCH YULIAN]":
+			GOTO FETCH
+	}
+
+	Felix "Tja, är du här nere igen?"
+	Felix "Vad händer?"
+	Sebastian "Inte så mycket"
+
+	[WHAT_IS_GOING_ON]
+	CHOICE {
+		"Vill du köpa en läsk av mig?":
+			Felix "Nä det är lugnt"
+			GOTO WHAT_IS_GOING_ON
+
+		"Är Pixie här?":
+			Felix "Jag vet inte dude"
+			Felix "Du får inte störa henne mer när hon jobbar nu"
+			CHOICE {
+				"Nej OK, sorry":
+					GOTO WHAT_IS_GOING_ON
+				"Nej men jag tror att jag är redo att göra intagningstestet här snart!":
+					Felix "OK, verkligen?"
+					GOTO YES_YES
+			}
+ 
+		"Jag tänkte på det här intagningsprovet du pratade om förut":
+			Felix "Ja just det"
+			[YES_YES]
+			IF Sebastian.HasItemOfType(Hackdev) {
+				CHOICE {
+					"Jag har hittat en modifierare!":
+						Felix "Cool cool"
+					"Jag tror att jag har den utrustning som krävs nu":
+						Felix "En modifierare eller?"
+						Sebastian "Mm"
+					"Hur anmäler man sig till det?":
+						Felix "Det gör man här hos mig"
+				}
+				Felix "Så du vill göra testet nu eller?"
+				Felix "Har du tränat dig och så?"
+				CHOICE {
+					"Mm... lite grann":
+						Felix "Ok?"
+						[PRACTICE]
+						Felix "Du kanske borde öva lite innan?"
+						Felix "Hank på hotellet är duktig, han kanske kan lära dig ett och annat?"
+						Felix "Eller Fib som jobbar i parken..."
+						CHOICE {
+							"OK, bra idé!":
+								[TRY_AGAIN]
+								Felix.StopTalking()
+								DEFOCUS
+								# later
+								WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+								Felix.StartTalking()
+								FOCUS
+								Felix "Ja?"
+								CHOICE ETERNAL {
+									"Nu är jag förberedd, låt mig göra testet!":
+										Felix "OK?!"
+
+									"Eh, strunt samma":
+										Felix "Ta det lugnt dude"
+										GOTO TRY_AGAIN
+								}
+
+							"Nej, jag vill göra testet nu":
+								[OKHMM]
+								Felix "Ok..? Hmm"
+
+							"Det har jag redan gjort":
+								GOTO OKHMM
+						}
+
+					"Ja, jag känner mig riktigt väl förberedd":
+						Felix "Vad bra!"
+					"Tränat på vadå?":
+						Felix "Att använda modifieraren, programmera saker och så..."
+						CHOICE {
+							"Njae":
+								GOTO PRACTICE
+							"Jo, lite":
+								Felix "Ok"
+						}
+				}
+				Felix "Jag ska ringa på Yulian om han är här"
+				[FETCH]
+				Felix "En sekund dude"
+				BROADCAST FelixCallsYulian
+			}
+			ELSE {
+				Sebastian "Hur anmäler man sig till det?"
+				Felix "Det gör man här hos mig. Har du en modifierare?"
+				CHOICE {
+					"Ehm... inte med mig.":
+
+					"Nej, vad är det för något?!!":
+						Felix "Det är det viktigaste redskapet om du ska jobba här"
+						Felix "Alla har en!"
+						Felix "Utom jag då"
+						CHOICE {
+							"Var kan jag hitta en sån grej då?":
+								GOTO HOW_TO_GET_MODIFIER
+
+							"Men vad har man den till?":
+								Felix "Programmerar saker typ, jag är inte helt säker"
+								Felix "Det är liksom som en dator"
+								Felix "Fast jävligt kraftfull"
+								Felix "Och bärbar"
+						}
+
+					"Jag fattar inte hur jag ska hitta en sån pryl":
+						GOTO HOW_TO_GET_MODIFIER
+				}
+				Felix "Du får komma tillbaka när du har skaffat dig en sån"
+				Felix "Och vet hur den fungerar!"
+				CHOICE {
+					"Ok...":
+					"Mm":
+				}
+				Felix "Annars har du ändå ingen chans att klara testet"
+				[HOW_TO_GET_MODIFIER]
+				Felix "Du borde kunna få tag på en hos Gunnar"
+				CHOICE {
+					"Vem är det?":
+						Felix "Om du frågar mig..."
+						Felix "En gammal sur gubbe som alla fjäskar för"
+						Felix "Men han vet hur man bygger datorer"
+						CHOICE {
+							"Coolt":
+								Felix "Mm, lite antar jag"
+								[HE_LIVES_IN_THE_HARBOR]
+								Felix "Han bor i en liten stuga borta vid hamnen"
+							"Jaha?":
+								Felix "Han jobbade på ministeriet förut tror jag"
+								Felix "Nu bor han i en liten stuga bort mot hamnen"
+						}
+						Felix "Den är rosa med tak av guld..."
+						Felix "Ligger precis bredvid spårvagnsspåren"
+						Felix "Rätt nära radiostationen är det också"
+						[WHAT_COLOR_ETC]
+						CHOICE {
+							"Är det ett jättehögt hus?":
+								Felix "Nej, inte alls"
+								Felix "Du tänker nog på Doris hus"
+								Felix "Gå inte dit!"
+								GOTO WHAT_COLOR_ETC
+							"Vilken färg har huset?":
+								Felix "Typ rosa..?"
+								Felix "Och så låter det konstigt om det"
+								Felix "Jag vet inte vad han håller på med där inne..."
+							"Ok, jag tror jag vet vad du snackar om för hus":
+								Felix "Bra"
+						}
+						Felix "Om du går dit så måste du vara beredd på att han är lite vresig"
+						CHOICE {
+							"Ok, vad jobbigt":
+								Felix "Mm... jag hatar negativa människor"
+							"Inga problem":
+								Felix "Säg inte det"
+								Felix "Men du borde definitivt gå dit ändå"
+						}
+						Felix "Lycka till!"
+						CHOICE {
+							"Tack, vi ses":
+							"Ha det bra!":
+						}
+
+					"Jaha..?":
+						Felix "Ja han säljer dem tror jag"
+						GOTO HE_LIVES_IN_THE_HARBOR
+				}
+				BROADCAST ShouldGetModifier
+				Felix.StopTalking()
+				DEFOCUS
+
+				WAIT Sebastian.IsNotInRoom(Lodge_Entry)
+				# later #
+
+				WAIT Felix.IsAtTask(Guard) LISTEN Sebastian_talk_Felix
+				FOCUS
+				Felix.StartTalking()
+
+				Felix "Ja?"
+				CHOICE ETERNAL {
+					"Jag hittar inte hans hus...":
+						Felix "Vems hus?"
+						CHOICE {
+							"Han mannen du pratade om, som hade modifierare":
+								Felix "Ah, Gunnar!"
+								[SHOW_YOU]
+								Felix "Jag kan visa det för dig om du vill"
+								CHOICE {
+									"Ja gärna!":
+									"Nej det behövs inte":
+										Felix "Jo, jag behöver ändå en promenad"
+								}
+								Felix "Kom så drar vi"
+
+							"Gunnar":
+								Felix "Ah"
+								GOTO SHOW_YOU
+						}
+
+					"Nu har jag fixat en modifierare":
+						Felix "Verkligen?"
+						Felix "Bra jobbat dude"
+						Felix "Jag ska se om bossen är inne"
+						BROADCAST FelixCallsYulian
+						Felix.StopTalking()
+						DEFOCUS
+						STOP
+				}
+
+				Felix.StopTalking()
+				DEFOCUS
+
+				Felix.SetTimetable("Felix_GuideToGunnar")
+				WAIT Felix.IsWithinDistance(HarborNorth_Point, 5)
+				Felix "Här är det!"
+				WAIT Sebastian.IsWithinDistance(Felix, 10)
+				FOCUS
+				[THANKS]
+				CHOICE {
+					"Eh, var?":
+						Felix "Det lila huset här framme"
+						GOTO THANKS
+					"Tack så hemskt mycket!":
+						Felix "Inga problem dude, vi ses"
+					"Grymt":
+						Felix "Ciao"
+				}
+				Felix.SetTimetable("Felix")
+				DEFOCUS
+			}
+	}
+}
+
+
+# At home:
+
+WAIT Felix.IsAtTask(Hanging) LISTEN Sebastian_talk_Felix {
+	FOCUS
+	Felix.StartTalking()
+
+	Felix "Nä men tjena Sebastian!"
+	CHOICE {
+		"God dag":
+			Felix "Nu känns du så där stel igen dude"
+			Felix "Slappna av lite"
+			CHOICE {
+				"Ja ok, jag ska försöka":
+					Felix "Bra, bra"
+
+				"Slappna av själv. Dude":
+					Felix "Haha, ja ok"
+			}
+
+		"Tjena dude!":
+			Felix "Du känns lite mer avslappnad idag"
+			Felix "Härligt!"
+	}
+	Felix "Jag tänkte bara softa här i lägenheten ikväll"
+	Felix "Du får gärna hänga här om du vill"
+
+	CHOICE {
+		"Schysst":
+		"Ok, cool!":
+		"Jag tänkte fråga dig en sak om Pixie":
+			Felix "Fan dude, jag orkar inte snacka känslor hela tiden"
+			Felix "Softa med den där bruden"
+			Felix "Vi kan väl ta det en annan dag"
+			CHOICE {
+				"Ja ok":
+				"Ok då...":
+			}
+		"Du jag tänkte på det här intagningsprovet":
+			Felix "Jag orkar inte snacka jobb nu Sebbe"
+			Felix "Kom förbi mig när jag sitter och vaktar så löser vi det där"
+			Sebastian "Ok"
+	}
+	Felix "Peace"
+
+	Felix.StopTalking()
+	DEFOCUS
+}
+
+WAIT Felix.IsNotAtTask(Guard) AND Felix.IsNotAtTask(Hanging) LISTEN Sebastian_talk_Felix {
+	Felix "Tjena Sebbe"
+	Felix.StopTalking()
+	WAIT Felix.IsNotAtTask(Guard) AND Felix.IsNotAtTask(Hanging) LISTEN Sebastian_talk_Felix
+	Felix "1 sekund..."
+	Felix.StopTalking()
+	WAIT Felix.IsNotAtTask(Guard) AND Felix.IsNotAtTask(Hanging) LISTEN Sebastian_talk_Felix
+	Felix "Vänta, jag ska bara sätta mig ner"
+	Felix.StopTalking()
+}
+
+
+LISTEN DONT_STOP

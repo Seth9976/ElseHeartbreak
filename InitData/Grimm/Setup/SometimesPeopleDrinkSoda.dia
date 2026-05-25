@@ -1,0 +1,117 @@
+
+
+[DRINK_MORE]
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Emma, 30)
+Emma.CreateDrinkInHand(WellspringSoda)
+Emma.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Felix, 30)
+Felix.CreateDrinkInHand(WellspringSoda)
+Felix.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Dave, 30)
+Dave.CreateDrinkInHand(WellspringSoda)
+Dave.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Glenn, 30)
+Glenn.CreateDrinkInHand(WellspringSoda)
+Glenn.UseHandItem()
+
+IF OneIn(3) {
+    GOTO A_BIT_LATER
+}
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Glenn, 30)
+Glenn.CreateDrinkInHand(WellspringSoda)
+Glenn.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Michail, 30)
+Michail.CreateDrinkInHand(WellspringSoda)
+Michail.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Will, 30)
+Will.CreateDrinkInHand(WellspringSoda)
+Will.UseHandItem()
+
+[EARLIER]
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Roby, 30)
+Roby.CreateDrinkInHand(WellspringSoda)
+Roby.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Emma, 30)
+Emma.CreateDrinkInHand(WellspringSoda)
+Emma.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Petra, 30)
+Petra.CreateDrinkInHand(WellspringSoda)
+Petra.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Wallenstam, 30)
+Wallenstam.CreateDrinkInHand(WellspringSoda)
+Wallenstam.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Police, 30)
+Police.CreateDrinkInHand(WellspringSoda)
+Police.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Lars, 30)
+Lars.CreateDrinkInHand(WellspringSoda)
+Lars.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Harry, 30)
+Harry.CreateDrinkInHand(WellspringSoda)
+Harry.UseHandItem()
+
+[A_BIT_LATER]
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Harry, 30)
+Harry.CreateDrinkInHand(WellspringSoda)
+Harry.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Receptionist, 30)
+Receptionist.CreateDrinkInHand(WellspringSoda)
+Receptionist.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Bouncer, 30)
+Bouncer.CreateDrinkInHand(WellspringSoda)
+Bouncer.UseHandItem()
+
+IF OneIn(2) {
+    GOTO EARLIER
+}
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Nini, 30)
+Nini.CreateDrinkInHand(WellspringSoda)
+Nini.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Emma, 30)
+Emma.CreateDrinkInHand(WellspringSoda)
+Emma.UseHandItem()
+
+WAIT 500
+WAIT Sebastian.IsOutsideDistance(Roby, 30)
+Roby.CreateDrinkInHand(WellspringSoda)
+Roby.UseHandItem()
+
+GOTO DRINK_MORE

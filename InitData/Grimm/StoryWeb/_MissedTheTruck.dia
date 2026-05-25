@@ -1,0 +1,4 @@
+
+Pixie.SetKnowledge("SebastianFailedFactory")
+Driver.Pos(CharacterRoom_Point)
+Driver.SetTimetable("")

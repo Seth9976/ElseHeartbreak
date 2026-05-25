@@ -1,0 +1,59 @@
+Pixie.SetTimetable("Pixie")
+
+WAIT 10
+
+WAIT Pixie.IsWithinDistance(Sebastian, 10) AND Sebastian.NotTalkingButIgnore(Pixie)
+
+Pixie "Hej hej Sebastian, vad gör du här?"
+Pixie "Jag vet inte om jag orkar prata med dig just nu"
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Ja, vad är det?"
+
+[AGAIN]
+CHOICE {
+	"Tänkte bara säga förlåt":
+		Pixie "Ok, det är lugnt"
+		Pixie "Jag måste bara få vara lite i fred"
+		CHOICE {
+			"Ok":
+			"Ja jag förstår":
+		}
+		Sebastian "Förresten..."
+		GOTO AGAIN
+
+	"Vad heter hon som har skoaffären?":
+		Pixie "Nini, hon är riktigt skön"
+}
+
+Pixie "Du förresten"
+Pixie "Felix pratade om att han skulle ha fest ikväll, ska du dit?"
+CHOICE {
+	"Ja det tänkte jag nog":
+		Pixie "Cool, vi ses kanske där då"
+	"Jag tänkte nog gå dit imorgon...":
+		Pixie "Jaha, ja det kanske är bättre"
+		Pixie "Får se om vi ses då"
+	"Jag är lite rädd för Felix":
+		Pixie "Vadå? Han är ju jättegullig"
+		Pixie "Han spelar nog bara lite kaxig ibland"
+		Pixie "Du får stå på dig emot honom"
+}
+CHOICE {
+	"Jepp!":
+	"Ja...":
+	"Mm, ska försöka":
+	"Var är det han bor?":
+		Pixie "Han bor ju framför caféet typ"
+		Pixie "Man går in på sidan som vetter mot parken"
+}
+
+Pixie "Men du Sebbe, vi hörs senare"
+Pixie "Hej då"
+
+Pixie.StopTalking()
+DEFOCUS

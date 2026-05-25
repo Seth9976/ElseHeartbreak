@@ -1,0 +1,29 @@
+#WAIT IsHour(17) # the evening after Sebastian arrives
+
+Pixie.Pos(PixiesApartment_Point)
+Pixie.SetTimetable("Pixie")
+
+
+
+WAIT Pixie.IsNotAtTask(Clubbing) LISTEN Sebastian_talk_Pixie {
+    IF IsOverHour(17) {
+        IF Pixie.IsNotInRoom(BarYvonne) {
+            Pixie "Hejsan, jag är på väg till klubben"
+            Pixie "Har lite bråttom!"
+            Pixie "Men vi kanske ses där?"
+        } 
+        ELSE {
+            GOTO NORMAL_HELLO
+        }
+    }
+    ELSE {
+        [NORMAL_HELLO]
+        Pixie "Hej!"
+        Pixie "Har jättebråttom, vi ses"
+    }
+}
+
+
+
+WAIT Pixie.IsAtTask(Clubbing) LISTEN Sebastian_talk_Pixie
+START DancingBeauty

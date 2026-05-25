@@ -1,0 +1,18 @@
+
+Pixie.SetTimetable("PixieCakeParty")
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie.StartTalking()
+
+CHOICE {
+    "Det kommer att gå bra, Pixie":
+    "Hmm...":
+}
+
+Pixie "Fan"
+Pixie "De kommer göra något hemskt med honom"
+Pixie "Jag känner det på mig!"
+
+Pixie.StopTalking()
+DEFOCUS

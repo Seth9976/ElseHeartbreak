@@ -1,0 +1,187 @@
+
+Petra.SetTimetable("PetraFindSebastian")
+Petra.SetRunning(true)
+
+WAIT Petra.IsWithinDistance(Sebastian, 10) AND Sebastian.IsIdle() [FIND_SEBASTIAN] {
+	FOCUS
+	WAIT 2
+	Petra "Sebastian!"
+	WAIT 1
+	CHOICE {
+		"Va?":
+		"Petra?!":
+		"Tjenare":
+		"[CHEAT]":
+			GOTO CHEAT
+	} 
+	Petra "Jag har letat efter dig!"
+	Petra.Interact(Sebastian)
+
+	WAIT Petra.HasConversationTarget(Sebastian)
+
+	Petra "Vad skönt att jag äntligen hittade dig"
+
+	CHOICE {
+		"Hur är läget?":
+			Petra "Det är OK med mig men Pixie är helt förstörd"
+			Petra "Ivan har blivit kallad till Ministeriet"
+
+		"Har det hänt något?":
+			Petra "Ja!"
+			Petra "Det är rätt hemskt"
+			Petra "Ivan har blivit kallad till Ministeriet"
+
+		"Jag var bara ute på stan lite":
+			Petra "OK, OK. Du måste följa med till Pixie"
+			Petra "Hon är helt förstörd, Ivan har blivit kallad till Ministeriet"
+	}
+
+	CHOICE {
+		"Va?!":
+			GOTO EXPERIMENT
+
+		"Oj, varför det?":
+			[EXPERIMENT]
+			Petra "De ska göra något slags experiment på honom!"
+
+		"Är det så farligt då?":
+			Petra "Sebastian, skärp dig."
+			Petra "Jag vet att du inte gillar Ivan så mycket"
+			Petra "men det här är allvarligt, de ska göra något slags experiment på honom"
+	}
+
+	Petra "Pixie är jätteorolig, du måste följa med och försöka trösta henne"
+
+	CHOICE {
+		"Hur då?":
+			Petra "Jag vet inte, hon behöver mest sällskap och så"
+			Petra "Vi ska försöka baka en tårta tillsammans"
+
+		"Vad är det för slags experiment egentligen?":
+			Petra "Jag vet inte..."
+			Petra "Stick till Pixies lägenhet så kommer jag snart"
+			Petra "Jag ska bara gå till Dorian och hämta honom också"
+			GOTO BYE
+		}
+
+	CHOICE {
+		"OK, ska jag kan följa med dit direkt om du vill":
+			Petra "Perfekt"
+			Petra "Jag kommer om ett tag, ska bara hämta Dorian också"
+
+		"Hmm, jag har lite andra saker jag måste göra i kväll tyvärr":
+			Petra "Jaha..."
+			Petra ""
+			Petra "Jag tror att Pixie blir väldigt besviken om du inte kommer"
+
+		"Jag kan hjälpa till med tårtan!":
+			Petra "Fint. Jag ska förbi hos Dorian och hämta honom också"
+			Petra "men du kan väl sticka direkt till Pixie"
+
+		"Jag vet inte om jag vet var Pixie bor faktiskt...":
+			Petra "Inte?"
+			GOTO SHE_LIVES
+	}
+
+	[BYE]
+	CHOICE {
+		"OK, men var bor hon då?":
+			[SHE_LIVES]
+			Petra "Hennes lägenhet ligger bakom Bar Yvonne typ"
+			Petra "Du går över Plaza och sen till vänster"
+			CHOICE {
+				"Mhm?":
+					Petra "Du går liksom under en bro"
+					Petra "Hon bor på en bakgata bakom Plaza"
+					CHOICE {
+						"Nära caféet?":
+							Petra "Nej, andra sidan Plaza"
+							CHOICE {
+								"OK, OK":
+								"Mhm...":
+							}
+							Petra "Du kan inte missa det!"
+
+						"OK, jag får försöka hitta då":
+							Petra "Ja, gör så"
+							Petra "Det är rätt enkelt"
+					}
+
+				"Ah!":
+					Petra "Du fattar? Bra!"
+			}
+			Petra "Hon bor i ett högt hus där"
+			Petra "Det är den enda dörren tror jag"
+			GOTO BYE
+
+		"OK, ses sen då":
+			Petra "Det gör vi, hej då!"
+
+		"Hej då!":
+			Petra "Hej hej!"
+	}
+
+	[CHEAT]
+
+	Petra.StopTalking()
+	DEFOCUS
+
+	Log("Petra should find Dorian now.")
+	Petra.SetTimetable(PetraFindDorian)
+	WAIT Petra.IsWithinDistance(Dorian, 5)
+	Petra.SetTimetable(PetraCakeParty)
+	Dorian.SetTimetable(DorianCakeParty)
+}
+
+
+WAIT Sebastian.IsInRoom(PixiesApartment)
+CANCEL FIND_SEBASTIAN
+Petra.SetRunning(false)
+LISTEN Sebastian_talk_Petra
+Petra "Vilken jävla dag"
+Petra "Suck..."
+Petra "Vad ska vi ta oss till..?"
+Petra "Och Pixie verkar så ledsen"
+
+CHOICE {
+	"Vad är det de ska göra med Ivan?":
+		Petra "Ingen vet"
+		Petra "Eller han kanske gör det..."
+		Petra "Vi får väl se imorgon. Kommer du till ministeriet?"
+		CHOICE {
+			"Ja..?":
+			"Vad händer där?":
+			"Njae":
+		}
+		Petra "Du måste komma!"
+		Petra "Pixie kommer må mycket bättre då"
+
+	"Ja...":
+		Petra "Du har pratat med henne väl?"
+		CHOICE {
+			"Jo jag försökte lite":
+			"Mm":
+			"Typ":
+		}
+		Petra "Hon gillar dig, det vet du va?"
+		[HOW]
+		CHOICE {
+			"Gör hon?":
+				Petra "Ja!"
+				GOTO HOW
+			"Jo, antar det...":
+				Petra "Vi gillar dig allihop"
+				GOTO COOL_GUY
+			"På vilket sätt?":
+				Petra "Ja men hon tycker du är skön"
+				[COOL_GUY]
+				Petra "Du är en skön kille Sebastian!"
+				CHOICE {
+					"Heh, tack":
+					"Jag gillar er":
+						Petra "Vad bra!"
+					"Jag gillar Pixie":
+						Petra "Ja? Vad bra!"
+				}
+		}
+}

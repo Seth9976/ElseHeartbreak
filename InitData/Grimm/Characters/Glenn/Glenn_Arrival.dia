@@ -1,0 +1,70 @@
+
+LISTEN Sebastian_talk_Glenn
+FOCUS
+Glenn.StartTalking()
+
+Glenn "Är du go eller?!"
+
+CHOICE {
+    "Jag tänkte bara säga hej":
+        Glenn "Hej, hej"
+
+    "Ja!":
+
+    "Läget?":
+        Glenn "Läget är således..."
+        Glenn "Vertikalt"
+
+    "Va?!":
+}
+
+CHOICE {
+    "Ha det fint!":
+    "Hej då!":
+}
+
+Glenn "Har du hört den här om Kålle å Ada som skulle..."
+Glenn "Äsch, vi tar den en annan gång hörru"
+Glenn "Simma lugnt nu"
+
+Glenn.StopTalking()
+DEFOCUS
+
+WAIT 20
+
+LISTEN Sebastian_talk_Glenn
+FOCUS
+Glenn.StartTalking()
+
+Glenn "Hallå du"
+Glenn "Jag ska inte ha nåt"
+Glenn "Vet du hur man ser skillnad på en norrman och en bäver?"
+Glenn "Hahaha..."
+Glenn "Nej nu måste jag spankulera"
+Glenn "Ta en snus hörru"
+
+Glenn.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Glenn
+FOCUS
+Glenn.StartTalking()
+
+Glenn "Tjena"
+Glenn "Har du lyssnat på min radiokanal?"
+Glenn "Den heter 7:an"
+Glenn "Sänder ut olagligt, jävligt underground"
+Glenn "Svinbra är den!"
+Glenn "Kom ihåg att lyssna nu"
+CHOICE {
+    "Det ska jag göra":
+    "7:an":
+        Glenn "Jamenvisst"
+    "Eh, hej då":
+        Glenn "Tjipp"
+}
+
+Glenn.StopTalking()
+DEFOCUS

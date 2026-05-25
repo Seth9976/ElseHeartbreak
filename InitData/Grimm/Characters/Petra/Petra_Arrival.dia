@@ -1,0 +1,261 @@
+
+WAIT Petra.IsInRoom(PetrasApartment) AND Sebastian.IsWithinDistance(Petra, 10) AND Petra.IsAwake() {
+	INTERRUPT BreakInPetra
+}
+
+
+WAIT Petra.IsAtTask(Djing) LISTEN Sebastian_talk_Petra {
+	FOCUS
+	Petra.StartTalking()
+	IF Petra.HasKnowledge("HasInvitedSebastianToBarYvonne") {
+		Petra "Hej! Det är ju du!"
+		Petra "Kul att du tog dig hit"
+		CHOICE {
+			"Ja, hade inte något bättre för mig":
+			"Ja!":
+			"Mhm":
+		}
+		Petra "Hur är läget då?"
+		CHOICE {
+			"Det är bra, själv?":
+				Petra "Lite tomt på dansgolvet"
+				Petra "Annars är det helt ok"
+			"Jag är jättetrött":
+				Petra "Haha, ok"
+			"Det är väl ok, tänkte köpa en öl":
+				Petra "Bra idé"
+		}
+		IF Sebastian.HasKnowledge(Pixie) {
+			Petra "Men du förresten"
+			Petra "Jag såg att du pratade med Pixie"
+			CHOICE {
+				"Ja...":
+				"Gjorde jag?":
+					Petra "Ja, tjejen på dansgolvet"
+					CHOICE {
+						"Jaha ja hon var trevlig!":
+						"Aha, hon ja":
+					}
+				"Ja, precis":
+			}
+			Petra "Kul! Vi är bästisar"
+			CHOICE {
+				"Jaha?":
+					Petra "Ja, vi har känt varandra typ hela livet"
+				"Är ni inte lite för gamla för sånt?":
+					Petra "Va? Bästisar är man ju hela livet!"
+				"Å, trevligt":
+					Petra "Ja"
+			}
+			Petra "Hon är världens bästa person"
+			Sebastian.SetKnowledge("PetraKnowsPixie")
+			CHOICE {
+				"Hon verkade väldigt trevlig":
+				"Verkligen?":
+				"Ok, va bra":
+				"Hehe, ok":
+			}
+			CHOICE {
+				"Nej, nu ska jag gå och köpa en öl":
+					Petra "Vi ses"
+				"Hon bjöd in mig på någon slags fest":
+					Petra "Ja, i gruvan imorgon?"
+					CHOICE {
+						"Mm":
+						"Ja!":
+					}
+					Petra "Kul! Jag vet inte om jag kan gå, måste nog DJ:a här då"
+					Petra "Även fast alla kommer vara där borta, så det känns lite onödigt"
+					Petra "Chefen blir sur annars"
+					Petra "Men vad roligt!"
+					Petra "Nu ska jag koncentrera mig här, vi ses"
+			}
+		}
+		ELSE {
+			Petra "Hoppas du får en kul kväll här!"
+		}
+	} ELSE {
+		Petra "Hallå där"
+		Petra "Jag är ledsen men jag måste koncentrera mig på mitt DJ-set"
+	}
+	Petra.StopTalking()
+	DEFOCUS
+
+	WAIT 15
+
+	[BUSY]
+	WAIT Petra.IsAtTask(Djing) LISTEN Sebastian_talk_Petra
+	FOCUS
+	Petra.StartTalking()
+	Petra "Sorry, måste koncentrera mig här just nu"
+	Petra.StopTalking()
+	DEFOCUS
+	GOTO BUSY
+}
+
+
+WAIT Petra.IsAtTask(Fikatime) LISTEN Sebastian_talk_Petra {
+	FOCUS
+	Petra.StartTalking()
+	Petra "Tjena"
+	Petra.SetKnowledge(Sebastian)
+	
+	CHOICE {
+		"Hej":
+		"Tja!":
+	}
+
+	Petra "Du ser lite förvirrad ut grabben"
+
+	CHOICE {
+		"Ja, jag är vilse typ":
+			Sebastian "Kom precis hit till stan"
+			Petra "Aha, jag fattar"
+
+		"Heh, gör jag?":
+			Petra "Mm, är du ny i stan?"
+			Sebastian "Jepp"
+	}
+
+	DEFOCUS
+	
+	INTERRUPT GetInvitedToBarYvonne
+
+	[AGAIN]
+	WAIT Petra.IsAtTask(Fikatime) LISTEN Sebastian_talk_Petra
+	Petra "Ja?"
+	FOCUS
+	CHOICE ETERNAL {
+		"Eh, det var inget":
+		"Sorry, jag råkade bara klicka på dig":
+		"Ursäkta, jag trodde du var någon annan":
+	}
+	DEFOCUS
+
+	GOTO AGAIN
+}
+
+
+
+
+WAIT Sebastian.IsNotInRoom(PetrasApartment) AND Petra.IsNotAtTask(Fikatime) AND Petra.IsNotAtTask(Djing) LISTEN Sebastian_talk_Petra {
+	FOCUS
+	Petra.StartTalking()
+
+	IF Petra.HasKnowledge(Sebastian) {
+		Petra "Hej Sebastian!"
+		CHOICE {
+			"Hej Anna!":
+				Petra "Jag heter inte Anna!"
+				GOTO MY_NAME_IS_PETRA
+
+			"Hej Emma!":
+				Petra "Jag heter inte Emma!"
+				GOTO MY_NAME_IS_PETRA
+
+			"Hej Petra!":
+				Petra "Du kom ihåg mitt namn, bra jobbat!"
+				CHOICE {
+					"Självklart":
+					"Ja jag är rätt så bra på namn":
+						Petra "Det är en bra färdighet"
+				}
+
+			"Hej Marie":
+				Petra "Jag heter inte Marie!"
+				[MY_NAME_IS_PETRA]
+				CHOICE {
+					"Nähä...":
+					"OK?":
+				}
+				Petra "Petra var namnet"
+				CHOICE {
+					"Oj förlåt":
+						Petra "Det är lugnt"
+					"Ah!":
+				}
+
+			"Hej... öh":
+				Petra "Petra heter jag"
+				Petra "Vi sågs förut"
+				CHOICE {
+					"Ah, ja just det":
+					"Ja nu minns jag":
+					"OK..?":
+				}
+				Petra "Trevligt, trevligt"
+		}
+		Petra "Vad händer idag då?"
+		CHOICE {
+			"Eh, letar efter snubben jag ska jobba med tror jag...":
+				Petra "OK, spännande"
+				Petra "Lycka till!"
+			"Jag är mest ute och turistar":
+				Petra "OK, kul!"
+				Petra "Vi ses"
+			"Letar efter en person":
+				Petra "På så vis?"
+				Petra "Hoppas du hittar denna person snart!"
+				Petra "Vi ses"
+			"Väntar, typ":
+				Petra "Jaha, på vadå?"
+				Petra "Bättre tider?"
+				CHOICE {
+					"Heh, ja något sånt":
+					"Mm... ungefär":
+					"Jupp":
+					"Njae, vet inte riktigt":
+				}
+				Petra "Hoppas du inte behöver vänta för länge!"
+				Petra "Vi ses"
+		}
+	} ELSE {
+		Petra "Hallå där"
+		CHOICE {
+			"Hejsan, var är hotellet?":
+				Petra "Det ligger väl på andra sidan bron"
+				IF Petra.IsInRoom(BurrowsNorth) {
+					Petra "Rätt över här"
+				} ELSE {
+					Petra "Om du går bort till Burrows alltså"
+					Petra "Jag bor där borta"
+				}
+				CHOICE {
+					"OK, tack för hjälpen":
+					"Burrows alltså...":
+						Petra "Ja, kolla på skyltarna"
+				}
+				Petra "Ha det fint!"
+
+			"Hej, jag letar efter caféet":
+				IF Petra.IsInRoom(Cafe_Exterior) {
+					Petra "OK, det är det huset av trä precis här"
+				} ELSE {
+					Petra "OK, det ligger nära här"
+					Petra "Bakom kommunhuset typ"
+				}
+				Petra "Det är jättebra, jag sitter där varje dag nästan"
+				CHOICE {
+					"OK, tack för hjälpen!":
+					"Najs":
+					"Härligt att höra":
+					"Har du inget jobb?":
+						Petra "Jag jobbar på kvällen"
+						Petra "Är DJ"
+				}
+		}
+	}
+
+	Petra.StopTalking()
+	DEFOCUS
+
+	[AGAIN]
+	WAIT Sebastian.IsNotInRoom(PetrasApartment) AND Petra.IsNotAtTask(Fikatime) AND Petra.IsNotAtTask(Djing) LISTEN Sebastian_talk_Petra
+	Petra "Sorry, har lite bråttom... kan vi prata mer sen?"
+	Petra "Jag hänger på caféet varje dag, kom dit och ta en fika!"
+	GOTO AGAIN
+}
+
+
+LISTEN DONT_STOP
+

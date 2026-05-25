@@ -1,0 +1,14 @@
+
+# När man är på fest hos felix och han hämtar Pixie och Ivan
+
+Story("Arrival")
+Story("CanSellSoda")
+Story("TryFindLodge")
+Story("AfterStalking")
+Story("PyjamasParty")
+Story("DiscoBall")
+
+SetHour(20)
+
+Sebastian.Pos(FelixApartment_Point1)
+#Sebastian.Pos(BarYvonne_PixiePoint)

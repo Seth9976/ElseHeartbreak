@@ -1,0 +1,196 @@
+
+Pixie.SetTimetable("PixieWaitForFactoryMission")
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Pixie
+
+FOCUS
+Pixie.StartTalking()
+
+Pixie "Mhm..?"
+Pixie "Är du redo att dra?"
+CHOICE {
+	"Ja!":
+		Pixie.StopTalking()
+		DEFOCUS
+		GOTO LETS_GO
+
+	"Nej, en sekund bara":
+
+	"Måste bara gå på toa först":
+
+	"Jag är så nervös":
+		Pixie "Äsch, det kommer att gå bra"
+}
+
+Pixie.StopTalking()
+DEFOCUS
+GOTO AGAIN
+
+
+
+[LETS_GO]
+Pixie.StopTalking()
+Pixie.SetTimetable("")
+Pixie.GetUpAndInteract(Lodge_Room1_DoorToRoom2)
+Pixie "OK, följ med mig Sebastian"
+Pixie.SetTimetable(PixieFactoryMission)
+
+BROADCAST FOLLOW_ME
+
+Driver.Pos(Mines_Entry_DriverPoint)
+MineCartComputer.RunMasterProgram()
+
+WAIT 1
+Pixie.StopTalking()
+Pixie.GetUpAndInteract(Driver) # extra things to make Pixie walk out of the room, sometimes she doesn't wanna go
+
+WAIT Pixie.IsInRoom(PoliceOffice_Exterior) AND Sebastian.IsWithinDistance(Pixie, 8) {
+    WAIT 4
+    Pixie "Kom ihåg deras förbud mot modifierare vid utgången"
+    Pixie "Skulle du råka aktivera deras larm så måste du försöka springa iväg"
+    Pixie "Fort som bara den, spring iväg och göm dig någonstans"
+    Pixie "I de andra rummen är det lugnt att modifiera saker hoppas jag"
+    Pixie "Annars kan ju inte teknikerna jobba där"
+}
+
+WAIT Pixie.IsInRoom(Mines_Entry) AND Sebastian.IsInRoom(Mines_Entry)
+WAIT 5
+WAIT Sebastian.IsWithinDistance(Pixie, 6)
+
+Pixie.SetTimetable("")
+Pixie.CancelWalking()
+
+FOCUS
+Pixie.StartTalking()
+Pixie "OK, du kan vänta här nu"
+Pixie "Jag ska gå fram och försöka lura bort chauffören en stund"
+Pixie "När han inte ser så måste du ta dig in i gruvvagnen där borta"
+
+[MORE]
+CHOICE {
+    "Var är vagnen?":
+        Pixie "Där framme på andra sidan spåret"
+        GOTO MORE
+
+    "Ska jag följa efter dig?":
+        Pixie "Nej nej!"
+        Pixie "Spring in i vagnen medan jag pratar med honom"
+        GOTO MORE
+
+    "OK, jag tror nog att jag ska klara det här...":
+
+    "Vad var det jag skulle hitta där inne nu igen?":
+        Pixie "Förmodligen en diskett eller något annat slags lagringsmedium"
+        Pixie "Jag vet inte exakt hur de brukar spara sin data"
+        Pixie "Och se till att inte lämna onödiga spår efter dig"
+        GOTO MORE
+}
+
+Pixie "Försök hålla huvudet kallt så kommer allt att gå bra"
+Pixie "Så fort jag börjar prata med honom kan du ta dig in i vagnen"
+Pixie "Och kom ihåg att inte använda modifieraren på staketet!"
+Pixie "Vi ses imorgon på lodgen"
+Pixie.StopTalking()
+DEFOCUS
+
+Pixie.Walk(Mines_Entry_LurePoint)
+Pixie "Så får du berätta hur det gick..."
+
+WAIT Pixie.IsIdle()
+Driver.CancelWalking()
+Pixie "Heeej!"
+Pixie.Dir(Up)
+Driver.Interact(Pixie)
+#LISTEN Driver_talk_Pixie
+Driver "Eh va??!"
+Driver "Hej hej"
+Pixie "Vad sysslar du med för något manligt?"
+Driver "Jag lastar vagnen"
+Pixie "Jaha... spännande!"
+Pixie "Men du förstår, det är så här..."
+Pixie "Jag har problem med ett stort paket här borta"
+Pixie "Som jag måste bära hem!"
+Driver "Jaha..?"
+Driver "Du, jag vet faktiskt inte om du får vara här"
+Pixie "Jag vet inte om jag orkar bära det själv..."
+Driver "Du borde nog inte vara här"
+Pixie "Du tror inte att du skulle kunna hjälpa mig..?"
+Pixie "Det är ett väldigt stort och tungt paket"
+Driver "Jaha..?"
+Pixie "Ja, och du ser så stark ut så jag tänkte att du kanske kunde bära det åt mig"
+Driver "Nej jag måste faktiskt sticka med min last nu unga dam"
+Pixie "Jaha, skit i det då"
+Pixie.SetTimetable(Pixie)
+
+RebuildRoomNetwork() # to enable pathfinding for Driver
+Driver.SetTimetable(Driver)
+#Driver.Interact(MineWagon_Door)
+
+WAIT Sebastian.IsInRoom(MineCart_Interior) AND Driver.IsWithinDistance(Sebastian, 10) {
+    FOCUS
+    Driver.StartTalking()
+    WAIT 4
+    Driver "Ey, vad gör du här?"
+    CHOICE {
+        "Eh...":
+        "Jag kollar säkerheten":
+            Driver "Mm?"
+        "Skit också!":
+    }
+    Driver "Du är i maskopi med tjejen där ute va?"
+    Driver "Jag är inte dum"
+    [NOT_STUPID]
+    CHOICE {
+        "Nej, det trodde jag inte heller!":
+            Driver "Behandla mig inte så då"
+            GOTO NOT_STUPID
+        "Jag ska gå, förlåt":
+            Driver "Vänta"
+        "Vad händer nu?":
+            Driver "Det beror väl på"
+    }
+    Driver "Vad är det ni håller på med här egentligen?"
+    CHOICE {
+        "Vi tänkte bryta oss in på fabriken":
+            Driver "OK, jag förstår"
+            Driver "En dumdristig duo, minst sagt"
+        "Det kan jag inte berätta":
+            Driver "Nähä"
+        "Vi tänkte sno mineraler":
+            Driver "Ha!"
+            Driver "Vilken ärlig inbrottstjuv jag har träffat"
+    }
+    Driver "Usch, jag orkar verkligen inte bry mig"
+    WAIT 2
+    Driver "JAG BRYR MIG SÅ JÄVLA LITE DAVE, HÖR DU DET?!"
+    WAIT 3 
+    Driver "Saken är den att jag tänkte lämna stan idag"
+    Driver "Det här är mitt sista pass"
+    Driver "Jag är så sanslöst trött på den här skiten"
+    CHOICE {
+        "Oj då...":
+        "Jaha?":
+    }
+    Driver "Vår chef är fruktansvärd"
+    Driver "Så nu är det finito"
+    Driver "Jag sticker!"
+    CHOICE {
+        "OK..?!":
+        "Nu?!":
+            Driver "Ja"
+        "Va?":
+    }
+    Driver "Gör vad du vill här, jag orkar inte bry mig"
+    Driver "Ha ett bra liv"
+    Driver.StopTalking()
+    DEFOCUS
+    Driver.SetTimetable(GetOntoBoat)
+}
+
+WAIT Sebastian.IsInRoom(Mines_Entry) AND MineCart.IsNotInRoom(Mines_Entry)
+BROADCAST FailedToGetIntoTruck
+
+Driver.SetTimetable("")
+Driver.Pos(HomeApartment_Point)

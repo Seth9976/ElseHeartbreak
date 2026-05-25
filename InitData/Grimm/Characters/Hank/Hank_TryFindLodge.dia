@@ -1,0 +1,90 @@
+
+Hank.SetTimetable(Hank)
+
+
+[BEGINNING_OF_CONVERSATION]
+
+LISTEN Sebastian_talk_Hank
+
+Hank.StartTalking()
+FOCUS
+
+[ANYTHING_MORE]
+CHOICE {
+    "Vill du köpa läsk?":
+        Hank "Det är nog bra faktiskt"
+        Hank "Men har du testat i hamnen?"
+        CHOICE {
+            "Jo, en del":
+            "Nej faktiskt inte":
+                Hank "Värt ett försök"
+                CHOICE {
+                    "Antar det...":
+                    "Ja, tack för tipset!":
+                }
+        }
+        GOTO ANYTHING_MORE
+
+    "Ha det gött":
+        Hank "Du med"
+
+    "Har du cigg?":
+        Hank "Nej, tyvärr"
+        Hank "Röker inte"
+        Hank.StopTalking()
+        DEFOCUS
+        GOTO BEGINNING_OF_CONVERSATION
+
+    "Kanske en konstig fråga men känner du en tjej som heter Pixie?":
+        Hank "Hmm, namnet låter lite bekant"
+        Hank "Eller..."
+        Hank "Hon är hacker va?"
+        CHOICE {
+            "Hacker?":
+                Hank "Ja, hon programmerar och sånt?"
+                CHOICE {
+                    "Aha, ja kanske. Jag vet inte så noga":
+                    "Ingen aning":
+                    "Det tror jag inte...":
+                }
+                Sebastian "Hon är väldigt speciell"
+                GOTO HEHE
+
+            "Jag vet inte... hon är mystisk, det är allt som är säkert":
+                Hank "Dom är ju ofta det"
+                CHOICE {
+                    "Vad gör en hacker?":
+                        Hank "Tja... programmerar och så antar jag"
+
+                    "Ok...":
+                }
+
+            "Då vet du mer än jag, men det låter intressant...":
+                [HEHE]
+                Hank "Jo men jag tror jag pratat med henne någon gång"
+                Hank "Vi hade problem med mjukvaran här i huset"
+                Hank "Det är inte så ovanligt som du kanske har märkt"
+        }
+        CHOICE {
+            "Så du känner henne inte så väl då?":
+                Hank "Nej det kan man inte säga"
+            "Vet du något mer om henne?":
+                Hank "Nej, tyvärr"
+                Hank "Hon är rätt många år yngre än jag, tror jag"
+        }
+        Sebastian "Ok"
+
+        CHOICE {
+            "Det var en annan sak jag tänkte på förresten":
+                Hank "Ja?"
+                GOTO ANYTHING_MORE
+            "Nej, ska gå och knoppa nu tror jag":
+                Hank "Ok, l8rs!"
+                Hank.StopTalking()
+                DEFOCUS
+                GOTO BEGINNING_OF_CONVERSATION
+        }
+}
+
+DEFOCUS
+Hank.StopTalking()

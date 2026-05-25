@@ -1,0 +1,33 @@
+
+Emma.SetTimetable(Emma)
+
+LISTEN Sebastian_talk_Emma
+FOCUS
+Emma.StartTalking()
+
+Emma "Ååå den är verkligen borta"
+
+CHOICE {
+    "Vad tråkigt alltså":
+    "Vadå?!":
+        Emma "Hampe"
+        CHOICE {
+            "Jaha...":
+            "Vad är det?":
+                Emma "Min hamster ju!"
+        }
+}
+
+Emma "Säg till om du hör nåt om den"
+
+CHOICE {
+    "Ja, det ska jag göra!":
+    "OK":
+}
+
+DEFOCUS
+Emma.StopTalking()
+
+
+LISTEN Sebastian_talk_Emma
+Emma "Hampe!"

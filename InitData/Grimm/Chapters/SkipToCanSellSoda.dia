@@ -1,0 +1,22 @@
+
+Story("FirstDay")
+Story("CanSellSoda")
+
+SetClock(1, 06, 50, 0) # this activates Pixie and Nini
+
+#START GetSoda
+
+#Sebastian.CreateCigarette(Bobs_Cigg4)
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+#Sebastian.Pos(HarborEast_Point)
+Sebastian.Pos(Hotel_Lobby_Point)
+#Sebastian.Pos(Hotel_Exterior_Point)
+
+SetHour(13)
+
+#Bernd.Pos(Sebastian)
+Hank.Pos(Sebastian)
+#Bob.Pos(Sebastian)
+#Bob.SetTimetable("")

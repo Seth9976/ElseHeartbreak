@@ -1,0 +1,10 @@
+
+Sebastian.Pos(HarborEast_Point)
+Frank.Pos(HarborEast_Point2)
+
+LISTEN Sebastian_talk_Frank
+FOCUS
+Frank "Fokus!"
+Log("Before interrupt")
+INTERRUPT TestInterrupt2
+Log("After interrupt")

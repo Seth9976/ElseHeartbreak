@@ -1,0 +1,271 @@
+
+LISTEN WellspringRepresentant_talk_Sebastian [OFF_PIST] {
+	WellspringRepresentant "Vart är du på väg?"
+	WellspringRepresentant "Kom med nu"
+	LISTEN WellspringRepresentant_talk_Sebastian
+	WellspringRepresentant "Hallå?!"
+}
+
+
+
+WAIT WellspringRepresentant.IsInRoom(HarborNorth)
+WAIT 5
+WellspringRepresentant "Är du med?"
+WellspringRepresentant.SetTimetable("")
+WellspringRepresentant.CancelWalking()
+WAIT IsWithinDistance(Sebastian, WellspringRepresentant, 8)
+FOCUS
+Sebastian "Förlåt, sa du något?"
+CANCEL OFF_PIST
+WellspringRepresentant.Interact(Sebastian)
+WellspringRepresentant "Alltså, jag försöker komma på vem det är du liknar"
+WellspringRepresentant "Det är någon skum skådis typ"
+WellspringRepresentant "Hmm..."
+WAIT 3
+WellspringRepresentant "Fan, jag kommer inte på det!"
+WellspringRepresentant "Vet du vem det kan vara?"
+CHOICE {
+	"Nä... jag vet inte riktigt":
+	"Hmm inte direkt":
+	"En del säger att jag är lik han i Seinfeldt":
+		WellspringRepresentant "Är det en film eller?"
+}
+WellspringRepresentant "Nej men jag får tänka vidare på det..."
+DEFOCUS
+WellspringRepresentant.SetTimetable("WellspringRepresentant_GuideToStorage")
+WellspringRepresentant "Du är så jävla lik alltså!"
+WAIT 2
+WellspringRepresentant "Helt sjukt"
+
+
+WAIT WellspringRepresentant.IsInRoom(HarborWest)
+
+WAIT WellspringRepresentant.IsWithinDistance(HarborWest_SodaStorageComputer, 3)
+WAIT IsWithinDistance(Sebastian, WellspringRepresentant, 8)
+
+WellspringRepresentant.SetTimetable("")
+
+FOCUS
+
+WAIT 2
+WellspringRepresentant "OK, så det här är datorn som kontrollerar dörren in i lagret."
+WellspringRepresentant "Det är bara att skriva in 'unlock' och sedan lösenord så kan man gå genom dörren."
+WellspringRepresentant "u..."
+WellspringRepresentant.TypeIntoComputer("u")
+WellspringRepresentant "n..."
+WellspringRepresentant.TypeIntoComputer("n")
+WellspringRepresentant "l......"
+WellspringRepresentant.TypeIntoComputer("l")
+WellspringRepresentant.TypeIntoComputer("0ck")
+WellspringRepresentant.TypeIntoComputer("ENTER")
+
+WAIT 5
+
+WellspringRepresentant.GetAngryAtComputer()
+WellspringRepresentant "Fan, jävla skitkukdator!!!"
+
+WellspringRepresentant.TypeIntoComputer("abc123")
+WellspringRepresentant.TypeIntoComputer("ENTER")
+
+CHOICE {
+	"Vad är problemet?":
+		WellspringRepresentant "Den här datorn styr dörren till lagret"
+		WellspringRepresentant "Men den accepterar inte mitt lösenord..."
+
+	"Ska jag försöka istället?":
+		WellspringRepresentant "NEJ!"
+		WellspringRepresentant "Eller kanske..."
+
+	"Kommer du inte in på datorn?":
+		WellspringRepresentant "Nej, du får försöka själv sen"
+		WellspringRepresentant "Verkar vara något fel med lösenordet"
+}
+
+WAIT 2
+WellspringRepresentant "Oj, jag måste dra snart"
+WellspringRepresentant.Interact(Sebastian)
+WellspringRepresentant "Men först: den viktigaste regeln inom Wellspring!"
+WellspringRepresentant "Tala ALDRIG illa om Wellspring och våra varumärken"
+# animation!
+
+CHOICE {
+	"Naturligtvis":
+	"Jag förstår":
+	"Mm, OK...":
+}
+
+WellspringRepresentant "Kan du den regeln så kommer nog allt att gå bra"
+WellspringRepresentant "Sedan är det ju inte alla som har talang för att sälja"
+
+CHOICE {
+	"Nej, självklart":
+	"Jag tror att jag har lite talang i alla fall":
+	"Hur vet man om man har talang?":
+		WellspringRepresentant "Det känner man"
+}
+
+WellspringRepresentant "Men jag måste dra nu som som sagt"
+WellspringRepresentant "Lösenordet till datorn SKA vara abc123 om ingen har bytt"
+WellspringRepresentant "Eller så var det 123abc"
+
+[PWD]
+CHOICE {
+	"123abc ?":
+		WellspringRepresentant "Ja, eller abc123"
+	"abc123 ?":
+		WellspringRepresentant "Ja, eller 123abc"
+	"Hur skriver man in lösenordet?":
+		WellspringRepresentant "Det är bara att använda tangentbordet"
+		WellspringRepresentant "Man måste skriva lite kommandon och skit också"
+		WellspringRepresentant "Jag fattar inte varför de gjort det så krångligt"
+		WellspringRepresentant "Men du kommer ihåg lösenordet nu eller?"
+		GOTO PWD
+}
+
+WellspringRepresentant "Inne på lagret finns det massor av burkar"
+WellspringRepresentant "Ta inte fler än du orkar bära"
+CHOICE {
+	"Ok":
+	"Hur många är lagom?":
+		WellspringRepresentant "Jag brukar ta typ 5 - 10 stycken"
+		WellspringRepresentant "Men beror ju på hur bra man är på att sälja också"
+		WellspringRepresentant "Och hur stark man är"
+		CHOICE {
+			"Jag är rätt stark ändå":
+				WellspringRepresentant "Mm?"
+			"Jaha, ja ok":
+			"Något mer?":
+		}
+}
+
+WellspringRepresentant "Vänta, just det!"
+WellspringRepresentant "En sista grej"
+WellspringRepresentant "Du MÅSTE komma ihåg att låsa om dig när du går!"
+
+CHOICE {
+	"Ska försöka...":
+	"Japp!":
+	"Hur gör man det?":
+		WellspringRepresentant "Det är bara att använda datorn"
+		WellspringRepresentant "Skriv in något av de där jävla kommandona och tryck på enter"
+		WellspringRepresentant "Det ska funka bara man är noggrann"
+}
+
+WellspringRepresentant "Vi har haft problem med uteliggare och annat pack här i hamnen"
+WellspringRepresentant "Så se till att bomma igen ordentligt"
+
+CHOICE {
+	"Javisst":
+	"Ok...":
+}
+
+WellspringRepresentant "Lycka till med försäljningen"
+WellspringRepresentant "Jag kontaktar dig om några dagar med mer instruktioner"
+
+WellspringRepresentant.SetTimetable("WellspringRepresentant")
+WellspringRepresentant "Och inget skitsnack om Wellspring, förstått?"
+
+CHOICE {
+	"Men vänta...":
+	"Yes sir":
+}
+DEFOCUS
+
+STOP SebastianStartsComputers
+
+### KNOWS HE CAN SELL SODA NOW!
+Sebastian.SetKnowledge(SellSoda)
+
+BROADCAST GotWellspringInstructions
+
+
+
+WAIT 10
+
+
+LISTEN Sebastian_talk_WellspringRepresentant
+FOCUS
+WellspringRepresentant.StartTalking()
+
+WellspringRepresentant "Hur går det med säljandet?"
+CHOICE {
+	"Sådär":
+		WellspringRepresentant "Tänkte väl det"
+		WellspringRepresentant "Tar ett tag att komma igång"
+		WellspringRepresentant "Speciellt om man inte har det i blodet"
+
+	"Helt ok":
+		WellspringRepresentant "Ok"
+
+	"Skitbra":
+		WellspringRepresentant "Verkligen?"
+		WellspringRepresentant "Aja, gött..."
+}
+
+WellspringRepresentant "Har du testat i fattigmanskvarteret?"
+CHOICE {
+	"Ja, tror det?":
+		WellspringRepresentant "OK"
+
+	"Nej, vad är det?":
+		WellspringRepresentant "Äh, det är bara jag som kallar det så"
+		WellspringRepresentant "Massa skabbiga typer där, fy tusan"
+		WellspringRepresentant "Men du kan ju testa om de vill ha något att pigga upp sig med!"
+		CHOICE {
+			"Mm... kanske":
+			"Ja, var ligger det då?":
+				WellspringRepresentant "Du går över spåren vid Radiostationen"
+				WellspringRepresentant "Det är en bro där"
+				WellspringRepresentant "Allra norraste delen av stan"
+				CHOICE {
+					"OK!":
+					"Å, jag är så dålig på norr och söder":
+						WellspringRepresentant "Du får kolla på solen"
+						WellspringRepresentant "Har du inte varit scout?"
+						CHOICE {
+							"Nä...":
+							"Heh":
+						}
+				}
+		}
+}
+
+WellspringRepresentant.StopTalking()
+DEFOCUS
+
+
+
+WAIT 10
+
+
+
+[AGAIN]
+LISTEN Sebastian_talk_WellspringRepresentant
+FOCUS
+WellspringRepresentant.StartTalking()
+
+WellspringRepresentant "Ja?"
+[MORE]
+CHOICE {
+	"Är det OK att sälja inne på Caféet och klubbar och så?":
+		WellspringRepresentant "Alltså, ägaren brukar inte bli så glad"
+		WellspringRepresentant "Men om man är lite diskret"
+		WellspringRepresentant "Som jag brukar vara"
+		WellspringRepresentant "Då går det bra!"
+		GOTO MORE
+
+	"Vad ska jag ta för en burk?":
+		WellspringRepresentant "$3 har de sagt till mig"
+		WellspringRepresentant "Men ibland kan man ju få ut lite mer"
+
+	"Du verkar inte jobba så hårt?":
+		WellspringRepresentant "Bry dig om dina egna affärer är du snäll"
+		WellspringRepresentant "Jag tar bara en liten rast här"
+
+	"Äsch, det var inget":
+}
+
+WellspringRepresentant.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

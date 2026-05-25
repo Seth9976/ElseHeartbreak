@@ -1,0 +1,25 @@
+
+Pixie.SetTimetable("Pixie")
+Pixie.StopTalking()
+
+WAIT 3
+Pixie "Undrar om det kommer mycket folk ikväll"
+
+WAIT 3
+Pixie "Det har varit lite dåligt ös på Yvonne senaste tiden"
+Pixie "Alla blir gamla och tråkiga..."
+
+WAIT Pixie.IsInRoom(BarYvonne)
+WAIT 5
+
+LISTEN Sebastian_talk_Pixie
+
+Pixie "Fan, det är inte bra stämning här idag"
+Pixie "Jag tror jag måste dra hem"
+Pixie.SetTimetable("PixieGoHome")
+
+WAIT Pixie.IsInRoom(PixiesApartment)
+WAIT IsHour(03)
+Pixie.SetTimetable("Pixie")
+
+

@@ -1,0 +1,9 @@
+
+Panda3.SetTimetable(Panda3_ClubDotGig)
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Party!!!"
+
+LISTEN Sebastian_talk_Panda3
+Panda3 "Club dot är bäst!"
+

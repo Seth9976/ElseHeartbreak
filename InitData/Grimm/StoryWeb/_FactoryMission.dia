@@ -1,0 +1,18 @@
+
+# Börjar när man bestämt att kuppen ska ske idag/ikväll och alla väntar på the Lodge för att ge sig iväg
+
+LISTEN FailedToGetIntoTruck {
+	Story("MissedTheTruck")
+}
+
+LISTEN Sebastian_open_Factory_RecieverRoom_Door_1 {
+	Story("GotIntoFactory")
+}
+
+LISTEN DidYouStealTheFilesStarted {
+    STOP # prevent DidYouStealTheFiles to trigger at 6 o' clock, according to statement below
+}
+
+WAIT IsHour(6)
+WAIT Sebastian.NotTalking()
+Story("DidYouStealTheFiles")

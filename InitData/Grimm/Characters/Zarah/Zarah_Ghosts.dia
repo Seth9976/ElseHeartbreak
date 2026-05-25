@@ -1,0 +1,57 @@
+
+WAIT Sebastian.IsWithinDistance(Zarah, 15)
+
+Zarah "Oj"
+Zarah "Håll dig lugn nu Albert"
+Sebastian.SetKnowledge(Albert)
+Zarah "Det kommer någon nu"
+WAIT 2
+Zarah "Han har varit så grinig den senaste tiden"
+
+LISTEN Sebastian_talk_Zarah
+FOCUS
+Zarah "Var kan jag ha lagt den?!"
+
+CHOICE {
+    "Vad?":
+    "Huh?":
+    "Jag vet inte":
+}
+
+Zarah "Det är säkert HON som har snott den!"
+
+[MORE]
+CHOICE {
+    "Vem?":
+        Zarah "Jag skapade det..."
+        Zarah "Kvinnan, hon tog det från mig!"
+        Zarah "Du måste förstöra det"
+        Zarah "DET HÅLLER HONOM FÅNGEN!"
+
+    "Tagit vad?":
+        Zarah "Mitt hjärta..."
+        Zarah "HON TOG DET"
+        GOTO MORE
+}
+
+DEFOCUS
+
+LISTEN Sebastian_talk_Zarah
+Zarah "Va?!"
+Zarah "HON är HÄR"
+Zarah "Hon har skapat en länk"
+Zarah "Var jobbar hon?!"
+Zarah "Vet du var HON jobbar??!!!"
+[WHO]
+CHOICE {
+    "Vem?":
+        GOTO WHO
+    "Monad?":
+        Zarah "AAAAAAH!"
+    "En länk till var?":
+        Zarah "MITT HJÄRTA"
+}
+
+LISTEN Sebastian_talk_Zarah
+Zarah "Ååååh!"
+Zarah "HON SKA FÅ!"

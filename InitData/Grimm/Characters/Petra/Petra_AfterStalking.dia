@@ -1,0 +1,129 @@
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+
+Petra "Hej Sebastian!"
+
+CHOICE {
+	"Hej hej":
+	"Hejsan":
+}
+
+Petra "Du verkar lite deppig?"
+
+CHOICE {
+	"Nej då, det är bra":
+		Petra "Ok, säg till om det är något annars"
+
+	"Äsch... jag klantade till det lite med Pixie bara":
+		[ANGER_PIXIE]
+		Petra "Jaha"
+		Petra "Hon brukar inte vara långsint, det löser sig nog"
+
+	"Hehe, ja jag är lite nere":
+		Petra "Vad har hänt?"
+		CHOICE {
+			"Strunt samma, det var inget viktigt":
+				Petra "Ok, ok"
+				Petra "Säg till om du vill prata annars"
+			"Jag råkade göra Pixie lite upprörd":
+				GOTO ANGER_PIXIE
+		}
+}
+
+Sebastian "Ok"
+
+CHOICE {
+	"Vad vet du om det här datorministeriet?":
+		Petra "Jag vet att Pixie inte gillar dem!"
+		Petra "Och inte så många andra heller för den delen"
+		Petra "De är rätt jobbiga"
+		CHOICE {
+			"Ja, så mycket har jag förstått":
+
+			"På vilket sätt?":
+				Petra "De bestämmer massa konstiga grejer här i stan"
+				Petra "Och håller på och handlar med utlandet"
+				Petra "Det går båtar varje dag"
+
+			"Pixie jobbar mot ministeriet på något vis eller?":
+				GOTO ASK_HER
+		}
+		Petra "Akta dig för dem om du kan"
+		CHOICE {
+			"Hehe, ok":
+			"Ja det ska jag göra":
+			"Mm":
+		}
+
+	"Jag tänkte på en sak med Pixie förresten":
+		Petra "Ja?"
+		[ASKING]
+		CHOICE {
+			"Hur gammal är hon?":
+				Petra "24"
+				Petra "Lika gammal som jag"
+				Petra "Hurså?"
+				CHOICE {
+					"Lite nyfiken":
+						Petra "Märker det"
+					"Nej jag undrade bara om vi var lika gamla":
+						Sebastian "Men jag är bara 20"
+						Petra "Oj, det var inte mycket!"
+				}
+				GOTO ASKING
+			"Vad är det för ställe hon jobbar på?":
+				[ASK_HER]
+				Petra "Ehm"
+				Petra "Det får du fråga henne om"
+				CHOICE {
+					"Ok":
+					"Jo men hon har inte velat säga det":
+						Petra "Hon kanske har en bra anledning i så fall"
+						CHOICE {
+							"Mm":
+							"Antagligen":
+							"Ja kanske det":
+						}
+				}
+
+			"Varför är hon tillsammans med den där Ivan?":
+				Petra "Ja, den som det visste"
+				Petra "Han är ett as, det har jag sagt till henne"
+				Petra "Men hon ser något hos honom"
+				Petra "Vadå, har han varit taskig mot dig?"
+				CHOICE {
+					"Nej då":
+						Petra "Ok, vad bra"
+					"Äh, inte direkt":
+						Petra "Ok, bra"
+					"Lite dryg har han väl varit":
+						Petra "Ja han är fan knepig"
+				}
+				Sebastian "Förresten..."
+				Petra "Ja?"
+				GOTO ASKING
+		}
+}
+
+Petra.StopTalking()
+DEFOCUS
+
+
+
+# later #
+
+
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+
+CHOICE {
+	"Petra?":
+	"Ursäkta, det var en till grej":
+		Petra "Ja?"
+}
+
+Petra.StopTalking()
+DEFOCUS

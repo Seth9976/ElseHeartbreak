@@ -1,0 +1,127 @@
+
+Roby.SetTimetable(Roby_VisitFelix)
+
+WAIT Roby.IsWithinDistance(Felix, 5)
+Felix.StartTalking()
+Roby "Felix!"
+Roby "De är efter mig"
+Roby "Ministeriet"
+Felix "Fan dude, du kan inte vara här!"
+Felix "Stick innan Yulian kommer"
+Roby "Ok, ok, ok"
+Roby.SetTimetable(Roby_WaitOutsideHotel)
+Roby.SetRunning(false)
+Felix.StopTalking()
+BROADCAST RobySpokeToFelix
+
+LISTEN Sebastian_talk_Roby
+FOCUS
+Roby.StartTalking()
+
+Typer5.Pos(HarborNorth_Point)
+Typer5.SetTimetable(Typer5)
+
+Roby "Hittade du den?!!"
+CHOICE {
+    "Nej...":
+        IF Sebastian.HasHandItemWithName("RedCase") {
+            Roby "Vad är det du håller i då?"
+            CHOICE {
+                "Eh...":
+                    GOTO GIEF                    
+                "Skojade bara!":
+                    Roby "Haha, nice!!!"
+                    GOTO GIEF
+            }
+        }
+        [DAMN_IT]
+        Roby "FAN OCKSÅ!!!"
+        Roby "Men tack ändå för att du försökte!"
+        Roby "Är det någon kvar där?"
+        CHOICE {
+            "Jag vet inte":
+            "Det tror jag inte":
+            "Mm, kanske":
+        }
+        Roby "OK, tack"
+        Roby "Måste dra"
+
+    "Ja!":
+        CHOICE {
+            "Det var ingen konst":
+            "Men det var jobbigare än du fick det att låta som":
+        }
+        [GIEF]
+        Roby "Ge mig den, ge mig den!"
+        Roby.StartWaitForGift()
+        [TRY_AGAIN]
+
+        LISTEN Sebastian_give_Roby {
+            Log("Giving....")
+            RemoveDanglingDialogueOptions("Roby_TheRedBag")
+
+            WAIT Roby.HasAnyHandItem()
+            
+            IF Roby.HasHandItemOfType(Suitcase) {
+                Roby "Tack!!!"
+                Roby "Jag ska inte glömma det här"
+                Roby.SetKnowledge(GotBag)
+
+                Roby "Du måste få någon slags belöning"
+                Roby "Hmm"
+                Roby "100 spänn, är det OK?"
+
+                CHOICE {
+                    "Visst...":
+                    "Oj, ja?!":
+                    "Gärna":
+                }
+                Roby "Varsågod!"
+
+                RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 100)
+                CHOICE {
+                    "Tack!":
+                        Roby "Inga problem"
+                    "Wow, vad snällt!":
+                        Roby "Det är du som är snäll"
+                    "Cool":
+                }
+
+                GOTO END_OF_GIVING
+            }
+            ELSE {
+                Roby "Det här är väl ingen väska?"
+                Roby.Give()
+                WAIT Roby.HasNoHandItem()
+                GOTO TRY_AGAIN
+            }
+        }
+
+        IF Sebastian.HasHandItemWithName(RedCase) {
+            Sebastian.Give()
+        }
+        ELIF RedCase.IsInRoom(Sebastian_inventory) {
+            Sebastian.TakeOutItem(RedCase)
+        }
+        ELSE {
+            WAIT 3
+            Sebastian "Nej, skoja bara. Jag hittade ingen väska."
+            Roby.StopWaitForGift()
+            GOTO DAMN_IT
+        }
+
+        LISTEN Forever
+
+        [END_OF_GIVING]
+        Roby "Måste dra nu, vi ses"
+        Roby.StopWaitForGift()
+}
+
+Roby.StopTalking()
+DEFOCUS
+
+Roby.SetTimetable(Roby)
+
+WAIT Roby.IsInRoom(RadioStationElevator)
+Roby.Pos(RadioStation_Point)
+

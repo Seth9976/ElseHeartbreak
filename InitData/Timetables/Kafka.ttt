@@ -1,0 +1,9 @@
+
+07:00 - 24:00 Working Sell Cafe_Room1_ClerkPoint CollectEmptyDrinks CoffeeCup_CoffeeCup
+00:00 - 07:00 Zzz Sleep KafkaApartment_Poor_Bed_Poor_Bed_1
+
+[Kafka_LookForSound]
+00:00 - 24:00 _ BeInRoom Cafe_Exterior
+
+[Kafka_InteractWithSebastian]
+00:00 - 24:00 _ Interact Sebastian

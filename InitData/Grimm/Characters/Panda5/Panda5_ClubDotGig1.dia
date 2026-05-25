@@ -1,0 +1,7 @@
+Panda5.SetTimetable(Panda5_ClubDotGig)
+
+LISTEN Sebastian_talk_Panda5
+Panda5 "Frank alltså"
+
+LISTEN Sebastian_talk_Panda5
+Panda5 "Han är så jävla bra!!!"

@@ -1,0 +1,66 @@
+
+LISTEN Sebastian_talk_Siri
+FOCUS
+
+Sebastian "Du..?"
+Siri "Ja"
+Siri "Jag vet vad du kommer att säga"
+Siri "Babcia berättade för mig"
+Sebastian.SetKnowledge(Babcia)
+WAIT 1
+
+CHOICE {
+	"Jag är hemskt ledsen att jag måste åka":
+		Siri "Var inte det"
+	"Hur ska det gå för dig tror du?":	
+}
+
+WAIT 0.5
+Siri "Jag kommer att klara mig"
+WAIT 0.5
+
+CHOICE {
+	"Hur länge ska du stanna på hotellet?":
+		Siri "Jag vet inte"
+		Siri "Så länge mina pengar räcker"
+		Sebastian "Vad ska du göra sedan?"
+		Siri "Jag får komma på något"
+
+	"Jag önskar att jag kunde göra något mer för dig":
+		Siri "Men Sebastian"
+		Siri "Du har gjort mer än tillräckligt"
+}
+
+CHOICE {
+	"Du skulle kunna åka med mig":
+		Siri "Vad menar du?"
+		Sebastian "På båten"
+		WAIT 1
+		Siri "Men..."
+		WAIT 1
+		CHOICE {
+			"Då kommer du aldrig mer behöva vara rädd för honom":
+				WAIT 3
+				Siri "Jag vet inte"
+
+			"Vad är du orolig för?":
+				WAIT 3
+				Siri "Allting"
+		}
+		Sebastian "Han vet inte var du är"
+		WAIT 2
+		Siri "Jag tror att jag måste vara i fred"
+		Siri "Förlåt"
+		DEFOCUS
+		Siri.SetTimetable("")
+		Siri.Walk(WifeBedPosition)
+		WAIT Siri.IsInRoom(Hotel_Room3)
+		WAIT IsHour(02)
+		Siri.SetTimetable("Siri")
+		STOP
+
+	"Jag måste sticka nu":
+		Siri "Farväl"
+}
+
+DEFOCUS

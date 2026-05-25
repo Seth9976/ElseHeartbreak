@@ -1,0 +1,33 @@
+
+LISTEN Sebastian_talk_Araki
+FOCUS
+Araki.StartTalking()
+
+INTERRUPT IntroduceAraki
+FOCUS
+
+
+[MORE]
+CHOICE {
+    "Så du jobbar här..?":
+        Araki "Mhm"
+        GOTO MORE
+
+    "Jag ska börja jobba här snart":
+        Araki "Ja?"
+        Araki "Välkommen"
+        CHOICE {
+            "Tack!":
+            "Tack så mycket, det känns kul":
+        }
+        GOTO MORE
+
+    "Skulle du kunna hjälpa mig lite, jag har problem med intagningsprovet..?":
+        Araki "Nej"
+        GOTO MORE
+
+    "Vi ses!":
+}
+
+Araki.StopTalking()
+DEFOCUS

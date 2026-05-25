@@ -1,0 +1,102 @@
+#RunMakeTransactionFunctionOnCreditCard("BerndCreditCard", 100)
+
+LISTEN Sebastian_talk_Bernd
+
+FOCUS
+Bernd.StartTalking()
+
+IF Bernd.HasKnowledge("Sebastian") {
+	Sebastian "Hej"
+	Bernd "Guten tag Sebastian"
+	IF Sebastian.HasKnowledge("BerndIsBirdLover") {
+		INTERRUPT SebastianTalksWithBerndAboutBirds
+		FOCUS
+	}
+	ELSE {
+		CHOICE {
+			"Hur går det med fotograferandet?":
+				Bernd "Tack bra, tack bra"
+
+			"Sett några fina fåglar på sistone?":
+				Bernd "Ja!"
+
+			"Vad händer?":
+		}
+		Bernd "Jag har sett en riktigt häftig fågel nere i hamnen"
+		Bernd "Jag vet inte vad det är för sort men den är mycket vacker"
+	}
+}
+ELSE {
+	WAIT 0.5 # a hack, the dialogue state has not been pushed properly yet from the previous FOCUS at the top of this file
+	INTERRUPT SebastianGetsToKnowBernd
+	FOCUS
+	Log("SHOULD BE FOCUSED NOW")
+}
+
+CHOICE {
+	"Är du intresserad av att köpa en läsk av mig?":
+		Bernd "Ehm... du har inte öl också?"
+		CHOICE {
+			"Nej tyvärr":
+			"Nej men den är jättegod, jag lovar":
+				Bernd "Mm..?"
+			"Jag säljer bara läsk":
+		}
+		Bernd "Då får det vara, jag är inte sugen på läsk"
+		CHOICE {
+			"Ok, ok":
+			"Jaha vad synd":
+		}
+
+	"Ska dra vidare, ha det fint Bernd!":
+}
+
+IF IsOverHour(20) {
+	Bernd "God kväll"
+}
+ELSE {
+	Bernd "Hej då"
+}
+
+Bernd.StopTalking()
+DEFOCUS
+
+
+
+# later #
+
+
+
+[BOTHER]
+LISTEN Sebastian_talk_Bernd
+
+FOCUS
+Bernd.StartTalking()
+
+IF Bernd.IsAtTask("Photographing") {
+	Bernd "Schh... jag har en fågel på kornet här nu"
+	CHOICE {
+		"Jaha, ok jag ska inte störa":
+		"Var då, var då?!":
+	}
+	Bernd "Vänta... schh"
+}
+ELSE {
+	Bernd "Hallo Sebastian!"
+	CHOICE {
+		"Hej!":
+		"God dag":
+		"God kväll":
+		"Hallo!":
+			Bernd "Å, ni pratar Tyska?"
+			CHOICE {
+				"Jawoll":
+				"Nein":
+			}			
+	}
+}
+
+Bernd.StopTalking()
+DEFOCUS
+
+GOTO BOTHER

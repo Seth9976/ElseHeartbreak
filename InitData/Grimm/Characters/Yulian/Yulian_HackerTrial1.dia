@@ -1,0 +1,107 @@
+
+Yulian.SetFieldToFloat("sleepiness", 0)
+Yulian.WakeUp()
+
+Yulian.StopTalking()
+Yulian.Pos(Lodge_Room2_Point)
+Yulian.SetTimetable("")
+
+Pixie.SetFieldToFloat("sleepiness", 0)
+Pixie.WakeUp()
+
+Pixie.Pos(Lodge_Room1_Point1)
+Pixie.SetTimetable("")
+
+LISTEN Parallell [FELIX_TALKING] {
+
+	Felix.TakeOutItem(FelixPhone)
+	WAIT Felix.HasHandItemWithName(FelixPhone)
+	WAIT 1
+	Felix.UseHandItem()
+	WAIT 2
+	Felix "Ja hej, han har kommit hit nu"
+	WAIT 1
+	Felix "Snubben jag pratade om"
+	WAIT 3
+	Felix.PutAwayHandItem()
+	WAIT Felix.HasNoHandItem()
+	Felix "Han kommer nog snart"
+	Felix "Chefen alltså"
+	Felix "Du får hålla dig i skinnet, han är lite stingslig"
+}
+BROADCAST Parallell
+
+Yulian.SetTimetable(InteractWithSebastian)
+LISTEN Yulian_talk_Sebastian
+CANCEL FELIX_TALKING
+
+FOCUS
+Yulian "Jaha, hej hej"
+Yulian "Där har vi dig"
+
+IF Sebastian.HasKnowledge("HasTalkedToYulian") {
+	CHOICE {
+		"Det är ju du!":
+			Yulian "Ja just det"
+
+		"Dig känner jag igen":
+			Yulian "Mm, just det"
+
+		"Hej":
+
+		"[SKIP FORWARD]":
+			GOTO SKIP_FORWARD
+	}
+}
+
+
+CHOICE {
+	"Mitt namn är Sebastian":
+	"Hej jag heter Sebbe":
+	
+	"[GO UP TO BURROWS]":
+		Sebastian.Pos(Burrows_North_Point)
+		DEFOCUS
+		LISTEN Sebastian_talk_Yulian
+}
+
+Yulian "Jag vet, jag vet"
+Yulian "Du var intresserad av att jobba för oss?"
+
+CHOICE {
+	"Mhm":
+	"Ja, mycket":
+	"Jo...":
+}
+
+Yulian "Har du gjort en bakgrundscheck på honom Felix?"
+Felix "För fasen, jag känner killen nu"
+Felix "Han är clean som en liten nyfödd bebis, Yulian"
+Sebastian.SetKnowledge(Yulian)
+Yulian "Inget samröre med Ministeriet?"
+
+Sebastian "Nä alltså.."
+CHOICE {
+	"Jag jobbar för Wellspring Soda":
+		Yulian "Ja?"
+		Yulian "Behåll det jobbet!"
+		Yulian "Det är en bra tillgång"
+
+	"Jag vet inget om dem, min herre":
+		Yulian "Bra, bra"
+
+	"Inte direkt":
+		Yulian "Mm?"
+}
+
+[SKIP_FORWARD]
+
+UnlockDoor(Lodge_Entry_DoorToRoom1)
+
+Yulian "Följ med mig in här så kan vi köra igång med provet"
+Yulian.SetTimetable(Yulian_InteractWithPixie)
+Yulian "Raska på"
+
+Sebastian.SetKnowledge(Yulian)
+
+DEFOCUS

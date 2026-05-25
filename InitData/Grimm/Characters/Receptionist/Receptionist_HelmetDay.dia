@@ -1,0 +1,14 @@
+WAIT Receptionist.IsInRoom(Ministry_Lobby) LISTEN Sebastian_talk_Receptionist
+
+FOCUS
+Receptionist.StartTalking()
+Receptionist "Ja?"
+CHOICE {
+	"När börjar det?":
+		Receptionist "Ska börja kl 11.00"
+
+    "Hej!":
+        Receptionist "Hrm"
+}
+Receptionist.StopTalking()
+DEFOCUS

@@ -1,0 +1,87 @@
+
+IF Panda4.IsNotInRoom(PandaApartment) {
+    STOP
+}
+
+IF Sebastian.IsNotInRoom(PandaApartment) {
+    STOP
+}
+
+Panda4.SetTimetable("")
+
+LISTEN Sebastian_talk_Panda4
+FOCUS
+Panda4.StartTalking()
+
+
+CHOICE {
+    "Hej":
+    "God dag":
+    "Hejsan!":
+}
+
+Panda4 "Tja"
+Panda4 "Vad händer?"
+
+CHOICE {
+    "Bara hälsar på...":
+    "Hade vägarna förbi":
+    "Inte mycket":
+}
+
+CHOICE {
+    "Fint ställe ni har här!":
+        Panda4 "Tack! Ja, jag gillar det"
+        Panda4 "Fast vissa är ju bättre än andra på att städa..."
+
+    "Så du bor i kollektivet också?":
+        Panda4 "Mhm"
+        Panda4 "För tillfället"
+        Panda4 "Ska försöka hitta något eget snart tror jag"
+        Panda4 "Fast det är ju kul att bo tillsammans också"
+        CHOICE {
+            "Ja, det verkar supermysigt ju":
+                Panda4 "Jo, men det är det"
+                
+            "Bråkar ni mycket eller?":
+                Panda4 "Nej då, vi är ganska synkade ändå"
+        }
+}
+
+Panda4 "Var bor du?"
+
+CHOICE {
+    "Hotel Devotchka":
+        Panda4 "Ah, du är inte från stan?"
+        CHOICE {
+            "Nej, bara här och jobbar lite":
+            "Nej precis":
+        }
+
+    "Nära hamnen":
+        Panda4 "Aha"
+}
+
+Panda4 "Vad ska du göra nu då?"
+
+CHOICE {
+    "Tänkte gå och jobba lite":
+        Panda4 "OK, OK"
+
+    "Ska träffa en kompis":
+        Panda4 "OK, ha det så roligt"
+
+    "Jag ska på fest":
+        Panda4 "Å, vad kul! Vi ska ut också"
+        Panda4 "Jag älskar att festa!"
+}
+
+Panda4 "Ha det fint"
+CHOICE {
+    "Du med!":
+    "Tack, du också":
+    "Ja, hej då!":
+}
+
+Panda4.StopTalking()
+DEFOCUS

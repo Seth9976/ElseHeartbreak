@@ -1,0 +1,38 @@
+
+STOP _DetectFindingHotel
+STOP _FoundHotel
+STOP _CheckedIn
+STOP _GotIntoRoom
+STOP Sebastian_CheckedIn
+STOP DetectFindingHotel
+
+Mines_ClubDot_TurnTableMixer_TurnTableMixer_1.StopMusic() # just one extra in case it doesn't stop in Frank_ClubDotGig1
+
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1) # FIX THE DOOR FOR SURE
+
+# Bower picks up the dropped floppy again
+IF AIGP1205.IsInRoom(Hotel_Corridor) {
+    Bower.PutIntoInventory(AIGP1205)
+}
+
+# Use this story for the salesman instead
+IF Sebastian.HasKnowledge("SellSoda") {
+    Story("MoreInstructions")
+}
+
+# Allow sequence breaking!
+Hotel_Lobby_DoorToOffice.UnlockDoor()
+
+LISTEN Typer1WasHitByExplosion {
+    Story("StrangeExplosion")
+}
+
+LISTEN AskedForPixie {
+    Story("FoundLodge")
+}
+
+LISTEN FelixCallsYulian {
+    Story("HackerTrial1")
+}
+
+LISTEN Forever

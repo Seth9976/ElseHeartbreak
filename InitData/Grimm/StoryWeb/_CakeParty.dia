@@ -1,0 +1,154 @@
+
+STOP _SequenceBreakHeart
+
+UnlockDoor(Plaza_DoorToPixiesApartment)
+
+PixiesApartment_Radio_1.SetCodeAndRun(RadioListenToChannel100)
+
+WAIT IsHour(0) [LISTEN_FOR_END_OF_PARTY] {
+	WAIT Sebastian.IsNotInRoom(PixiesApartment)
+	GOTO NEXT_DAY_IS_HELMET_DAY
+}
+
+Pixie.SetTimetable("PixieCakeParty")
+Ivan.SetTimetable("IvanCakeParty")
+Felix.SetTimetable("FelixCakeParty")
+
+Pixie.Pos(PixiesApartment_Point)
+Ivan.Pos(PixiesApartment_Point)
+
+
+
+WAIT Sebastian.IsInRoom(PixiesApartment)
+Petra.SetTimetable("PetraCakeParty")
+
+
+FOCUS
+WAIT 3
+Pixie "Hej"
+
+CHOICE {
+	"Hur är läget Pixie?":
+	"Hur är läget Ivan?":
+	"Hur är läget med er?":
+}
+
+Pixie "*snyft*"
+Ivan "Pixie är lite nere"
+Pixie "LITE??! Ivan, hur kan du säga så?"
+Pixie "Du ska bli utstatt för ett livsfarligt experiment!!!"
+Ivan "Lugn lugn. Det är inte så farligt."
+Pixie "ARRRRRHHHHH!!!"
+Pixie "Vi har gått igenom det här tusen gånger nu, du vet lika väl som jag hur farligt det är."
+WAIT 1
+Ivan "Hon har blivit lite hysterisk som du märker"
+
+DEFOCUS
+
+
+IF Petra.IsNotInRoom(PixiesApartment) {
+	Petra.Pos(PlazaBacktreet_Point1)
+}
+
+IF Dorian.IsNotInRoom(PixiesApartment) {
+	Dorian.Pos(PlazaBacktreet_Point1)
+}
+
+Petra.SetTimetable(PetraCakeParty)
+Dorian.SetTimetable(DorianCakeParty)
+
+WAIT 100
+
+WAIT Pixie.IsWithinDistance(Sebastian, 7) AND Sebastian.NotTalking()
+[HYSTERIA]
+Sebastian.CancelWalking()
+FOCUS
+
+Pixie "Nej jag klarar inte det här längre"
+Pixie "Jag måste få vara själv med Ivan!"
+Pixie "Ni får gå hem allihopa"
+Petra "Men Pixie..!"
+WAIT 3
+
+IF Felix.IsInRoom("PixiesApartment") {
+	Felix "OK, hej då då"
+	Felix.SetTimetable(Felix)
+}
+
+CHOICE {
+	"Ska jag också gå?":
+		Pixie "Ja det är nog bäst"
+		Pixie "Jag måste få vara ensam med Ivan"
+
+	"Jag går också då":
+		Pixie "Ja, ursäkta att det blev en sådan röra här Sebastian"
+}
+
+Pixie.SetTimetable("")
+Pixie.Interact(Sebastian)
+Pixie.StartTalking()
+
+Pixie "Experimentet är imorgon på ministeriet"
+Pixie "Kan du komma dit?"
+CHOICE {
+	"Självklart":
+		Pixie "Å du är en ängel Sebastian!"
+	"Får man verkligen komma in på ministeriet?":
+		Pixie "Vi har speciell access imorgon till experimentsalen"
+	"Kan vi inte ses här?":
+		Pixie "Nej jag måste ta med Ivan dit"
+}
+Pixie "Möt mig och Petra i Ministeriets lobby imorgon på morgonen så kan vi gå tillsammans till själva experimentet"
+Pixie.StopTalking()
+DEFOCUS
+
+IF Petra.IsInRoom("PixiesApartment") {
+	Petra.SetTimetable(Petra)
+	Petra "Jag går nu med, vi ses imorgon Pixie och Ivan och allihop"
+	Petra "Hej då!"
+	Dorian "Jag går väl också, farväl fränder"
+	Dorian.SetTimetable(Dorian)
+	Dorian "Och lycka till imorgon Ivan!"
+	Pixie "Hej då..."
+	Pixie "Och hej då Sebastian"
+}
+ELSE {
+	Pixie "Hej då"
+}
+
+WAIT 3
+Pixie.SetTimetable(CakeParty)
+
+Pixie "Sebastian, kan du vara snäll och gå också?"
+Pixie "Vi ses imorgon"
+
+CHOICE {
+	"OK, jag kommer hit vid 10-tiden":
+		Pixie "Nej, vi ska ju ses vid Ministeriet sa jag ju!!!"
+		CHOICE {
+			"Ja just det":
+			"OK, OK":
+			"Oj förlåt, jag glömde":
+		}
+
+	"Det gör vi":
+
+	"Japp, på ministeriet":
+		Pixie "Precis"
+}
+CHOICE {
+	"God natt":
+	"Hej då":
+	"Hoppas du kan sova":
+		Pixie "Ja, det går nog..."
+		Pixie "Hej då"
+}
+
+LockDoor(Plaza_DoorToPixiesApartment)
+[NEXT_DAY_IS_HELMET_DAY]
+
+WAIT IsHour(06)
+WAIT Sebastian.NotTalking()
+Story("HelmetDay")
+
+PixiesApartment_Radio_1.SetCodeAndRun(RadiOS)

@@ -1,0 +1,118 @@
+
+Roby.Pos(RadioStation_Point)
+Roby.SetTimetable(Roby)
+Roby.SetNeverGetsTired(true)
+
+LISTEN Sebastian_talk_Roby
+Roby.StartTalking()
+FOCUS
+
+CHOICE {
+    "Tja!":
+    "Goddagens":
+}
+
+IF Sebastian.HasKnowledge(Roby) {
+    Roby "Hej du, 'sup?"
+    CHOICE {
+        "Går mest runt":
+        "Vet inte riktigt...":
+    }
+    [WHAT_UP]
+    CHOICE {
+        "Vad gör du?":
+            Roby "Sänder radio, kollar så allt flyter på"
+            Roby "Vi har fyra olika kanaler här"
+            Roby "Senaste musiken, det är jag som väljer"
+            GOTO WHAT_UP
+
+        "Hur gick det med han snubben som var här?":
+            Roby "Ååå, vill inte prata om det egentligen"
+            Roby "De är på mig som fan"
+            Roby "Fattar inte vad de vill!"
+            GOTO WHAT_UP
+
+        "Känner du någon som heter Pixie?":
+            GOTO PIXIE
+
+        "Så du äger det här stället?":
+            Roby "Ja, typ"
+            Roby "Det var inte jag som startade radiostationen"
+            Roby "Men jag är den enda som sköter den just nu"
+            GOTO WHAT_UP
+    }
+} ELSE {
+    Roby "Hej, vem är du?"
+    CHOICE {
+        "Jag heter Sebastian":
+        "Sebbe":
+    }
+    Roby "OK, cool"
+    Roby "Jag är Roby, jobbar här på radiostationen"
+    Roby "Läget?"
+    GOTO WHAT_UP
+}
+
+
+
+[PIXIE]
+Roby "Pixie?"
+Roby "Hon jobbar väl på skoaffären?"
+
+CHOICE {
+    "Jaha, ok":
+    "Gör hon?":
+        Roby "Ja, det är jag helt säker på!"
+}
+
+CHOICE {
+    "OK, jag får kolla upp det":
+        Roby "Gör så"
+
+    "OK, tack för hjälpen!":
+        Roby "Inga problem"
+}
+
+[BYE]
+Roby "Hej då!"
+
+DEFOCUS
+Roby.StopTalking()
+
+
+
+
+[MORE]
+LISTEN Sebastian_talk_Roby
+FOCUS
+Roby.StartTalking()
+
+Roby "Ja?"
+CHOICE {
+    "Är du helt säker på att hon jobbar där på skoaffären?":
+        Roby "Ja ja, visst"
+        Roby "Hon är nära vän med Nini som driver stället"
+
+    "Är det kul att ha en radiostation?":
+        Roby "Hur awesome som helst"
+        Roby "Vad tycker du om musiken jag spelar?"
+        CHOICE {
+            "Helt OK":
+                Roby "Jaha..? Du kanske inte har helt samma smak som jag"
+            "Ganska bra":
+                Roby "OK"
+            "Super!":
+                Roby "Å, tack"
+            "Den är grym":
+                Roby "Kul att du tycker det!"
+        }
+
+    "Är det OK om jag trycker lite på knappar och sånt här inne?":
+        Roby "Nej, gör inte det!"
+        Roby "Vi är live"
+        Roby "Du kommer förstöra för alla som lyssnar på radio"
+}
+
+Roby.StopTalking()
+DEFOCUS
+GOTO MORE

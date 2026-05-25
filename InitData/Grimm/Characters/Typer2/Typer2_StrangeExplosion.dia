@@ -1,0 +1,63 @@
+
+Typer2.Pos(Factory_Exterior_Point1)
+Typer2.SetTimetable(HelpTyper1AfterExplosion)
+
+WAIT 3
+
+WAIT Sebastian.IsWithinDistance(Typer1, 6) AND Sebastian.NotTalking() [ON_THE_FLOOR_TALKING] {
+    Typer1 "Jag kan inte röra mig"
+    FOCUS
+    CHOICE {
+        "Oj, ska jag hämta hjälp?":
+            Typer1 "Nej, det kommer nog någon snart"
+
+        "Läskigt, vad ska jag göra?":
+            Typer1 "Det kommer nog någon snart"
+    }
+    DEFOCUS
+
+    LISTEN Sebastian_talk_Typer1
+    FOCUS
+    CHOICE {
+        "Säker att jag inte kan göra något?":
+        "Vad hände?":
+    }
+    Typer1 "Var god och gå härifrån, här finns inget att se"
+    DEFOCUS
+
+    LISTEN Sebastian_talk_Typer1
+    Typer1 "Argh..."
+}
+
+LISTEN Typer2_talk_Typer1
+CANCEL ON_THE_FLOOR_TALKING
+Typer2 "Vad hände?"
+Typer1 "Den var laddad"
+Typer2 "Skåpet?"
+Typer1 "Ja"
+Typer2 "Klarar du dig?"
+
+IF Sebastian.HasKnowledge("HasSecretFloppy") {
+    Typer1 "Ja"
+    Typer1 "Försök hitta jäveln"
+}
+ELSE {
+    Typer1 "Ja, försök hitta jäveln som stal min diskett"
+    Typer2 "OK, åt vilket håll stack han?"
+    Typer1 "Det var en kvinna, hon hade konstig frisyr"
+    Typer1 "Gick mot Burrows"
+}
+
+Typer2 "Ja, jag undersöker"
+Typer2.SetTimetable(Typer2_HuntAraki)
+
+LISTEN Sebastian_talk_Typer2 {
+    Typer2 "Håll dig undan grabben"
+}
+
+WAIT 7
+Typer1 "Vad glor du på?"
+WAIT 60
+Typer1 "Ah..."
+Typer1.WakeUp()
+Typer1.SetTimetable(Typer1_HuntAraki)

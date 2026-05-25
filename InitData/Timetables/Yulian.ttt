@@ -1,0 +1,15 @@
+06:00 - 11:00 Working 			Sit Lodge_Room2_OfficeChair_OfficeChair_1 Lodge_Room2_Chair_SimpleCarver_Chair_SimpleCarver_1
+11:00 - 13:00 Working           Sit Lodge_Room2_SofaSeat_1 Lodge_Room2_SofaSeat_2
+13:00 - 18:00 Working 			Sit Lodge_Room2_OfficeChair_OfficeChair_1 Lodge_Room2_Chair_SimpleCarver_Chair_SimpleCarver_1
+18:00 - 19:00 Relaxing 			BeInRoom Plaza
+19:00 - 22:00 Relaxing 			BeInRoom HarborEast
+22:00 - 06:00 Sleeping 			Sleep YulianApartment_Poor_Bed_Poor_Madrass_1
+
+[Yulian_InteractWithPixie]
+00:00 - 24:00 FindHer			Interact Pixie
+
+[Yulian_WorkOvertime]
+00:00 - 24:00 Working           Sit Lodge_Room2_OfficeChair_OfficeChair_1 Lodge_Room2_Chair_SimpleCarver_Chair_SimpleCarver_1
+
+[InteractWithSebastian]
+00:00 - 24:00 _ Interact Sebastian

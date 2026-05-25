@@ -1,0 +1,46 @@
+#SetClock(1, 22, 0, 0)
+
+WAIT 1
+#Story("FirstDay")
+#Story("DoorProblems")
+
+
+# CLUB DOT!
+#Story(ClubDotGig1)
+#Pixie.Pos(BarYvonne_PixiePoint)
+#Sebastian.Pos(BarYvonne_Point1)
+
+
+#Sebastian.CreateBeerInHand()
+#Bob.Pos(Mines_ClubDot_PixiePoint)
+#Story("PyjamasParty")
+#Pixie.SetTimetable(ShowTheWayToClubDot)
+#Pixie.Pos(Sebastian)
+#SetRain(250)
+#Story("CanSellSoda")
+#Sebastian.Interact(Bob)
+#Sebastian.PutIntoInventory(BarYvonne_WellspringSoda_1)
+
+
+#Petra.Pos(Sebastian)
+
+#Sebastian.PutIntoInventory(KeyRoom1)
+#START GettingReady
+
+#WAIT 1
+#Babcia.Pos(Sebastian)
+#Story("CanSellSoda")
+
+
+#START TestMeetPixie
+
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_1)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_2)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_3)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_4)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_5)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_6)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_7)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_8)
+Sebastian.PutIntoInventory(SodaStorage_WellspringSoda_9)
+

@@ -1,0 +1,13 @@
+00:00 - 24:00 Hacking 		BeInRoom Lodge_Underwater
+
+[Araki_StealFloppyAfterExplosion]
+00:00 - 24:00 _             Interact SecretFloppy
+
+[Araki_GoToPark]
+00:00 - 24:00 _             BeInRoom DorisGardens_East
+
+[Araki_Gambling]
+03:00 - 16:00   Hacking         BeInRoom    Lodge_Underwater
+16:00 - 19:00   Gambling        BeInRoom    Casino_Floor1
+19:00 - 01:00   Gambling        BeInRoom    Casino_Floor2
+01:00 - 03:00   Gambling        BeInRoom    Casino_Floor1

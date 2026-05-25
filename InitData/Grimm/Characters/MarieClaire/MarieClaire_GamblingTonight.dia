@@ -1,0 +1,47 @@
+LISTEN Sebastian_talk_MarieClaire
+
+FOCUS 
+MarieClaire.StartTalking()
+MarieClaire "Spelar ni?"
+
+CHOICE {
+	"Nej...":
+		MarieClaire "Nähä, så tråkigt"
+		CHOICE {
+			"Jag kan inte reglerna":
+				GOTO I_CAN_EXPLAIN
+			"Jag måste gå vidare, ursäkta mig":
+				MarieClaire "Naturligtvis"
+		}
+
+	"Vad är det för spel?":
+		MarieClaire "Tärning"
+		CHOICE {
+			"Får man vara med?":
+				MarieClaire "Javisst, kan ni spela?"
+				CHOICE {
+					"Ja":
+						MarieClaire "Utmärkt"
+					"Nej...":
+						[I_CAN_EXPLAIN]
+						MarieClaire "Jag kan förklara"
+						GOTO HOW_IT_WORKS
+				}
+
+			"Vad är reglerna?":
+				GOTO HOW_IT_WORKS
+		}
+
+	"Jag gärna! Hur fungerar det?":
+		[HOW_IT_WORKS]
+		MarieClaire "Man väljer vad man vill satsa på"
+		MarieClaire "Och gissar man rätt får man tillbaka dubbel sina pengar"
+		CHOICE {
+			"Annars blir man av med dem?":
+				MarieClaire "Ja"
+			"Oj, wow!":
+		}
+}
+
+MarieClaire.StopTalking()
+DEFOCUS

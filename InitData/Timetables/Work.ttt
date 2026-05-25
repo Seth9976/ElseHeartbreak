@@ -1,0 +1,11 @@
+
+18:00 - 08:30 Sleep 	Sleep 			Factory_Exterior_Poor_Bed_Poor_Bed_1
+08:30 - 11:00 Dayjob 	RefineGoods 	Factory_Floor1
+11:00 - 12:00 Pause	 	Fika 			Factory_Floor1
+12:00 - 18:00 Dayjob 	RefineGoods		Factory_Floor1
+
+
+[Work_DayOff]
+18:00 - 08:30 Sleep     Sleep           Factory_Exterior_Poor_Bed_Poor_Bed_1
+08:30 - 11:00 Dayjob    BeInRoom        DorisGardens_East
+14:00 - 18:00 Pause     Fika            Cafe_Room1

@@ -1,0 +1,19 @@
+
+LISTEN PyjamasPartyIsOn {
+	Story("PyjamasParty")
+	Story("FindActivists")
+}
+
+LISTEN ShouldGetModifier {
+	Story("LookForModifier")
+}
+
+WAIT Sebastian.HasHandItemOfType(Hackdev) {
+    Story("VoluntaryTeachers")
+}
+
+LISTEN LetsGoToFirstLecture {
+	Story("FirstLecture")
+}
+
+LISTEN DONT_STOP

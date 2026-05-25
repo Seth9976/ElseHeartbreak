@@ -1,0 +1,260 @@
+FOCUS
+
+Pixie.StartTalking()
+Pixie "Hej!"
+
+CHOICE {
+    "Hej?":
+    "Hej":
+    "Hej!":
+    "[CHEAT]":
+        GOTO DONE
+}
+
+SetCameraAutoRotateSpeed(-10)
+
+Pixie "Vem är du? Jag känner inte igen dig tror jag"
+
+CHOICE {
+    "Jag heter Sebastian":
+    "Mitt namn är Sebastian":
+    "Sebastian, och du?":
+}
+
+Pixie "Jag heter Pixie. Trevligt att träffas."
+#Pixie.ShakeHand(Sebastian)
+
+Pixie "Är du ny i stan eller?"
+
+CHOICE {
+    "Ja, jag kom hit idag":
+        GOTO FUN
+    "Ja, jag kom hit i går":
+        [FUN]
+        Pixie "Jaha, så roligt!"
+    "Ja, jag kom hit för några dagar sedan":
+        Pixie "OK"
+    "Njae, jag har bott här ett tag":
+        Pixie "OK, konstigt att jag inte lagt märke till dig förut, eller hur?!"
+        CHOICE {
+            "Hehe, jo lite":
+            "Mm, visst är det":
+            "Jag har faktiskt sett dig flera gånger":
+                Pixie "Oj, vad creepy, hahaha"
+                Pixie "Jag tror att jag typ aldrig har sett dig!"
+        }
+}
+
+Pixie "Vad gör du här i staden?"
+
+CHOICE {
+    "Jag säljer läsk":
+        GOTO SODA
+        
+    "Jag är affärsman":
+        Pixie "Jaha, vad är det du säljer?"
+    
+    "Jag är konstnär":
+        Pixie "Å, tufft!"
+        Pixie "Så du målar tavlor typ..?"
+        CHOICE {
+            "Jo typ... fast jag jobbar som försäljare för att ha råd med färg och sånt":
+                Sebastian "Det är ju jävligt svårt att försörja sig på måleriet innan man är känd"
+                Pixie "Jo fan, det förstår jag"
+                Pixie "Men vad är det du säljer då?"
+
+            "Mmm...":
+                Pixie "Ok..?"
+                GOTO HEHE
+        }
+}
+
+CHOICE {
+    "Läsk, typ":
+    "Läsk":
+    "Det är lite pinsamt...":
+        Pixie "Äsch, kläm fram det nu"
+        Sebastian "Jo jag säljer läsk"
+}
+
+[SODA]
+Pixie "Läsk? Jag älskar läsk! Vilken sort?"
+Sebastian "Wellspring"
+Pixie ""
+Pixie "Jaha..."
+
+CHOICE {
+    "Mmm":
+    "Jo men så att så är det":
+    "...":
+}
+
+Pixie "...men jag tycker den kan vara rätt god ändå, om man blandar den med något!"
+Pixie "Typ väldigt mycket sprit"
+
+CHOICE {
+    "Haha":
+    "Heh":
+}
+
+CHOICE {
+    "De flesta verkar tyvärr tycka att den är ganska äcklig...":
+    "Den är ju jättegod!":
+        Pixie "Haha, det märks att du jobbar för dem"
+    "Ja det är ju inte den godaste läsken...":
+}
+
+Pixie "Men du, det gör inget! Jag gillar dig ändå"
+Pixie "Hahaha"
+
+CHOICE {
+    "Tur... hehe":
+    "Jag gillar dig med":
+    "...":
+}
+
+Pixie "Hehe"
+[HEHE]
+WAIT 1
+Sebastian "Nä men så att..."
+Pixie "Ja?"
+Sebastian "Äh det var inget"
+WAIT 2
+
+CHOICE {
+    "Du dansar bra förresten":
+        Pixie "Å, tack!"
+        Pixie "Tycker du om att dansa?"
+        CHOICE {
+            "Ehh... njae så där":
+            "Mmmm lite":
+            "Jo det gör jag väl":
+        }
+        Pixie "Kan du inte visa några moves? Hahaha"
+        CHOICE {
+            "Njae...":
+            "Hmmmm":
+        }
+        Pixie "Äh det är OK, jag måste faktiskt gå hem snart ändå"
+        
+    "Så eh... vill du ha en öl eller nåt?":
+        Pixie "Å tack men jag ska snart gå hem faktiskt"
+        
+    "Kanske en tråkig fråga men vad jobbar du med?":
+        Pixie "Haha, vad du är frågvis!"
+        GOTO WORK_STUFF
+}
+
+Pixie "Måste jobba imorgon"
+
+CHOICE {
+    "OK":
+        GOTO SHOW_TOMORROW
+    "Var jobbar du?":
+}
+
+Pixie "Nä usch vilken tråkig fråga, hahaha!"
+[WORK_STUFF]
+Pixie "Det kan vi prata om någon annan dag..."
+[SHOW_TOMORROW]
+Pixie "...men du! Vi ska på en spelning imorgon. Du kanske vill hänga med?"
+Pixie "Det är en jättebra DJ som ska lira"
+
+CHOICE {
+    "Ja gärna, det låter kul":
+        Pixie "Härligt!"
+    
+    "Jag är lite trött, vet inte om jag orkar":
+        Pixie "Kom igen, klart du ska komma"
+        CHOICE {
+            "Ja jo OK då":
+                Pixie "Härligt!"
+            "Nä.....":
+                Pixie "OK, gör som du vill din tråkmåns..."
+                Pixie "men jag tror att det kommer bli jävligt fett"
+                CHOICE {
+                    "Ok, jag kanske kommer":
+                    "Ha det så roligt":
+                        Pixie "Det ska vi!"
+                        Pixie "Måste nog dra hem nu"
+                        GOTO BYE
+                }
+        }
+}
+
+Pixie "Det är på ett ställe som heter Club Dot, ligger ute vid gruvorna"
+
+CHOICE {
+    "OK":
+    "Aha, där har jag varit!":
+        Pixie "Verkligen? Coolt!"
+    "Gruvor?":
+        Pixie "Ja, de bryter malm där typ"
+}
+
+Pixie "Jag kommer direkt från jobbet tror jag"
+Pixie "Om du vill kan jag titta förbi här så kan vi gå tillsammans?"
+
+CHOICE {
+    "Schysst!":
+        Pixie "Inga problem"
+    "OK, låter bra":
+        Pixie "Härligt!"
+    "OK...":
+        Pixie "Se inte så fundersam ut"
+        Pixie "Det kommer bli hur jävla grymt som helst!!!"
+}
+
+Pixie "Vi ses här på Bar Yvonne vid 18-tiden typ då"
+Pixie "Låter det bra?"
+
+CHOICE {
+    "Ja, jättebra":
+    "Kl sex här inne? Jo men det funkar":
+    "Mhm":
+}
+
+Pixie "Grymt!"
+Pixie "Jag måste gå hem nu men det var jättekul att träffa dig"
+
+CHOICE {
+    "Ja, detsamma!":
+    "Mm, verkligen":
+    "Japp":
+}
+
+Pixie "Vi ses imorgon då!"
+Pixie "Då får du träffa mina kompisar"
+Pixie "Och Ivan också såklart"
+
+CHOICE {
+    "Ok, hej då!":
+        GOTO BYE
+    "Ivan?":
+    "Ivan?!":
+    "Ivan?!!":
+    "Ivan??!?!??!!!??!?":
+}
+
+[DONE]
+SetCameraAutoRotateSpeed(0)
+Pixie "Ja, det är min pojkvän!"
+
+[BYE]
+SetCameraAutoRotateSpeed(0)
+
+Sebastian.SetKnowledge("ClubDot")
+Sebastian.SetKnowledge("Pixie")
+Pixie.SetKnowledge("Sebastian")
+
+Pixie.StopTalking()
+Pixie.SetTimetable("PixieGoHome")
+Pixie "Hej då"
+
+WAIT 2
+DEFOCUS
+
+START Pixie_AreYouFollowingMeHome
+
+WAIT IsHour(7)
+BROADCAST ClubDotMorningBegins

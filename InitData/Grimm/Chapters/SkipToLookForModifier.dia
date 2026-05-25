@@ -1,0 +1,8 @@
+
+Story("CanSellSoda")
+Story("AfterStalking")
+Story("AfterPyjamas")
+Story("LookForModifier")
+SetHour(17)
+
+Sebastian.Pos(Hut_Point1)

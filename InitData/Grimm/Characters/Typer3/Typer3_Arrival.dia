@@ -1,0 +1,85 @@
+
+Typer3.Pos(Burrows_North_Point)
+Typer3.SetTimetable(Typer3_SearchForLodgeAtBlaKnuten)
+
+WAIT Sebastian.IsInRoom(BlaKnutenRoom1) AND Typer3.IsInRoom(BlaKnutenRoom1)
+FOCUS
+Typer3.StartTalking()
+Typer3.SetTimetable("")
+
+WAIT 3
+Typer3 "UHÖÄÄVHASHVHAH!!!!"
+Typer3 "Herregud"
+Typer3 "Ni skrämde mig något fruktansvärt"
+
+
+CHOICE {
+    "Oj, ursäkta":
+    "Förlåt så hemskt mycket!":
+    "Oops":
+}
+
+Typer3.Interact(VendingMachine)
+Typer3 "Jag måste ta något och dricka för att lugna ner nerverna"
+
+WAIT Typer3.IsIdle()
+Typer3.Interact(VendingMachine)
+
+CHOICE {
+    "OK":
+    "Jaha":
+    "...":
+}
+CHOICE {
+    "Det var inte meningen att skrämmas":
+    "Vad är det här för ställe?":
+    "Kan man få köpa något att äta?":
+}
+
+Typer3 "Hmm?"
+WAIT 2
+IF Typer3.HasAnyHandItem() {
+    Typer3.UseHandItem()
+    WAIT 3
+    Typer3 "Ahhh!"
+    Typer3 "Den satt där den skulle"
+} ELSE {
+    Typer3 "Hur fungerar de här maskinerna egentligen?!"
+}
+
+Typer3 "Så, vad gör ni här?!"
+Typer3 "Ni tillhör möjligtvis inte..?"
+
+CHOICE {
+    "Jag är bara ute på promenad":
+    "Jag ska jobba som läskförsäljare!":
+    "Tillhör vad då?":
+}
+
+Typer3 "Jag måste tyvärr fylla i en blankett i och med att ni klampade in här"
+Typer3 "CB3415 - Olovligt besök under utredning"
+Typer3 "Kan ni vänta här medan jag går och hämtar den?"
+
+CHOICE {
+    "Helst inte":
+    "OK!":
+    "Njae...":
+}
+
+Typer3 "Rör er inte ur fläcken"
+
+Typer3.PutAwayHandItem()
+Typer3.StopTalking()
+DEFOCUS
+
+Typer3 "Eller jo, flytta lite på dig så att jag kommer ut ur rummet"
+Typer3.SetTimetable(Typer3)
+Typer3 "Men gå ingenstans sen!"
+
+WAIT 10
+
+LISTEN Sebastian_talk_Typer3
+Typer3 "Plikten kallar"
+
+LISTEN Sebastian_talk_Typer3
+Typer3 "Har inte tid"

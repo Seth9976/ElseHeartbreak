@@ -1,0 +1,6 @@
+05:00 - 21:30 Sleeping 			Sleep Hotel_Room3_Bed
+21:30 - 05:00 HangOutInDiner 	Sit Hotel_Diner_KitchenChair1
+
+[Siri_Bolder]
+05:00 - 21:30 Sleeping          Sleep Hotel_Room3_Bed
+21:30 - 05:00 HangOutInDiner    BeInRoom Hotel_Diner

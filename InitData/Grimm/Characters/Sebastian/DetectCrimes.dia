@@ -1,0 +1,10 @@
+
+#[AGAIN]
+
+# detektera om man har stulit pengar
+
+# detektera om man hackar på stan
+# Story(_BustedWhenModding)
+
+WAIT 100
+#GOTO AGAIN

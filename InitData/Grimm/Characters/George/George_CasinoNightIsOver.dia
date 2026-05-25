@@ -1,0 +1,15 @@
+
+George.SetTimetable(George)
+
+LISTEN Sebastian_talk_George
+FOCUS
+George.StartTalking()
+
+George "Hej du"
+George "Jag har inte tid för autografer idag"
+George "Men ha en bra dag!"
+
+George.StopTalking()
+DEFOCUS
+
+

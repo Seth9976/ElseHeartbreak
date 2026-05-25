@@ -1,0 +1,162 @@
+LISTEN Sebastian_talk_Bernd
+
+INTERRUPT SebastianGetsToKnowBernd
+FOCUS
+
+IF Bernd.IsAtTask("Photographing") {
+	WAIT 0.5
+	INTERRUPT SebastianTalksWithBerndAboutBirds
+	FOCUS
+}
+
+CHOICE {
+	"Var kommer du ifrån då?":
+		Bernd "Jag är från Tyskland"
+		[VACATION]
+		Bernd "Har tagit tjänstledigt för att kunna satsa på fotograferandet i några månader"
+
+	"Vad jobbar du med?":
+		Bernd "Jag jobbar egentligen på en bank hemma i Tyskland"
+		Bernd "Men nu är jag på semester"
+		GOTO VACATION
+}
+
+CHOICE {
+	"Jaha":
+		Bernd "Vad gör du här i staden?"
+			CHOICE {
+				"Jag har fått ett jobb här":
+					Bernd "Jaha?"
+					CHOICE {
+						"Mm":
+						"Jag är läskförsäljare men har inte börjat jobba än":
+							GOTO SODA
+					}
+				"Försöker hitta mig själv typ":
+					Bernd "Aha, utmärkt... utmärkt"
+
+				"Jag ska sälja läsk är det tänkt":
+					[SODA]
+					Bernd "Läsk?"
+					Bernd "Jag gillar öl bättre"
+					Bernd "Har du varit på oktoberfest?"
+					CHOICE {
+						"Ja, en gång":
+							Bernd "Ja då vet du hur fantastiskt det är"
+						"Nej, aldrig":
+							Bernd "Du borde gå om du får chansen!"
+						"Vad är det?":
+							Bernd "Det är en stor fest i Tyskland där man dricker massor med öl"
+					}
+			}
+	"Vad skönt det låter":
+		Bernd "Ja, man måste ha tid att göra sånt som är roligt ibland också"
+		CHOICE {
+			"Ja...":
+			"Mm":
+			"Verkligen!":
+		}
+}
+
+Bernd "Sebastian, det var mycket trevligt att prata med dig"
+Bernd "Vi ses!"
+CHOICE {
+	"Ja, det gör vi":
+	"Jepp!":
+	"Ha det":
+}
+
+Bernd.StopTalking()
+DEFOCUS
+
+
+# later #
+
+
+[BOTHER]
+LISTEN Sebastian_talk_Bernd
+FOCUS
+Bernd.StartTalking()
+
+Bernd "Hallo igen!"
+
+CHOICE {
+	"Hej!":
+		[HELLO]
+		CHOICE {
+			"Vackert väder idag":
+				Bernd "Ja, underbart!"
+				Bernd "Jag älskar alla väder"
+				[EVEN_THAT]
+				CHOICE ETERNAL {
+					"Även snö?":
+					"Även orkan?":
+					"Även torka?":
+						GOTO DRAUGHT
+					"Även hagel?":
+				}
+				Bernd "Ja, alla väder"
+				GOTO EVEN_THAT
+				[DRAUGHT]
+				Bernd "Nä..."
+				Bernd "Men är det verkligen ett väder?"
+				Sebastian "Vet inte"
+
+			"Några tips på vad man ska kolla på här i stan?":
+				Bernd "Å, det finns så mycket vackra saker här"
+				Bernd "Fåglarna då såklart"
+				Bernd "Och alla byggnader, så... urbant"
+				Bernd "Slitet och levande på ett alldeles unikt sätt"
+				CHOICE {
+					"Har du något mer specifikt tips på vad jag borde se?":
+						Bernd "Har du varit ute i hamnen?"
+						Bernd "Jag gillar lyftkranarna där"
+						Bernd "Arbetarna..!"
+
+					"Jag tycker mest det är skräpigt":
+						Bernd "Du måste titta noggrannare min vän"
+				}
+		}
+		CHOICE {
+			"Tack för pratstunden, ska promenera runt lite mer nu tror jag":
+			"Nä nu måste jag nog tyvärr gå och vila, är astrött":
+		}
+		IF IsOverHour(20) {
+			Bernd "God natt"
+		}
+		ELSE {
+			Bernd "God middag"
+		}
+
+	"Ursäkta mig men jag glömde bort vad du heter..?":
+		Bernd "Jag heter Bernd"
+		Bernd "Ditt namn var Sebastian?"
+		CHOICE {
+			"Ja precis":
+			"Mm, eller Sebbe":
+				Bernd "Ja precis"
+		}
+		GOTO HELLO
+
+	"Ursäkta, det var inget":
+		Bernd "Ok, ha en bra dag!"
+		CHOICE {
+			"Du med":
+			"Ja det ska jag!":
+			"Ska försöka...":
+		}
+
+	"Allt väl?":
+		Bernd "Det är prima, tack"
+		Bernd "Själv?"
+		CHOICE {
+			"Det är bra":
+			"Det funkar":
+		}
+		GOTO HELLO
+}
+
+Bernd.StopTalking()
+DEFOCUS
+
+GOTO BOTHER

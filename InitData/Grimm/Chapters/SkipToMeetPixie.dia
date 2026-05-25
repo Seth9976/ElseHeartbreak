@@ -1,0 +1,11 @@
+Sebastian.PutIntoInventory(KeyRoom1)
+SetDoorTarget(Hotel_Corridor_Door1, Hotel_Room1_Door1)
+
+Sebastian.Pos(BarYvonne_Point1)
+
+#Story("FirstDay")
+#Story("CanSellSoda")
+
+SetClock(1, 20, 00, 0)
+
+Pixie.Pos(BarYvonne_PixiePoint)

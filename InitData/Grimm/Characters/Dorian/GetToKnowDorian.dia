@@ -1,0 +1,199 @@
+FOCUS
+Dorian.StartTalking()
+
+CHOICE {
+    "Hej":  
+    "God dag":
+    "Ursäkta mig":
+}
+
+Dorian "Å, vem är ni?"
+
+CHOICE {
+    "Jag heter Sebastian":
+        Dorian.SetKnowledge(Sebastian)
+    "Sebbe":
+        Dorian.SetKnowledge(Sebastian)
+        Dorian.SetKnowledge(Sebbe)
+}
+
+Dorian "Jaså? Angenämt, angenämt"
+
+CHOICE {
+    "Vem är du?":
+        Dorian "Mitt namn är Dorian"
+        Dorian "Dorian M."
+        Dorian "Jag är poet"
+        Sebastian.SetKnowledge(Dorian)
+
+    "Vad är det här för stadsdel?":
+        Dorian "Oj, svår fråga"
+        Dorian "Här bor de udda och utstötta"
+        Dorian "Men här bor också konstnärerna och artisterna"
+        Dorian "Och så poeterna såklart, sådana som jag själv!"
+}
+
+CHOICE {
+    "Poet?":
+        Dorian "Javisst, precis!"
+
+    "Menar du att du skriver dikter?":
+        Dorian "Ja..."
+        Dorian "Ja precis!"
+}
+
+CHOICE {
+    "Är det svårt?":
+        Dorian "Ja, mycket"
+        Dorian "Att fullkomligt blotta sin själ för omvärlden"
+        Dorian "Det låter inte så lätt, eller hur?"
+        CHOICE {
+            "Nej... antar det":
+                Dorian "Men det är inte något man väljer själv"
+                Dorian "Diktkonsten har valt mig att vara dess fanbärare"
+                Dorian "Och det är mitt ok att bära, för resten av mitt liv"
+
+            "Fast det måste väl finnas svårare jobb?":
+                Dorian "Vad får dig att tro det? Har du något exempel?"
+                CHOICE {
+                    "Jag ska tydligen jobba som läskförsäljare, det verkar väldigt svårt":
+                        Dorian "Ja?"
+                    "Typ... stuntman?":
+                        Dorian "Mmm"
+                        Dorian "Men att riskera sin kropp är aldrig lika allvarligt som att riskera sin själ"
+                        CHOICE {
+                            "Ok...":
+                            "Hmm, om du säger det så":
+                            "Jag vet inte om jag håller med":
+                        }
+                    "Kanske att uppfinna raketer":
+                        Dorian "Nej, det är ju bara att räkna"
+                        Dorian "Mitt skapande kräver fullständig närvaro"
+                        Dorian "Jag är fullkomligt uttömd efter att jag skrivit"
+                }
+        }
+        Dorian "Vill du höra en dikt förresten?"
+
+    "Vad intressant":
+        Dorian "Vill du höra?"
+
+    "Ok... Du vet inte var jag kan träffa kompisar här i stan förresten?":
+        Dorian "Goda vänner är svåra att finna"
+        Dorian "Alla hänger ju på Bar Yvonne"
+        Dorian "Men det stället är, som du säkert redan vet, en studie i ytlighet"
+        CHOICE {
+            "Bar Yvonne?":
+                Dorian "Ja, det ligger nere i centrum"
+                Dorian "Jag går aldrig dit längre"
+
+            "Ah, där har jag varit":
+                Dorian "Ja?"
+                Dorian "Din stackare"
+                Dorian "Jag går aldrig dit längre"
+                Dorian "Inte efter det som hänt"
+                CHOICE {
+                    "Ok, jag tyckte det var trevligt där":
+                    "Vad har hänt där?":
+                        Dorian "Å, glöm det"
+                        Dorian "Jag var en annan person då"
+                    "Det ska jag komma ihåg":
+                }
+        }
+        Dorian "Skrivandet är hela mitt liv nu"
+        CHOICE {
+            "Ok, vad bra":
+                Dorian "Bra? Det är ett absolut måste!"
+                Dorian "Hela mitt väsen kräver det"
+            "Oj":
+                Dorian "Du ser förvånad ut"
+            "Jaha?":
+                Dorian "Så är det"
+        }
+        Dorian "Jag måste få uttrycka mig, annars kommer jag att gå under"
+        Dorian "Vill du höra en dikt?"
+}
+
+CHOICE {
+    "Kan jag väl":
+        GOTO POEM
+
+    "Ja, gärna!":
+        [POEM]
+        Dorian "Hrm"
+        Dorian "Hm hrm hm..."
+        Dorian "Beredd?"
+        WAIT 2
+        Dorian "En spricka"
+        Dorian "En strimma"
+        Dorian "En stråle ljus"
+        Dorian "Som prickar"
+        Dorian "Dig"
+        Dorian "Och mig"
+        WAIT 2
+        Dorian "MIN VÄN!"
+        Dorian "Var är du?"
+        Dorian "Var är den tagg"
+        Dorian "som skär dig?"
+        WAIT 2
+        Dorian "Ack, din själ"
+        Dorian "Du grymma värld"
+        WAIT 1
+        Dorian "Farväl"
+        WAIT 3
+        Dorian "Eh?!"
+        Dorian "Vad tycker du?!!"
+        CHOICE {
+            "Intressant...":
+                Dorian "Ja?"
+                Dorian "Precis!"
+                Dorian "Det är intressant som jag vill vara"
+
+            "Jättebra!":
+                Dorian "Ja?"
+                Dorian "Tack!"
+                Dorian "Jag är rätt nöjd själv"
+
+            "Lite konstig...":
+                Dorian "Jaha?"
+                Dorian "Hrm, du kanske inte är så van att höra poesi?"
+                CHOICE {
+                    "Njae...":
+                    "Jo rätt så":
+                        Dorian "Jaha"
+                }
+        }
+        Dorian "Jag måste skriva vidare nu"
+        Dorian "Men kom gärna tillbaka senare"
+        CHOICE {
+            "Det ska jag, lycka till!":
+                [THANKS]
+                Dorian "Tack min vän"
+
+            "OK, ses":
+                Dorian "Farväl min nyvunne frände"
+
+            "Visst, ha det gött!":
+                GOTO THANKS
+        }
+
+    "Nej tack":
+        Dorian "Va?"
+        Dorian "Men den är fantastisk"
+        CHOICE {
+            "Nej men jag måste rusa nu":
+                Dorian "Jaha... farväl då min nyfunne vän"
+                CHOICE {
+                    "Jag kanske kan lyssna på den senare...":
+                    "Hej då!":
+                    "Ha det gött":
+                }
+            "OK då":
+                Dorian "Du kommer inte att bli besviken!"
+                GOTO POEM
+        }
+}
+
+Dorian.StopTalking()
+DEFOCUS
+
+STOP

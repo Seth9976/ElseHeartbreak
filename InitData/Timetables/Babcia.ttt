@@ -1,0 +1,5 @@
+
+05:00 - 10:00 Receptionist 	BeAtTing 	Hotel_Lobby_WorkPoint
+10:00 - 14:00 Receptionist 	BeInRoom 	Hotel_Lobby
+14:00 - 22:00 Receptionist 	BeAtTing 	Hotel_Lobby_WorkPoint
+22:00 - 05:00 Rest 			Sleep		Hotel_LeftSuite_Bed1

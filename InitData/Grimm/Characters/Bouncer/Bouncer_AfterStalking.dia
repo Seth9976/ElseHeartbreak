@@ -1,0 +1,86 @@
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Bouncer
+FOCUS
+Bouncer.StartTalking()
+Bouncer "Hallå där"
+
+CHOICE ETERNAL {
+    "Hej, hej":
+    "God dag!":
+    "Läget?":
+        Bouncer "Bara fint"
+}
+
+[MORE]
+CHOICE ETERNAL {
+    "Jobbar du för ministeriet?":
+        Bouncer "Va?!"
+        Bouncer "Eh... nej verkligen inte"
+        Bouncer "Vem har sagt det?"
+        CHOICE {
+            "Ingen, jag bara undrade":
+            "Kommer inte ihåg":
+        }
+        Bouncer "Jag vet knappt något om ministeriet"
+        Bouncer "Men jag är helt säker på att jag inte jobbar där"
+        Bouncer "Inte för att jag har något emot dem, nej nej"
+        Bouncer "Men jag jobbar verligen inte där!"
+        CHOICE {
+            "OK":
+            "Nähä, jag förstår":
+            "På så vis...":
+        }
+        GOTO MORE
+
+    "Vet du var jag kan lära mig att programmera?":
+        Bouncer "Programmera..? Hmm..."
+        Bouncer "Är det inte det som trädgårdsmästaren brukar hålla på med?"
+        Bouncer "I parken?"
+        CHOICE {
+            "Ja?":
+            "Kanske":
+            "Jo, tror det":
+            "Näää..?":
+        }
+        Bouncer "Han går runt med en apparat och grejar med saker"
+        Bouncer "Jag brukar sitta och titta på honom när han jobbar"
+        Bouncer "Parken är verkligen skön om man vill komma bort från stadens stress, har du varit där?"
+        CHOICE {
+            "Nej":
+            "Ja, den är jättefin":
+            "Jo... den är OK":
+                Bouncer "Jag älskar den"
+        }
+        CHOICE {
+            "Jag ska gå och se om jag hittar trädgårdsmästaren":
+                Bouncer "Gör så"
+            "En annan sak förresten...":
+                GOTO MORE
+            "Nej nu måste jag rusa":
+                Bouncer "OK, hej då!"
+        }
+
+    "Hej då":
+        Bouncer "Hej då!"
+
+    "Du vill inte köpa en läsk?":
+        Bouncer "Nej tack, det är bra"
+        CHOICE {
+            "Inte ens om du får den gratis?":
+                Bouncer "Det är väl ingen bra deal för dig?"
+                CHOICE {
+                    "Nä, sant":
+                    "Nej...":
+                }
+            "OK":
+            "Synd...":
+        }
+        GOTO MORE
+}
+
+Bouncer.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

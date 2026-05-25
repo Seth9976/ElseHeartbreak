@@ -1,0 +1,14 @@
+
+LISTEN ManHuntBegins {
+    Story(ManHunt)
+}
+
+LISTEN Sebastian_open_HarborEast_DoorToFerry {
+    Story("GotOntoBoat")
+    WAIT 2
+    Sebastian.CancelWalking()
+}
+
+
+LISTEN DONT_STOP
+

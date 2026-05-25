@@ -1,0 +1,31 @@
+
+CreateCharacter("a", Sebastian)
+CreateCharacter("b", Sebastian)
+CreateCharacter("c", Sebastian)
+CreateCharacter("d", Sebastian)
+CreateCharacter("e", Sebastian)
+CreateCharacter("f", Sebastian)
+CreateCharacter("g", Sebastian)
+
+WAIT 1
+
+a.Walk(HarborEast_Point)
+WAIT 1
+
+b.Walk(Hotel_Exterior_Point)
+WAIT 1
+
+c.Walk(Ministry_Lobby_Point1)
+WAIT 1
+
+d.Walk(HarborNorth_Point)
+WAIT 1
+
+e.Walk(Plaza_Point)
+WAIT 1
+
+f.Walk(PoorDesolateBuilding1_Exterior_FrontTrigger)
+WAIT 1
+
+g.Walk(Hut_Point1)
+WAIT 1

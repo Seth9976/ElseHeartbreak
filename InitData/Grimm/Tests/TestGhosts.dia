@@ -1,0 +1,12 @@
+
+Sebastian.Pos(Hotel_Room1_Point2)
+
+WAIT 2
+
+STOP _GotIntoRoom
+
+Story("CanSellSoda")
+Story("YouAreMemberNow")
+Story("Ghosts")
+
+SetHour(20)

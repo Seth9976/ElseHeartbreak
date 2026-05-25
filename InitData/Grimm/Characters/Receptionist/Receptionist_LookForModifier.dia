@@ -1,0 +1,67 @@
+
+[AGAIN]
+
+LISTEN Sebastian_talk_Receptionist
+
+FOCUS
+Receptionist.StartTalking()
+
+Receptionist "God dag. Vem söker ni?"
+
+CHOICE ETERNAL {
+	"Eh, ingen speciell":
+		Receptionist "Det är nog bäst att ni går i så fall"
+		Receptionist "Endast personer med ett tydligt ärende får vistas i våra lokaler"
+
+	"Jag skulle vilja få tag på en sån här 'modifierare'":
+		Receptionist "Jaså?"
+		Receptionist "Det går bra"
+		Receptionist "Har ni fyllt i blanketterna?"
+		CHOICE {
+			"Vad då för blanketter?":
+				[FORMS]
+				Receptionist "C-345 Innehav av Modifierare nivå 1"
+				Receptionist "Samt DGZXH-230-FB Psykisk hälsa och välbefinnande"
+				Receptionist "Dessutom måste ni såklart ha GG-120 Bakgrundscheck Nivå 2"
+				Receptionist "Och givetvis HYFEN-HYFEN-20 Skadeförsäkring"
+				Receptionist "Plus ett personligt brev"
+				CHOICE {
+					"Oj, det var mycket":
+						Receptionist "Så ni har dem inte med er och ifyllda?"
+						Sebastian "Nej"
+					"Nej de har jag inte fyllt i":
+				}
+				Receptionist "Då kan jag tyvärr inte hjälpa er"
+
+			"Nej, jag har inte hört talas om några sådana":
+				Receptionist "All information finns på vår hemsida"
+				CHOICE {
+					"OK":
+					"Jaha, får kolla där då":
+					"Men vad är det för blanketter då?":
+						GOTO FORMS
+				}
+		}
+
+	"Vackert väder idag":
+		Receptionist "Datorministeriet undanbeder sig alla typer av kallprat i den här lokalen"
+
+	"Kan man få ett jobb här?":
+		Receptionist "Datorministeriet söker för närvarande inga personer"
+
+	"Så det här är Datorministeriet?":
+		Receptionist "Ja"
+		CHOICE {
+			"Fint":
+			"Stor byggnad":
+			"Det är lite kallt här inne":
+		}
+		Receptionist "Alla typer av personliga åsikter om lokalen ignoreras vänligen"
+}
+
+Receptionist "Adjö"
+
+Receptionist.StopTalking()
+DEFOCUS
+
+GOTO AGAIN

@@ -1,0 +1,10 @@
+Panda5.SetTimetable(Panda5)
+
+LISTEN Sebastian_talk_Panda5
+Panda5 "'sup?"
+FOCUS
+CHOICE {
+    "Det är bra":
+    "Rullar på":
+}
+DEFOCUS

@@ -1,0 +1,126 @@
+
+# Internet
+# ... don't run them yet, emits errors
+# run them when Sebastian has reached the internet instead
+
+
+# Pong highscore
+Yvonne_ArcadeMachine2.RunFunctionOnComputer(SaveMemory, "highscore", 11)
+WAIT 1
+Yvonne_ArcadeMachine2.RunFunctionOnComputer(SaveMemory, "champion", "Ivan")
+
+
+# Cashiers
+RunMasterProgramOnAllComputersInRoom(TouristOffice)
+RunMasterProgramOnAllComputersInRoom(ShoeStore)
+RunMasterProgramOnAllComputersInRoom(Ministry_Lobby)
+
+
+
+RunMasterProgramOnAllComputersInRoom(PoorDesolateBuilding1_HackerRoom)
+
+
+# Harbour areas
+#RunMasterProgramOnAllComputersInRoom(HarborEast)
+MediumSewerComputer_MediumSewerComputer.RunMasterProgram()
+WAIT 1
+RunMasterProgramOnAllComputersInRoom(HarborNorth)
+RunMasterProgramOnAllComputersInRoom(HarborSouth)
+RunMasterProgramOnAllComputersInRoom(HarborWest)
+
+# Downtown
+RunMasterProgramOnAllComputersInRoom(Plaza)
+RunMasterProgramOnAllComputersInRoom(Hospital_Exterior)
+RunMasterProgramOnAllComputersInRoom(PoliceOffice_Exterior)
+
+# Hotel
+OrganComputer.RunMasterProgram()
+
+# Misc
+FinanceComputer.RunMasterProgram()
+
+# Lodge
+# RunMasterProgramOnAllComputersInRoom(Lodge_Room1) # att köra något visst program här gör så att dörren kraschar...?
+RunMasterProgramOnAllComputersInRoom(Lodge_Room2)
+WAIT 1
+Lodge_FirstCorridor_MediumSewerComputer_MediumSewerComputer_1.RunMasterProgram()
+Lodge_FirstCorridor_LargeComputerL4_LargeComputerL4_1.RunMasterProgram()
+WAIT 1
+RunMasterProgramOnAllComputersInRoom(Lodge_Underwater)
+WAIT 1
+RunMasterProgramOnAllComputersInRoom(Frank_Room)
+WAIT 1
+
+# Ministry
+Ministry_Elevator1_Computer.RunMasterProgram()
+Ministry_Elevator2_Computer.RunMasterProgram()
+Ministry_Elevator3_Computer.RunMasterProgram()
+Ministry_Elevator4_Computer.RunMasterProgram()
+TramComputer1.RunMasterProgram()
+TramComputer2.RunMasterProgram()
+TramComputer3.RunMasterProgram()
+TramComputer4.RunMasterProgram()
+MeteorologyServer.RunMasterProgram()
+Wellspringer.RunMasterProgram()
+PowerTap.RunMasterProgram()
+Hugin.RunMasterProgram()
+
+# Park
+GardenBoxComputer1.RunMasterProgram()
+DorisGardens_West_GardenBoxComputer1_1.RunMasterProgram()
+
+# Factory lobby
+Factory_Lobby_FlatScreen_FlatComputerScreen_2.RunMasterProgram()
+Factory_Lobby_FlatScreen_FlatComputerScreen_3.RunMasterProgram()
+Factory_Lobby_FlatScreen_FlatComputerScreen_4.RunMasterProgram()
+Factory_Lobby_FlatScreen_FlatComputerScreen_5.RunMasterProgram()
+Factory_Lobby_FlatScreen_FlatComputerScreen_6.RunMasterProgram()
+Factory_Lobby_FlatScreen_FlatComputerScreen_7.RunMasterProgram()
+
+# Factory corridor
+FactoryServerDoor.RunMasterProgram()
+FactoryServerDoor2.RunMasterProgram()
+
+# Rest of factory
+RunMasterProgramOnAllComputersInRoom(Factory_Office)
+RunMasterProgramOnAllComputersInRoom(Factory_RecieverRoom)
+RunMasterProgramOnAllComputersInRoom(Factory_Floor1)
+RunMasterProgramOnAllComputersInRoom(Factory_Floor2)
+
+# Secret data on hard drive
+GoodsDatabase.RunFunctionOnComputer(SaveMemory, "W311SPRNG", "abc123")
+WAIT 1
+GoodsDatabase.RunFunctionOnComputer(SaveMemory, "MONADOOR", "38984312")
+
+# Casino
+Casino_Floor1_MinistryCubbardComputerScreen_MinistryCubbardComputerScreen_1.RunMasterProgram()
+CasinoCashRegister.RunMasterProgram()
+
+
+
+
+LongsonOffice_ComputerWithConsoleOutput_1.RunMasterProgram()
+WAIT 1
+LongsonOffice_ComputerWithConsoleOutput_1.RunFunctionOnComputer(SaveMemory, 1, 20000)
+WAIT 1
+LongsonOffice_ComputerWithConsoleOutput_1.RunFunctionOnComputer(SaveMemory, 2, 13000)
+WAIT 1
+LongsonOffice_ComputerWithConsoleOutput_1.RunFunctionOnComputer(SaveMemory, 3, 400)
+WAIT
+LongsonOffice_ComputerWithConsoleOutput_1.RunFunctionOnComputer(SaveMemory, 4, 30000)
+WAIT 1
+LongsonOffice_ComputerWithConsoleOutput_1.RunFunctionOnComputer(SaveMemory, 5, 95000)
+
+
+
+IF OneIn(7) {
+    # do nothing, let it stay behind Ministry
+}
+ELSE {
+    Ministry_Exterior_SmallHackdev_1.Pos(Testing_Trigger_1)
+}
+
+
+# Test
+CentralServer.RunMasterProgram()
+TestComputer2.RunMasterProgram()

@@ -1,0 +1,429 @@
+
+# sebastian sitter med sin mor och far vid middagsbordet
+# klassisk musik hörs i bakgrunden
+# kameran åker runt dem långsamt
+# pappan pratar om något ointressant
+# telefonen ringer plötsligt
+
+BROADCAST SlowFadeIn
+
+SetClock(0, 18, 45, 0)
+SetClockSpeed(30)
+
+Father.Pos(DadsChair)
+#Father.SetHandItem(HomeApartment_CinnamonBun_CinnamonBun_3)
+
+Mother.Pos(MomsChair)
+Sebastian.Pos(SebastiansChair)
+
+#WAIT 1
+FOCUS
+
+
+#GOTO AFTER_CHEAT_MENU
+#CHOICE {
+#	"PLAY GAME FROM THE BEGINNING":
+#	
+#	"Chapter 1 (first day)":
+#		BROADCAST CHAPTER_CHEAT
+#		WAIT 2
+#		START SkipToFirstDay
+#		DEFOCUS
+#		STOP
+#	"Chapter 2 (after dot)":
+#		BROADCAST CHAPTER_CHEAT
+#		WAIT 2
+#		START SkipToTryFindLodge
+#		DEFOCUS
+#		STOP
+#	"Chapter 3 (tests)":
+#		BROADCAST CHAPTER_CHEAT
+#		WAIT 2
+#		START SkipToHackerTrial1
+#		DEFOCUS
+#		STOP
+#	"Chapter 4 (factory)":
+#		BROADCAST CHAPTER_CHEAT
+#		WAIT 2
+#		START SkipToFactoryMission
+#		DEFOCUS
+#		STOP
+#	"Chapter 5 (experiment)":
+#		BROADCAST CHAPTER_CHEAT
+#		WAIT 2
+#		START SkipToHelmetDay
+#		DEFOCUS
+#		STOP
+#	"Chapter 6 (final act)":
+#		BROADCAST CHAPTER_CHEAT
+#		WAIT 2
+#		START SkipToAfterGhosts
+#		DEFOCUS
+#		STOP
+#}
+#[AFTER_CHEAT_MENU]
+
+
+SetCameraAutoRotateSpeed(10)
+
+Sebastian.SetFieldToFloat("sleepiness", 0)
+Sebastian.SetNeverGetsTired(true)
+
+WAIT 3
+BROADCAST Birthday
+
+
+WAIT 3
+Father "Och då sa han att han inte kunde gå med på ett sådant avtal!"
+Father "Har ni hört på maken?"
+#Father.UseHandItem()
+Father "Men jag tvingade honom att göra det, såklart"
+Mother "Mm? Kan vi inte försöka prata om någonting som inte är jobb"
+Mother "Det är ju ändå Sebastians födelsedag"
+
+CHOICE {
+	"Det är lugnt mamma":
+		Father "Hör du?"
+		Father "Sebastian vill bara höra vad hans far har uträttat idag"
+	"Ja, ska vi börja med tårtan snart?":
+		Mother "Ja, alldeles strax"
+		Mother "Jag tänkte att vi kunde sjunga för dig först bara"
+	"Exakt":
+		Father "Jag försöker ju bara få er att förstå vilken bedrift jag uträttat idag!"
+	"[CHEAT]":
+		SetCameraAutoRotateSpeed(0)
+		GOTO END_OF_PHONE_CONVERSATION
+	"[INTRO_SEQUENCE]":
+		SetCameraAutoRotateSpeed(0)
+		Sebastian.SetNeverGetsTired(false)
+		BROADCAST GOING_TO_DORISBURG
+}
+
+HomeTelephone.StartRinging()
+WAIT 2
+Father "Oj, telefon nu?"
+Mother "Älskling du kan väl ta det?"
+Father "Jag har mat i munnen"
+Mother "Suck, jag svarar ju ALLTID i det här hemmet"
+WAIT 1
+
+CHOICE {
+	"Jag kan ta det mamma":
+		Father "Det är väl aldrig någon som ringer dig?"
+		Father "Men låt inte mig stoppa dig, för all del"
+
+	"Kan du skicka tårtkniven pappa?":
+		Father "Jag når det inte"
+
+	"Åh...":
+}
+WAIT 1
+SetCameraAutoRotateSpeed(0)
+DEFOCUS
+
+LISTEN Sebastian_talk_Mother [YOU_TAKE_IT_MOTHER] {
+	Mother "Du kan väl ta det är du snäll?"
+	LISTEN Sebastian_talk_Mother [YOU_TAKE_IT_MOTHER]
+	Mother "Jag svarar ju jämt"
+}
+
+LISTEN Sebastian_talk_Father [YOU_TAKE_IT_FATHER] {
+	Father "Min son"
+	Father "Var nu så god och svara i telefon"
+	LISTEN Sebastian_talk_Father [YOU_TAKE_IT_FATHER]
+	Father "Seså"
+}
+
+START HelpSequence1
+
+LISTEN Sebastian_phone_HomeTelephone
+FOCUS
+
+CANCEL YOU_TAKE_IT_MOTHER
+CANCEL YOU_TAKE_IT_FATHER
+
+Sebastian "Ja?"
+HomeTelephone "Talar jag med Sebastian?"
+
+CHOICE {
+	"Ja...":
+	"Japp!":
+	"Mm, fast kalla mig Sebbe helst":
+	"[CHEAT]":
+		GOTO END_OF_PHONE_CONVERSATION
+}
+
+HomeTelephone "Du hade sökt ett jobb här hos oss"
+HomeTelephone "Försäljare av läsk, tre månaders provanställning"
+
+CHOICE {
+	"Hade jag?":
+	"Ja just det...":
+	"Det stämmer!":
+}
+
+HomeTelephone "Ja... som du vet så du har ju inga direkta meriter"
+HomeTelephone "Men vi har en ledig tjänst som ingen annan har visat intresse för"
+
+CHOICE {
+	"Oj, verkligen?!":
+	"OK...?":
+	"Vad bra!":
+}
+
+HomeTelephone "Det är inte här i staden dock"
+HomeTelephone "Du måste resa en bit, vi står för kostnaden såklart"
+HomeTelephone "Och hotell och så också"
+
+[AGAIN]
+CHOICE {
+	"OK... vart ska jag åka?":
+		GOTO WHERE_TO
+	"Ingår mat?":
+		HomeTelephone "Njae... frukost tror jag. Resten får du ordna med själv"
+	"Oj, det låter ju ändå rätt bra":
+		HomeTelephone "Javisst"
+		HomeTelephone "Vi på Wellspring bryr oss mycket om våra anställda"
+		HomeTelephone "Och våra kunder!"
+}
+GOTO AGAIN
+
+[WHERE_TO]
+HomeTelephone "Dorisburg heter det"
+HomeTelephone "Jag vet ärligt talat inte mycket om staden"
+HomeTelephone "Känner ni till den?"
+
+CHOICE {
+	"Aldrig hört namnet":
+		HomeTelephone "Nej, det är inte något stort ställe"
+
+	"Jo... det låter vagt bekant":
+		HomeTelephone "Ok"
+
+	"Min farfar är där ifrån!":
+		HomeTelephone "Ja men vilket trevligt sammanträffande då"
+}
+
+HomeTelephone "Men till saken... är ni intresserad av det här erbjudandet?"
+HomeTelephone "Vi behöver svar snarast"
+
+CHOICE {
+	"Jo men det låter bra tycker jag":
+	"Får jag tänka på saken över natten":
+		HomeTelephone "Helst inte"
+		HomeTelephone "Vi vill gärna se att du åker redan imorgon"
+	"Det kommer lite hastigt på":
+		HomeTelephone "Ja, jag förstår detta"
+		HomeTelephone "Men ett sånt här erbjudande kommer inte varje dag!"
+}
+
+HomeTelephone "Just det, jag glömde säga att vi har en säljare på plats i staden"
+HomeTelephone "Han kommer att kunna visa dig runt och hjälpa dig att komma igång med jobbet"
+
+CHOICE {
+	"OK... hmm":
+	"Det låter ju bra":
+	"Aha":
+		GOTO STAY_AT_DEVOTCHKA
+}
+
+HomeTelephone "Ja men strålande!"
+HomeTelephone "Båten du ska åka med har nummer 340"
+HomeTelephone "Den går imorgon bitti från hamnen, var där i god tid!"
+HomeTelephone "Väl i Dorisburg ska du ta in på ett hotell som heter..."
+HomeTelephone "Hmm... Devotchka står det här"
+
+CHOICE {
+	"Devotchka?":
+		HomeTelephone "Precis"
+
+	"Va?":
+		[STAY_AT_DEVOTCHKA]
+		HomeTelephone "Hotellet du ska bo på heter DEVOTCHKA"
+
+	"OK":
+		GOTO OKOK
+}
+
+HomeTelephone "Det är säkert jättetrevligt tror jag"
+HomeTelephone "Om du inte har några fler frågor så tycker jag att vi avslutar mötet här"
+
+CHOICE {
+	"OK! Jag är peppad!":
+		HomeTelephone "Fantastiskt"
+	"Jag tänkte på den här båten..?":
+		HomeTelephone "Ja, Dorisburg ligger på en ö tror jag"
+		HomeTelephone "Det är lite oklart faktiskt"
+	"Men vänta...":
+		HomeTelephone "Alltså, jag har ett antal fler samtal som jag måste ta här ikväll"
+}
+
+HomeTelephone "Men om det var allt så tycker jag att vi nöjer oss så"
+HomeTelephone "Vi hoppas att du kommer att trivas i Wellspring-familjen!"
+[OKOK]
+HomeTelephone "God kväll"
+
+CHOICE {
+	"God kväll!":
+	"Eh, så jag fick jobbet alltså?":
+	"OK...???":
+}
+
+#HomeTelephone "*klick*"
+
+[END_OF_PHONE_CONVERSATION]
+#HomeTelephone "*beep*"
+BROADCAST Beep
+
+DEFOCUS
+
+START HelpSequence2
+
+Sebastian.SetFieldToFloat("sleepiness", 25)
+Sebastian.SetNeverGetsTired(false)
+
+
+LISTEN Sebastian_lay_HomeApartmentSebbeRoom_Poor_Bed_Poor_Bed_1 {
+	MuteNotifications(true)
+	Sebastian.SetFieldToFloat("sleepiness", 0) # so he doesn't fall asleep
+	WAIT Sebastian.IsLaying()
+	FOCUS
+	WAIT 3
+	[LETS_GO]
+	BROADCAST GOING_TO_DORISBURG
+	Kill(Mother)
+	Kill(Father)
+	STOP
+}
+
+WAIT Sebastian.IsWithinDistance(Mother, 10)
+FOCUS
+
+Mother.Interact(Sebastian)
+Father "Nej nu ska jag kolla på TV hörrni"
+Father "Tack för maten"
+Father.SetTimetable("FatherTV")
+WAIT 1
+Mother "Vem var det i telefon Sebastian?"
+
+CHOICE {
+	"Det var det där jobbet":
+		Mother "Jaha?"
+		CHOICE {
+			"Jag fick det...":
+				[FUN]
+				Mother "Ja men vad roligt"
+				Mother "När börjar du?"
+				CHOICE {
+					"Jättesnart, jag måste åka båt imorgon bitti":
+					"Imorgon!":
+				}
+				Mother "Bäst att du sover ordentligt då"
+				Sebastian "Mm"
+			"De ville ha mig!":
+				GOTO FUN
+		}			
+	"Äsch, ingen särskild":
+		Sebastian "Någon som ringt fel typ"
+		Mother "OK"
+}
+
+DEFOCUS
+
+WAIT Father.IsWithinDistance(HomeApartment_TelevisionS_TelevisionS_1, 10) {
+	HomeApartment_TelevisionS_TelevisionS_1.TurnOnTv()
+
+	WAIT HomeApartment_TelevisionS_TelevisionS_1.IsTvOff()
+	Father "Vad gör du!"
+	WAIT 5
+	WAIT HomeApartment_TelevisionS_TelevisionS_1.IsTvOff()
+	Father "Sätt på den genast!"
+	WAIT 7
+	WAIT HomeApartment_TelevisionS_TelevisionS_1.IsTvOff()
+	Father "Sebastian!!!"
+	WAIT 5
+	WAIT HomeApartment_TelevisionS_TelevisionS_1.IsTvOff()
+	Father "Suck..."
+	WAIT 6
+	Father.Sleep(24)
+}
+
+LISTEN Sebastian_pickup_HomeApartment_GlassOfWater_GlassOfBooze_1 {
+	Father "Sebastian!"
+	Father "Den där ska jag ha senare!"
+}
+
+
+LISTEN Sebastian_talk_Father {
+	FOCUS
+	Father "Vad är det min son?"
+	CHOICE {
+		"Hej då, då":
+			Father "Vart ska du?!"
+			CHOICE {
+				"Jag fick ett jobb, det verkar vara i en annan stad":
+					[OH_REALLY]
+					WAIT 3
+					Father "Jaså?"
+					WAIT 3
+					Father "Vänta, jag ska bara kolla klart här"
+
+				"Öhh... Typ Dorisburg..?":
+					GOTO OH_REALLY
+			}
+		"God natt":
+			Father "God natt, god natt"
+
+		"Vad kollar du på?":
+			Father "Nyheterna"
+			Father "Det är viktiga saker det här"
+			Father "Mycket som händer i världen"
+	}
+	DEFOCUS
+	LISTEN Sebastian_talk_Father
+	FOCUS
+	Father "Vänta..."
+	WAIT 5
+	Father "Haha, kolla vad kul!"
+	DEFOCUS
+}
+
+LISTEN Sebastian_talk_Mother {
+	FOCUS
+	Mother "Ja, vad är det Sebastian?"
+	[GOING_TO_BED]
+	CHOICE {
+		"Jag går och lägger mig nu":
+			Mother "God natt"
+		"Jag ska gå och göra lite läxor på mitt rum":
+			Mother "Ja men gör så"
+			Mother "Jag ska nog gå och lägga mig snart"
+		"Det var god tårta":
+			Mother "Vad bra"
+			GOTO GOING_TO_BED
+	}
+	DEFOCUS
+	# later
+	LISTEN Sebastian_talk_Mother
+	FOCUS
+	Mother "Ja?"
+	CHOICE {
+		"Hej då":
+			Mother "Hej då, hoppas du får det bra på ditt nya jobb"
+			CHOICE {
+				"Ja... det blir nog bra":
+				"Mm, hoppas":
+			}
+			Mother "God natt, hoppas du kan sova"
+
+		"Ska du och pappa skilja er?":
+			Mother "Men Sebastian, varför tror du det?"
+			CHOICE {
+				"Ni pratar inte med varandra":
+				"Äsch, jag vet inte":
+			}
+	}
+	DEFOCUS
+}
+
+LISTEN DONT_STOP

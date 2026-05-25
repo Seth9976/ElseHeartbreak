@@ -1,0 +1,9 @@
+
+[AGAIN]
+WAIT Kafka.IsNotAtTask("Zzz")
+#Log("Unlocking cafe")
+UnlockDoor(Cafe_Exterior_DoorToCafe)
+WAIT Kafka.IsAtTask("Zzz")
+#Log("Locking cafe")
+LockDoor(Cafe_Exterior_DoorToCafe)
+GOTO AGAIN

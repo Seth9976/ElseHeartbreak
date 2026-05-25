@@ -1,0 +1,232 @@
+
+WAIT Felix.IsInRoom(FelixApartment)
+
+WAIT 3
+
+Felix "Hej allihopa, jag är tillbaka!"
+Felix "Jag fick med mig Pixie och Ivan också!"
+
+IF Emma.IsInRoom(FelixApartment) {
+	Emma "Yay!"
+}
+
+IF Amanda.IsInRoom(FelixApartment) {
+	Amanda "Hej Felix!"
+}
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "Hur går det Sebbe?"
+CHOICE {
+	"Vilken häftig fest du har ordnat":
+		Felix "Fett, fett"
+		Felix "Kul att höra Sebbe, jag gillar dig!"
+	"Det är OK, tänkte gå hem snart":
+		Felix "Nej, gör inte det!"
+		Felix "Vi har ju just börjat festa här"
+		Felix "Och Pixie och Ivan kom ju nu också"
+	"Dina tjejkompisar är lite jobbiga":
+		Felix "Vadå, var de taskiga?"
+		CHOICE {
+			"Alltså, lite":
+			"Njae men lite otrevliga typ":
+		}
+		Felix "Jag ska säga till dem"
+		Felix "De är bara så jävla fräscha!"
+}
+Felix "Ta mer öl om du vill förresten!"
+CHOICE {
+	"Tack!":
+	"Ok, det ska jag":
+	"Jag tror det är bra för mig nu":
+		Felix "Äsch, kom igen!"
+}
+
+Sebastian "Men Felix, en sak till bara..."
+Sebastian "Jag tänkte på den här organisationen ni har där i källaren?"
+Felix "Mmm?"
+
+CHOICE {
+	"Är det svårt att gå med där?":
+	"Om jag skulle vilja hjälpa till där, hur gör jag då?":
+	"Jag har en kompis som alltid sagt att han vill kämpa mot sånt där":
+		Sebastian "Hur gör han för att söka dit?"
+		Felix "Haha, jaha du"
+}
+
+Felix "Alltså det är olika, jag fick mitt gig där av en slump"
+Felix "De letar egentligen alltid efter pålitligt folk"
+Felix "Men det är ett jävligt svårt jobb som de gör där inne"
+Felix "Jag tror att de har något slags test om man ska bli med"
+
+[DO_THE_TEST]
+CHOICE {
+	"Jag vill göra testet!":
+		Felix "OK... men kan du ens använda en dator?"
+		CHOICE {
+			"Alltså, hmm":
+				Sebastian "Inte direkt, är det bara sånt de håller på med?"
+			"Jag kan skriva i Word!":
+			"Måste man kunna sånt?":
+			"Dator?! Jag är grym, vi hade en programmeringskurs på gymnasiet":
+		}
+		Felix "Jag tror inte du riktigt fattat grejen"
+
+	"Om jag klarade testet, tror du att jag skulle få jobba tillsammans med Pixie då?":
+		Felix "Jo, antagligen"
+		Felix "Hon är rätt mycket i fält med olika uppdrag typ"
+		Felix "Så beror väl på vad för arbetsuppgifter man har"
+		GOTO DO_THE_TEST
+
+	"Vad måste man kunna för att klara testet?":
+		Felix "Vet inte riktigt"
+		Felix "Mycket programmering och sånt"
+		Felix "...problemlösning"
+		Felix "Och så måste man ha hjärtat på det rätta stället!"
+		GOTO DO_THE_TEST
+}
+
+Felix "Om man vill bli med där så måste man visa sig värdig"
+Felix "Du får typ försöka lära dig datorer och programmering tror jag"
+
+CHOICE {
+	"Men hur lär man sig sånt?":
+		Felix "Jag vet inte, jag kan inte programmera för fem öre"
+		Felix "Du får väl fråga dig runt"
+
+	"Ja... ok":
+		Felix "Du får hitta någon som har tid över att lära dig lite"
+}
+
+Felix "Pixie kanske kan hjälpa dig när hon lugnat ner sig också"
+
+CHOICE {
+	"Ja ok, ska försöka...":
+	"Ja ok, tack för hjälpen!":
+	"Får se om jag orkar lära mig den här skiten, är inte riktigt min grej alltså":
+		Felix "Nä jag vet, det är svårt dude!"
+}
+
+Felix.StopTalking()
+DEFOCUS
+
+
+# later #
+
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "Ja?"
+CHOICE {
+	"Du jag tänkte på det där testet du snackade om...":
+	"Tror du Pixie skulle gilla om jag försökte få jobb hos er?":
+}
+Felix "Fan, inte mer Sebbe!"
+Felix "Kom förbi där när jag jobbar så dealar vi med det då"
+CHOICE {
+	"Ok, förlåt":
+	"Amen va tusan":
+		Felix "Ta det lugnt dude"
+	"Oj jag tänkte mig inte för":
+}
+Felix.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+CHOICE {
+	"Känner du Pixies pojkvän?":
+		Felix "Ivan?"
+		Felix "Jo, en del. Han gick i skolan med min storebror."
+		CHOICE {
+			"Han är lite skum":
+			"Han är inte så trevlig":
+			"Han verkar schysst":
+		}
+		Felix "Tycker du?"
+		CHOICE {
+			"Eller eh, jag vet inte":
+			"Ja... vad tycker du?":
+				Felix "Han är bra på att lyfta vikter"
+				Felix "Jävligt imponerande på gymmet"
+				CHOICE {
+					"OK, coolt":
+					"Går du på gym?":
+						Felix "Haha, nä inte direkt"
+						Felix "Så jävla jobbigt"
+				}
+		}
+
+	"Nej nu tror jag att jag måste gå hem":
+		Felix "Nej men sluta, ta en till öl istället!"
+		CHOICE {
+			"OK...":
+			"Jag blir så full på öl har jag märkt":
+				Felix "Ja men det spelar väl ingen roll"
+				Felix "Du måste släppa loss Sebbe"
+				Felix "Släpp ut vilddjuret inom dig!"
+		}
+	
+	"Bra musik du spelar":
+		Felix "Ja, visst är den fet!"
+		Felix "Har du testat min öl-tapp förresten?"
+		Felix "Pixie har mixtrat med den"
+		CHOICE {
+			"Mixtrat?":
+				Felix "Ja, hon använde sin apparat du vet"
+				[STRONG]
+				Felix "Och nu får man så jääävla stark öl alltså"
+				Felix "Det är sjukt"
+				CHOICE {
+					"Oj":
+					"Wow":
+				}
+			"Jaha?":
+				Felix "Ja dude, hon har skillz"
+				GOTO STRONG
+			"Oj då, gick den sönder?":
+				Felix "Nej nej!"
+				Felix "Hon hackade den"
+				GOTO STRONG
+		}
+}
+Felix.StopTalking()
+DEFOCUS
+
+
+
+LISTEN Sebastian_talk_Felix
+FOCUS
+Felix.StartTalking()
+Felix "'sup?"
+[SUP]
+CHOICE {
+	"Huh?":
+		Felix "Läget?"
+		GOTO SUP
+	"Jo det är väl bra":
+	"Så förbannat trött":
+}
+Felix "Ryck upp dig, det är ju fest!"
+
+CHOICE {
+	"Ja ok, ska försöka!":
+
+	"Är det ok om jag slaggar här i natt?":
+		Felix "Visst, inga problem"
+
+	"Nej nu går jag hem":
+		Felix "Ok dude"
+}
+Felix.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Felix
+Felix "Chill, dude"
+

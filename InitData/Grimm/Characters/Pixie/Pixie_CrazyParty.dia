@@ -1,0 +1,57 @@
+
+LISTEN Sebastian_talk_Pixie [COME_WITH] {
+    Pixie "Kom med till Petra!"
+}
+
+
+
+LISTEN RoamingPartyStarted
+CANCEL COME_WITH
+
+
+LISTEN Sebastian_talk_Pixie
+[MORE_QUESTIONS_FOR_PIXIE]
+FOCUS
+Pixie.StartTalking()
+Pixie "Vad är det Sebbe?"
+CHOICE {
+    "Jag tror att jag måste gå hem":
+        Pixie "Redan?"
+        CHOICE {
+            "Jag mår inte bra":
+                Pixie "OK, vad tråkigt"
+                Pixie "Du är inte ledsen va?"
+                CHOICE {
+                    "Nej, nej...":
+                    "Nää":
+                    "Absolut inte!":
+                        Sebastian "Bara lite trött"
+                }
+                Pixie "OK, vi ses imorgon på Lodgen hoppas jag?!"
+                CHOICE {
+                    "Självklart":
+                    "Japp!":
+                    "Tror det...":
+                }
+                Pixie "OK, sov gott!"
+
+            "Ja, hej då!":
+                Pixie "Hej då"
+        }
+        Petra "Kul att du kom Sebastian!"
+
+    "Vågar jag ta Felix knark?":
+        Pixie "Ja ja, hur farligt kan det vara?"
+        Pixie "Fast i och för sig..."
+        Pixie "Alltså, jag vet inte"
+        Pixie "Gör som du känner själv!"
+
+    "Trevlig fest":
+        Pixie "Ja, visst är det!"
+}
+Pixie.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Pixie
+GOTO MORE_QUESTIONS_FOR_PIXIE
+

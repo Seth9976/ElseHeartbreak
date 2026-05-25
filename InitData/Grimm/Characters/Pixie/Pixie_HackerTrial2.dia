@@ -1,0 +1,393 @@
+
+Pixie.Pos(Lodge_Room1_Point1)
+Pixie.SetTimetable("")
+Pixie.CancelWalking()
+
+Lodge_Room2_DoorToUnderwater.LockDoor()
+
+FOCUS
+WAIT 1
+
+UnlockDoor(Lodge_Room1_DoorToRoom2)
+Lodge_Room1_DoorToRoom2.SetDoorTarget(Lodge_Room2_DoorToRoom1)
+
+Pixie.SetTimetable(TalkToSebastian)
+Sebastian "Wohoo!"
+Sebastian "Pixie, jag tror att jag klarade det!!!"
+Sebastian.Interact(Lodge_Room2_Point)
+
+WAIT Pixie.HasConversationTarget(Sebastian) AND Sebastian.NotTalkingButIgnore(Pixie)
+#FOCUS
+
+Pixie.SetTimetable("")
+Pixie.StartTalking()
+Pixie "Bravo!"
+
+CHOICE {
+	"Det var klurigt!":
+		Pixie "Ja, men det ska det vara"
+		CHOICE {
+			"Jo, OK":
+			"Mm":
+		}
+	"Tack":
+	"Det var lättare än jag trodde":
+		Pixie "Vad bra!"
+	"[ARE_YOU_DONE]":
+		GOTO ARE_YOU_DONE
+}
+
+Pixie "OK, så uppgift 2 kommer att vara lite annorlunda"
+Pixie "Ser du kaffekopparna på bordet där?"
+
+CHOICE {
+	"Ja":
+	"Ehm, antar det":
+	"Nej, var då?":
+		Pixie "Där borta bredvid Yulians kontor"
+}
+
+Pixie "Jag vill att du gör om den..."
+Pixie "Om jag dricker ur en kopp så blir jag vackrare och mer attraktiv"
+Pixie "Men om någon annan dricker så ska de börja lukta illa"
+
+CHOICE {
+	"Ok....":
+	"Jaha?":
+	"OK!":
+}
+
+Pixie "Då kör vi! Säg till när du är klar"
+#Pixie.SetTimetable(Pixie)
+
+[ARE_YOU_DONE]
+Pixie.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Pixie
+FOCUS
+Pixie "Färdig?"
+Pixie.StartTalking()
+CHOICE ETERNAL {
+	"Jepp, tror det":
+		DEFOCUS
+
+	"Njae... kaffet tog slut":
+		Pixie "OK, du kan fylla på koppen i kranen i så fall"
+		Pixie "Eller ta en ny kopp"
+		GOTO ARE_YOU_DONE
+
+	"Vad är funktionen för att bli snygg?":
+		Pixie "Eh..."
+		Pixie "Charisma tror jag"
+		CHOICE {
+			"Vilket värde ska jag skicka in då?":
+				Pixie "Kanske 10?"
+				Pixie "Eller 20, jag vet inte riktigt vad som är lagom"
+
+			"Aha!":
+
+			"OK, och för att lukta illa?":
+				Pixie "Smelliness"
+				[FUNCTIONS]
+				Pixie "Charisma och Smelliness är funktionerna du behöver"
+				Pixie "Du kan hitta dem i hjälprutan längst ner på din modiferare vet du va?"
+				CHOICE ETERNAL {
+					"Nej, bra tips!":
+					"Ja... svårt att hitta bara":
+						Pixie "Mm, sant"
+				}
+		}
+		GOTO ARE_YOU_DONE
+
+	"Hur får jag någon att lukta illa?":
+		Pixie "Smelliness"
+		Pixie "Typ Smelliness(10) borde räcka, hehe"
+		Pixie "Och snygghet heter..."
+		Pixie "Charisma, tror jag"
+		GOTO FUNCTIONS
+
+	"Hur kan koppen veta vem som dricker ur den?":
+		Pixie "Det finns en funktion som heter IsUser"
+		Pixie "Där kan man skicka in ett namn och se om den personen dricker ur koppen just nu"
+		[OH]
+		CHOICE ETERNAL {
+			"Aha, coolt":
+			"Vad gör den här funktionen som heter GetUser då?":
+				Pixie "Ja den kan man också använda"
+				Pixie "Då får du namnet på vem som dricker"
+				Pixie "Där skulle du ju kunna jämföra svaret med hjälp av == till exempel"
+				Pixie "Men IsUser() är nog lättare"
+				GOTO OH
+			"Hur skriver man det?":
+				Pixie "Typ..."
+				Pixie "if IsUser('Sebastian')"
+				Pixie "Eller liknande"
+				GOTO OH
+			"Ja... men alltså, hur kan den VETA?":
+				Pixie "Öh..."
+				Pixie "Ingen aning"
+				Pixie "Den bara vet, verkar det som"
+		}
+		GOTO ARE_YOU_DONE
+
+	"Nej, jag fattar bara inte hur jag ska göra...":
+		Pixie "Ja det kan vara svårt"
+		Pixie "Du kan alltid gå hem och sova på saken, det brukar hjälpa för mig"
+		Pixie "Eller kolla på datorerna här i rummet, deras program kanske går att bli inspirerad av"
+		CHOICE ETERNAL {
+			"Kan du inte ge något litet tips?":
+				Pixie "Hmm... OK då"
+				Pixie "Du måste använda if"
+				Pixie "Börja med att kolla vem som dricker ur koppen med hjälp av funktionen IsUser"
+				Pixie "Och kör olika funktioner beroende på det"
+				CHOICE ETERNAL {
+					"Tack!":
+					"Hur funkar if?":
+						Pixie "Jag trodde du hade lärt dig något innan du kom hit?"
+						Pixie "Du får läsa manualen, vi har den på diskett här någonstans"
+						CHOICE ETERNAL {
+							"OK...":
+							"Mm, får väl göra det":
+						}
+				}
+			"Ja... jag är riktigt sliten faktiskt":
+				Pixie "Vi kan köra vidare med testet imorgon om du vill?"
+				CHOICE ETERNAL {
+					"Äsch, jag gör klart nu":
+						Pixie "OK"
+						GOTO ARE_YOU_DONE
+					"Ja tack":
+						Pixie "OK, ses"
+						Pixie.StopTalking()
+						Pixie.SetTimetable("Pixie_WaitInLodgeRoom2")
+						DEFOCUS
+						WAIT 30
+						LISTEN Sebastian_talk_Pixie
+						FOCUS
+						Pixie.SetTimetable("")
+						Pixie.StartTalking()
+						Pixie "Hej!"
+						Pixie "Ska vi köra vidare då?"
+						GOTO ARE_YOU_DONE
+				}
+
+			"Hur fungerar det här med 'else'?":
+				Pixie "Å, 'else' är mitt favoritord!"
+				Pixie "Du kan bara använda 'else' tillsammans med 'if'..."
+				CHOICE ETERNAL {
+					"OK?":
+					"Jaha":
+					"På så vis":
+				}
+				Pixie "Det du skriver på raden efter 'else' händer om det efter if INTE händer"
+				Pixie "Fattar du?"
+				CHOICE ETERNAL {
+					"Öh... nej inte alls!":
+					"Kanske lite?":
+					"Typ":
+				}
+				Pixie "Ja men tänk att jag undersöker något med 'if'"
+				Pixie "Typ 'if age > 18'"
+				Pixie "Och då händer något, jag vet inte vad..."
+				Pixie "Det kanske låter konstigt"
+				CHOICE ETERNAL {
+					"Det låter konstigt?":
+					"Jaha...":
+					"OK":
+				}
+				Pixie "Ja så om 'age' är större än 18 så låter det konstigt"
+				Pixie "Det kanske finns en funktion som heter MakeWeirdSound()"
+				Pixie "Vad vet jag?!"
+				Pixie "Hur som helst..."
+				Pixie "Om 'age' INTE här större än 18, vad händer då?"
+				CHOICE ETERNAL {
+					"Jag vet inte":
+						GOTO KUGG
+					"Låt mig tänka...":
+						[KUGG]
+						Pixie "Äsch, det är en kuggfråga"
+						Pixie "Ingenting händer!"
+					"Ingenting?":
+						Pixie "Precis!"
+				}
+				Pixie "Men om vi vill att något ska hända då så kan vi använda 'else'"
+				Pixie "Så allt vi skriver efter 'else' händer om 'if age > 18' INTE är sant"
+				Pixie "Det är sjukt smidigt"
+				CHOICE ETERNAL {
+					"Ja det verkar bra faktiskt":
+					"Mhm...":
+					"OK, om du säger det så":
+				}
+				Pixie "Glöm inte 'end' på slutet sen heller"
+				Pixie "Du borde kolla på lite kod med 'if' och 'else' så kan du säkert förstå bättre"
+				CHOICE ETERNAL {
+					"Ja det ska jag göra":
+					"Jo, OK":
+					"Mhm":
+				}
+
+			"Suck, jag skulle haft en manual...":
+				Pixie "Jag tror vi har den liggande på diskett här faktiskt!"
+		}
+		GOTO ARE_YOU_DONE
+}
+
+LISTEN MiniBranch {
+	Pixie "OK, ge mig kaffekoppen så jag får testa den"
+}
+
+Pixie.StartWaitForGift()
+
+BROADCAST MiniBranch
+LISTEN Sebastian_give_Pixie
+FOCUS
+Pixie "Tackar"
+WAIT Pixie.HasAnyHandItem()
+Pixie.StopWaitForGift()
+WAIT Pixie.IsIdle()
+Pixie.UseHandItem()
+WAIT 3
+
+IF Pixie.IsFieldGreaterThan("charisma", 0) {
+	
+	Pixie "Hur ser jag ut Sebastian, är jag extra snygg?"
+	CHOICE {
+		"Du är alltid jättesnygg Pixie":
+			Pixie "Men är jag extra snygg?"
+			[CHARISMA]
+			Pixie "Jag känner mig rikigt karismatisk faktiskt"
+			CHOICE {
+				"Ja, verkligen":
+				"Jag tror det...":
+				"Kanske..?":
+			}
+
+		"Jag vet inte vad jag ska säga... du är helt oemotståndlig":
+
+		"Hmm...":
+			GOTO CHARISMA
+	}
+	Pixie "Bravo, den funkar på mig!"
+	Pixie "Nu måste vi kolla om den fungerar som den ska på någon annan"
+	
+	UnlockDoor(Lodge_Room1_DoorToRoom2)
+	Lodge_Room1_DoorToRoom2.SetDoorTarget(Lodge_Room2_DoorToRoom1)
+
+	Frank.SetFieldToFloat("sleepiness", 0)
+	Frank.WakeUp()
+	Frank.Pos(Lodge_Room1_Point1)
+	Frank.SetTimetable(Frank_TalkToPixie)
+	Frank.StopTalking()
+	
+	Pixie "FRANK, kan du komma ett tag?!"
+
+
+	LISTEN START_THREAD [THREAD] {
+	    WAIT 8
+	    IF Frank.IsNotInRoom(Lodge_Room2) {
+	    	Frank.Pos(Lodge_Room2_SofaSeat_1)
+	    }
+	}
+	BROADCAST START_THREAD
+
+
+	WAIT Frank.IsInRoom(Lodge_Room2)
+	Frank.SetTimetable("")
+	Frank.CancelWalking()
+	Frank "Vad är det?"
+	Pixie "Kan du ta en klunk från den här koppen?"
+	Pixie.Interact(Frank)
+	WAIT Pixie.HasConversationTarget(Frank)
+	Log("talked!")
+	Frank "Hmm... jag antar att jag inte borde"
+	Frank "Men du är så förtjusande Pixie, så hur kan jag motstå?"
+	Pixie.Give()
+	LISTEN Pixie_give_Frank
+	Log("gave!")
+	Pixie "Å, Frank... du är en sådan charmör"
+	Pixie "Drick nu!"
+	Frank.UseHandItem()
+	WAIT 2
+	Frank "Mmm"
+	WAIT 2
+	Frank "Hmmm"
+	WAIT 2
+	IF Frank.IsFieldGreaterThan("smelliness", 0) {	
+		Pixie "Hahaha, jag tror det funkar!"
+		Pixie "Ok, toppen Frank."
+		Pixie "Du får gå och fixa en lösning på det där själv innan du börjar stinka"
+		Frank.PutAwayHandItem()
+		Frank "Vilken jävla stil va?"
+		Frank "Nästa gång är det jag som håller i inträdesproven, Pixie"
+		Pixie "Tack för hjälpen!"
+		Frank.SetTimetable("Frank")
+		Pixie "Bravo Sebastian, du får full poäng på den uppgiften"
+		GOTO START_NEXT_TRIAL
+	}
+	ELSE {
+		Pixie "Känner du något?"
+		Frank "Inte direkt..."
+		Pixie "Nej det verkar som att det är något fel..."
+		Pixie "Vad gjorde du med koppen Sebbe?"
+		CHOICE {
+			"Ehm... jag vet inte":
+				Pixie "OK, du måste försöka fatta vad det är du gör när du hackar något"
+				Pixie "Annars kan du ställa till med stora problem"
+
+			"Men den borde funka!":
+				Pixie "OK? Ja ibland kan de strula de här kopparna"
+				Pixie "De börjar nog bli slitna"
+
+			"Jag fattade inte hur jag skulle göra":
+				Pixie "OK, nä det kan vara klurigt"
+		}
+		Pixie "Jaja, du klarade halva uppgiften i alla fall, så du behöver inte göra om"
+		Pixie "Tack för hjälpen Frank! Ursäkta att jag störde"
+		Frank "Inga problem"
+		Frank.PutAwayHandItem()
+		WAIT Frank.HasNoHandItem()
+		Frank.SetTimetable("Frank")
+		GOTO START_NEXT_TRIAL
+	}
+	STOP
+}
+
+[TRY_AGAIN]
+Pixie "Hmm den verkar inte funka exakt som jag ville"
+Pixie "Här, ta tillbaka koppen"
+Pixie.SetTimetable(TalkToSebastian)
+WAIT Pixie.HasConversationTarget(Sebastian) AND Sebastian.NotTalkingButIgnore(Pixie)
+Pixie.SetTimetable("")
+Pixie.Give()
+WAIT Pixie.HasNoHandItem()
+
+CHOICE {
+	"Ok... jag fortsätter testa runt lite mer då":
+		Pixie "Ja, det där klarar du!"
+
+	"Hur ska den funka då?":
+		Pixie "Jag ska få höjd karisma när jag dricker av den"
+		Pixie "Andra människor ska börja lukta illa"
+}
+DEFOCUS
+
+GOTO ARE_YOU_DONE
+
+
+STOP
+
+
+[START_NEXT_TRIAL]
+DEFOCUS
+Lodge_Room2_DoorToUnderwater.UnlockDoor()
+Pixie.StopTalking()
+Pixie.Walk(Lodge_Underwater_Point1)
+Pixie "Nu är det bara en prövning kvar – följ med mig till nästa rum"
+
+BROADCAST CompletedHackerTrial2
+
+
+
+
+

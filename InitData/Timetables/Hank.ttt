@@ -1,0 +1,38 @@
+06:00 - 10:00 SecretWork	BeInRoom Hotel_ServerBasement
+10:00 - 12:00 Work			BeInRoom Hotel_Lobby
+12:00 - 13:00 Work			Fika Hotel_Diner
+13:00 - 19:00 Work			BeInRoom Hotel_Lobby
+19:00 - 22:00 Chilling		BeInRoom HanksApartment
+22:00 - 06:00 Sleep			Sleep    HanksApartment_Bed
+
+[HankStayAtHome]
+00:00 - 24:00 Chilling    BeInRoom HanksApartment
+
+[Hank_FixDoor]
+00:00 - 24:00 _ Hack Hotel_Corridor_Door1
+
+[Hank_AfterGhosts]
+06:00 - 19:00 Work			BeInRoom Hotel_Lobby
+19:00 - 22:00 Chilling		BeInRoom HanksApartment
+22:00 - 06:00 Sleep			Sleep    HanksApartment_Bed
+
+[Hank_GuideToFirstLecture]
+00:00 - 24:00 Guiding	GuideTo HanksApartment_Point Sebastian
+
+[Hank_GuideToSecondLecture]
+00:00 - 24:00 Guiding	GuideTo HanksApartment_Point Sebastian
+
+[Hank_GuideToSebastiansRoom]
+00:00 - 24:00 Guiding	GuideTo Hotel_Room1_Point Sebastian
+
+[Hank_FixLamp]
+00:00 - 24:00 _ Hack Hotel_Exterior_StreetLight4
+
+[InteractFunnyButton]
+00:00 - 24:00 _ Interact FunnyButton
+
+[Hank_InteractWithBabcia]
+00:00 - 24:00 _ Interact Babcia
+
+[Hank_HackFuseBox]
+00:00 - 24:00 _ Hack Hotel_Room1_FuseBox

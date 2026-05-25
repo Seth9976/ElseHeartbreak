@@ -1,0 +1,18 @@
+
+Sebastian.Pos(Ministry_ExperimentHall_Trigger_1)
+
+WAIT 5
+
+SetHour(12)
+Story("HelmetDay")
+
+Ivan.Pos(Ministry_ExperimentHall_Trigger_1)
+WAIT 3
+Pixie.SetTimetable(PixieInteractIvan)
+Pixie.Pos(Ministry_ExperimentHall_Trigger_1)
+WAIT 3
+Petra.Pos(Ministry_ExperimentHall_Trigger_1)
+
+STOP _Arrival # otherwise this will happen when we get back to the room
+
+LISTEN FOREVER

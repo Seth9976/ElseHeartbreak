@@ -1,0 +1,55 @@
+FOCUS
+
+CHOICE {
+    "[SKIP]":
+        GOTO SKIP
+
+    "Ehm...":
+        CHOICE {
+            "Jag är den nye städaren!":
+            "Jag gick fel bara":
+        }
+        Sebastian "Eller alltså"
+        GOTO OJ
+
+    "Va?!":
+        CHOICE {
+            "Jo men det är så här att, ehmmm...":
+            "Hejsan! Jag kommer från Wellspring Soda":
+        }
+
+    "Oj":
+        [OJ]
+        CHOICE {
+            "Var är jag?":
+            "Vad är det här för ställe?":
+            "Hej, vem är ni?":
+                CHOICE {
+                    "Ni verkar vara en oerhört sympatisk man":
+                    "Själv heter jag Sebastian":
+                    "Trevligt att råkas..?":
+                }
+        }
+}
+
+CHOICE {
+    "Ni kanske är sugen på en svalkande läsk?":
+    "Det var väl här jag skulle börja jobba idag väl?":
+    "Fantastisk morgon vi har!":
+}
+
+CHOICE {
+    "Inte?":
+    "Jag måste ha gått fel... usch så klantigt":
+}
+
+CHOICE {
+    "Nej men jag ska väl ta och gå då":
+    "Måste rusa nu, hej då!":
+    "Oj, jag har ett möte om en halvtimme. Adjö.":
+}
+
+[SKIP]
+DEFOCUS
+
+BROADCAST DONE

@@ -1,0 +1,34 @@
+Hank.SetTimetable("Hank")
+
+LISTEN Sebastian_talk_Hank
+
+FOCUS
+Hank.StartTalking()
+Hank "?"
+CHOICE {
+	"Har du lagat min dörr?":
+		Hank "Ja, den ska fungera nu"
+		CHOICE {
+			"Tack så mycket!":
+			"Vad bra, då ska jag gå och lägga mig":
+		}
+		Hank "Man försöker ju vara till nytta"
+
+	"Hej":
+		Hank "Tjena"
+		Hank "Några problem?"
+		CHOICE {
+			"Nä, allt är lugnt":
+			"Tänkte bara kolla om det är lugnt att gå in på mitt rum nu?":
+				Hank "Jaja, nu ska allt funka bra igen"
+		}
+}
+
+Hank.StopTalking()
+DEFOCUS
+
+
+[AGAIN]
+LISTEN Sebastian_talk_Hank
+Hank "Sorry kan inte prata nu, måste gå och fixa en grej"
+GOTO AGAIN

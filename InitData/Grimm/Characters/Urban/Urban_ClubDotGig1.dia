@@ -1,0 +1,64 @@
+
+Urban.StopTalking()
+Urban.SetTimetable(Urban_ClubDotParty)
+Urban.SetFieldToFloat("drunkenness", 100)
+
+#Urban.Pos(Mines_ClubDot_PixiePoint)
+
+WAIT Urban.IsInRoom(Mines_ClubDot)
+Urban.CreateBeerInHand()
+
+Urban.PutIntoInventory(UrbanSpecialBeer) # for later
+
+WAIT Sebastian.IsInRoom(Mines_ClubDot) LISTEN Sebastian_talk_Urban
+
+IF Urban.HasNoHandItem() {
+    Urban.TakeOutItem(UrbanSpecialBeer)
+}
+
+FOCUS
+Urban.StartTalking()
+
+Urban "Öhhhh"
+Urban "Skulle du kunna... hålllla min öl medan jag drar å pissar?"
+Urban.SetTimetable("") # don't get no beer automatically, plx
+
+CHOICE {
+    "Ehm...":
+    "Ja det kan jag väl":
+    "OK, inga problem!":
+}
+
+IF Urban.HasNoHandItem() {
+    Urban.CreateBeerInHand()
+}
+
+Urban.Give()
+Urban "Fy fan va bra..."
+WAIT Urban.HasNoHandItem()
+
+Urban.StopTalking()
+DEFOCUS
+
+Urban.SetTimetable("")
+Urban.Walk(PoliceOffice_Exterior_Trigger_2)
+Urban.SetTimetable("Urban_ClubDotParty")
+
+
+WAIT Sebastian.IsInRoom(Mines_ClubDot) LISTEN Sebastian_talk_Urban
+
+FOCUS
+Urban.StartTalking()
+
+CHOICE {
+    "Hej, vill du ha tillbaka din öl?":
+        Urban "Äschhhh..."
+        Urban "Behåll den!"
+
+    "Grymt ställe det här!":
+        Urban "Ja, helvete"
+        Urban "Så här såg det inte ut på min tid"
+}
+
+Urban.StopTalking()
+DEFOCUS

@@ -1,0 +1,4 @@
+Pixie.SetTimetable("PixieOvertime")
+Pixie.Pos(Lodge_Room1_Point1)
+
+Story("LetMeBeAHacker")

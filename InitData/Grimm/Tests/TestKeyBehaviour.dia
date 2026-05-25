@@ -1,0 +1,9 @@
+SetClock(0, 10, 00, 0)
+
+Sebastian.Pos(Testing_Trigger_1)
+#Sebastian.Interact(Testing_Door1)
+
+CreateCharacter("Keyman", Testing2_Key)
+StartLogging(Keyman)
+Testing2_Key.Pos(Keyman_inventory, 0, 0)
+Keyman.Interact(Testing2_Beer_3)

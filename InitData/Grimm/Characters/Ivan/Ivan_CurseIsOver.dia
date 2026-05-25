@@ -1,0 +1,20 @@
+
+Plaza_DoorToPixiesApartment.UnlockDoor()
+
+
+Ivan.SetTimetable("Ivan_GetOutOfInternet")
+Ivan.StopTalking()
+
+Ivan "Jag måste hitta Pixie"
+Ivan "Var är hon?"
+Ivan "PIXIE"
+
+WAIT Ivan.IsWithinDistance(Internet_Internet_ComputerTerminal_7, 5)
+Internet_Internet_ComputerTerminal_7.SetCode("Internet_Internet_ComputerTerminal_7")
+
+LISTEN Ivan_slurped_Internet_Internet_ComputerTerminal_7
+
+Ivan.Pos(PixiesApartment_Point)
+Ivan.SetTimetable("Ivan_CurseIsOver")
+
+Ivan.SetFieldToFloat("corruption", 0)

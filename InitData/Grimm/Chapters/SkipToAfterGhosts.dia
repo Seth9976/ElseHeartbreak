@@ -1,0 +1,19 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("Ghosts")
+Story("AfterGhostVisit")
+
+SetHour(11)
+Hank.Pos(Hotel_Lobby_Point)
+
+
+Hotel_Room1_FuseBox.SetCode("GhostBox")
+#Hotel_Room1_FuseBox.SetCode("SlurpingFusebox")
+
+
+#Sebastian.Pos(Hotel_Lobby_Point)
+#Sebastian.Pos(Hotel_Room1_Chair_1)
+#Sebastian.Pos(Internet_Point)
+Sebastian.Pos(Ministry_MonadsOffice_MonadPoint)

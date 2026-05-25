@@ -1,0 +1,17 @@
+FOCUS
+
+Babcia "Nej"
+Babcia "Eller jo, vi har väl kanske någon i källaren"
+Babcia "Men den är inte tillgänglig för våra gäster"
+Babcia "Men det är väl sånt folk har hemma?"
+
+CHOICE {
+    "Har de?":
+        Babcia "Jadå"
+    "OK, jag förstår":
+    "Jaha...":
+}
+
+Babcia.SetKnowledge(AskedAboutFloppyReader)
+
+DEFOCUS

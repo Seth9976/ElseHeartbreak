@@ -1,0 +1,240 @@
+
+Hank.SetTimetable(Hank)
+
+
+LISTEN Sebastian_talk_Hank
+
+Hank.StartTalking()
+
+IF Hank.HasKnowledge("Sebastian") {
+	FOCUS
+	Hank "Tjena Sebastian, allt lugnt?"
+}
+ELSE {
+	INTERRUPT GetToKnowHankSnippet
+	FOCUS
+	Hank "Så Sebastian..."
+	Hank "Var det något speciellt du ville?"
+}
+
+[AGAIN]
+
+CHOICE {
+	"Jag har problem med dörren till mitt rum":
+		Hank "Verkligen??!"
+		Sebastian "Nä, skoja bara"
+		Hank "Kul"
+		Hank "Har du skojat färdig eller var det något annat?"
+		GOTO AGAIN
+
+	"Ja, är du sugen på att köpa en läsk av mig?":
+		[TRY_SELL]
+		Hank "Kanske det"
+		Hank "Vad har du för en sort?"
+		Sebastian "Wellspring"
+		Hank "Jag testar gärna en"	
+		Hank.PutAwayHandItem()
+
+	"Njae... eller du råkar inte ha tips på något ställe jag borde kolla in här i stan?":
+		Hank "Hmm... bra fråga"
+		Hank "Bar Yvonne är ju nice"
+		Hank "Men jag hinner aldrig gå dit längre, jobbar för mycket"
+		CHOICE {
+			"OK, var ligger det?":
+				Hank "Vid Plaza, i en källare"
+				Hank "Har öppet typ varje kväll, du borde kolla in det"
+			"OK, jag dricker inte alkohol":
+				Hank "Jaha..."
+				Hank "Ja man kan väl dricka vatten där också antar jag"
+				Hank "Även om de flesta brukar vara rätt packade om jag minns rätt"
+				Hank "Det ligger i en källare vid Plaza mitt i stan"
+		}
+		CHOICE {
+			"OK, ska kolla in det":
+				Hank "Ja gör det"
+			"Kanske kan vara något ändå, tack för tipset":
+				Hank "Inga problem"
+			"Bra tips":
+				Hank "Hoppas du gillar det"
+		}
+		Sebastian.SetKnowledge("HankTipAboutBarYvonne")
+		CHOICE {
+			"Ha det fint, vi ses!":
+				Hank "L8rs"
+				GOTO CONVERSATION_IS_OVER
+			"Du vill inte köpa en läsk av mig förresten?":
+				GOTO TRY_SELL
+		}
+}
+
+Log("Time to give")
+[TRY_GIVE_AGAIN]
+
+Hank.StartWaitForGift()
+LISTEN Sebastian_give_Hank [SELLING] {
+	Log("Giving....")
+	RemoveDanglingDialogueOptions("Hank_CanSellSoda")
+	WAIT Hank.HasAnyHandItem()
+	Log("Hank got something...")
+	IF Hank.HasHandItemOfDrinkType("soda") {
+		Hank "Tack!"
+		Hank.PutAwayHandItem()
+		RunMakeTransactionFunctionOnCreditCard("SebastianCreditCard", 2)
+		Sebastian.SetKnowledge("HasSoldSodaToHank")
+		Hank.StopWaitForGift()
+		GOTO PAYMENT
+	} ELSE {
+		Hank "Det här är väl ingen läsk?"
+		Hank.Give()
+		WAIT Sebastian.HasAnyHandItem()
+		GOTO TRY_GIVE_AGAIN
+	}
+}
+
+IF Sebastian.HasDrinkOfType("soda") {
+	LISTEN Forever
+} ELSE {
+	CHOICE {
+		"Hmm, jag hittar inga burkar...":
+		"Oj det här var pinsamt":
+			Hank "Vadå?"
+			Sebastian "Jag verka inte ha några burkar med mig"
+	}
+
+	CANCEL SELLING
+	GOTO DONE_SELLING
+}
+
+[PAYMENT]
+
+Hank "Tackar! Vad blir det?"
+
+CHOICE {
+	"$2":
+		Hank "Billigt!"
+		SebastianCreditCard.RunMakeTransactionFunctionOnCreditCard(2)
+
+	"$3":
+		Hank "OK, OK"
+		Hank "Här har du"
+		SebastianCreditCard.RunMakeTransactionFunctionOnCreditCard(3)
+
+	"$5":
+		Hank "Dyrt!"
+		Sebastian "Mm..."
+		Hank "Men det är lugnt, här har du cashen"
+		Sebastian "Tackar"
+		SebastianCreditCard.RunMakeTransactionFunctionOnCreditCard(5)
+
+	"Äsch, du kan få den":
+		Hank "Schysst! Man tackar och bockar"
+}
+
+[DONE_SELLING]
+
+CHOICE {
+	"Ha en bra dag!":
+		Hank "Du med"
+	"Wellspring hälsar dig god morgon, god middag och god kväll!":
+		Hank "Fint, fint"
+	"Hej då då":
+		Hank "Vi ses"
+}
+
+[CONVERSATION_IS_OVER]
+Hank.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Hank
+FOCUS
+Hank.StartTalking()
+Hank "Hallå igen"
+IF Sebastian.HasKnowledge("HankTipAboutBarYvonne") {
+	CHOICE {
+		"Jag hittar inte den där baren du snackade om":
+			Hank "OK, drygt"
+			Hank "Den ligger på Plaza, har du varit där"
+			CHOICE {
+				"Ja, tror det":
+					Hank "OK, men då är det bara att gå ner i källaren ett hus där"
+					Hank "Det ligger mitt emot rådhuset och har konstiga guldrör vid dörren"
+				"Nej...":
+					Hank "Du får gå över bron mot Plaza och Ministeriet"
+					Hank "Sen när du är nere i Burrows så svänger du vänster direkt"
+					Hank "Man går längs med spåren"
+					Hank "Och sen är du framme, det är inga konstigheter när man kan det"
+			}
+			CHOICE {
+				"OK...":
+				"Aha!":
+			}
+			Hank "Hoppas det hjälper"
+
+		"Skulle bara kolla vad du gjorde":
+			[WHAT_ARE_YOU_DOING]
+			IF Hank.IsAtTask(Chilling) {
+				Hank "Så lite som möjligt"
+			} ELSE {
+				Hank "Jobbar å står i"
+			}
+			CHOICE {
+				"Härligt":
+				"Gött är det!":
+				"OK...":
+			}
+	}
+} ELSE {
+	Sebastian "Vad gör du?"
+	GOTO WHAT_ARE_YOU_DOING
+}
+CHOICE {
+	"Ska väl dra vidare nu":
+	"Nä men ha det fint så ses vi":				
+}
+Hank "L8rs"
+Hank.StopTalking()
+DEFOCUS
+
+
+
+[LOOP_AGAIN]
+LISTEN Sebastian_talk_Hank
+Hank "Tja Sebbe, allt lugnt?"
+FOCUS
+Hank.StartTalking()
+CHOICE ETERNAL {
+	"Ja för tusan":
+		Hank "Härligt att höra"
+	"Visst, inga problem":
+		Hank "Gött"
+	"Fortfarande rätt vilse i staden":
+		Hank "Segt..."
+		Hank "Du kanske bara ska softa lite ett tag"
+		Hank "Eller hitta en karta?"
+		CHOICE {
+			"Ja det vore riktigt praktiskt om jag bara kunde hitta en":
+				Hank "De har nog kartor på turistbyrån tror jag"
+				CHOICE {
+					"Ah, givetvis!":
+						Hank "Testa med det"
+						
+					"Var ligger den då?":
+						Hank "I hamnen, där färjan lägger till"
+						Sebastian "OK, tack!"
+						Hank "Nemas problemas"
+				}
+			"Jag har redan en karta":
+				Hank "Ok, ok"
+		}
+		
+	"Jodå... tråkigt att sälja läsk men annars är det bra":
+		Hank "Det är bara å kämpa på!"
+}
+Hank.StopTalking()
+DEFOCUS
+GOTO LOOP_AGAIN
+
+
+
+

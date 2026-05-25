@@ -1,0 +1,193 @@
+#RunMakeTransactionFunctionOnCreditCard("TouristOfficeGalCreditCard", 100)
+
+
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+
+FOCUS
+TouristOfficeGal.StartTalking()
+
+
+TouristOfficeGal "Hej, vad kan jag hjälpa till med?"
+
+CHOICE {
+	"Jag letar efter någon trevlig sevärdhet att besöka":
+		TouristOfficeGal "Har du kollat på statyn?"
+		CHOICE {
+			"Hmm, kanske":
+				TouristOfficeGal "Den står mitt på torget"
+				TouristOfficeGal "Du kan inte missa den"
+			"Ja!":
+				TouristOfficeGal "OK, då vet jag inte..."
+				TouristOfficeGal "Kanske titta på Ministeriet, det är ju rätt häftigt"
+				TouristOfficeGal "Fast gå inte in för då kanske de kastar ut dig"
+			"Nej":
+				TouristOfficeGal "Den kan du ju kolla på..."
+				TouristOfficeGal "Den står mitt på torget"
+		}
+		Sebastian "OK, tack för tipsen"
+		TouristOfficeGal "Inga problem"
+		TouristOfficeGal "Nåt ska man väl få betalt för..."
+		TouristOfficeGal "*jäsp*"
+		TouristOfficeGal "Fasen vad trött jag är"
+		CHOICE {
+			"Du vill inte pigga upp dig själv med en svalkande dricka?":
+				GOTO SELL
+			"Jobbigt":
+				Sebastian "Sover du inte ordentligt?"
+				TouristOfficeGal "Jodå, men jag jobbar bara så mycket övertid"
+				TouristOfficeGal "De vill att det här stället ska vara öppet typ jämt"
+				TouristOfficeGal "En del av Dorisburgs nya turistpolicy, tydligen"
+				CHOICE {
+					"Jaha... OK ska gå vidare nu":
+						TouristOfficeGal "Hej då"
+					"Men finns det ingen annan som kan byta av dig?":
+						GOTO VACATION
+				}
+		}
+
+	"Frågan är snarare vad JAG kan hjälpa dig med!":
+		[SELL]
+		TouristOfficeGal "Va..."
+		CHOICE {
+			"Jag kommer från Wellspring Inc.":
+				Sebastian "och jag har ett mycket förmånligt erbjudande till dig"
+				TouristOfficeGal "Jag fattar ärligt talat ingenting vad snackar om"
+				CHOICE {
+					"Jag säljer läsk!":
+					"Förlåt om jag uttrycker mig förvirrande":
+						Sebastian "Jag säljer en läsk kallad Wellspring Soda"
+				}
+			"Jo det är så att jag säljer läsk":
+		}
+		TouristOfficeGal "Läsk..."
+		TouristOfficeGal "Jag vet inte om jag får köpa saker medan jag arbetar..."
+		CHOICE {
+			"Nä ok... hmm":
+				TouristOfficeGal "Sorry"
+			"Men när slutar du jobba då?!":
+				TouristOfficeGal "Raggar du på mig eller..? Hehe"
+				TouristOfficeGal "Skoja bara. Jag vet inte, jag jobbar över väldigt mycket nu"
+				[VACATION]
+				TouristOfficeGal "Alla andra är på semester"
+				TouristOfficeGal "Vi får så bra erbjudanden på resor när vi jobbar här..."
+				TouristOfficeGal "Å gud vad trött jag är!!!"
+		}
+		CHOICE {
+			"Ok du ska få vara i fred, men lycka till med allt här":
+				TouristOfficeGal "Tack"
+			"Jag går nu då, hej då":
+				TouristOfficeGal "Hejsvejs"
+		}
+}
+
+TouristOfficeGal.StopTalking()
+DEFOCUS
+
+TouristOfficeGal.SetKnowledge(Sebastian)
+
+
+# later #
+
+
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+
+FOCUS
+TouristOfficeGal.StartTalking()
+
+TouristOfficeGal "Mm?"
+CHOICE {
+	"Så... vad har du för framtidsplaner?":
+		TouristOfficeGal "Eh..?"
+		TouristOfficeGal "Du vet att jag jobbar va?"
+		TouristOfficeGal "Men ok"
+		TouristOfficeGal "Jag vill nog mest åka på solsemester"
+		TouristOfficeGal "Som mina kollegor"
+		TouristOfficeGal "Sen ska jag väl försöka hitta en kille och så, skaffa en större lägenhet"
+		TouristOfficeGal "Du?"
+		CHOICE {
+			"Typ samma":
+				TouristOfficeGal "Mm ok"
+			"Jag vet inte, måste hitta ett bättre jobb tror jag":
+				TouristOfficeGal "Ja, det är segt att det finns så många dåliga jobba bara"
+			"Jag ska bli bäst i världen på att sälja läsk":
+				TouristOfficeGal "Jaha"
+				TouristOfficeGal "Konstigt mål i livet"
+				CHOICE {
+					"Hmm... ja kanske":
+					"Nej, jag tror att det är min grej!":
+						TouristOfficeGal "Ok"
+				}
+		}
+		CHOICE {
+			"Förresten, du vet inget bra ställe att sälja läsk på?":
+				GOTO GOOD_HOW
+
+			"Nu ska jag gå tror jag, ha det fint!":
+				TouristOfficeGal "Du med"
+		}
+
+	"Jag letar efter ett bra ställe att sälja läsk på":
+		[GOOD_HOW]
+		TouristOfficeGal "Hur då bra?"
+		CHOICE {
+			"Ja men mycket folk. Helst törstiga":
+				TouristOfficeGal "Hmm...."
+				TouristOfficeGal "Jag vet inte så noga"
+				TouristOfficeGal "Kanske i hamnen, de jobbar ju mycket där så de borde ju bli uttorkade"
+				CHOICE {
+					"Ah, smart tänkt!":
+						TouristOfficeGal "Man har sina ljusa stunder"
+
+					"Var ligger hamnen?":
+						TouristOfficeGal "Om du går runt det här huset och sen viker av åt vänster"
+						TouristOfficeGal "Så kommer du till en massa lyftkranar och sånt"
+						CHOICE {
+							"Ah, där har jag ju redan varit!":
+								TouristOfficeGal "Ja men så bra"
+							"Är det där som lagret med läsk ligger?":
+								TouristOfficeGal "Det vet jag inte"
+								TouristOfficeGal "Men det låter rimligt"
+						}
+				}
+
+			"Folk som har råd att köpa mycket liksom":
+				TouristOfficeGal "Hmm..."
+				TouristOfficeGal "Kanske vid kasinot, där finns det ju en del svinrika typer"
+				TouristOfficeGal "Fast de dricker kanske mest Dry Martinis"
+				CHOICE {
+					"Mm, men kanske värt att testa":
+					"Var ligger kasinot?":
+						TouristOfficeGal "Du går över bron framför hotell Devotchka"
+						TouristOfficeGal "Sen genom Burrows mot Ministeriet och så svänger du höger"
+						CHOICE {
+							"OK, låter lätt":
+							"Hmm... ok får försöka med det":
+						}
+				}
+		}
+		TouristOfficeGal "Annars kan du ju testa caféet i centrum"
+		TouristOfficeGal "Där är det ofta mycket folk"
+		CHOICE {
+			"Jag har redan varit där och försökt":
+				TouristOfficeGal "Aha ok, ja men då vet jag nog inte mer"
+			"Mm just det":
+				TouristOfficeGal "Lycka till"
+		}
+}
+
+TouristOfficeGal.StopTalking()
+DEFOCUS
+
+
+# later 
+
+[TAKE_A_MAP]
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+FOCUS
+TouristOfficeGal.StartTalking()
+Sebastian "Jag hittar ju verkligen inte i den här staden"
+TouristOfficeGal "Ta en karta!"
+TouristOfficeGal "Eller oj, de verkar vara slut"
+TouristOfficeGal.StopTalking()
+DEFOCUS
+GOTO TAKE_A_MAP

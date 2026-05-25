@@ -1,0 +1,57 @@
+
+WAIT Felix.IsInRoom(PixiesApartment)
+Felix "Hej allihop!"
+Ivan "Hej Felix, kul att du kunde komma"
+
+
+LISTEN Sebastian_talk_Felix
+FOCUS 
+Felix.StartTalking()
+
+Felix "Tja, dude"
+
+[AGAIN]
+CHOICE {
+    "Vad tror du om alltihop?":
+        Felix "Ja det är rätt sjukt alltså"
+        Felix "Men hur farligt kan det vara?"
+
+        CHOICE {
+            "Alla verkar rätt deppiga":
+                Felix "Jo fan"
+
+            "Jag vet inte...":
+                Felix "Nä, fan"
+                Felix "Ingen vet någonting känns det som"
+        }
+
+    "Vad ska jag göra med Pixie?":
+        Felix "Hur menar du?"
+        Felix "Alltså, dude... du måste chilla"
+        Felix "Fast visa dig stark"
+        Felix "Man vet ju aldrig"
+
+    "Skulle det finnas tårta eller något här?":
+        Felix "Ja, Petra sa det"
+        Felix "Men jag hittar ingen"
+        CHOICE {
+            "Segt":
+            "OK, OK":
+            "Skit också":
+        }
+        
+    "Jag får gå och prata med henne igen":
+        Felix "Med Pixie?"
+        Felix "Mm, visst"
+        Felix "Var försiktig med vad du säger bara"
+}
+
+Felix.StopTalking()
+DEFOCUS
+
+
+LISTEN Sebastian_talk_Felix
+FOCUS 
+Felix.StartTalking()
+Felix "Ja?"
+GOTO AGAIN

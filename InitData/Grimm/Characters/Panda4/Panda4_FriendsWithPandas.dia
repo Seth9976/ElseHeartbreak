@@ -1,0 +1,33 @@
+
+LISTEN Sebastian_talk_Panda4
+
+FOCUS
+Panda4.StartTalking()
+Panda4 "Tja"
+
+[AGAIN]
+CHOICE {
+    "Vad gör du?":
+        IF Panda4.IsInRoom(BarYvonne) {
+            Panda4 "Festar..."
+            Panda4 "Som vanligt, haha!"
+        } ELSE {
+            IF Panda4.IsAtTask(Party) {
+                Panda4 "På väg till Bar Yvonne"
+                Panda4 "Som vanligt, haha!"
+            } ELSE {
+                Panda4 "Inte mycket"
+            }
+        }
+        GOTO AGAIN
+
+    "Allt bra?":
+        Panda4 "Ja, toppen!"
+        GOTO AGAIN
+
+    "Ha det gött":
+        Panda4 "Du med"
+}
+
+Panda4.StopTalking()
+DEFOCUS

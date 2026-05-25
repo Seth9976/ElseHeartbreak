@@ -1,0 +1,12 @@
+
+START GetAllLodgeStuff
+
+Story("Downtime")
+Story("HelmetDay")
+Story("InExperimentHall")
+
+SetHour(12)
+
+Ivan.Pos(Ministry_ExperimentHall_TheChair)
+Pixie.Pos(Ministry_ExperimentHall_Trigger_1)
+Sebastian.Pos(Ministry_ExperimentHall_Trigger_1)

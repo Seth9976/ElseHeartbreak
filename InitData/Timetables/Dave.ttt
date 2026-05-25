@@ -1,0 +1,12 @@
+
+08:00 - 16:00 _ BeInRoom Factory_Office
+16:00 - 00:00 _ Party    Hospital_Exterior
+00:00 - 08:00 _ Sleep    MonadsApartment_BedL_Left_1
+
+
+[TalkToSebastian]
+00:00 - 24:00 _ Interact Sebastian
+
+[Dave_DayOff]
+08:00 - 00:00 _ BeInRoom Cafe_Room1
+00:00 - 08:00 _ Sleep    MonadsApartment_BedL_Left_1

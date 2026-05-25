@@ -1,0 +1,56 @@
+
+Petra.SetTimetable("WorryInLobby")
+
+WAIT Sebastian.IsInRoom(Ministry_Lobby)
+{
+	Petra.Interact(Sebastian)
+	WAIT IsWithinDistance(Petra, Sebastian, 30)
+	Petra.CancelWalking()
+	Petra "Sebastian!"
+	WAIT WAIT IsWithinDistance(Petra, Sebastian, 20)
+	Petra "Där är du ju!"
+}
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+Petra "Hon är väldigt ledsen..."
+Petra.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+Petra "Jag har försokt trösta henne men det går inte så bra"
+Petra.StopTalking()
+DEFOCUS
+
+LISTEN Sebastian_talk_Petra
+FOCUS
+Petra.StartTalking()
+Petra "Jag hoppas att Ivan klarar sig"
+CHOICE {
+    "Ja...":
+        [BLEH]
+        Petra "Usch vilken hemsk dag"
+
+    "Jo men det gör han nog":
+        Petra "Jag hoppas"
+
+    "Mm, verkligen!":
+        GOTO BLEH
+}
+Petra.StopTalking()
+DEFOCUS
+
+
+[AGAIN]
+LISTEN Sebastian_talk_Petra
+Petra.StartTalking()
+Petra "Fan..."
+Petra.StopTalking()
+
+Petra.StartTalking()
+Petra "..."
+Petra.StopTalking()
+GOTO AGAIN

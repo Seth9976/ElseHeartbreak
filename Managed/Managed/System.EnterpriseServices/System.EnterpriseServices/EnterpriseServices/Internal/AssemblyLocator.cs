@@ -1,0 +1,19 @@
+﻿using System;
+using System.Runtime.InteropServices;
+
+namespace System.EnterpriseServices.Internal
+{
+	/// <summary>Locates an assembly and returns information about its modules.</summary>
+	// Token: 0x02000061 RID: 97
+	[Guid("458aa3b5-265a-4b75-bc05-9bea4630cf18")]
+	public class AssemblyLocator : MarshalByRefObject
+	{
+		/// <summary>Initializes a new instance of the <see cref="T:System.EnterpriseServices.Internal.AssemblyLocator" /> class.</summary>
+		// Token: 0x0600017B RID: 379 RVA: 0x00002FA0 File Offset: 0x000011A0
+		[MonoTODO]
+		public AssemblyLocator()
+		{
+			throw new NotImplementedException();
+		}
+	}
+}

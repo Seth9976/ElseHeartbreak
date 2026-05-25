@@ -1,0 +1,23 @@
+
+
+WAIT TouristOfficeGal.IsAtTask(Work) LISTEN Sebastian_talk_TouristOfficeGal
+
+FOCUS
+TouristOfficeGal.StartTalking()
+
+
+TouristOfficeGal "Hallå där"
+
+IF TouristOfficeGal.HasKnowledge(SebastianLookingForHotel) {
+	TouristOfficeGal "Hittade du hotellet?"
+	Sebastian "Japp!"
+}
+ELSE {
+	TouristOfficeGal "Behöver du hjälp med något?"
+	Sebastian "Nej det är lugnt"
+}
+
+TouristOfficeGal.StopTalking()
+DEFOCUS
+
+TouristOfficeGal.SetKnowledge(Sebastian)
